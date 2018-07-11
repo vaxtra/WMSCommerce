@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/assets/MasterPage/MasterPage.master" AutoEventWireup="true" CodeFile="MasterPageNoSession.master.cs" Inherits="assets_MasterPage_MasterPageNoSession" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderJavascript" runat="Server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

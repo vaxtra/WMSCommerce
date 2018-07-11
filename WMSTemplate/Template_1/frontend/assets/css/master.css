@@ -1,0 +1,46 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:  Trendsetter
+Version:  1.0
+Assigned to:  WebNik
+Primary use:  Trendsetter
+-------------------------------------------------------------------*/
+
+
+/* FONTS*/
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
+@import '../fonts/css/font-awesome.min.css';
+@import '../fonts/stroke/style.css';
+@import '../fonts/elegant/style.css';
+@import '../fonts/flaticon/flaticon.css';
+
+
+
+/* PLUGIN CSS */
+
+@import '../libs/bootstrap/bootstrap.css';                /* bootstrap */
+@import '../plugins/bootstrap-select/css/bootstrap-select.css';   /* select customization */
+@import '../plugins/headers/header.css';                /* header */
+@import '../plugins/headers/yamm.css';                /* header */
+@import '../plugins/slider-pro/slider-pro.css';         /* main slider */
+@import '../plugins/owl-carousel/owl.theme.css';                 /* other sliders */
+@import '../plugins/bxslider/jquery.bxslider.css';                        /* other sliders */
+@import '../plugins/magnific-popup/magnific-popup.css';            /* modal */
+@import '../plugins/animate/animate.css';                        /* animations */
+@import '../plugins/nouislider/jquery.nouislider.css';          /* price filter */
+@import url('../plugins/flexslider/flexslider.css');    /* slider */
+@import url('../plugins/lighter/jquery.lighter.css'); /* images popab */
+@import url('../plugins/cloud-zoom/cloud-zoom.css'); /* images zoom  */
+
+
+
+/* MAIN CSS */
+
+@import 'theme.css';
+@import 'color.css';
+@import 'woo.css';
+@import 'woocommerce-layout.css';
+@import 'responsive.css';
+
+

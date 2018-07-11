@@ -1,0 +1,183 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageKosong.master.cs" Inherits="WITPointOfSales_MasterPageKosong" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/ico" href="/images/icon.ico" />
+
+    <title>WIT. Point Of Sales</title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="/WITPointOfSales/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/css/navbar-fixed-top.css" rel="stylesheet" />
+    <%--<link href="/WITPointOfSales/css/print.css" rel="stylesheet" media="print" />--%>
+
+    <style type="text/css">
+        span.deleteicon {
+            position: relative;
+        }
+
+            span.deleteicon span {
+                position: absolute;
+                display: block;
+                top: 5px;
+                right: 5px;
+                width: 16px;
+                height: 16px;
+                background: url('/WITPointOfSales/img/cross.png') 0 -690px;
+                cursor: pointer;
+            }
+
+            span.deleteicon input {
+                padding-right: 25px;
+            }
+
+        .modalBackground {
+            background-color: Black;
+            filter: alpha(opacity=90);
+            opacity: 0.5;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <form id="formWITPointOfSales" runat="server">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="/WITPointOfSales/js/jquery.js"></script>
+        <script src="/WITPointOfSales/js/mousetrap.min.js"></script>
+        <script src="/WITPointOfSales/js/autoNumeric.js"></script>
+        <script src="/WITPointOfSales/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#tableProduk').dataTable({
+                    "sScrollY": "290px",
+                    "sDom": "frtiS",
+                    "bDeferRender": true,
+                    "aaSorting": [[0, 'desc']],
+                    "bFilter": false,
+                    "bInfo": false
+                });
+
+
+                $('#tableProduk1').dataTable({
+                    "sScrollY": "290px",
+                    "sDom": "frtiS",
+                    "bDeferRender": true,
+                    "aaSorting": [[0, 'desc']],
+                    "bFilter": false,
+                    "bInfo": false
+                });
+
+                $('#tableProduk3').dataTable({
+                    "sScrollY": "290px",
+                    "sDom": "frtiS",
+                    "bDeferRender": true,
+                    "aaSorting": [[0, 'desc']],
+                    "bFilter": false,
+                    "bInfo": false
+                });
+
+                $('#tableTransaksi').dataTable({
+                    "sScrollY": "400px",
+                    "bPaginate": false
+                });
+
+                jQuery(function ($) {
+                    $('.auto').autoNumeric('init');
+                });
+
+                Mousetrap.bind('enter', function () {
+                    var bt = document.getElementById('ButtonProdukManual');
+                    if (bt) {
+                        bt.click();
+                    }
+                });
+
+                Mousetrap.bind('ins', function () {
+                    var bt = document.getElementById('ButtonTunai');
+                    if (bt) {
+                        bt.click();
+                    }
+                });
+
+                $('input.deletable').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
+                    $(this).prev('input').val('').focus();
+                }));
+            });
+
+            function pageLoad(sender, args) {
+                if (args.get_isPartialLoad()) {
+                    $('#tableProduk').dataTable({
+                        "sScrollY": "290px",
+                        "sDom": "frtiS",
+                        "bDeferRender": true,
+                        "aaSorting": [[0, 'desc']],
+                        "bFilter": false,
+                        "bInfo": false
+                    });
+
+                    $('#tableProduk1').dataTable({
+                        "sScrollY": "290px",
+                        "sDom": "frtiS",
+                        "bDeferRender": true,
+                        "aaSorting": [[0, 'desc']],
+                        "bFilter": false,
+                        "bInfo": false
+                    });
+
+                    $('#tableProduk3').dataTable({
+                        "sScrollY": "290px",
+                        "sDom": "frtiS",
+                        "bDeferRender": true,
+                        "aaSorting": [[0, 'desc']],
+                        "bFilter": false,
+                        "bInfo": false
+                    });
+
+                    $('#tableTransaksi').dataTable({
+                        "sScrollY": "400px",
+                        "bPaginate": false
+                    });
+
+                    jQuery(function ($) {
+                        $('.auto').autoNumeric('init');
+                    });
+
+                    Mousetrap.bind('enter', function () {
+                        var bt = document.getElementById('ButtonProdukManual');
+                        if (bt) {
+                            bt.click();
+                        }
+                    });
+
+                    Mousetrap.bind('ins', function () {
+                        var bt = document.getElementById('ButtonTunai');
+                        if (bt) {
+                            bt.click();
+                        }
+                    });
+
+                    $('input.deletable').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
+                        $(this).prev('input').val('').focus();
+                    }));
+                }
+            };
+        </script>
+    </form>
+</body>
+</html>

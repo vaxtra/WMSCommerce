@@ -1,0 +1,582 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/ico" href="/images/icon.ico" />
+
+    <title>WIT. Point Of Sales</title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="/WITPointOfSales/assets/plugins/datatable/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/plugins/datatable/media/css/dataTables.tableTools.min.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/plugins/datatable/media/css/dataTables.scroller.min.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/css/navbar-fixed-top.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/css/print.css" rel="stylesheet" media="print" />
+    <link href="/WITPointOfSales/assets/plugins/select2/select2.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/plugins/datetime/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/plugins/BootstrapMultiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="/WITPointOfSales/assets/plugins/CustomWIT/css-pos.css" rel="stylesheet" />
+
+    <style type="text/css">
+        span.deleteicon {
+            position: relative;
+        }
+
+            span.deleteicon span {
+                position: absolute;
+                display: block;
+                top: 5px;
+                right: 5px;
+                width: 16px;
+                height: 16px;
+                background: url('/WITPointOfSales/img/cross.png') 0 -690px;
+                cursor: pointer;
+            }
+
+            span.deleteicon input {
+                padding-right: 25px;
+            }
+
+        .modalBackground {
+            background-color: Black;
+            filter: alpha(opacity=90);
+            opacity: 0.5;
+        }
+
+        .Wrap {
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        .NoWrap {
+            white-space: nowrap;
+        }
+
+        .FontRed {
+            color: red;
+        }
+
+        .fitSize {
+            width: 1px;
+            white-space: nowrap;
+        }
+
+        .modal {
+            display: block !important;
+        }
+
+        .modal-dialog {
+            overflow-y: initial !important;
+        }
+
+        .modal-body {
+            height: 380px;
+            overflow-y: auto;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+      <script src="/plugins/extra/html5shiv.min.js"></script>
+      <script src="/plugins/extra/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="background-color: rgb(248, 248, 248)">
+    <form id="formWITPointOfSales" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <asp:HyperLink ID="HyperLinkNamaLokasi" runat="server" class="navbar-brand"></asp:HyperLink>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <asp:HyperLink ID="HyperLinkPointOfSales" runat="server" Text="Point Of Sales"></asp:HyperLink></li>
+                        <li><a href="/WITWarehouse/Default.aspx">Warehouse</a></li>
+                        <li><a href="/WITPointOfSales/Transaksi.aspx">Transaksi</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/WITAdministrator/">Beranda</a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <asp:Label ID="LabelPengguna" runat="server"></asp:Label>
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/WITPointOfSales/Laporan.aspx" id="menuLaporan" runat="server">Laporan</a></li>
+                                <li><a href="/WITAdministrator/Pengguna/Password.aspx">Ubah Password</a></li>
+                                <li><a href="/WITAdministrator/Login.aspx?do=logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="/WITPointOfSales/assets/js/jquery.min.js"></script>
+        <script src="/WITPointOfSales/assets/js/mousetrap.min.js"></script>
+        <script src="/WITPointOfSales/assets/js/autoNumeric.js"></script>
+        <script src="/WITPointOfSales/assets/js/bootstrap.min.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/datatable/media/js/jquery.dataTables.min.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/datatable/media/js/dataTables.tableTools.min.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/datatable/media/js/dataTables.scroller.min.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/select2/select2.min.js"></script>
+        <script src="/WITPointOfSales/assets/js/jquery.dataTables.columnFilter.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/datetime/jquery.datetimepicker.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/datetime/moment.min.js"></script>
+        <script src="/WITPointOfSales/assets/plugins/BootstrapMultiselect/bootstrap-multiselect.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('.BootstrapMultiselect').multiselect({
+                    numberDisplayed: 2
+                });
+
+                $(".Select2Tag").select2({ tags: true });
+
+                Date.parseDate = function (input, format) {
+                    return moment(input, format).toDate();
+                };
+                Date.prototype.dateFormat = function (format) {
+                    return moment(this).format(format);
+                };
+
+                jQuery('.TanggalJam').datetimepicker({
+                    format: 'D MMMM YYYY H:mm',
+                    formatTime: 'H:mm',
+                    formatDate: 'D MMMM YYYY'
+                });
+
+                jQuery('.Tanggal').datetimepicker({
+                    format: 'D MMMM YYYY',
+                    timepicker: false,
+                    formatDate: 'D MMMM YYYY'
+                });
+
+                $(".proses").click(function () {
+                    var $btn = $(this);
+                    $btn.button('loading');
+
+                    setTimeout(function () {
+                        $btn.button('reset');
+                    }, 3600000);
+                });
+
+                $('.infoTooltip').tooltip();
+
+                $(".select2").select2();
+
+                var oTable = $('#tableProduk').dataTable({
+                    "sScrollY": "246px",
+                    "bScrollInfinite": true,
+                    "bPaginate": false,
+                    "bInfo": false
+                });
+
+                oTable.parent().scrollTop(9999999999);
+
+                $('.SplitBill1').dataTable({
+                    "sScrollY": "450px",
+                    "bScrollInfinite": true,
+                    "bPaginate": false,
+                    "bInfo": false
+                });
+
+                var SplitBill = $('.SplitBill2').dataTable({
+                    "sScrollY": "450px",
+                    "bScrollInfinite": true,
+                    "bPaginate": false,
+                    "bInfo": false
+                });
+
+                SplitBill.parent().scrollTop(9999999999);
+
+                $('#tableKombinasi').dataTable({
+                    "sScrollY": "255px",
+                    "bScrollInfinite": true,
+                    "aoColumns": [
+                        { "sType": "string" },
+                        { "sType": "string" }
+                    ],
+                    "aaSorting": [[1, 'desc']],
+                    "bInfo": false
+                });
+
+                $('#tableProduk1').dataTable({
+                    "sScrollY": "290px",
+                    "sDom": "frtiS",
+                    "bDeferRender": true,
+                    "aaSorting": [[0, 'desc']],
+                    "bFilter": false,
+                    "bInfo": false
+                });
+
+                $('#tableProduk3').dataTable({
+                    "sScrollY": "290px",
+                    "sDom": "frtiS",
+                    "bDeferRender": true,
+                    "aaSorting": [[0, 'desc']],
+                    "bFilter": false,
+                    "bInfo": false
+                });
+
+                $('#tableTransaksi').dataTable({
+                    "sScrollY": "360px",
+                    "aaSorting": [[0, 'desc']],
+                    "bPaginate": false
+                }).columnFilter(
+                    {
+                        aoColumns: [{ type: "text" },
+                        { type: "text" },
+                        { type: "text" },
+                        { type: "text" },
+                        { type: "select" },
+                        { type: "text" },
+                        { type: "text" },
+                            null]
+                    });
+
+                jQuery(function ($) {
+                    $('.auto').autoNumeric('init');
+                });
+
+                Mousetrap.bind('enter', function () {
+                    var bt = document.getElementById('ButtonProdukManual');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('ins', function () {
+                    var bt = document.getElementById('ButtonTunai');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f9', function () {
+                    var bt = document.getElementById('ButtonTunai');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f5', function () {
+                    var bt = document.getElementById('ButtonPelanggan');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f6', function () {
+                    var bt = document.getElementById('ButtonDiscount');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f7', function () {
+                    var bt = document.getElementById('ButtonBiayaPengiriman');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f8', function () {
+                    var bt = document.getElementById('ButtonTambahKeterangan');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f3', function () {
+                    var bt = document.getElementById('ButtonTampilkanSemua');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('f4', function () {
+                    var bt = document.getElementById('ButtonOrderTunai');
+                    if (bt) {
+                        bt.click();
+                        return false;
+                    }
+                });
+
+                Mousetrap.bind('backspace', function () {
+                    return false;
+                });
+
+                Mousetrap.bind('f2', function () {
+                    var tb = document.getElementById('TextBoxPencarianProduk');
+                    if (tb) {
+                        tb.focus();
+                        return false;
+                    }
+                });
+
+                $('.DisableEnter').keypress(function (event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                    }
+                });
+
+                $('input.deletable').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
+                    $(this).prev('input').val('').focus();
+                }));
+
+                $('.angka').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '0', vMax: '9999999999' });
+                $('.angkaNegatif').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '-9999999999', vMax: '9999999999' });
+
+                $('.angkaDesimal').autoNumeric('init', { aSep: '.', aDec: ',' });
+                $('.angkaDesimalNegatif').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '-99999999999.99' });
+            });
+
+            function pageLoad(sender, args) {
+                if (args.get_isPartialLoad()) {
+
+                    $('.BootstrapMultiselect').multiselect({
+                        numberDisplayed: 2
+                    });
+
+                    $(".Select2Tag").select2({ tags: true });
+
+                    Date.parseDate = function (input, format) {
+                        return moment(input, format).toDate();
+                    };
+                    Date.prototype.dateFormat = function (format) {
+                        return moment(this).format(format);
+                    };
+
+                    jQuery('.TanggalJam').datetimepicker({
+                        format: 'D MMMM YYYY H:mm',
+                        formatTime: 'H:mm',
+                        formatDate: 'D MMMM YYYY'
+                    });
+
+                    jQuery('.Tanggal').datetimepicker({
+                        format: 'D MMMM YYYY',
+                        timepicker: false,
+                        formatDate: 'D MMMM YYYY'
+                    });
+
+                    $(".proses").click(function () {
+                        var $btn = $(this);
+                        $btn.button('loading');
+
+                        setTimeout(function () {
+                            $btn.button('reset');
+                        }, 3600000);
+                    });
+
+                    $('.infoTooltip').tooltip();
+
+                    $(".select2").select2();
+
+                    var oTable = $('#tableProduk').dataTable({
+                        "sScrollY": "246px",
+                        "bScrollInfinite": true,
+                        "bPaginate": false,
+                        "bInfo": false
+                    });
+
+                    oTable.parent().scrollTop(9999999999);
+
+                    $('.SplitBill1').dataTable({
+                        "sScrollY": "450px",
+                        "bScrollInfinite": true,
+                        "bPaginate": false,
+                        "bInfo": false
+                    });
+
+                    var SplitBill = $('.SplitBill2').dataTable({
+                        "sScrollY": "450px",
+                        "bScrollInfinite": true,
+                        "bPaginate": false,
+                        "bInfo": false
+                    });
+
+                    SplitBill.parent().scrollTop(9999999999);
+
+                    $('#tableKombinasi').dataTable({
+                        "sScrollY": "200px",
+                        "bScrollInfinite": true,
+                        "aoColumns": [
+                            { "sType": "string" },
+                            { "sType": "string" }
+                        ],
+                        "aaSorting": [[1, 'desc']],
+                        "bInfo": false
+                    });
+
+                    $('#tableProduk1').dataTable({
+                        "sScrollY": "290px",
+                        "sDom": "frtiS",
+                        "bDeferRender": true,
+                        "aaSorting": [[0, 'desc']],
+                        "bFilter": false,
+                        "bInfo": false
+                    });
+
+                    $('#tableProduk3').dataTable({
+                        "sScrollY": "290px",
+                        "sDom": "frtiS",
+                        "bDeferRender": true,
+                        "aaSorting": [[0, 'desc']],
+                        "bFilter": false,
+                        "bInfo": false
+                    });
+
+                    $('#tableTransaksi').dataTable({
+                        "sScrollY": "360px",
+                        "aaSorting": [[0, 'desc']],
+                        "bPaginate": false
+                    }).columnFilter(
+                        {
+                            aoColumns: [{ type: "text" },
+                            { type: "text" },
+                            { type: "text" },
+                            { type: "text" },
+                            { type: "select" },
+                            { type: "text" },
+                            { type: "text" },
+                                null]
+                        });
+
+                    jQuery(function ($) {
+                        $('.auto').autoNumeric('init');
+                    });
+
+                    Mousetrap.bind('enter', function () {
+                        var bt = document.getElementById('ButtonProdukManual');
+                        if (bt) {
+                            bt.click();
+                        }
+                    });
+
+                    Mousetrap.bind('ins', function () {
+                        var bt = document.getElementById('ButtonTunai');
+                        if (bt) {
+                            bt.click();
+                        }
+                    });
+
+                    Mousetrap.bind('f9', function () {
+                        var bt = document.getElementById('ButtonTunai');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f5', function () {
+                        var bt = document.getElementById('ButtonPelanggan');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f6', function () {
+                        var bt = document.getElementById('ButtonDiscount');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f7', function () {
+                        var bt = document.getElementById('ButtonBiayaPengiriman');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f8', function () {
+                        var bt = document.getElementById('ButtonTambahKeterangan');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f3', function () {
+                        var bt = document.getElementById('ButtonTampilkanSemua');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('f4', function () {
+                        var bt = document.getElementById('ButtonOrderTunai');
+                        if (bt) {
+                            bt.click();
+                            return false;
+                        }
+                    });
+
+                    Mousetrap.bind('backspace', function () {
+                        return false;
+                    });
+
+                    Mousetrap.bind('f2', function () {
+                        var tb = document.getElementById('TextBoxPencarianProduk');
+                        if (tb) {
+                            tb.focus();
+                            return false;
+                        }
+                    });
+
+                    $('.DisableEnter').keypress(function (event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                        }
+                    });
+
+                    $('input.deletable').wrap('<span class="deleteicon" />').after($('<span/>').click(function () {
+                        $(this).prev('input').val('').focus();
+                    }));
+
+                    $('.angka').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '0', vMax: '9999999999' });
+                    $('.angkaNegatif').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '-9999999999', vMax: '9999999999' });
+
+                    $('.angkaDesimal').autoNumeric('init', { aSep: '.', aDec: ',' });
+                    $('.angkaDesimalNegatif').autoNumeric('init', { aSep: '.', aDec: ',', vMin: '-99999999999.99' });
+                }
+            };
+        </script>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

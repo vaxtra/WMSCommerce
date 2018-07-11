@@ -1,0 +1,181 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPagePrint.master.cs" Inherits="MasterPagePrint" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Laporan</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="/WITPointOfSales/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .fitSize {
+            width: 1px;
+            white-space: nowrap;
+        }
+
+        .breakWord {
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        body {
+            font-family: Tahoma, Arial;
+        }
+
+        table.laporan tbody tr td {
+            padding: 0 2px 0 2px;
+        }
+
+        table.table tr th {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        window.print();
+    </script>
+</head>
+<body>
+    <form id="formWITEnterpriseSystem" runat="server">
+        <div class="container-fluid" style="font-size: 10px;">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h1>
+                        <img src="/images/logo.jpg" />
+                    </h1>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <h3 style="font-weight: bold; margin-bottom: 0; text-transform: uppercase;">
+                        <asp:Label ID="LabelJudul" runat="server"></asp:Label>
+                    </h3>
+                    <div style="font-size: 17px; font-weight: bold;">
+                        <asp:Label ID="LabelStoreTempat" runat="server"></asp:Label>
+                    </div>
+                    <div style="font-size: 12px; margin-bottom: 10px;">
+                        <asp:Label ID="LabelSubJudul" runat="server"></asp:Label>
+                    </div>
+
+                    <div style="font-size: 12px; font-weight: bold;">Print</div>
+                    <div>
+                        <asp:Label ID="LabelPrintTanggal" runat="server"></asp:Label><br />
+                        <asp:Label ID="LabelPrintPengguna" runat="server"></asp:Label><br />
+                        <asp:Label ID="LabelPrintStoreTempat" runat="server"></asp:Label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-6" runat="server" id="PanelPengirimHeader">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <b>
+                                <asp:Label ID="LabelPengirimTempat" runat="server"></asp:Label>
+                            </b>
+                        </div>
+                        <div class="panel-body">
+                            <asp:Label ID="LabelPengirimPengguna" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPengirimTanggal" runat="server"></asp:Label>
+                            <br />
+                            <br />
+                            <asp:Label ID="LabelPengirimAlamat" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPengirimTelepon" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPengirimEmail" runat="server"></asp:Label>
+
+                            <div runat="server" id="PanelKeterangan">
+                                <br />
+                                <br />
+                                <b>Keterangan :</b>
+                                <br />
+                                <asp:Label ID="LabelPengirimKeterangan" runat="server"></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-xs-offset-2 text-left" runat="server" id="PanelPenerimaHeader">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <b>
+                                <asp:Label ID="LabelPenerimaTempat" runat="server"></asp:Label>
+                            </b>
+                        </div>
+                        <div class="panel-body">
+                            <asp:Label ID="LabelPenerimaPengguna" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPenerimaTanggal" runat="server"></asp:Label>
+                            <br />
+                            <br />
+                            <asp:Label ID="LabelPenerimaAlamat" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPenerimaTelepon" runat="server"></asp:Label>
+                            <br />
+                            <asp:Label ID="LabelPenerimaEmail" runat="server"></asp:Label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Periode [<asp:Label ID="LabelPeriode" runat="server"></asp:Label>]</h4>
+                </div>
+            </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <div class="row">
+                <div class="col-xs-3" runat="server" id="PanelPengirimFooter">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <b>
+                                <asp:Label ID="LabelPengirimPengguna1" runat="server"></asp:Label>
+                            </b>
+                        </div>
+                        <div class="panel-body">
+                            <br />
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-xs-offset-6" runat="server" id="PanelPenerimaFooter">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <b>
+                                <asp:Label ID="LabelPenerimaPengguna1" runat="server"></asp:Label>
+                            </b>
+                        </div>
+                        <div class="panel-body">
+                            <br />
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="text-center">THANK YOU</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><b>Warehouse Management System Powered by WIT.</b></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="/WITPointOfSales/js/jquery.min.js"></script>
+        <script src="/WITPointOfSales/js/bootstrap.min.js"></script>
+    </form>
+</body>
+</html>

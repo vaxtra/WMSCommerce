@@ -1,0 +1,262 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="frontend_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>WMS-COMMERCE</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="HandheldFriendly" content="true" />
+
+    <link rel="stylesheet" href="/frontend/assets/css/master.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/custom_WIT.css" />
+
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="formWMSCommerce" runat="server">
+        <!-- Loader-->
+        <div class="screen-loader">
+            <div class="loading">
+                <span class="loader_span">
+                    <span class="loader_right"></span>
+                    <span class="loader_left"></span>
+                </span>
+            </div>
+            <div class="sl-top"></div>
+            <div class="sl-bottom"></div>
+        </div>
+        <!-- Loader end-->
+
+        <div class="l-theme">
+            <!-- ==========================-->
+            <!-- SEARCH MODAL-->
+            <!-- ==========================-->
+            <div class="header-search open-search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                            <div class="navbar-search">
+                                <div class="search-global" />
+                                <input type="text" placeholder="Type to search" autocomplete="off" name="s" value="" class="search-global__input" />
+                                <button class="search-global__btn"><i class="icon fa fa-search"></i></button>
+                                <div class="search-global__note">Begin typing your search above and press return to search.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="search-close close"><i class="fa fa-times"></i></button>
+        </div>
+        <!-- ==========================-->
+        <!-- MOBILE MENU-->
+        <!-- ==========================-->
+        <div data-off-canvas="mobile-slidebar left overlay" class="mobile-slidebar ">
+            <ul class="nav navbar-nav">
+                <li><a href="./Default.aspx">Home</a></li>
+                <li><a href="./ProductList.aspx">Belanja</a></li>
+                <li><a href="./gallery-1.html">Cara Pemesanan</a></li>
+                <li><a href="./blog-post.html">Konfirmasi Pembayaran</a></li>
+                <li><a href="./contact.html">Hubungi Kami</a></li>
+            </ul>
+        </div>
+
+        <!-- ==========================-->
+        <!-- POPAP MENU-->
+        <!-- ==========================-->
+        <div class="wrap-fixed-menu" id="fixedMenu">
+            <nav class="fullscreen-center-menu">
+
+                <div class="menu-main-menu-container">
+
+                    <ul class="nav navbar-nav">
+                        <li><a href="./Default.aspx">Home</a></li>
+                        <li><a href="./ProductList.aspx">Belanja</a></li>
+                        <li><a href="./gallery-1.html">Cara Pemesanan</a></li>
+                        <li><a href="./blog-post.html">Konfirmasi Pembayaran</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <button type="button" class="fullmenu-close"><i class="fa fa-times"></i></button>
+        </div>
+
+        <div data-canvas="container">
+            <header class="header header-4 header-normal-width header-menu-middle navbar-fixed-top header-logo-black header-topbarbox-1-left header-topbarbox-2-right header-navbar-center header-navibox-1-right">
+                <div class="top-bar clearfix">
+                    <div class="header-topbarbox-1 clearfix">
+
+                        <div class="header-topbarbox__item header-topbarbox__item_bd-top">HUBUNGI KAMI  8 800 777-23-22</div>
+                    </div>
+                    <div class="header-topbarbox-2 clearfix">
+                        <div class="header-topbarbox__item"><a href="http://templines.rocks/html/trendsetter/home-1.html">Login</a> atau<a href="http://templines.rocks/html/trendsetter/home-1.html"> Register</a></div>
+                    </div>
+                </div>
+
+                <div class="container container-boxed-width">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <ul class="nav navbar-nav hidden-xs clearfix vcenter">
+                                <li>
+                                    <!-- Mobile Trigger Start-->
+                                    <button class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i></button>
+                                    <!-- Mobile Trigger End-->
+                                </li>
+                                <li>
+                                    <ul class="social-net list-inline text-left">
+                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/facebook.com" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
+                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/twitter.com" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
+                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/pinterest-p.com" class="social-net__link"><i class="icon fa fa-instagram"></i></a></li>
+
+                                    </ul>
+                                    <!-- end social-list-->
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="center-logo">
+                                <a href="./Default.aspx" class="navbar-brand scroll">
+                                    <img src="/frontend/assets/media/general/logo.png" alt="logo" class="normal-logo" /><img src="/frontend/assets/media/general/logo-dark.png" alt="logo" class="scroll-logo hidden-xs" /></a>
+                                <button class="menu-mobile-button visible-xs-block js-toggle-mobile-slidebar toggle-menu-button"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="header-navibox-1">
+                                <button class="js-toggle-screen toggle-menu-button  hidden-xs"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i></button>
+                                <a href="#" class="btn_header_search"><i class="fa fa-search"></i></a>
+                                <div class="header-cart"><a href="#"><i aria-hidden="true" class="fa fa-shopping-cart"></i></a><span class="header-cart-count bg-primary">3</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav id="nav" class="navbar">
+                        <ul class="yamm main-menu nav navbar-nav hidden-xs">
+                            <li><a href="Default.aspx">Home<b class="caret"></b></a></li>
+                            <li><a href="ProductList.aspx">Belanja<b class="caret"></b></a></li>
+                            <li><a href="#">Cara Pemesanan<b class="caret"></b></a></li>
+                            <li><a href="#">Konfirmasi Pembayaran<b class="caret"></b></a> </li>
+                            <li><a href="./contact.html">Hubungi Kami</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <!-- end .header-->
+        </div>
+        <div class="wrap-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <!-- end b-form-newsletter-->
+            <footer class="footer footer-type-1 bg-grey">
+                <div class="footer__main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-push-4">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <section class="footer-section">
+                                            <h3 class="footer-section__title">About</h3>
+                                            <ul class="footer__list list-unstyled">
+                                                <li><a href="./about.html">About Us</a></li>
+                                                <li><a href="./Default.aspx">Careers</a></li>
+                                                <li><a href="./Default.aspx">International</a></li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <section class="footer-section">
+                                            <h3 class="footer-section__title">Support</h3>
+                                            <ul class="footer__list list-unstyled">
+                                                <li><a href="./contact.html">Contact</a></li>
+                                                <li><a href="./contact.html">Returns</a></li>
+                                                <li><a href="./contact.html">Warranty</a></li>
+                                                <li><a href="./contact.html">Help</a></li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <section class="footer-section">
+                                            <h3 class="footer-section__title">Legal</h3>
+                                            <ul class="footer__list list-unstyled">
+                                                <li><a href="./privacy-policy.html">Privacy</a></li>
+                                                <li><a href="./terms-of-use.html">Terms</a></li>
+                                                <li><a href="./privacy-policy.html">Patents</a></li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <section class="footer-section">
+                                            <h3 class="footer-section__title">Other</h3>
+                                            <ul class="footer__list list-unstyled">
+                                                <li><a href="./Default.aspx">Account</a></li>
+                                                <li><a href="./Default.aspx">Newsletter</a></li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-pull-8">
+                                <ul class="social-net list-inline">
+                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/facebook.com" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
+                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/twitter.com" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
+                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/pinterest-p.com" class="social-net__link"><i class="icon fa fa-pinterest-p"></i></a></li>
+                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/vk.com" class="social-net__link"><i class="icon fa fa-vk"></i></a></li>
+                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/vine.com" class="social-net__link"><i class="icon fa fa-vine"></i></a></li>
+                                </ul>
+                                <!-- end social-list-->
+                                <div class="copyright">©  2017 TrendSetter  ® All Right Reserved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end .footer-type-1-->
+        </div>
+
+        <!-- ++++++++++++-->
+        <!-- MAIN SCRIPTS-->
+        <!-- ++++++++++++-->
+        <script src="/frontend/assets/libs/jquery-1.12.4.min.js"></script>
+        <script src="/frontend/assets/libs/jquery-migrate-1.2.1.js"></script>
+        <!-- Bootstrap-->
+        <script src="/frontend/assets/libs/bootstrap/bootstrap.min.js"></script>
+        <!-- User customization-->
+        <script src="/frontend/assets/js/custom.js"></script>
+        <!-- Other slider-->
+        <script src="/frontend/assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+        <!-- Pop-up window-->
+        <script src="/frontend/assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <!-- Headers scripts-->
+        <script src="/frontend/assets/plugins/headers/slidebar.js"></script>
+        <script src="/frontend/assets/plugins/headers/header.js"></script>
+        <!-- Select customization-->
+        <script src="/frontend/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <!-- Mail scripts-->
+        <script src="/frontend/assets/plugins/jqBootstrapValidation.js"></script>
+        <script src="/frontend/assets/plugins/contact_me.js"></script>
+        <!-- Filter and sorting images-->
+        <script src="/frontend/assets/plugins/isotope/isotope.pkgd.min.js"></script>
+        <script src="/frontend/assets/plugins/isotope/imagesLoaded.js"></script>
+        <!-- Shuffle-->
+        <script src="/frontend/assets/plugins/letters/jquery.shuffleLetters.js"></script>
+        <!-- Progress numbers-->
+        <script src="/frontend/assets/plugins/rendro-easy-pie-chart/jquery.easypiechart.min.js"></script>
+        <script src="/frontend/assets/plugins/rendro-easy-pie-chart/waypoints.min.js"></script>
+        <!-- Animations-->
+        <script src="/frontend/assets/plugins/scrollreveal/scrollreveal.min.js"></script>
+        <!-- Main slider-->
+        <script src="/frontend/assets/plugins/slider-pro/jquery.sliderPro.min.js"></script>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

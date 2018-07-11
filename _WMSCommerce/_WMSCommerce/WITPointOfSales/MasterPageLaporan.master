@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageLaporan.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/ico" href="/images/icon.ico" />
+
+    <title>Laporan</title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link href="/WITPointOfSales/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        table.laporan tbody tr td {
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+
+        table.laporan thead tr th {
+            text-align: center;
+        }
+
+        table.laporan tfoot tr th {
+            text-align: center;
+        }
+
+        .fitSize {
+            width: 1px;
+            white-space: nowrap;
+        }
+
+        .breakWord {
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <form id="formWITPointOfSales" runat="server">
+        <div class="container" style="font-size: 10px; font-family: Tahoma;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="/WITPointOfSales/js/jquery.min.js"></script>
+        <script src="/WITPointOfSales/js/bootstrap.min.js"></script>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
