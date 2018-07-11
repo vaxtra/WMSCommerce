@@ -53,137 +53,23 @@
         <h2 class="b-about-main__title text-center">Latest Product</h2>
         <div class="b-about-main__subtitle color-primary text-center">Nam in tempus felis, eu eleifend tellus</div>
         <div class="b-goods-catalog">
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-            <section class="b-goods b-goods_mod-a b-goods_5-col">
-                <div class="b-goods__inner">
-                    <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                        <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                    <div class="b-goods__wrap">
-                        <div class="b-goods__category">category</div>
-                        <h3 class="b-goods__name">Enceladus</h3>
-                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                        <div class="b-goods__price">$160</div>
-                        <div class="b-goods-links"><a href="./ProductDetail.aspx" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
-                    </div>
-                </div>
-            </section>
-
+            <asp:Repeater ID="RepeaterProduk" runat="server">
+                <ItemTemplate>
+                    <section class="b-goods b-goods_mod-a b-goods_5-col">
+                        <div class="b-goods__inner">
+                            <a href="<%# Eval("Foto") %>" class="b-goods__img js-zoom-images">
+                                <img src="<%# Eval("Foto") %>" alt="goods" class="img-responsive" /></a>
+                            <div class="b-goods__wrap">
+                                <div class="b-goods__category">category</div>
+                                <h3 class="b-goods__name"><%# Eval("Nama") %></h3>
+                                <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
+                                <div class="b-goods__price"><%# Eval("Harga").ToFormatHarga() %></div>
+                                <div class="b-goods-links"><a href="/Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
+                            </div>
+                        </div>
+                    </section>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
 
 

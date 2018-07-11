@@ -18,21 +18,18 @@
                 <div class="b-goods-carousel">
                     <div class="col-md-1">
                         <div id="bx-pager" class="b-goods-carousel__thumb">
-                            <a data-slide-index="0" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
-                                <img src="/frontend/assets/media/content/goods-carousel/thumbnails/1.jpg" alt="foto" class="b-goods-carousel__thumb-img" /></a>
-                            <a data-slide-index="1" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
-                                <img src="/frontend/assets/media/content/goods-carousel/thumbnails/2.jpg" alt="foto" class="b-goods-carousel__thumb-img" /></a>
-                            <a data-slide-index="2" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
-                                <img src="/frontend/assets/media/content/goods-carousel/thumbnails/3.jpg" alt="foto" class="b-goods-carousel__thumb-img" /></a>
-                            <a data-slide-index="3" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
-                                <img src="/frontend/assets/media/content/goods-carousel/thumbnails/4.jpg" alt="foto" class="b-goods-carousel__thumb-img" /></a>
-                            <a data-slide-index="4" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
-                                <img src="/frontend/assets/media/content/goods-carousel/thumbnails/5.jpg" alt="foto" class="b-goods-carousel__thumb-img" /></a>
-
+                            <asp:Repeater ID="RepeaterFoto" runat="server">
+                                <ItemTemplate>
+                                    
+                                    <a data-slide-index="4" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
+                                        <img src='<%# Eval("Foto") %>' style="width: 100px; height: 100px;" " alt="foto" class="b-goods-carousel__thumb-img" /></a>
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <ul class="b-goods-carousel__main-img bxslider">
+
                             <li>
                                 <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
                             <li>
@@ -50,12 +47,15 @@
 
                     <div class="col-lg-4 col-lg-offset-1 col-md-5">
                         <section class="b-goods-3 b-goods-3_mod-a">
-                            <div class="b-goods-3__category">Jackets</div>
-                            <h3 class="b-goods-3__name">Hyperion</h3>
+                            <div class="b-goods-3__category">
+                                <asp:Literal ID="LiteralNama" runat="server"></asp:Literal></div>
+                            <h3 class="b-goods-3__name">
+                                <asp:Literal ID="LiteralHarga" runat="server"></asp:Literal></h3>
                             <div class="b-goods-3__price color-primary">$85.99</div>
                             <div class="b-goods-3__price-old">$130.00</div>
                             <div class="b-goods-3__label bg-secondary">sale</div>
-                            <div class="b-goods-3__description">Donec id massa ut nisl auctor mollis eu nec magna. Duis mattis congue lacus ac elementum.</div>
+                            <div class="b-goods-3__description">
+                                <asp:Literal ID="LiteralDeskripsi" runat="server"></asp:Literal></div>
                         </section>
                         <!-- end b-goods-->
 
@@ -63,22 +63,20 @@
 
                         <div class="form-group">
                             <div class="col-md-8">
-                                <select data-width="100%" class="selectpicker">
-                                    <option selected="selected">-- Choose Size --</option>
-                                    <option>46</option>
-                                    <option>48</option>
-                                    <option>50</option>
-                                    <option>52</option>
-                                </select>
+                                <asp:DropDownList ID="DropDownListStokProduk" runat="server"></asp:DropDownList>
                             </div>
                             <div class="col-md-4">
                                 <div class="enumerator">
                                     <span class="enumerator__btn js-minus_btn">-</span>
-                                    <input type="text" value="1" class="enumerator__input" /><span class="enumerator__btn js-plus_btn">+</span>
+                                    <asp:TextBox ID="TextBoxQuantity" runat="server" Text="1"></asp:TextBox><span class="enumerator__btn js-plus_btn">+</span>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <asp:Button class="btn btn-primary btn-effect" ID="ButtonAddToCart" runat="server" Text="add to cart" />
+                                <asp:Button ID="ButtonAddToCart" runat="server" Text="Add to Cart" OnClick="ButtonAddToCart_Click" />
+                            </div>
+                            <div class="col-md-12">
+                                <asp:Button ID="ButtonRemove" runat="server" Text="xxxx" OnClick="ButtonRemove_Click" />
+                                <asp:Button ID="ButtonRemoveSession" runat="server" Text="Session" OnClick="ButtonRemoveSession_Click" />
                             </div>
                         </div>
                     </div>

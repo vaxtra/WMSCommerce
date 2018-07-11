@@ -9,16 +9,19 @@ public partial class ProductList : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        string[] Data = new string[10];
-        for (int i = 0; i < Data.Count(); i++)
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
-            Data[i] = "/frontend/assets/media/content/goods/mens/220x250/1.jpg";
-        }
+            var Produk = db.TBProduks.Select(item => new
+            {
+                item.IDProduk,
+                item.Nama,
+                Foto = "/images/cover/" + item.IDProduk + ".jpg",
+                Harga = item.TBKombinasiProduks.FirstOrDefault().TBStokProduks.FirstOrDefault(item2 => item2.IDTempat == 1).HargaJual
+            }).ToArray();
 
-        RepeaterData.DataSource = Data.Select(item => new
-        {
-            Source = item
-        });
-        RepeaterData.DataBind();
+            RepeaterProduk.DataSource = Produk;
+            RepeaterProduk.DataBind();
+
+        }
     }
 }
