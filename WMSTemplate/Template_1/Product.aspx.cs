@@ -114,4 +114,55 @@ public partial class ProductDetail : System.Web.UI.Page
         //MENGHAPUS SESSION
         Session.Abandon();
     }
+
+    protected void ButtonAddToCart_Click1(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
+
+            //MENCARI TRANSAKSI SESSION
+            var TransaksiECommerce = db.TBTransaksiECommerces
+                .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
+
+            if (TransaksiECommerce == null)
+            {
+                TransaksiECommerce = new TBTransaksiECommerce
+                {
+                    //IDTransaksiECommerce
+                    IDPelanggan = Pelanggan.IDPelanggan,
+                    _IDWMSPelanggan = Pelanggan.IDWMSPelanggan,
+                    _TanggalInsert = DateTime.Now
+                };
+
+                db.TBTransaksiECommerces.InsertOnSubmit(TransaksiECommerce);
+            }
+
+            TransaksiECommerce.TBTransaksiECommerceDetails.Add(new TBTransaksiECommerceDetail
+            {
+                TBTransaksiECommerce = TransaksiECommerce,
+                //IDTransaksiECommerceDetail
+                IDStokProduk = DropDownListStokProduk.SelectedValue.ToInt(),
+                Quantity = TextBoxQuantity.Text.ToInt(),
+                _TanggalInsert = DateTime.Now
+            });
+
+            db.SubmitChanges();
+        }
+
+        Response.Redirect("_Cart.aspx");
+
+        //PENGATURAN PELANGGAN DI TRANSAKSI
+        //PengaturanPelanggan(Pelanggan.IDPelanggan);
+
+        //ClassTransaksi Transaksi = new ClassTransaksi(1, 1, DateTime.Now);
+
+        //Transaksi.TambahDetailTransaksi(DropDownListKombinasiProduk.SelectedValue.ToInt(), TextBoxQuantity.Text.ToInt());
+
+        //Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.AwaitingPayment;
+        //Transaksi.StatusPrint = true;
+
+        //Transaksi.ConfirmTransaksi(db);
+        //db.SubmitChanges();
+    }
 }

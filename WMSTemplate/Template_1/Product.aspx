@@ -4,6 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    
     <div class="goods-card">
         <div class="container">
             <div class="row">
@@ -14,6 +15,8 @@
                         <li><a href="./home.html">Clothong</a></li>
                         <li class="active">raincoats</li>
                     </ol>
+                    <asp:Button ID="ButtonAddToCart" runat="server" Text="Add to Cart" OnClick="ButtonAddToCart_Click1" />
+                    <a runat="server" id="IDNAONWE" onclick="ButtonAddToCart_Click1">TES</a>
                 </div>
                 <div class="b-goods-carousel">
                     <div class="col-md-1">
@@ -72,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <asp:Button ID="ButtonAddToCart" runat="server" Text="Add to Cart" OnClick="ButtonAddToCart_Click" />
+                                
                             </div>
                             <div class="col-md-12">
                                 <asp:Button ID="ButtonRemove" runat="server" Text="xxxx" OnClick="ButtonRemove_Click" />

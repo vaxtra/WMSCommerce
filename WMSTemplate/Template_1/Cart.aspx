@@ -3,6 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <asp:MultiView ID="MultiView1" runat="server">
+        <asp:View ID="View1" runat="server">
+
+        </asp:View>
+    </asp:MultiView>
     <div class="goods-card">
         <div class="container">
             <h2 class="b-about-main__title text-center">Keranjang Belanja</h2>
