@@ -203,6 +203,10 @@ ul.wc_payment_methods {
     border:1px solid #ddd;
     padding:20px 15px;
 }
+.woocommerce table.cart td.actions .coupon
+{
+    float:right;
+}
 @media (min-width:992px) {
     .main-slider__label {
         margin-top: 170px;

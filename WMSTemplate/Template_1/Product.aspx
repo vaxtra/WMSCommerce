@@ -15,7 +15,7 @@
                         <li><a href="./home.html">Clothong</a></li>
                         <li class="active">raincoats</li>
                     </ol>
-                    <asp:Button ID="ButtonAddToCart" runat="server" Text="Add to Cart" OnClick="ButtonAddToCart_Click1" />
+                    
                     <a runat="server" id="IDNAONWE" onclick="ButtonAddToCart_Click1">TES</a>
                 </div>
                 <div class="b-goods-carousel">
@@ -66,20 +66,21 @@
 
                         <div class="form-group">
                             <div class="col-md-8">
-                                <asp:DropDownList ID="DropDownListStokProduk" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListStokProduk" runat="server" CssClass="selectpicker" data-width="100%"></asp:DropDownList>
                             </div>
                             <div class="col-md-4">
                                 <div class="enumerator">
                                     <span class="enumerator__btn js-minus_btn">-</span>
-                                    <asp:TextBox ID="TextBoxQuantity" runat="server" Text="1"></asp:TextBox><span class="enumerator__btn js-plus_btn">+</span>
+                                    <asp:TextBox ID="TextBoxQuantity" runat="server" Text="1" CssClass="enumerator__input"></asp:TextBox><span class="enumerator__btn js-plus_btn">+</span>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 
                             </div>
                             <div class="col-md-12">
-                                <asp:Button ID="ButtonRemove" runat="server" Text="xxxx" OnClick="ButtonRemove_Click" />
-                                <asp:Button ID="ButtonRemoveSession" runat="server" Text="Session" OnClick="ButtonRemoveSession_Click" />
+                                <asp:Button ID="ButtonAddToCart" runat="server" Text="Add to Cart" CssClass="btn btn-primary btn-effect" OnClick="ButtonAddToCart_Click1" />
+<%--                                <asp:Button ID="ButtonRemove" runat="server" Text="xxxx" OnClick="ButtonRemove_Click" />
+                                <asp:Button ID="ButtonRemoveSession" runat="server" Text="Session" OnClick="ButtonRemoveSession_Click" />--%>
                             </div>
                         </div>
                     </div>

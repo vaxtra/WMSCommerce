@@ -9,7 +9,10 @@ public partial class Cart : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            LoadData();
+        }
     }
 
 
@@ -67,6 +70,7 @@ public partial class Cart : System.Web.UI.Page
                 RepeaterCart.DataBind();
 
                 var total = TransaksiECommerceDetail.Sum(item => item.Quantity * item.TBStokProduk.HargaJual).ToString();
+                LiteralTotal.Text = total.ToFormatHarga();
             }
             else
                 MultiView1.ActiveViewIndex = 0;

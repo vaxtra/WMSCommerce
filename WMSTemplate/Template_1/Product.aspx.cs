@@ -86,7 +86,7 @@ public partial class ProductDetail : System.Web.UI.Page
             db.SubmitChanges();
         }
 
-        Response.Redirect("_Cart.aspx");
+        Response.Redirect("Cart.aspx");
 
         //PENGATURAN PELANGGAN DI TRANSAKSI
         //PengaturanPelanggan(Pelanggan.IDPelanggan);
@@ -150,7 +150,7 @@ public partial class ProductDetail : System.Web.UI.Page
             db.SubmitChanges();
         }
 
-        Response.Redirect("_Cart.aspx");
+        Response.Redirect("Cart.aspx");
 
         //PENGATURAN PELANGGAN DI TRANSAKSI
         //PengaturanPelanggan(Pelanggan.IDPelanggan);

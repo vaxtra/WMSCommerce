@@ -92,7 +92,7 @@
                                         <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
                                         <div class="b-goods__price-old">  <%# Eval("Harga").ToFormatHarga() %></div>
                                         <div class="b-goods__price">  <%# Eval("Harga").ToFormatHarga() %></div>
-                                        <div class="b-goods-links"><a href="/_Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
+                                        <div class="b-goods-links"><a href="/Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
                                     </div>
                                 </div>
                             </section>
