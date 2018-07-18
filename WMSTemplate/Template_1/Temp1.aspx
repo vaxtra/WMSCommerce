@@ -14,14 +14,7 @@
                         <div class="col-xs-10 col-xs-offset-1">
                             <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
                             <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="2000" data-show-delay="1200" data-hide-delay="400" class="sp-layer">
-                                <ul class="main-slider__list list-inline">
-                                    <li><a href="./catalog-list.html">MEN</a></li>
-                                    <li><a href="./catalog-list.html">WOMEN</a></li>
-                                    <li><a href="./catalog-list.html">ACCESSORIES</a></li>
-                                    <li><a href="./catalog-list.html">GADGETS</a></li>
-                                </ul>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -34,14 +27,7 @@
                         <div class="col-xs-10 col-xs-offset-1">
                             <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
                             <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="2000" data-show-delay="1200" data-hide-delay="400" class="sp-layer">
-                                <ul class="main-slider__list list-inline">
-                                    <li><a href="./catalog-list.html">MEN</a></li>
-                                    <li><a href="./catalog-list.html">WOMEN</a></li>
-                                    <li><a href="./catalog-list.html">ACCESSORIES</a></li>
-                                    <li><a href="./catalog-list.html">GADGETS</a></li>
-                                </ul>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>

@@ -4,85 +4,147 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    Informasi Pelanggan
-    Alamat email anda
-    (alamat email)
+    <h2>Informasi Pelanggan</h2>
+    <h3>Alamat email anda</h3>
 
-    Alamat Pengiriman
-    (nama depan)
-    (nama belakang)
-    (negara)
-    (provinsi)
-    (Pilih Kota)
-    (Pilih Kecamatan)
-    (Alamat)
-    (Kode Pos)
-    (Nomor Telepon)
+    Alamat Email
+    <asp:TextBox ID="TextBoxAlamatEmail" runat="server"></asp:TextBox><br />
 
-    Kembali ke Keranjang Belanja
-    Lanjutkan ke Pengiriman
+    <h3>Alamat Pengiriman</h3>
 
-    Detail Pengiriman
+    <%--    Nama Depan
+    <asp:TextBox ID="TextBoxNamaDepan" runat="server"></asp:TextBox><br />
 
-     Alamat Pengiriman
+    Nama Belakang
+    <asp:TextBox ID="TextBoxNamaBelakang" runat="server"></asp:TextBox><br />--%>
 
-    Rendy Herdiawan
-    Jl. Ujungberung Indah Permai VI S-10
-    Ujung Berung, Kota Bandung
-    Jawa Barat 40611
-    Indonesia
-    Phone: 08156201691
+    Nama Lengkap
+    <asp:TextBox ID="TextBoxNamaLengkap" runat="server"></asp:TextBox><br />
 
+    Negara
+    <asp:DropDownList ID="DropDownListNegara" runat="server"></asp:DropDownList><br />
 
-    Pilih Jasa Pengiriman
+    Provinsi
+    <asp:DropDownList ID="DropDownListProvinsi" runat="server"></asp:DropDownList><br />
 
-    (Logo JNT)
-    Regular Service Rp 11.000
+    Kota
+    <asp:DropDownList ID="DropDownListKota" runat="server"></asp:DropDownList><br />
 
-     Kembali ke Informasi Pelanggan
-    Lanjutkan ke Pembayaran
+    Kecamatan
+    <asp:DropDownList ID="DropDownListKecamatan" runat="server"></asp:DropDownList><br />
 
+    Alamat
+    <asp:TextBox ID="TextBoxAlamat" runat="server"></asp:TextBox><br />
 
+    Kode Pos
+    <asp:TextBox ID="TextBoxKodePos" runat="server"></asp:TextBox><br />
 
-    Metode Pembayaran
-    Semua transaksi dienkripsi. Data kartu kredit tidak pernah disimpan.
+    Nomor Telepon
+    <asp:TextBox ID="TextBoxNomorTelepon" runat="server"></asp:TextBox><br />
 
-    Bank Transfer
-Pembayaran Lewat ATM atau internet Banking. Verifikasi manual.
+    <br />
 
-     Pilih untuk Berlangganan Newsletter 
+    <asp:Button ID="ButtonKembaliKeKeranjangBelanja" runat="server" Text="Kembali ke Keranjang Belanja" OnClick="ButtonKembaliKeKeranjangBelanja_Click" />
+    <asp:Button ID="ButtonLanjutkanKePengiriman" runat="server" Text="Lanjutkan ke Pengiriman" OnClick="ButtonLanjutkanKePengiriman_Click" />
 
-     Kembali ke detail pengiriman
+    <br />
+    <br />
 
-    Proses Pemesanan
+    <h2>Detail Pengiriman</h2>
 
+    <h3>Alamat Pengiriman</h3>
 
+    <asp:Literal ID="LiteralNamaLengkap" runat="server"></asp:Literal><br />
 
+    <asp:Literal ID="LiteralAlamat" runat="server"></asp:Literal><br />
 
+    <asp:Literal ID="LiteralKecamatan" runat="server"></asp:Literal>,
+    <asp:Literal ID="LiteralKota" runat="server"></asp:Literal><br />
 
-    DETAIL PEMESANAN
+    <asp:Literal ID="LiteralProvinsi" runat="server"></asp:Literal>
+    <asp:Literal ID="LiteralKodePos" runat="server"></asp:Literal><br />
 
-    (image 100 * 100)
-    1 x Nova
-        Hitam / 37 
+    <asp:Literal ID="LiteralNegara" runat="server"></asp:Literal><br />
 
-    Rp 99.000,00
-    Masukan Kode Voucher Anda
+    <asp:Literal ID="LiteralNomorTelepon" runat="server"></asp:Literal><br />
 
-Subtotal
+    <h2>Pilih Jasa Pengiriman</h2>
 
-Rp 99.000,00
+    <table>
+        <asp:Repeater ID="RepeaterKurir" runat="server">
+            <ItemTemplate>
+                <tr>
+                    <td>
+                        <asp:RadioButton ID="RadioButtonKurir" runat="server" GroupName="Kurir" />
+                    </td>
+                    <td><%# Eval("IDKurir") %></td>
+                    <td><%# Eval("Nama") %></td>
+                    <td><%# Eval("Biaya") %></td>
+                </tr>
+            </ItemTemplate>
+        </asp:Repeater>
+    </table>
 
-Biaya Pengiriman
+    <%--    (Logo JNT)
+    Regular Service Rp 11.000--%>
 
-Rp 11.000
+    <asp:Button ID="ButtonKembaliKeInformasiPelanggan" runat="server" Text="Kembali ke Informasi Pelanggan" OnClick="ButtonKembaliKeInformasiPelanggan_Click" />
+    <asp:Button ID="ButtonLanjutkanKePembayaran" runat="server" Text="Lanjutkan ke Pembayaran" OnClick="ButtonLanjutkanKePembayaran_Click" />
 
-Pajak
+    <h2>Metode Pembayaran</h2>
+    <h3>Semua transaksi dienkripsi. Data kartu kredit tidak pernah disimpan.</h3>
 
-Rp 0
+    <b>Bank Transfer</b><br />
+    Pembayaran Lewat ATM atau internet Banking. Verifikasi manual.
+    <br />
+    <br />
 
-Total
+    <asp:CheckBox ID="CheckBoxSubscribe" runat="server" Text="Pilih untuk Berlangganan Newsletter" />
+    <br />
+    <br />
 
-Rp 110.000
+    <asp:Button ID="ButtonKembaliKeDetailPengiriman" runat="server" Text="Kembali ke Detail Pengiriman" OnClick="ButtonKembaliKeDetailPengiriman_Click" />
+    <asp:Button ID="ButtonProsesPemesanan" runat="server" Text="Proses Pemesanan" OnClick="ButtonProsesPemesanan_Click" />
 
+    <h2>DETAIL PEMESANAN</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Produk</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <asp:Repeater ID="RepeaterCart" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <%# Eval("Nama") %><br />
+                            <img src='<%# Eval("Foto") %>' style="height: 100px; width: 100px;" /><br />
+                        </td>
+                        <td><%# Eval("Quantity") %></td>
+                        <td><%# Eval("Total").ToFormatHarga() %></td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </tbody>
+    </table>
+
+    <%--  Masukan Kode Voucher Anda
+    <asp:TextBox ID="TextBoxVoucher" runat="server"></asp:TextBox>
+    <asp:Button ID="Button1" runat="server" Text="Button" />--%>
+
+    Subtotal
+    <asp:Label ID="LabelSubtotal" runat="server"></asp:Label><br />
+
+    Biaya Pengiriman
+    <asp:Label ID="LabelBiayaPengiriman" runat="server"></asp:Label><br />
+
+    <%--Pajak
+Rp 0--%>
+
+    Total
+  <asp:Label ID="LabelTotal" runat="server"></asp:Label><br />
 </asp:Content>
