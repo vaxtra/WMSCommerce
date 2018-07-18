@@ -7,31 +7,34 @@
     <div id="main-slider" data-slider-width="1920px" data-slider-height="585px" data-slider-arrows="false" data-slider-buttons="false" class="main-slider slider-pro">
         <div class="sp-slides">
             <!-- Slide 1-->
-            <div class="sp-slide">
-                <img src="/frontend/assets/media/components/b-main-slider/bg-1.jpg" alt="slider" class="sp-image" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
-                            <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                         
-                        </div>
+            <asp:Repeater ID="RepeaterPost" runat="server">
+                <ItemTemplate>
+                 <%--   <div class='<%# Eval("ClassPost")%>'>
+                        <span class="text-danger"><%# Eval("Nama") + " - " + Eval("Konten") %></span>
+                    </div>--%>
+                    <div class="<%# Eval("ClassImages")%>">
+                        <asp:Repeater ID="RepeaterImage" runat="server" DataSource='<%# Eval("DataSourceImages")%>'>
+                            <ItemTemplate>
+                                <div class="sp-slide">
+                                    <img src="<%# Eval("DefaultURL") %>" alt="slider" class="sp-image" />
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-xs-offset-1">
+                                                <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer"><%# Eval("DefaultURL") %></div>
+                                                <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer"><%# Eval("DefaultURL") %></h2>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
             <!-- Slide 2-->
-            <div class="sp-slide">
-                <img src="/frontend/assets/media/components/b-main-slider/bg-2.jpg" alt="slider" class="sp-image" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
-                            <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                         
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- end main-slider-->
