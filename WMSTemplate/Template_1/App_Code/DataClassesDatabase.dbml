@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB13346_WMSCommerce" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=202.67.10.27,25000;Initial Catalog=DB13346_WMSCommerce;User ID=DB13346_WMSCommerce" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB13346_WMSCommerceConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBWITEnterpriseSystem" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=202.67.10.27,25000;Initial Catalog=DB13346_WMSCommerce;Persist Security Info=True;User ID=DB13346_WMSCommerce" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB13346_WMSCommerceConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TBAkun" Member="TBAkuns">
     <Type Name="TBAkun">
       <Column Name="IDAkun" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -800,6 +800,43 @@
       <Association Name="TBWilayah_TBKurirBiaya" Member="TBWilayah" ThisKey="IDWilayah" OtherKey="IDWilayah" Type="TBWilayah" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBKurirKota" Member="TBKurirKotas">
+    <Type Name="TBKurirKota">
+      <Column Name="IDKurirKota" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDKurirProvinsi" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Tipe" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="KodePos" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="[_IDWMSStore]" Member="_IDWMSStore" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[_IDWMSKurirKota]" Member="_IDWMSKurirKota" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="[_Urutan]" Member="_Urutan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_TanggalInsert]" Member="_TanggalInsert" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatInsert]" Member="_IDTempatInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaInsert]" Member="_IDPenggunaInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_TanggalUpdate]" Member="_TanggalUpdate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatUpdate]" Member="_IDTempatUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaUpdate]" Member="_IDPenggunaUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IsActive]" Member="_IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TBKurirProvinsi_TBKurirKota" Member="TBKurirProvinsi" ThisKey="IDKurirProvinsi" OtherKey="IDKurirProvinsi" Type="TBKurirProvinsi" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBKurirProvinsi" Member="TBKurirProvinsis">
+    <Type Name="TBKurirProvinsi">
+      <Column Name="IDKurirProvinsi" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="[_IDWMSStore]" Member="_IDWMSStore" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[_IDWMSKurirProvinsi]" Member="_IDWMSKurirProvinsi" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="[_Urutan]" Member="_Urutan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_TanggalInsert]" Member="_TanggalInsert" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatInsert]" Member="_IDTempatInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaInsert]" Member="_IDPenggunaInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_TanggalUpdate]" Member="_TanggalUpdate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatUpdate]" Member="_IDTempatUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaUpdate]" Member="_IDPenggunaUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IsActive]" Member="_IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TBKurirProvinsi_TBKurirKota" Member="TBKurirKotas" ThisKey="IDKurirProvinsi" OtherKey="IDKurirProvinsi" Type="TBKurirKota" />
+    </Type>
+  </Table>
   <Table Name="dbo.TBLogPengguna" Member="TBLogPenggunas">
     <Type Name="TBLogPengguna">
       <Column Name="IDLogPengguna" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -890,6 +927,24 @@
       <Column Name="Isi" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="TBPengguna_TBNotifikasi" Member="TBPengguna" ThisKey="IDPenggunaPengirim" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
       <Association Name="TBPengguna_TBNotifikasi1" Member="TBPengguna1" ThisKey="IDPenggunaPenerima" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPage" Member="TBPages">
+    <Type Name="TBPage">
+      <Column Name="IDPage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDPageTemplate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Deskripsi" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TBPage_TBPost" Member="TBPosts" ThisKey="IDPage" OtherKey="IDPage" Type="TBPost" />
+      <Association Name="TBPageTemplate_TBPage" Member="TBPageTemplate" ThisKey="IDPageTemplate" OtherKey="IDPageTemplate" Type="TBPageTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPageTemplate" Member="TBPageTemplates">
+    <Type Name="TBPageTemplate">
+      <Column Name="IDPageTemplate" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="DefaultURL" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="TBPageTemplate_TBPage" Member="TBPages" ThisKey="IDPageTemplate" OtherKey="IDPageTemplate" Type="TBPage" />
     </Type>
   </Table>
   <Table Name="dbo.TBPelanggan" Member="TBPelanggans">
@@ -1136,6 +1191,8 @@
       <Association Name="TBPengguna_TBPOProduksiProdukPenagihan" Member="TBPOProduksiProdukPenagihans" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPOProduksiProdukPenagihan" />
       <Association Name="TBPengguna_TBPOProduksiProdukPenagihanDetail" Member="TBPOProduksiProdukPenagihanDetails" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPOProduksiProdukPenagihanDetail" />
       <Association Name="TBPengguna_TBPOProduksiProdukRetur" Member="TBPOProduksiProdukReturs" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPOProduksiProdukRetur" />
+      <Association Name="TBPengguna_TBPost" Member="TBPosts" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPost" />
+      <Association Name="TBPengguna_TBPostDetail" Member="TBPostDetails" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPostDetail" />
       <Association Name="TBPengguna_TBProject" Member="TBProjects" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBProject" />
       <Association Name="TBPengguna_TBProject1" Member="TBProjects1" ThisKey="IDPengguna" OtherKey="IDPenggunaUpdate" Type="TBProject" />
       <Association Name="TBPengguna_TBProyeksi" Member="TBProyeksis" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBProyeksi" />
@@ -1646,6 +1703,54 @@
       <Association Name="TBStokProduk_TBPOProduksiProdukReturDetail" Member="TBStokProduk" ThisKey="IDStokProduk" OtherKey="IDStokProduk" Type="TBStokProduk" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBPost" Member="TBPosts">
+    <Type Name="TBPost">
+      <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDPengguna" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Tanggal" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Judul" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Deskripsi" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Align" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Tags" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="TBPost_TBPostDetail" Member="TBPostDetails" ThisKey="IDPost" OtherKey="IDPost" Type="TBPostDetail" />
+      <Association Name="TBPost_TBRelasiPostKategoriPost" Member="TBRelasiPostKategoriPosts" ThisKey="IDPost" OtherKey="IDPost" Type="TBRelasiPostKategoriPost" />
+      <Association Name="TBPage_TBPost" Member="TBPage" ThisKey="IDPage" OtherKey="IDPage" Type="TBPage" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBPost" Member="TBPengguna" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPostDetail" Member="TBPostDetails">
+    <Type Name="TBPostDetail">
+      <Column Name="IDPostDetail" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDPengguna" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Tanggal" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Jenis" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Konten" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="TBPostDetail_TBPostDetailImage" Member="TBPostDetailImages" ThisKey="IDPostDetail" OtherKey="IDPostDetail" Type="TBPostDetailImage" />
+      <Association Name="TBPengguna_TBPostDetail" Member="TBPengguna" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPost_TBPostDetail" Member="TBPost" ThisKey="IDPost" OtherKey="IDPost" Type="TBPost" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPostDetailImage" Member="TBPostDetailImages">
+    <Type Name="TBPostDetailImage">
+      <Column Name="IDPostDetailImage" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPostDetail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DefaultURL" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="TBPostDetail_TBPostDetailImage" Member="TBPostDetail" ThisKey="IDPostDetail" OtherKey="IDPostDetail" Type="TBPostDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPostKategori" Member="TBPostKategoris">
+    <Type Name="TBPostKategori">
+      <Column Name="IDPostKategori" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Association Name="TBPostKategori_TBRelasiPostKategoriPost" Member="TBRelasiPostKategoriPosts" ThisKey="IDPostKategori" OtherKey="IDPostKategori" Type="TBRelasiPostKategoriPost" />
+    </Type>
+  </Table>
   <Table Name="dbo.TBPrintBarcode" Member="TBPrintBarcodes">
     <Type Name="TBPrintBarcode">
       <Column Name="IDStokProduk" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -1866,6 +1971,14 @@
       <Column Name="IDMenu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="TBMenu_TBRelasiPenggunaMenu" Member="TBMenu" ThisKey="IDMenu" OtherKey="IDMenu" Type="TBMenu" IsForeignKey="true" />
       <Association Name="TBPengguna_TBRelasiPenggunaMenu" Member="TBPengguna" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBRelasiPostKategoriPost" Member="TBRelasiPostKategoriPosts">
+    <Type Name="TBRelasiPostKategoriPost">
+      <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPostKategori" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TBPost_TBRelasiPostKategoriPost" Member="TBPost" ThisKey="IDPost" OtherKey="IDPost" Type="TBPost" IsForeignKey="true" />
+      <Association Name="TBPostKategori_TBRelasiPostKategoriPost" Member="TBPostKategori" ThisKey="IDPostKategori" OtherKey="IDPostKategori" Type="TBPostKategori" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TBRelasiProdukKategoriProduk" Member="TBRelasiProdukKategoriProduks">

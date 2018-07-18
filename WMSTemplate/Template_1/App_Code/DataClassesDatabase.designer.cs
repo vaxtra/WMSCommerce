@@ -224,6 +224,12 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   partial void InsertTBKurirBiaya(TBKurirBiaya instance);
   partial void UpdateTBKurirBiaya(TBKurirBiaya instance);
   partial void DeleteTBKurirBiaya(TBKurirBiaya instance);
+  partial void InsertTBKurirKota(TBKurirKota instance);
+  partial void UpdateTBKurirKota(TBKurirKota instance);
+  partial void DeleteTBKurirKota(TBKurirKota instance);
+  partial void InsertTBKurirProvinsi(TBKurirProvinsi instance);
+  partial void UpdateTBKurirProvinsi(TBKurirProvinsi instance);
+  partial void DeleteTBKurirProvinsi(TBKurirProvinsi instance);
   partial void InsertTBLogPengguna(TBLogPengguna instance);
   partial void UpdateTBLogPengguna(TBLogPengguna instance);
   partial void DeleteTBLogPengguna(TBLogPengguna instance);
@@ -248,6 +254,12 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   partial void InsertTBNotifikasi(TBNotifikasi instance);
   partial void UpdateTBNotifikasi(TBNotifikasi instance);
   partial void DeleteTBNotifikasi(TBNotifikasi instance);
+  partial void InsertTBPage(TBPage instance);
+  partial void UpdateTBPage(TBPage instance);
+  partial void DeleteTBPage(TBPage instance);
+  partial void InsertTBPageTemplate(TBPageTemplate instance);
+  partial void UpdateTBPageTemplate(TBPageTemplate instance);
+  partial void DeleteTBPageTemplate(TBPageTemplate instance);
   partial void InsertTBPelanggan(TBPelanggan instance);
   partial void UpdateTBPelanggan(TBPelanggan instance);
   partial void DeleteTBPelanggan(TBPelanggan instance);
@@ -350,6 +362,18 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   partial void InsertTBPOProduksiProdukReturDetail(TBPOProduksiProdukReturDetail instance);
   partial void UpdateTBPOProduksiProdukReturDetail(TBPOProduksiProdukReturDetail instance);
   partial void DeleteTBPOProduksiProdukReturDetail(TBPOProduksiProdukReturDetail instance);
+  partial void InsertTBPost(TBPost instance);
+  partial void UpdateTBPost(TBPost instance);
+  partial void DeleteTBPost(TBPost instance);
+  partial void InsertTBPostDetail(TBPostDetail instance);
+  partial void UpdateTBPostDetail(TBPostDetail instance);
+  partial void DeleteTBPostDetail(TBPostDetail instance);
+  partial void InsertTBPostDetailImage(TBPostDetailImage instance);
+  partial void UpdateTBPostDetailImage(TBPostDetailImage instance);
+  partial void DeleteTBPostDetailImage(TBPostDetailImage instance);
+  partial void InsertTBPostKategori(TBPostKategori instance);
+  partial void UpdateTBPostKategori(TBPostKategori instance);
+  partial void DeleteTBPostKategori(TBPostKategori instance);
   partial void InsertTBPrintBarcode(TBPrintBarcode instance);
   partial void UpdateTBPrintBarcode(TBPrintBarcode instance);
   partial void DeleteTBPrintBarcode(TBPrintBarcode instance);
@@ -395,6 +419,9 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   partial void InsertTBRelasiPenggunaMenu(TBRelasiPenggunaMenu instance);
   partial void UpdateTBRelasiPenggunaMenu(TBRelasiPenggunaMenu instance);
   partial void DeleteTBRelasiPenggunaMenu(TBRelasiPenggunaMenu instance);
+  partial void InsertTBRelasiPostKategoriPost(TBRelasiPostKategoriPost instance);
+  partial void UpdateTBRelasiPostKategoriPost(TBRelasiPostKategoriPost instance);
+  partial void DeleteTBRelasiPostKategoriPost(TBRelasiPostKategoriPost instance);
   partial void InsertTBRelasiProdukKategoriProduk(TBRelasiProdukKategoriProduk instance);
   partial void UpdateTBRelasiProdukKategoriProduk(TBRelasiProdukKategoriProduk instance);
   partial void DeleteTBRelasiProdukKategoriProduk(TBRelasiProdukKategoriProduk instance);
@@ -1082,6 +1109,22 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
 		}
 	}
 	
+	public System.Data.Linq.Table<TBKurirKota> TBKurirKotas
+	{
+		get
+		{
+			return this.GetTable<TBKurirKota>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBKurirProvinsi> TBKurirProvinsis
+	{
+		get
+		{
+			return this.GetTable<TBKurirProvinsi>();
+		}
+	}
+	
 	public System.Data.Linq.Table<TBLogPengguna> TBLogPenggunas
 	{
 		get
@@ -1143,6 +1186,22 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
 		get
 		{
 			return this.GetTable<TBNotifikasi>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPage> TBPages
+	{
+		get
+		{
+			return this.GetTable<TBPage>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPageTemplate> TBPageTemplates
+	{
+		get
+		{
+			return this.GetTable<TBPageTemplate>();
 		}
 	}
 	
@@ -1418,6 +1477,38 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
 		}
 	}
 	
+	public System.Data.Linq.Table<TBPost> TBPosts
+	{
+		get
+		{
+			return this.GetTable<TBPost>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPostDetail> TBPostDetails
+	{
+		get
+		{
+			return this.GetTable<TBPostDetail>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPostDetailImage> TBPostDetailImages
+	{
+		get
+		{
+			return this.GetTable<TBPostDetailImage>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPostKategori> TBPostKategoris
+	{
+		get
+		{
+			return this.GetTable<TBPostKategori>();
+		}
+	}
+	
 	public System.Data.Linq.Table<TBPrintBarcode> TBPrintBarcodes
 	{
 		get
@@ -1535,6 +1626,14 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
 		get
 		{
 			return this.GetTable<TBRelasiPenggunaMenu>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBRelasiPostKategoriPost> TBRelasiPostKategoriPosts
+	{
+		get
+		{
+			return this.GetTable<TBRelasiPostKategoriPost>();
 		}
 	}
 	
@@ -19220,6 +19319,799 @@ public partial class TBKurirBiaya : INotifyPropertyChanging, INotifyPropertyChan
 	}
 }
 
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBKurirKota")]
+public partial class TBKurirKota : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDKurirKota;
+	
+	private int _IDKurirProvinsi;
+	
+	private string _Nama;
+	
+	private string _Tipe;
+	
+	private string _KodePos;
+	
+	private System.Nullable<System.Guid> @__IDWMSStore;
+	
+	private System.Guid @__IDWMSKurirKota;
+	
+	private System.Nullable<int> @__Urutan;
+	
+	private System.DateTime @__TanggalInsert;
+	
+	private int @__IDTempatInsert;
+	
+	private int @__IDPenggunaInsert;
+	
+	private System.DateTime @__TanggalUpdate;
+	
+	private int @__IDTempatUpdate;
+	
+	private int @__IDPenggunaUpdate;
+	
+	private bool @__IsActive;
+	
+	private EntityRef<TBKurirProvinsi> _TBKurirProvinsi;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDKurirKotaChanging(int value);
+    partial void OnIDKurirKotaChanged();
+    partial void OnIDKurirProvinsiChanging(int value);
+    partial void OnIDKurirProvinsiChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void OnTipeChanging(string value);
+    partial void OnTipeChanged();
+    partial void OnKodePosChanging(string value);
+    partial void OnKodePosChanged();
+    partial void On_IDWMSStoreChanging(System.Nullable<System.Guid> value);
+    partial void On_IDWMSStoreChanged();
+    partial void On_IDWMSKurirKotaChanging(System.Guid value);
+    partial void On_IDWMSKurirKotaChanged();
+    partial void On_UrutanChanging(System.Nullable<int> value);
+    partial void On_UrutanChanged();
+    partial void On_TanggalInsertChanging(System.DateTime value);
+    partial void On_TanggalInsertChanged();
+    partial void On_IDTempatInsertChanging(int value);
+    partial void On_IDTempatInsertChanged();
+    partial void On_IDPenggunaInsertChanging(int value);
+    partial void On_IDPenggunaInsertChanged();
+    partial void On_TanggalUpdateChanging(System.DateTime value);
+    partial void On_TanggalUpdateChanged();
+    partial void On_IDTempatUpdateChanging(int value);
+    partial void On_IDTempatUpdateChanged();
+    partial void On_IDPenggunaUpdateChanging(int value);
+    partial void On_IDPenggunaUpdateChanged();
+    partial void On_IsActiveChanging(bool value);
+    partial void On_IsActiveChanged();
+    #endregion
+	
+	public TBKurirKota()
+	{
+		this._TBKurirProvinsi = default(EntityRef<TBKurirProvinsi>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDKurirKota", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDKurirKota
+	{
+		get
+		{
+			return this._IDKurirKota;
+		}
+		set
+		{
+			if ((this._IDKurirKota != value))
+			{
+				this.OnIDKurirKotaChanging(value);
+				this.SendPropertyChanging();
+				this._IDKurirKota = value;
+				this.SendPropertyChanged("IDKurirKota");
+				this.OnIDKurirKotaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDKurirProvinsi", DbType="Int NOT NULL")]
+	public int IDKurirProvinsi
+	{
+		get
+		{
+			return this._IDKurirProvinsi;
+		}
+		set
+		{
+			if ((this._IDKurirProvinsi != value))
+			{
+				if (this._TBKurirProvinsi.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDKurirProvinsiChanging(value);
+				this.SendPropertyChanging();
+				this._IDKurirProvinsi = value;
+				this.SendPropertyChanged("IDKurirProvinsi");
+				this.OnIDKurirProvinsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250)")]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipe", DbType="VarChar(250)")]
+	public string Tipe
+	{
+		get
+		{
+			return this._Tipe;
+		}
+		set
+		{
+			if ((this._Tipe != value))
+			{
+				this.OnTipeChanging(value);
+				this.SendPropertyChanging();
+				this._Tipe = value;
+				this.SendPropertyChanged("Tipe");
+				this.OnTipeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KodePos", DbType="VarChar(250)")]
+	public string KodePos
+	{
+		get
+		{
+			return this._KodePos;
+		}
+		set
+		{
+			if ((this._KodePos != value))
+			{
+				this.OnKodePosChanging(value);
+				this.SendPropertyChanging();
+				this._KodePos = value;
+				this.SendPropertyChanged("KodePos");
+				this.OnKodePosChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDWMSStore]", Storage="__IDWMSStore", DbType="UniqueIdentifier")]
+	public System.Nullable<System.Guid> _IDWMSStore
+	{
+		get
+		{
+			return this.@__IDWMSStore;
+		}
+		set
+		{
+			if ((this.@__IDWMSStore != value))
+			{
+				this.On_IDWMSStoreChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDWMSStore = value;
+				this.SendPropertyChanged("_IDWMSStore");
+				this.On_IDWMSStoreChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDWMSKurirKota]", Storage="__IDWMSKurirKota", DbType="UniqueIdentifier NOT NULL")]
+	public System.Guid _IDWMSKurirKota
+	{
+		get
+		{
+			return this.@__IDWMSKurirKota;
+		}
+		set
+		{
+			if ((this.@__IDWMSKurirKota != value))
+			{
+				this.On_IDWMSKurirKotaChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDWMSKurirKota = value;
+				this.SendPropertyChanged("_IDWMSKurirKota");
+				this.On_IDWMSKurirKotaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_Urutan]", Storage="__Urutan", DbType="Int")]
+	public System.Nullable<int> _Urutan
+	{
+		get
+		{
+			return this.@__Urutan;
+		}
+		set
+		{
+			if ((this.@__Urutan != value))
+			{
+				this.On_UrutanChanging(value);
+				this.SendPropertyChanging();
+				this.@__Urutan = value;
+				this.SendPropertyChanged("_Urutan");
+				this.On_UrutanChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_TanggalInsert]", Storage="__TanggalInsert", DbType="DateTime NOT NULL")]
+	public System.DateTime _TanggalInsert
+	{
+		get
+		{
+			return this.@__TanggalInsert;
+		}
+		set
+		{
+			if ((this.@__TanggalInsert != value))
+			{
+				this.On_TanggalInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__TanggalInsert = value;
+				this.SendPropertyChanged("_TanggalInsert");
+				this.On_TanggalInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDTempatInsert]", Storage="__IDTempatInsert", DbType="Int NOT NULL")]
+	public int _IDTempatInsert
+	{
+		get
+		{
+			return this.@__IDTempatInsert;
+		}
+		set
+		{
+			if ((this.@__IDTempatInsert != value))
+			{
+				this.On_IDTempatInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDTempatInsert = value;
+				this.SendPropertyChanged("_IDTempatInsert");
+				this.On_IDTempatInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDPenggunaInsert]", Storage="__IDPenggunaInsert", DbType="Int NOT NULL")]
+	public int _IDPenggunaInsert
+	{
+		get
+		{
+			return this.@__IDPenggunaInsert;
+		}
+		set
+		{
+			if ((this.@__IDPenggunaInsert != value))
+			{
+				this.On_IDPenggunaInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDPenggunaInsert = value;
+				this.SendPropertyChanged("_IDPenggunaInsert");
+				this.On_IDPenggunaInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_TanggalUpdate]", Storage="__TanggalUpdate", DbType="DateTime NOT NULL")]
+	public System.DateTime _TanggalUpdate
+	{
+		get
+		{
+			return this.@__TanggalUpdate;
+		}
+		set
+		{
+			if ((this.@__TanggalUpdate != value))
+			{
+				this.On_TanggalUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__TanggalUpdate = value;
+				this.SendPropertyChanged("_TanggalUpdate");
+				this.On_TanggalUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDTempatUpdate]", Storage="__IDTempatUpdate", DbType="Int NOT NULL")]
+	public int _IDTempatUpdate
+	{
+		get
+		{
+			return this.@__IDTempatUpdate;
+		}
+		set
+		{
+			if ((this.@__IDTempatUpdate != value))
+			{
+				this.On_IDTempatUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDTempatUpdate = value;
+				this.SendPropertyChanged("_IDTempatUpdate");
+				this.On_IDTempatUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDPenggunaUpdate]", Storage="__IDPenggunaUpdate", DbType="Int NOT NULL")]
+	public int _IDPenggunaUpdate
+	{
+		get
+		{
+			return this.@__IDPenggunaUpdate;
+		}
+		set
+		{
+			if ((this.@__IDPenggunaUpdate != value))
+			{
+				this.On_IDPenggunaUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDPenggunaUpdate = value;
+				this.SendPropertyChanged("_IDPenggunaUpdate");
+				this.On_IDPenggunaUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IsActive]", Storage="__IsActive", DbType="Bit NOT NULL")]
+	public bool _IsActive
+	{
+		get
+		{
+			return this.@__IsActive;
+		}
+		set
+		{
+			if ((this.@__IsActive != value))
+			{
+				this.On_IsActiveChanging(value);
+				this.SendPropertyChanging();
+				this.@__IsActive = value;
+				this.SendPropertyChanged("_IsActive");
+				this.On_IsActiveChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBKurirProvinsi_TBKurirKota", Storage="_TBKurirProvinsi", ThisKey="IDKurirProvinsi", OtherKey="IDKurirProvinsi", IsForeignKey=true)]
+	public TBKurirProvinsi TBKurirProvinsi
+	{
+		get
+		{
+			return this._TBKurirProvinsi.Entity;
+		}
+		set
+		{
+			TBKurirProvinsi previousValue = this._TBKurirProvinsi.Entity;
+			if (((previousValue != value) 
+						|| (this._TBKurirProvinsi.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBKurirProvinsi.Entity = null;
+					previousValue.TBKurirKotas.Remove(this);
+				}
+				this._TBKurirProvinsi.Entity = value;
+				if ((value != null))
+				{
+					value.TBKurirKotas.Add(this);
+					this._IDKurirProvinsi = value.IDKurirProvinsi;
+				}
+				else
+				{
+					this._IDKurirProvinsi = default(int);
+				}
+				this.SendPropertyChanged("TBKurirProvinsi");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBKurirProvinsi")]
+public partial class TBKurirProvinsi : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDKurirProvinsi;
+	
+	private string _Nama;
+	
+	private System.Nullable<System.Guid> @__IDWMSStore;
+	
+	private System.Guid @__IDWMSKurirProvinsi;
+	
+	private System.Nullable<int> @__Urutan;
+	
+	private System.DateTime @__TanggalInsert;
+	
+	private int @__IDTempatInsert;
+	
+	private int @__IDPenggunaInsert;
+	
+	private System.DateTime @__TanggalUpdate;
+	
+	private int @__IDTempatUpdate;
+	
+	private int @__IDPenggunaUpdate;
+	
+	private bool @__IsActive;
+	
+	private EntitySet<TBKurirKota> _TBKurirKotas;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDKurirProvinsiChanging(int value);
+    partial void OnIDKurirProvinsiChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void On_IDWMSStoreChanging(System.Nullable<System.Guid> value);
+    partial void On_IDWMSStoreChanged();
+    partial void On_IDWMSKurirProvinsiChanging(System.Guid value);
+    partial void On_IDWMSKurirProvinsiChanged();
+    partial void On_UrutanChanging(System.Nullable<int> value);
+    partial void On_UrutanChanged();
+    partial void On_TanggalInsertChanging(System.DateTime value);
+    partial void On_TanggalInsertChanged();
+    partial void On_IDTempatInsertChanging(int value);
+    partial void On_IDTempatInsertChanged();
+    partial void On_IDPenggunaInsertChanging(int value);
+    partial void On_IDPenggunaInsertChanged();
+    partial void On_TanggalUpdateChanging(System.DateTime value);
+    partial void On_TanggalUpdateChanged();
+    partial void On_IDTempatUpdateChanging(int value);
+    partial void On_IDTempatUpdateChanged();
+    partial void On_IDPenggunaUpdateChanging(int value);
+    partial void On_IDPenggunaUpdateChanged();
+    partial void On_IsActiveChanging(bool value);
+    partial void On_IsActiveChanged();
+    #endregion
+	
+	public TBKurirProvinsi()
+	{
+		this._TBKurirKotas = new EntitySet<TBKurirKota>(new Action<TBKurirKota>(this.attach_TBKurirKotas), new Action<TBKurirKota>(this.detach_TBKurirKotas));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDKurirProvinsi", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDKurirProvinsi
+	{
+		get
+		{
+			return this._IDKurirProvinsi;
+		}
+		set
+		{
+			if ((this._IDKurirProvinsi != value))
+			{
+				this.OnIDKurirProvinsiChanging(value);
+				this.SendPropertyChanging();
+				this._IDKurirProvinsi = value;
+				this.SendPropertyChanged("IDKurirProvinsi");
+				this.OnIDKurirProvinsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250)")]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDWMSStore]", Storage="__IDWMSStore", DbType="UniqueIdentifier")]
+	public System.Nullable<System.Guid> _IDWMSStore
+	{
+		get
+		{
+			return this.@__IDWMSStore;
+		}
+		set
+		{
+			if ((this.@__IDWMSStore != value))
+			{
+				this.On_IDWMSStoreChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDWMSStore = value;
+				this.SendPropertyChanged("_IDWMSStore");
+				this.On_IDWMSStoreChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDWMSKurirProvinsi]", Storage="__IDWMSKurirProvinsi", DbType="UniqueIdentifier NOT NULL")]
+	public System.Guid _IDWMSKurirProvinsi
+	{
+		get
+		{
+			return this.@__IDWMSKurirProvinsi;
+		}
+		set
+		{
+			if ((this.@__IDWMSKurirProvinsi != value))
+			{
+				this.On_IDWMSKurirProvinsiChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDWMSKurirProvinsi = value;
+				this.SendPropertyChanged("_IDWMSKurirProvinsi");
+				this.On_IDWMSKurirProvinsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_Urutan]", Storage="__Urutan", DbType="Int")]
+	public System.Nullable<int> _Urutan
+	{
+		get
+		{
+			return this.@__Urutan;
+		}
+		set
+		{
+			if ((this.@__Urutan != value))
+			{
+				this.On_UrutanChanging(value);
+				this.SendPropertyChanging();
+				this.@__Urutan = value;
+				this.SendPropertyChanged("_Urutan");
+				this.On_UrutanChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_TanggalInsert]", Storage="__TanggalInsert", DbType="DateTime NOT NULL")]
+	public System.DateTime _TanggalInsert
+	{
+		get
+		{
+			return this.@__TanggalInsert;
+		}
+		set
+		{
+			if ((this.@__TanggalInsert != value))
+			{
+				this.On_TanggalInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__TanggalInsert = value;
+				this.SendPropertyChanged("_TanggalInsert");
+				this.On_TanggalInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDTempatInsert]", Storage="__IDTempatInsert", DbType="Int NOT NULL")]
+	public int _IDTempatInsert
+	{
+		get
+		{
+			return this.@__IDTempatInsert;
+		}
+		set
+		{
+			if ((this.@__IDTempatInsert != value))
+			{
+				this.On_IDTempatInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDTempatInsert = value;
+				this.SendPropertyChanged("_IDTempatInsert");
+				this.On_IDTempatInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDPenggunaInsert]", Storage="__IDPenggunaInsert", DbType="Int NOT NULL")]
+	public int _IDPenggunaInsert
+	{
+		get
+		{
+			return this.@__IDPenggunaInsert;
+		}
+		set
+		{
+			if ((this.@__IDPenggunaInsert != value))
+			{
+				this.On_IDPenggunaInsertChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDPenggunaInsert = value;
+				this.SendPropertyChanged("_IDPenggunaInsert");
+				this.On_IDPenggunaInsertChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_TanggalUpdate]", Storage="__TanggalUpdate", DbType="DateTime NOT NULL")]
+	public System.DateTime _TanggalUpdate
+	{
+		get
+		{
+			return this.@__TanggalUpdate;
+		}
+		set
+		{
+			if ((this.@__TanggalUpdate != value))
+			{
+				this.On_TanggalUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__TanggalUpdate = value;
+				this.SendPropertyChanged("_TanggalUpdate");
+				this.On_TanggalUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDTempatUpdate]", Storage="__IDTempatUpdate", DbType="Int NOT NULL")]
+	public int _IDTempatUpdate
+	{
+		get
+		{
+			return this.@__IDTempatUpdate;
+		}
+		set
+		{
+			if ((this.@__IDTempatUpdate != value))
+			{
+				this.On_IDTempatUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDTempatUpdate = value;
+				this.SendPropertyChanged("_IDTempatUpdate");
+				this.On_IDTempatUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IDPenggunaUpdate]", Storage="__IDPenggunaUpdate", DbType="Int NOT NULL")]
+	public int _IDPenggunaUpdate
+	{
+		get
+		{
+			return this.@__IDPenggunaUpdate;
+		}
+		set
+		{
+			if ((this.@__IDPenggunaUpdate != value))
+			{
+				this.On_IDPenggunaUpdateChanging(value);
+				this.SendPropertyChanging();
+				this.@__IDPenggunaUpdate = value;
+				this.SendPropertyChanged("_IDPenggunaUpdate");
+				this.On_IDPenggunaUpdateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[_IsActive]", Storage="__IsActive", DbType="Bit NOT NULL")]
+	public bool _IsActive
+	{
+		get
+		{
+			return this.@__IsActive;
+		}
+		set
+		{
+			if ((this.@__IsActive != value))
+			{
+				this.On_IsActiveChanging(value);
+				this.SendPropertyChanging();
+				this.@__IsActive = value;
+				this.SendPropertyChanged("_IsActive");
+				this.On_IsActiveChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBKurirProvinsi_TBKurirKota", Storage="_TBKurirKotas", ThisKey="IDKurirProvinsi", OtherKey="IDKurirProvinsi")]
+	public EntitySet<TBKurirKota> TBKurirKotas
+	{
+		get
+		{
+			return this._TBKurirKotas;
+		}
+		set
+		{
+			this._TBKurirKotas.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBKurirKotas(TBKurirKota entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBKurirProvinsi = this;
+	}
+	
+	private void detach_TBKurirKotas(TBKurirKota entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBKurirProvinsi = null;
+	}
+}
+
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBLogPengguna")]
 public partial class TBLogPengguna : INotifyPropertyChanging, INotifyPropertyChanged
 {
@@ -21171,6 +22063,347 @@ public partial class TBNotifikasi : INotifyPropertyChanging, INotifyPropertyChan
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPage")]
+public partial class TBPage : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPage;
+	
+	private int _IDPageTemplate;
+	
+	private string _Nama;
+	
+	private string _Deskripsi;
+	
+	private EntitySet<TBPost> _TBPosts;
+	
+	private EntityRef<TBPageTemplate> _TBPageTemplate;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPageChanging(int value);
+    partial void OnIDPageChanged();
+    partial void OnIDPageTemplateChanging(int value);
+    partial void OnIDPageTemplateChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void OnDeskripsiChanging(string value);
+    partial void OnDeskripsiChanged();
+    #endregion
+	
+	public TBPage()
+	{
+		this._TBPosts = new EntitySet<TBPost>(new Action<TBPost>(this.attach_TBPosts), new Action<TBPost>(this.detach_TBPosts));
+		this._TBPageTemplate = default(EntityRef<TBPageTemplate>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int IDPage
+	{
+		get
+		{
+			return this._IDPage;
+		}
+		set
+		{
+			if ((this._IDPage != value))
+			{
+				this.OnIDPageChanging(value);
+				this.SendPropertyChanging();
+				this._IDPage = value;
+				this.SendPropertyChanged("IDPage");
+				this.OnIDPageChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPageTemplate", DbType="Int NOT NULL")]
+	public int IDPageTemplate
+	{
+		get
+		{
+			return this._IDPageTemplate;
+		}
+		set
+		{
+			if ((this._IDPageTemplate != value))
+			{
+				if (this._TBPageTemplate.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPageTemplateChanging(value);
+				this.SendPropertyChanging();
+				this._IDPageTemplate = value;
+				this.SendPropertyChanged("IDPageTemplate");
+				this.OnIDPageTemplateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deskripsi", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string Deskripsi
+	{
+		get
+		{
+			return this._Deskripsi;
+		}
+		set
+		{
+			if ((this._Deskripsi != value))
+			{
+				this.OnDeskripsiChanging(value);
+				this.SendPropertyChanging();
+				this._Deskripsi = value;
+				this.SendPropertyChanged("Deskripsi");
+				this.OnDeskripsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPage_TBPost", Storage="_TBPosts", ThisKey="IDPage", OtherKey="IDPage")]
+	public EntitySet<TBPost> TBPosts
+	{
+		get
+		{
+			return this._TBPosts;
+		}
+		set
+		{
+			this._TBPosts.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPageTemplate_TBPage", Storage="_TBPageTemplate", ThisKey="IDPageTemplate", OtherKey="IDPageTemplate", IsForeignKey=true)]
+	public TBPageTemplate TBPageTemplate
+	{
+		get
+		{
+			return this._TBPageTemplate.Entity;
+		}
+		set
+		{
+			TBPageTemplate previousValue = this._TBPageTemplate.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPageTemplate.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPageTemplate.Entity = null;
+					previousValue.TBPages.Remove(this);
+				}
+				this._TBPageTemplate.Entity = value;
+				if ((value != null))
+				{
+					value.TBPages.Add(this);
+					this._IDPageTemplate = value.IDPageTemplate;
+				}
+				else
+				{
+					this._IDPageTemplate = default(int);
+				}
+				this.SendPropertyChanged("TBPageTemplate");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBPosts(TBPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPage = this;
+	}
+	
+	private void detach_TBPosts(TBPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPage = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPageTemplate")]
+public partial class TBPageTemplate : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPageTemplate;
+	
+	private string _Nama;
+	
+	private string _DefaultURL;
+	
+	private EntitySet<TBPage> _TBPages;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPageTemplateChanging(int value);
+    partial void OnIDPageTemplateChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void OnDefaultURLChanging(string value);
+    partial void OnDefaultURLChanged();
+    #endregion
+	
+	public TBPageTemplate()
+	{
+		this._TBPages = new EntitySet<TBPage>(new Action<TBPage>(this.attach_TBPages), new Action<TBPage>(this.detach_TBPages));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPageTemplate", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int IDPageTemplate
+	{
+		get
+		{
+			return this._IDPageTemplate;
+		}
+		set
+		{
+			if ((this._IDPageTemplate != value))
+			{
+				this.OnIDPageTemplateChanging(value);
+				this.SendPropertyChanging();
+				this._IDPageTemplate = value;
+				this.SendPropertyChanged("IDPageTemplate");
+				this.OnIDPageTemplateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DefaultURL", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string DefaultURL
+	{
+		get
+		{
+			return this._DefaultURL;
+		}
+		set
+		{
+			if ((this._DefaultURL != value))
+			{
+				this.OnDefaultURLChanging(value);
+				this.SendPropertyChanging();
+				this._DefaultURL = value;
+				this.SendPropertyChanged("DefaultURL");
+				this.OnDefaultURLChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPageTemplate_TBPage", Storage="_TBPages", ThisKey="IDPageTemplate", OtherKey="IDPageTemplate")]
+	public EntitySet<TBPage> TBPages
+	{
+		get
+		{
+			return this._TBPages;
+		}
+		set
+		{
+			this._TBPages.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBPages(TBPage entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPageTemplate = this;
+	}
+	
+	private void detach_TBPages(TBPage entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPageTemplate = null;
 	}
 }
 
@@ -25217,6 +26450,10 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private EntitySet<TBPOProduksiProdukRetur> _TBPOProduksiProdukReturs;
 	
+	private EntitySet<TBPost> _TBPosts;
+	
+	private EntitySet<TBPostDetail> _TBPostDetails;
+	
 	private EntitySet<TBProject> _TBProjects;
 	
 	private EntitySet<TBProject> _TBProjects1;
@@ -25406,6 +26643,8 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		this._TBPOProduksiProdukPenagihans = new EntitySet<TBPOProduksiProdukPenagihan>(new Action<TBPOProduksiProdukPenagihan>(this.attach_TBPOProduksiProdukPenagihans), new Action<TBPOProduksiProdukPenagihan>(this.detach_TBPOProduksiProdukPenagihans));
 		this._TBPOProduksiProdukPenagihanDetails = new EntitySet<TBPOProduksiProdukPenagihanDetail>(new Action<TBPOProduksiProdukPenagihanDetail>(this.attach_TBPOProduksiProdukPenagihanDetails), new Action<TBPOProduksiProdukPenagihanDetail>(this.detach_TBPOProduksiProdukPenagihanDetails));
 		this._TBPOProduksiProdukReturs = new EntitySet<TBPOProduksiProdukRetur>(new Action<TBPOProduksiProdukRetur>(this.attach_TBPOProduksiProdukReturs), new Action<TBPOProduksiProdukRetur>(this.detach_TBPOProduksiProdukReturs));
+		this._TBPosts = new EntitySet<TBPost>(new Action<TBPost>(this.attach_TBPosts), new Action<TBPost>(this.detach_TBPosts));
+		this._TBPostDetails = new EntitySet<TBPostDetail>(new Action<TBPostDetail>(this.attach_TBPostDetails), new Action<TBPostDetail>(this.detach_TBPostDetails));
 		this._TBProjects = new EntitySet<TBProject>(new Action<TBProject>(this.attach_TBProjects), new Action<TBProject>(this.detach_TBProjects));
 		this._TBProjects1 = new EntitySet<TBProject>(new Action<TBProject>(this.attach_TBProjects1), new Action<TBProject>(this.detach_TBProjects1));
 		this._TBProyeksis = new EntitySet<TBProyeksi>(new Action<TBProyeksi>(this.attach_TBProyeksis), new Action<TBProyeksi>(this.detach_TBProyeksis));
@@ -26798,6 +28037,32 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBPost", Storage="_TBPosts", ThisKey="IDPengguna", OtherKey="IDPengguna")]
+	public EntitySet<TBPost> TBPosts
+	{
+		get
+		{
+			return this._TBPosts;
+		}
+		set
+		{
+			this._TBPosts.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBPostDetail", Storage="_TBPostDetails", ThisKey="IDPengguna", OtherKey="IDPengguna")]
+	public EntitySet<TBPostDetail> TBPostDetails
+	{
+		get
+		{
+			return this._TBPostDetails;
+		}
+		set
+		{
+			this._TBPostDetails.Assign(value);
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBProject", Storage="_TBProjects", ThisKey="IDPengguna", OtherKey="IDPengguna")]
 	public EntitySet<TBProject> TBProjects
 	{
@@ -27636,6 +28901,30 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 	}
 	
 	private void detach_TBPOProduksiProdukReturs(TBPOProduksiProdukRetur entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPengguna = null;
+	}
+	
+	private void attach_TBPosts(TBPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPengguna = this;
+	}
+	
+	private void detach_TBPosts(TBPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPengguna = null;
+	}
+	
+	private void attach_TBPostDetails(TBPostDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPengguna = this;
+	}
+	
+	private void detach_TBPostDetails(TBPostDetail entity)
 	{
 		this.SendPropertyChanging();
 		entity.TBPengguna = null;
@@ -39391,6 +40680,1027 @@ public partial class TBPOProduksiProdukReturDetail : INotifyPropertyChanging, IN
 	}
 }
 
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPost")]
+public partial class TBPost : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPost;
+	
+	private int _IDPage;
+	
+	private int _IDPengguna;
+	
+	private int _Urutan;
+	
+	private System.DateTime _Tanggal;
+	
+	private string _Judul;
+	
+	private string _Deskripsi;
+	
+	private string _Align;
+	
+	private string _Tags;
+	
+	private EntitySet<TBPostDetail> _TBPostDetails;
+	
+	private EntitySet<TBRelasiPostKategoriPost> _TBRelasiPostKategoriPosts;
+	
+	private EntityRef<TBPage> _TBPage;
+	
+	private EntityRef<TBPengguna> _TBPengguna;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPostChanging(int value);
+    partial void OnIDPostChanged();
+    partial void OnIDPageChanging(int value);
+    partial void OnIDPageChanged();
+    partial void OnIDPenggunaChanging(int value);
+    partial void OnIDPenggunaChanged();
+    partial void OnUrutanChanging(int value);
+    partial void OnUrutanChanged();
+    partial void OnTanggalChanging(System.DateTime value);
+    partial void OnTanggalChanged();
+    partial void OnJudulChanging(string value);
+    partial void OnJudulChanged();
+    partial void OnDeskripsiChanging(string value);
+    partial void OnDeskripsiChanged();
+    partial void OnAlignChanging(string value);
+    partial void OnAlignChanged();
+    partial void OnTagsChanging(string value);
+    partial void OnTagsChanged();
+    #endregion
+	
+	public TBPost()
+	{
+		this._TBPostDetails = new EntitySet<TBPostDetail>(new Action<TBPostDetail>(this.attach_TBPostDetails), new Action<TBPostDetail>(this.detach_TBPostDetails));
+		this._TBRelasiPostKategoriPosts = new EntitySet<TBRelasiPostKategoriPost>(new Action<TBRelasiPostKategoriPost>(this.attach_TBRelasiPostKategoriPosts), new Action<TBRelasiPostKategoriPost>(this.detach_TBRelasiPostKategoriPosts));
+		this._TBPage = default(EntityRef<TBPage>);
+		this._TBPengguna = default(EntityRef<TBPengguna>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDPost
+	{
+		get
+		{
+			return this._IDPost;
+		}
+		set
+		{
+			if ((this._IDPost != value))
+			{
+				this.OnIDPostChanging(value);
+				this.SendPropertyChanging();
+				this._IDPost = value;
+				this.SendPropertyChanged("IDPost");
+				this.OnIDPostChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPage", DbType="Int NOT NULL")]
+	public int IDPage
+	{
+		get
+		{
+			return this._IDPage;
+		}
+		set
+		{
+			if ((this._IDPage != value))
+			{
+				if (this._TBPage.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPageChanging(value);
+				this.SendPropertyChanging();
+				this._IDPage = value;
+				this.SendPropertyChanged("IDPage");
+				this.OnIDPageChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPengguna", DbType="Int NOT NULL")]
+	public int IDPengguna
+	{
+		get
+		{
+			return this._IDPengguna;
+		}
+		set
+		{
+			if ((this._IDPengguna != value))
+			{
+				if (this._TBPengguna.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPenggunaChanging(value);
+				this.SendPropertyChanging();
+				this._IDPengguna = value;
+				this.SendPropertyChanged("IDPengguna");
+				this.OnIDPenggunaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Urutan", DbType="Int NOT NULL")]
+	public int Urutan
+	{
+		get
+		{
+			return this._Urutan;
+		}
+		set
+		{
+			if ((this._Urutan != value))
+			{
+				this.OnUrutanChanging(value);
+				this.SendPropertyChanging();
+				this._Urutan = value;
+				this.SendPropertyChanged("Urutan");
+				this.OnUrutanChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tanggal", DbType="DateTime NOT NULL")]
+	public System.DateTime Tanggal
+	{
+		get
+		{
+			return this._Tanggal;
+		}
+		set
+		{
+			if ((this._Tanggal != value))
+			{
+				this.OnTanggalChanging(value);
+				this.SendPropertyChanging();
+				this._Tanggal = value;
+				this.SendPropertyChanged("Tanggal");
+				this.OnTanggalChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Judul", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+	public string Judul
+	{
+		get
+		{
+			return this._Judul;
+		}
+		set
+		{
+			if ((this._Judul != value))
+			{
+				this.OnJudulChanging(value);
+				this.SendPropertyChanging();
+				this._Judul = value;
+				this.SendPropertyChanged("Judul");
+				this.OnJudulChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deskripsi", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string Deskripsi
+	{
+		get
+		{
+			return this._Deskripsi;
+		}
+		set
+		{
+			if ((this._Deskripsi != value))
+			{
+				this.OnDeskripsiChanging(value);
+				this.SendPropertyChanging();
+				this._Deskripsi = value;
+				this.SendPropertyChanged("Deskripsi");
+				this.OnDeskripsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Align", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string Align
+	{
+		get
+		{
+			return this._Align;
+		}
+		set
+		{
+			if ((this._Align != value))
+			{
+				this.OnAlignChanging(value);
+				this.SendPropertyChanging();
+				this._Align = value;
+				this.SendPropertyChanged("Align");
+				this.OnAlignChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tags", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string Tags
+	{
+		get
+		{
+			return this._Tags;
+		}
+		set
+		{
+			if ((this._Tags != value))
+			{
+				this.OnTagsChanging(value);
+				this.SendPropertyChanging();
+				this._Tags = value;
+				this.SendPropertyChanged("Tags");
+				this.OnTagsChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPost_TBPostDetail", Storage="_TBPostDetails", ThisKey="IDPost", OtherKey="IDPost")]
+	public EntitySet<TBPostDetail> TBPostDetails
+	{
+		get
+		{
+			return this._TBPostDetails;
+		}
+		set
+		{
+			this._TBPostDetails.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPost_TBRelasiPostKategoriPost", Storage="_TBRelasiPostKategoriPosts", ThisKey="IDPost", OtherKey="IDPost")]
+	public EntitySet<TBRelasiPostKategoriPost> TBRelasiPostKategoriPosts
+	{
+		get
+		{
+			return this._TBRelasiPostKategoriPosts;
+		}
+		set
+		{
+			this._TBRelasiPostKategoriPosts.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPage_TBPost", Storage="_TBPage", ThisKey="IDPage", OtherKey="IDPage", IsForeignKey=true)]
+	public TBPage TBPage
+	{
+		get
+		{
+			return this._TBPage.Entity;
+		}
+		set
+		{
+			TBPage previousValue = this._TBPage.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPage.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPage.Entity = null;
+					previousValue.TBPosts.Remove(this);
+				}
+				this._TBPage.Entity = value;
+				if ((value != null))
+				{
+					value.TBPosts.Add(this);
+					this._IDPage = value.IDPage;
+				}
+				else
+				{
+					this._IDPage = default(int);
+				}
+				this.SendPropertyChanged("TBPage");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBPost", Storage="_TBPengguna", ThisKey="IDPengguna", OtherKey="IDPengguna", IsForeignKey=true)]
+	public TBPengguna TBPengguna
+	{
+		get
+		{
+			return this._TBPengguna.Entity;
+		}
+		set
+		{
+			TBPengguna previousValue = this._TBPengguna.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPengguna.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPengguna.Entity = null;
+					previousValue.TBPosts.Remove(this);
+				}
+				this._TBPengguna.Entity = value;
+				if ((value != null))
+				{
+					value.TBPosts.Add(this);
+					this._IDPengguna = value.IDPengguna;
+				}
+				else
+				{
+					this._IDPengguna = default(int);
+				}
+				this.SendPropertyChanged("TBPengguna");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBPostDetails(TBPostDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPost = this;
+	}
+	
+	private void detach_TBPostDetails(TBPostDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPost = null;
+	}
+	
+	private void attach_TBRelasiPostKategoriPosts(TBRelasiPostKategoriPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPost = this;
+	}
+	
+	private void detach_TBRelasiPostKategoriPosts(TBRelasiPostKategoriPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPost = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPostDetail")]
+public partial class TBPostDetail : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPostDetail;
+	
+	private int _IDPost;
+	
+	private int _IDPengguna;
+	
+	private int _Urutan;
+	
+	private System.DateTime _Tanggal;
+	
+	private string _Nama;
+	
+	private int _Jenis;
+	
+	private string _Konten;
+	
+	private EntitySet<TBPostDetailImage> _TBPostDetailImages;
+	
+	private EntityRef<TBPengguna> _TBPengguna;
+	
+	private EntityRef<TBPost> _TBPost;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPostDetailChanging(int value);
+    partial void OnIDPostDetailChanged();
+    partial void OnIDPostChanging(int value);
+    partial void OnIDPostChanged();
+    partial void OnIDPenggunaChanging(int value);
+    partial void OnIDPenggunaChanged();
+    partial void OnUrutanChanging(int value);
+    partial void OnUrutanChanged();
+    partial void OnTanggalChanging(System.DateTime value);
+    partial void OnTanggalChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void OnJenisChanging(int value);
+    partial void OnJenisChanged();
+    partial void OnKontenChanging(string value);
+    partial void OnKontenChanged();
+    #endregion
+	
+	public TBPostDetail()
+	{
+		this._TBPostDetailImages = new EntitySet<TBPostDetailImage>(new Action<TBPostDetailImage>(this.attach_TBPostDetailImages), new Action<TBPostDetailImage>(this.detach_TBPostDetailImages));
+		this._TBPengguna = default(EntityRef<TBPengguna>);
+		this._TBPost = default(EntityRef<TBPost>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetail", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDPostDetail
+	{
+		get
+		{
+			return this._IDPostDetail;
+		}
+		set
+		{
+			if ((this._IDPostDetail != value))
+			{
+				this.OnIDPostDetailChanging(value);
+				this.SendPropertyChanging();
+				this._IDPostDetail = value;
+				this.SendPropertyChanged("IDPostDetail");
+				this.OnIDPostDetailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", DbType="Int NOT NULL")]
+	public int IDPost
+	{
+		get
+		{
+			return this._IDPost;
+		}
+		set
+		{
+			if ((this._IDPost != value))
+			{
+				if (this._TBPost.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPostChanging(value);
+				this.SendPropertyChanging();
+				this._IDPost = value;
+				this.SendPropertyChanged("IDPost");
+				this.OnIDPostChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPengguna", DbType="Int NOT NULL")]
+	public int IDPengguna
+	{
+		get
+		{
+			return this._IDPengguna;
+		}
+		set
+		{
+			if ((this._IDPengguna != value))
+			{
+				if (this._TBPengguna.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPenggunaChanging(value);
+				this.SendPropertyChanging();
+				this._IDPengguna = value;
+				this.SendPropertyChanged("IDPengguna");
+				this.OnIDPenggunaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Urutan", DbType="Int NOT NULL")]
+	public int Urutan
+	{
+		get
+		{
+			return this._Urutan;
+		}
+		set
+		{
+			if ((this._Urutan != value))
+			{
+				this.OnUrutanChanging(value);
+				this.SendPropertyChanging();
+				this._Urutan = value;
+				this.SendPropertyChanged("Urutan");
+				this.OnUrutanChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tanggal", DbType="DateTime NOT NULL")]
+	public System.DateTime Tanggal
+	{
+		get
+		{
+			return this._Tanggal;
+		}
+		set
+		{
+			if ((this._Tanggal != value))
+			{
+				this.OnTanggalChanging(value);
+				this.SendPropertyChanging();
+				this._Tanggal = value;
+				this.SendPropertyChanged("Tanggal");
+				this.OnTanggalChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Jenis", DbType="Int NOT NULL")]
+	public int Jenis
+	{
+		get
+		{
+			return this._Jenis;
+		}
+		set
+		{
+			if ((this._Jenis != value))
+			{
+				this.OnJenisChanging(value);
+				this.SendPropertyChanging();
+				this._Jenis = value;
+				this.SendPropertyChanged("Jenis");
+				this.OnJenisChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Konten", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Konten
+	{
+		get
+		{
+			return this._Konten;
+		}
+		set
+		{
+			if ((this._Konten != value))
+			{
+				this.OnKontenChanging(value);
+				this.SendPropertyChanging();
+				this._Konten = value;
+				this.SendPropertyChanged("Konten");
+				this.OnKontenChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPostDetail_TBPostDetailImage", Storage="_TBPostDetailImages", ThisKey="IDPostDetail", OtherKey="IDPostDetail")]
+	public EntitySet<TBPostDetailImage> TBPostDetailImages
+	{
+		get
+		{
+			return this._TBPostDetailImages;
+		}
+		set
+		{
+			this._TBPostDetailImages.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBPostDetail", Storage="_TBPengguna", ThisKey="IDPengguna", OtherKey="IDPengguna", IsForeignKey=true)]
+	public TBPengguna TBPengguna
+	{
+		get
+		{
+			return this._TBPengguna.Entity;
+		}
+		set
+		{
+			TBPengguna previousValue = this._TBPengguna.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPengguna.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPengguna.Entity = null;
+					previousValue.TBPostDetails.Remove(this);
+				}
+				this._TBPengguna.Entity = value;
+				if ((value != null))
+				{
+					value.TBPostDetails.Add(this);
+					this._IDPengguna = value.IDPengguna;
+				}
+				else
+				{
+					this._IDPengguna = default(int);
+				}
+				this.SendPropertyChanged("TBPengguna");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPost_TBPostDetail", Storage="_TBPost", ThisKey="IDPost", OtherKey="IDPost", IsForeignKey=true)]
+	public TBPost TBPost
+	{
+		get
+		{
+			return this._TBPost.Entity;
+		}
+		set
+		{
+			TBPost previousValue = this._TBPost.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPost.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPost.Entity = null;
+					previousValue.TBPostDetails.Remove(this);
+				}
+				this._TBPost.Entity = value;
+				if ((value != null))
+				{
+					value.TBPostDetails.Add(this);
+					this._IDPost = value.IDPost;
+				}
+				else
+				{
+					this._IDPost = default(int);
+				}
+				this.SendPropertyChanged("TBPost");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBPostDetailImages(TBPostDetailImage entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPostDetail = this;
+	}
+	
+	private void detach_TBPostDetailImages(TBPostDetailImage entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPostDetail = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPostDetailImage")]
+public partial class TBPostDetailImage : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPostDetailImage;
+	
+	private int _IDPostDetail;
+	
+	private int _Urutan;
+	
+	private string _DefaultURL;
+	
+	private EntityRef<TBPostDetail> _TBPostDetail;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPostDetailImageChanging(int value);
+    partial void OnIDPostDetailImageChanged();
+    partial void OnIDPostDetailChanging(int value);
+    partial void OnIDPostDetailChanged();
+    partial void OnUrutanChanging(int value);
+    partial void OnUrutanChanged();
+    partial void OnDefaultURLChanging(string value);
+    partial void OnDefaultURLChanged();
+    #endregion
+	
+	public TBPostDetailImage()
+	{
+		this._TBPostDetail = default(EntityRef<TBPostDetail>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetailImage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDPostDetailImage
+	{
+		get
+		{
+			return this._IDPostDetailImage;
+		}
+		set
+		{
+			if ((this._IDPostDetailImage != value))
+			{
+				this.OnIDPostDetailImageChanging(value);
+				this.SendPropertyChanging();
+				this._IDPostDetailImage = value;
+				this.SendPropertyChanged("IDPostDetailImage");
+				this.OnIDPostDetailImageChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetail", DbType="Int NOT NULL")]
+	public int IDPostDetail
+	{
+		get
+		{
+			return this._IDPostDetail;
+		}
+		set
+		{
+			if ((this._IDPostDetail != value))
+			{
+				if (this._TBPostDetail.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPostDetailChanging(value);
+				this.SendPropertyChanging();
+				this._IDPostDetail = value;
+				this.SendPropertyChanged("IDPostDetail");
+				this.OnIDPostDetailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Urutan", DbType="Int NOT NULL")]
+	public int Urutan
+	{
+		get
+		{
+			return this._Urutan;
+		}
+		set
+		{
+			if ((this._Urutan != value))
+			{
+				this.OnUrutanChanging(value);
+				this.SendPropertyChanging();
+				this._Urutan = value;
+				this.SendPropertyChanged("Urutan");
+				this.OnUrutanChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DefaultURL", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string DefaultURL
+	{
+		get
+		{
+			return this._DefaultURL;
+		}
+		set
+		{
+			if ((this._DefaultURL != value))
+			{
+				this.OnDefaultURLChanging(value);
+				this.SendPropertyChanging();
+				this._DefaultURL = value;
+				this.SendPropertyChanged("DefaultURL");
+				this.OnDefaultURLChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPostDetail_TBPostDetailImage", Storage="_TBPostDetail", ThisKey="IDPostDetail", OtherKey="IDPostDetail", IsForeignKey=true)]
+	public TBPostDetail TBPostDetail
+	{
+		get
+		{
+			return this._TBPostDetail.Entity;
+		}
+		set
+		{
+			TBPostDetail previousValue = this._TBPostDetail.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPostDetail.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPostDetail.Entity = null;
+					previousValue.TBPostDetailImages.Remove(this);
+				}
+				this._TBPostDetail.Entity = value;
+				if ((value != null))
+				{
+					value.TBPostDetailImages.Add(this);
+					this._IDPostDetail = value.IDPostDetail;
+				}
+				else
+				{
+					this._IDPostDetail = default(int);
+				}
+				this.SendPropertyChanged("TBPostDetail");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPostKategori")]
+public partial class TBPostKategori : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPostKategori;
+	
+	private string _Nama;
+	
+	private EntitySet<TBRelasiPostKategoriPost> _TBRelasiPostKategoriPosts;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPostKategoriChanging(int value);
+    partial void OnIDPostKategoriChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    #endregion
+	
+	public TBPostKategori()
+	{
+		this._TBRelasiPostKategoriPosts = new EntitySet<TBRelasiPostKategoriPost>(new Action<TBRelasiPostKategoriPost>(this.attach_TBRelasiPostKategoriPosts), new Action<TBRelasiPostKategoriPost>(this.detach_TBRelasiPostKategoriPosts));
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostKategori", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int IDPostKategori
+	{
+		get
+		{
+			return this._IDPostKategori;
+		}
+		set
+		{
+			if ((this._IDPostKategori != value))
+			{
+				this.OnIDPostKategoriChanging(value);
+				this.SendPropertyChanging();
+				this._IDPostKategori = value;
+				this.SendPropertyChanged("IDPostKategori");
+				this.OnIDPostKategoriChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPostKategori_TBRelasiPostKategoriPost", Storage="_TBRelasiPostKategoriPosts", ThisKey="IDPostKategori", OtherKey="IDPostKategori")]
+	public EntitySet<TBRelasiPostKategoriPost> TBRelasiPostKategoriPosts
+	{
+		get
+		{
+			return this._TBRelasiPostKategoriPosts;
+		}
+		set
+		{
+			this._TBRelasiPostKategoriPosts.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TBRelasiPostKategoriPosts(TBRelasiPostKategoriPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPostKategori = this;
+	}
+	
+	private void detach_TBRelasiPostKategoriPosts(TBRelasiPostKategoriPost entity)
+	{
+		this.SendPropertyChanging();
+		entity.TBPostKategori = null;
+	}
+}
+
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPrintBarcode")]
 public partial class TBPrintBarcode : INotifyPropertyChanging, INotifyPropertyChanged
 {
@@ -44428,6 +46738,174 @@ public partial class TBRelasiPenggunaMenu : INotifyPropertyChanging, INotifyProp
 					this._IDPengguna = default(int);
 				}
 				this.SendPropertyChanged("TBPengguna");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBRelasiPostKategoriPost")]
+public partial class TBRelasiPostKategoriPost : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _IDPost;
+	
+	private int _IDPostKategori;
+	
+	private EntityRef<TBPost> _TBPost;
+	
+	private EntityRef<TBPostKategori> _TBPostKategori;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPostChanging(int value);
+    partial void OnIDPostChanged();
+    partial void OnIDPostKategoriChanging(int value);
+    partial void OnIDPostKategoriChanged();
+    #endregion
+	
+	public TBRelasiPostKategoriPost()
+	{
+		this._TBPost = default(EntityRef<TBPost>);
+		this._TBPostKategori = default(EntityRef<TBPostKategori>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDPost
+	{
+		get
+		{
+			return this._IDPost;
+		}
+		set
+		{
+			if ((this._IDPost != value))
+			{
+				if (this._TBPost.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPostChanging(value);
+				this.SendPropertyChanging();
+				this._IDPost = value;
+				this.SendPropertyChanged("IDPost");
+				this.OnIDPostChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostKategori", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	public int IDPostKategori
+	{
+		get
+		{
+			return this._IDPostKategori;
+		}
+		set
+		{
+			if ((this._IDPostKategori != value))
+			{
+				if (this._TBPostKategori.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnIDPostKategoriChanging(value);
+				this.SendPropertyChanging();
+				this._IDPostKategori = value;
+				this.SendPropertyChanged("IDPostKategori");
+				this.OnIDPostKategoriChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPost_TBRelasiPostKategoriPost", Storage="_TBPost", ThisKey="IDPost", OtherKey="IDPost", IsForeignKey=true)]
+	public TBPost TBPost
+	{
+		get
+		{
+			return this._TBPost.Entity;
+		}
+		set
+		{
+			TBPost previousValue = this._TBPost.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPost.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPost.Entity = null;
+					previousValue.TBRelasiPostKategoriPosts.Remove(this);
+				}
+				this._TBPost.Entity = value;
+				if ((value != null))
+				{
+					value.TBRelasiPostKategoriPosts.Add(this);
+					this._IDPost = value.IDPost;
+				}
+				else
+				{
+					this._IDPost = default(int);
+				}
+				this.SendPropertyChanged("TBPost");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPostKategori_TBRelasiPostKategoriPost", Storage="_TBPostKategori", ThisKey="IDPostKategori", OtherKey="IDPostKategori", IsForeignKey=true)]
+	public TBPostKategori TBPostKategori
+	{
+		get
+		{
+			return this._TBPostKategori.Entity;
+		}
+		set
+		{
+			TBPostKategori previousValue = this._TBPostKategori.Entity;
+			if (((previousValue != value) 
+						|| (this._TBPostKategori.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TBPostKategori.Entity = null;
+					previousValue.TBRelasiPostKategoriPosts.Remove(this);
+				}
+				this._TBPostKategori.Entity = value;
+				if ((value != null))
+				{
+					value.TBRelasiPostKategoriPosts.Add(this);
+					this._IDPostKategori = value.IDPostKategori;
+				}
+				else
+				{
+					this._IDPostKategori = default(int);
+				}
+				this.SendPropertyChanged("TBPostKategori");
 			}
 		}
 	}
