@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*
 [TABLE OF CONTENTS]
 
@@ -4309,9 +4309,8 @@ body {
 }
 
 .b-title-page_w_bg {
- padding-bottom: 200px;
+ padding-bottom: 30px;
   margin-bottom: 50px;
-  padding-top: 200px;
   background-image: url(../media/components/b-title-page/bg-1.jpg);
   background-size: cover;
     position: relative;

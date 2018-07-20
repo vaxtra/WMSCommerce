@@ -4,21 +4,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
 
-    <%--    <div class="b-title-page b-title-page_w_bg">
+    <div class="b-title-page b-title-page_w_bg">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1 class="b-title-page__title">Men's Wear</h1>
-                    <ul class="b-title-page__list list-inline">
-                        <li><a href="./catalog-list.html">MEN</a></li>
-                        <li><a href="./catalog-list.html">WOMEN</a></li>
-                        <li><a href="./catalog-list.html">ACCESSORIES</a></li>
-                        <li><a href="./catalog-list.html">GADGETS</a></li>
-                    </ul>
+                    <h2>LATEST PRODUCTS</h2>
                 </div>
             </div>
         </div>
-    </div>--%>
+    </div>
     <!-- end b-title-page-->
 
     <div class="container">
@@ -44,19 +38,15 @@
                             <section class="b-filter__section">
                                 <h3 class="b-filter__title">Categories</h3>
                                 <select data-width="100%" class="selectpicker">
-                                    <option />
-                                    T-Shirts
-                         
-                                    <option />
-                                    Categories 2
-                         
-                                    <option />
-                                    Categories 3
-                       
+                                    <asp:Repeater ID="RepeaterListKategori" runat="server">
+                                        <ItemTemplate>
+                                            <option />
+                                            <%# Eval("KategoriList") %>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </select>
                             </section>
                         </div>
-
                         <div class="col-md-6">
                             <section class="b-filter__section">
                                 <h3 class="b-filter__title">brand</h3>
@@ -87,11 +77,11 @@
                                     <a href='<%# Eval("Foto") %>' class="b-goods__img js-zoom-images">
                                         <img src="<%# Eval("Foto") %>" alt="goods" class="img-responsive" /></a>
                                     <div class="b-goods__wrap">
-                                        <div class="b-goods__category">category</div>
-                                        <h3 class="b-goods__name">   <%# Eval("Nama") %></h3>
-                                        <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
-                                        <div class="b-goods__price-old">  <%# Eval("Harga").ToFormatHarga() %></div>
-                                        <div class="b-goods__price">  <%# Eval("Harga").ToFormatHarga() %></div>
+                                        <div class="b-goods__category"><%# Eval("Kategori") %></div>
+                                        <h3 class="b-goods__name"><%# Eval("Nama") %></h3>
+                                        <div class="b-goods__description"><%# Eval("Deskripsi") %></div>
+                                        <div class="b-goods__price-old"><%# Eval("Harga").ToFormatHarga() %></div>
+                                        <div class="b-goods__price"><%# Eval("Harga").ToFormatHarga() %></div>
                                         <div class="b-goods-links"><a href="/Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
                                     </div>
                                 </div>

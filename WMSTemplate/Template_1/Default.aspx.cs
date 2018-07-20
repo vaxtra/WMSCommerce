@@ -17,9 +17,11 @@ public partial class _Default : System.Web.UI.Page
                 {
                     item.IDProduk,
                     item.Nama,
+                    Kategori = item.TBProdukKategori.Nama,
                     Foto = "/images/cover/" + item.IDProduk + ".jpg",
+                    Deskripsi = item.DeskripsiSingkat,
                     Harga = item.TBKombinasiProduks.FirstOrDefault().TBStokProduks.FirstOrDefault(item2 => item2.IDTempat == 1).HargaJual
-                }).ToArray();
+                }).ToArray().Take(5);
 
                 RepeaterProduk.DataSource = Produk;
                 RepeaterProduk.DataBind();

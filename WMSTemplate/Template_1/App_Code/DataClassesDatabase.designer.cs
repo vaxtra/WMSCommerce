@@ -21,7 +21,7 @@ using System.Reflection;
 
 
 
-[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DB13346_WMSCommerce")]
+[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DBWITEnterpriseSystem")]
 public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataContext
 {
 	

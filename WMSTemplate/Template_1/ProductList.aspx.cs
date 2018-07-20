@@ -15,10 +15,16 @@ public partial class ProductList : System.Web.UI.Page
             {
                 item.IDProduk,
                 item.Nama,
+                Kategori=item.TBProdukKategori.Nama,
                 Foto = "/images/cover/" + item.IDProduk + ".jpg",
+                Deskripsi=item.DeskripsiSingkat,
                 Harga = item.TBKombinasiProduks.FirstOrDefault().TBStokProduks.FirstOrDefault(item2 => item2.IDTempat == 1).HargaJual
             }).ToArray();
-
+            RepeaterListKategori.DataSource = db.TBProdukKategoris.Select(iten => new
+            {
+                KategoriList=iten.Nama
+            }).ToArray();
+            RepeaterListKategori.DataBind();
             RepeaterProduk.DataSource = Produk;
             RepeaterProduk.DataBind();
 

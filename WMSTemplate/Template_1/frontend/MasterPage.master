@@ -98,7 +98,7 @@
                         <div class="header-topbarbox__item header-topbarbox__item_bd-top">HUBUNGI KAMI  8 800 777-23-22</div>
                     </div>
                     <div class="header-topbarbox-2 clearfix">
-                        <div class="header-topbarbox__item"><a href="http://templines.rocks/html/trendsetter/home-1.html">Login</a> atau<a href="http://templines.rocks/html/trendsetter/home-1.html"> Register</a></div>
+                        <div class="header-topbarbox__item"><a href="#">Login</a> atau<a href="#"> Register</a></div>
                     </div>
                 </div>
 
@@ -113,9 +113,9 @@
                                 </li>
                                 <li>
                                     <ul class="social-net list-inline text-left">
-                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/facebook.com" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
-                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/twitter.com" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
-                                        <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/pinterest-p.com" class="social-net__link"><i class="icon fa fa-instagram"></i></a></li>
+                                        <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
+                                        <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
+                                        <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-instagram"></i></a></li>
 
                                     </ul>
                                     <!-- end social-list-->

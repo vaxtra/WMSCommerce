@@ -60,9 +60,9 @@
                             <a href="<%# Eval("Foto") %>" class="b-goods__img js-zoom-images">
                                 <img src="<%# Eval("Foto") %>" alt="goods" class="img-responsive" /></a>
                             <div class="b-goods__wrap">
-                                <div class="b-goods__category">category</div>
+                               <div class="b-goods__category"><%# Eval("Kategori") %></div>
                                 <h3 class="b-goods__name"><%# Eval("Nama") %></h3>
-                                <div class="b-goods__description">Praesent quis vestibulum risus. Suspendisse non malesuada risus, ut venenatis nisi. Quisque aliquam justo in est tempor malesuada ac eu sem.</div>
+                                <div class="b-goods__description"><%# Eval("Deskripsi") %></div>
                                 <div class="b-goods__price"><%# Eval("Harga").ToFormatHarga() %></div>
                                 <div class="b-goods-links"><a href="/Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
                             </div>
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <section class="section-area">
+   <%-- <section class="section-area">
         <div class="block-table block-table_padd_10">
             <div class="block-table__cell col-md-6 col-md-push-6">
                 <div class="block-table__inner vc-bg-01 "></div>
@@ -240,7 +240,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--%>
 
     <%--  <div class="b-gallery js-zoom-gallery grid b-isotope clearfix">
           <div class="b-isotope__grid">
