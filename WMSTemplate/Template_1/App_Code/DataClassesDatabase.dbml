@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBWITEnterpriseSystem" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=202.67.10.27,25000;Initial Catalog=DB13346_WMSCommerce;Persist Security Info=True;User ID=DB13346_WMSCommerce" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB13346_WMSCommerceConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB13346_WMSCommerce" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\GANJARR;Initial Catalog=DB13346_WMSCommerce;Persist Security Info=True;User ID=warmup" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB13346_WMSCommerceConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TBAkun" Member="TBAkuns">
     <Type Name="TBAkun">
       <Column Name="IDAkun" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1705,7 +1705,7 @@
   </Table>
   <Table Name="dbo.TBPost" Member="TBPosts">
     <Type Name="TBPost">
-      <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IDPage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IDPengguna" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -1722,14 +1722,14 @@
   </Table>
   <Table Name="dbo.TBPostDetail" Member="TBPostDetails">
     <Type Name="TBPostDetail">
-      <Column Name="IDPostDetail" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPostDetail" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IDPengguna" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Tanggal" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Nama" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Jenis" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Konten" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Konten" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="TBPostDetail_TBPostDetailImage" Member="TBPostDetailImages" ThisKey="IDPostDetail" OtherKey="IDPostDetail" Type="TBPostDetailImage" />
       <Association Name="TBPengguna_TBPostDetail" Member="TBPengguna" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
       <Association Name="TBPost_TBPostDetail" Member="TBPost" ThisKey="IDPost" OtherKey="IDPost" Type="TBPost" IsForeignKey="true" />
@@ -1737,10 +1737,14 @@
   </Table>
   <Table Name="dbo.TBPostDetailImage" Member="TBPostDetailImages">
     <Type Name="TBPostDetailImage">
-      <Column Name="IDPostDetailImage" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDPostDetailImage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IDPostDetail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Urutan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DefaultURL" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Judul" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Deskripsi" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Link" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Alt" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Association Name="TBPostDetail_TBPostDetailImage" Member="TBPostDetail" ThisKey="IDPostDetail" OtherKey="IDPostDetail" Type="TBPostDetail" IsForeignKey="true" />
     </Type>
   </Table>
