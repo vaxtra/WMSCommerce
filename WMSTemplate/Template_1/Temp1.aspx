@@ -20,8 +20,8 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-xs-10 col-xs-offset-1">
-                                                <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer"><%# Eval("DefaultURL") %></div>
-                                                <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer"><%# Eval("DefaultURL") %></h2>
+                                                <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer"><%# Eval("Judul") %></div>
+                                                <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer"><%# Eval("Deskripsi") %></h2>
 
                                             </div>
                                         </div>

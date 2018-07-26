@@ -5662,6 +5662,12 @@ transform: rotate(360deg);
 
 .b-title-page__title.shuffle{
     min-height: 80px;
-    opacity: 0;
+    opacity: 1;
+}
+.entry-media img {
+    margin:0 auto;
+}
+.entry-media p {
+    color:red;
 }
 

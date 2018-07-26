@@ -38,15 +38,16 @@ public partial class _Default : System.Web.UI.Page
                 //////var cariPostDetail=db.TBPostDetails.Select(items=>new {
                 //////    idPost=items.IDPost,
                 //////}).Where(y=>y.idPost==cariPost.)
-                RepeaterPost.DataSource = db.TBPostDetails.Where(x => x.TBPost.IDPage == 1).Select(item => new
+                RepeaterPost.DataSource = db.TBPostDetails.Where(x => x.TBPost.IDPage == 2).Select(item => new
                 {
-                    ClassPost = item.Jenis == 1 ? "form-group" : "hidden",
                     Nama = item.Nama,
                     Konten = item.Konten,
-                    ClassImages = item.Jenis == 2 ? "form-group" : "hidden",
+                    ClassImages = item.Jenis == (int)EnumJenisPostDetail.ImageSlider ? "form-group" : "hidden",
                     DataSourceImages = item.TBPostDetailImages.Select(item2 => new
                     {
-                        DefaultURL = item2.DefaultURL
+                        DefaultURL = item2.DefaultURL,
+                        Judul=item2.Judul,
+                        Deskripsi = item2.Deskripsi
                     })
                 });
                 RepeaterPost.DataBind();

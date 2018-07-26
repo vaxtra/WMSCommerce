@@ -1,0 +1,16 @@
+﻿@page {
+    size: auto;
+    margin: 0mm;
+    width: 58mm;
+    float: none;
+}
+
+@font-face {
+    font-family: 'Merchant Copy';
+    src: url('/WITPointOfSales/fonts/Merchant Copy.ttf');
+}
+
+body {
+    padding: 0px;
+    width: 58mm;
+}

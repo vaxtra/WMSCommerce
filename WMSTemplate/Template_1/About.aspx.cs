@@ -11,7 +11,7 @@ public partial class BlogDetail : System.Web.UI.Page
     {
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
-            RepeaterPost.DataSource = db.TBPosts.Where(item => item.IDPage == 2).Select(item => new
+            RepeaterPost.DataSource = db.TBPosts.Where(item => item.IDPost == 6).Select(item => new
             {
                 Judul = item.Judul,
                 DataSourcePostDetail = item.TBPostDetails.Select(item2 => new

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var bleep = new Audio();
+        bleep.src = 'bleep.mp3';
+    </script>
+    <script type="text/javascript" src="beep.js"></script>
+
+    <script type="text/javascript">
+        function Beep1000() {
+            new Beep(22050).play(1991, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep900() {
+            new Beep(22050).play(1900, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep800() {
+            new Beep(22050).play(800, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep700() {
+            new Beep(22050).play(700, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep600() {
+            new Beep(22050).play(600, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep500() {
+            new Beep(22050).play(500, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep400() {
+            new Beep(22050).play(400, 0.1, [Beep.utils.amplify(8000)]);
+        }
+
+        function Beep300() {
+            new Beep(22050).play(300, 0.1, [Beep.utils.amplify(8000)]);
+        }
+    </script>
+
+</head>
+<body>
+    <a href="#" onmousedown="bleep.play()">1000</a>
+    <a href="#" onmousedown="Beep900()">900</a>
+    <a href="#" onmousedown="Beep800()">800</a>
+    <a href="#" onmousedown="Beep700()">700</a>
+    <a href="#" onmousedown="Beep600()">-600-</a>
+    <a href="#" onmousedown="Beep500()">500</a>
+    <a href="#" onmousedown="Beep400()">400</a>
+    <a href="#" onmousedown="Beep300()">300</a>
+</body>
+</html>

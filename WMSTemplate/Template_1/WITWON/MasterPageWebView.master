@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/assets/MasterPage/MasterPageSession.master" AutoEventWireup="true" CodeFile="MasterPageWebView.master.cs" Inherits="WITWON_MasterPageWebView" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <nav class="navbar navbar-default navbar-fixed-top hidden-print" style="background:#f8f8f8 !important;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <asp:Label ID="LabelTempat" runat="server" ForeColor="#555"></asp:Label></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <asp:LinkButton ID="LinkButtonLogout" runat="server" ForeColor="#555" OnClick="LinkButtonLogout_Click">Logout</asp:LinkButton></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main row-offcanvas body-offcanvas">
+                <h3 class="page-header">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolderTitleLeft" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolderTitleRight" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </h3>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderJavascript" runat="Server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

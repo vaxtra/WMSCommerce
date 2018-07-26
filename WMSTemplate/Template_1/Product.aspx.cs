@@ -32,6 +32,12 @@ public partial class ProductDetail : System.Web.UI.Page
                     item.FotoUtama,
                 });
                 RepeaterFoto.DataBind();
+                RepeaterFotoBesar.DataSource = Foto.Select(item => new
+                {
+                    Foto = "/images/Produk/" + item.IDFotoProduk + item.ExtensiFoto,
+                    item.FotoUtama,
+                });
+                RepeaterFotoBesar.DataBind();
 
                 var StokProduk = db.TBStokProduks
                     .Where(item =>

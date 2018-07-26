@@ -141,6 +141,7 @@
                         <ul class="yamm main-menu nav navbar-nav hidden-xs">
                             <li><a href="Default.aspx">Home<b class="caret"></b></a></li>
                             <li><a href="ProductList.aspx">Belanja<b class="caret"></b></a></li>
+                            <li><a href="ProductList.aspx">Blog<b class="caret"></b></a></li>
                             <li><a href="#">Cara Pemesanan<b class="caret"></b></a></li>
                             <li><a href="#">Konfirmasi Pembayaran<b class="caret"></b></a> </li>
                             <li><a href="./contact.html">Hubungi Kami</a></li>
@@ -163,32 +164,31 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <section class="footer-section">
-                                            <h3 class="footer-section__title">About</h3>
+                                            <h3 class="footer-section__title">Popular Links</h3>
                                             <ul class="footer__list list-unstyled">
-                                                <li><a href="./about.html">About Us</a></li>
-                                                <li><a href="./Default.aspx">Careers</a></li>
-                                                <li><a href="./Default.aspx">International</a></li>
+                                                <li><a href="./About.aspx">About Us</a></li>
+                                                <li><a href="./Default.aspx">Products</a></li>
+                                                <li><a href="./Default.aspx">Confirm Payment</a></li>
+                                           
                                             </ul>
                                         </section>
                                     </div>
                                     <div class="col-sm-3">
                                         <section class="footer-section">
-                                            <h3 class="footer-section__title">Support</h3>
+                                            <h3 class="footer-section__title">Help</h3>
                                             <ul class="footer__list list-unstyled">
-                                                <li><a href="./contact.html">Contact</a></li>
-                                                <li><a href="./contact.html">Returns</a></li>
-                                                <li><a href="./contact.html">Warranty</a></li>
-                                                <li><a href="./contact.html">Help</a></li>
+                                                <li><a href="./Page.aspx?id=9">Returns</a></li>
+                                                <li><a href="./Page.aspx?id=8">FAQ</a></li>
+                                                <li><a href="./Page.aspx?id=7">How To Buy</a></li>
                                             </ul>
                                         </section>
                                     </div>
                                     <div class="col-sm-3">
                                         <section class="footer-section">
-                                            <h3 class="footer-section__title">Legal</h3>
+                                            <h3 class="footer-section__title">Security And Privacy</h3>
                                             <ul class="footer__list list-unstyled">
-                                                <li><a href="./privacy-policy.html">Privacy</a></li>
-                                                <li><a href="./terms-of-use.html">Terms</a></li>
-                                                <li><a href="./privacy-policy.html">Patents</a></li>
+                                                <li><a href="./Page.aspx?id=10">Privacy</a></li>
+                                                <li><a href="./Page.aspx?id=11">Terms and Condition</a></li>
                                             </ul>
                                         </section>
                                     </div>
@@ -196,8 +196,9 @@
                                         <section class="footer-section">
                                             <h3 class="footer-section__title">Other</h3>
                                             <ul class="footer__list list-unstyled">
-                                                <li><a href="./Default.aspx">Account</a></li>
-                                                <li><a href="./Default.aspx">Newsletter</a></li>
+                                                <li><a href="#">Account</a></li>    
+                                                 <li><a href="./Lookbook.aspx">Lookbook</a></li>
+                                                 <li><a href="./Default.aspx">Contact</a></li>
                                             </ul>
                                         </section>
                                     </div>
@@ -205,14 +206,14 @@
                             </div>
                             <div class="col-md-4 col-md-pull-8">
                                 <ul class="social-net list-inline">
-                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/facebook.com" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
-                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/twitter.com" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
-                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/pinterest-p.com" class="social-net__link"><i class="icon fa fa-pinterest-p"></i></a></li>
-                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/vk.com" class="social-net__link"><i class="icon fa fa-vk"></i></a></li>
-                                    <li class="social-net__item"><a href="http://templines.rocks/html/trendsetter/vine.com" class="social-net__link"><i class="icon fa fa-vine"></i></a></li>
+                                    <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-facebook"></i></a></li>
+                                    <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-twitter"></i></a></li>
+                                    <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-pinterest-p"></i></a></li>
+                                    <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-vk"></i></a></li>
+                                    <li class="social-net__item"><a href="#" class="social-net__link"><i class="icon fa fa-vine"></i></a></li>
                                 </ul>
                                 <!-- end social-list-->
-                                <div class="copyright">©  2017 TrendSetter  ® All Right Reserved</div>
+                                <div class="copyright">©  2017 wms-commerce  ® All Right Reserved</div>
                             </div>
                         </div>
                     </div>

@@ -4,54 +4,31 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <div id="main-slider" data-slider-width="1920px" data-slider-height="585px" data-slider-arrows="false" data-slider-buttons="false" class="main-slider slider-pro">
+    <div id="main-slider" data-slider-width="1920px" data-slider-height="480px" data-slider-arrows="false" data-slider-buttons="false" class="main-slider slider-pro">
         <div class="sp-slides">
-            <!-- Slide 1-->
-            <div class="sp-slide">
-                <img src="/frontend/assets/media/components/b-main-slider/bg-1.jpg" alt="slider" class="sp-image" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
-                            <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="2000" data-show-delay="1200" data-hide-delay="400" class="sp-layer">
-                                <ul class="main-slider__list list-inline">
-                                    <li><a href="./catalog-list.html">MEN</a></li>
-                                    <li><a href="./catalog-list.html">WOMEN</a></li>
-                                    <li><a href="./catalog-list.html">ACCESSORIES</a></li>
-                                    <li><a href="./catalog-list.html">GADGETS</a></li>
-                                </ul>
+            <asp:Repeater ID="RepeaterImage" runat="server">
+                <ItemTemplate>
+                    <div class="sp-slide">
+                        <img src="<%# Eval("DefaultURL") %>" alt="slider" class="sp-image" />
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-10 col-xs-offset-1">
+                                    <%--  <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer"><%# Eval("Judul") %></div>
+                                    <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer"><%# Eval("Deskripsi") %></h2>--%>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </ItemTemplate>
+            </asp:Repeater>
             <!-- Slide 2-->
-            <div class="sp-slide">
-                <img src="/frontend/assets/media/components/b-main-slider/bg-2.jpg" alt="slider" class="sp-image" />
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1">
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="800" data-show-delay="400" data-hide-delay="400" class="main-slider__label sp-layer">up to 70% off</div>
-                            <h2 data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="1200" data-show-delay="600" data-hide-delay="400" class="main-slider__title sp-layer">Final Sale</h2>
-                            <div data-width="100%" data-show-transition="left" data-hide-transition="left" data-show-duration="2000" data-show-delay="1200" data-hide-delay="400" class="sp-layer">
-                                <ul class="main-slider__list list-inline">
-                                    <li><a href="./catalog-list.html">MEN</a></li>
-                                    <li><a href="./catalog-list.html">WOMEN</a></li>
-                                    <li><a href="./catalog-list.html">ACCESSORIES</a></li>
-                                    <li><a href="./catalog-list.html">GADGETS</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <!-- end main-slider-->
     <div class="l-main-content">
         <h2 class="b-about-main__title text-center">Latest Product</h2>
-        <div class="b-about-main__subtitle color-primary text-center">Nam in tempus felis, eu eleifend tellus</div>
+        <div class="b-about-main__subtitle color-primary text-center"><a href="ProductList.aspx">View All Products</a> </div>
         <div class="b-goods-catalog">
             <asp:Repeater ID="RepeaterProduk" runat="server">
                 <ItemTemplate>
@@ -60,7 +37,7 @@
                             <a href="<%# Eval("Foto") %>" class="b-goods__img js-zoom-images">
                                 <img src="<%# Eval("Foto") %>" alt="goods" class="img-responsive" /></a>
                             <div class="b-goods__wrap">
-                               <div class="b-goods__category"><%# Eval("Kategori") %></div>
+                                <div class="b-goods__category"><%# Eval("Kategori") %></div>
                                 <h3 class="b-goods__name"><%# Eval("Nama") %></h3>
                                 <div class="b-goods__description"><%# Eval("Deskripsi") %></div>
                                 <div class="b-goods__price"><%# Eval("Harga").ToFormatHarga() %></div>
@@ -74,7 +51,34 @@
 
 
     </div>
-    <div class="section-area">
+    <div class="section-advantages-1">
+        <h2 class="b-about-main__title text-center">The Blog</h2>
+        <div class="b-about-main__subtitle color-primary text-center">Nam in tempus felis, eu eleifend tellus</div>
+        <div class="row">
+
+            <asp:Repeater ID="RepeaterPostHome" runat="server">
+                <ItemTemplate>
+                    <div class="col-sm-3">
+                        <asp:Repeater ID="RepeaterPostDetail" runat="server" DataSource='<%# Eval("DataSourcePostDetail") %>'>
+                            <ItemTemplate>
+                                <div class='<%# Eval("ClassSingleImage") %>'>
+                                    <img src="<%# Eval("ImgaeSingleDefaultURL") %>" alt="goods" class="img-responsive" />
+                               
+
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <!-- end .b-advantages-->
+                             <span class="b-advantages-1__title ui-title-inner text-center"><%# Eval("Judul") %></span>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+
+        </div>
+
+    </div>
+
+    <%-- <div class="section-area">
 
         <div class="block-table block-table_padd_20">
             <div class="block-table__cell col-md-4">
@@ -111,83 +115,22 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
+    
    <%-- <section class="section-area">
-        <div class="block-table block-table_padd_10">
-            <div class="block-table__cell col-md-6 col-md-push-6">
-                <div class="block-table__inner vc-bg-01 "></div>
-            </div>
-            <div class="block-table__cell col-md-6 col-md-pull-6 text-center">
-                <div class="block-table__inner bg-grey">
-
-                    <div class="main-flex-box">
-                        <div class="flex-box-content">
-                            <h2 class="ui-title-block ui-title-block_mod-a"><span class="text-gradient"><span class="shuffle">Men's Wear</span></span></h2>
-                            <div class="ui-subtitle-block">Aenean feugiat libero ligula, eget cursus</div>
-                            <div data-min480="2" data-min768="3" data-min992="2" data-min1200="2" data-pagination="true" data-navigation="false" data-auto-play="4000" data-stop-on-hover="true" class="goods-carousel owl-carousel owl-theme enable-owl-carousel js-zoom-gallery ">
-                                <section class="b-goods">
-                                    <div class="b-goods__inner">
-                                        <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                                            <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                                        <div class="b-goods__category">category</div>
-                                        <h3 class="b-goods__name">Poliak</h3>
-                                        <div class="b-goods__price">$230.00</div>
-                                    </div>
-                                </section>
-                                <!-- end b-goods-->
-
-                                <section class="b-goods">
-                                    <div class="b-goods__inner">
-                                        <a href="/frontend/assets/media/content/goods/mens/220x250/2.jpg" class="b-goods__img js-zoom-images">
-                                            <img src="/frontend/assets/media/content/goods/mens/220x250/2.jpg" alt="goods" class="img-responsive" /></a>
-                                        <div class="b-goods__category">category</div>
-                                        <h3 class="b-goods__name">Tarvos</h3>
-                                        <div class="b-goods__price">$130.99</div>
-                                    </div>
-                                </section>
-                                <!-- end b-goods-->
-
-                                <section class="b-goods">
-                                    <div class="b-goods__inner">
-                                        <a href="/frontend/assets/media/content/goods/mens/220x250/1.jpg" class="b-goods__img js-zoom-images">
-                                            <img src="/frontend/assets/media/content/goods/mens/220x250/1.jpg" alt="goods" class="img-responsive" /></a>
-                                        <div class="b-goods__category">category</div>
-                                        <h3 class="b-goods__name">Poliak</h3>
-                                        <div class="b-goods__price">$230.00</div>
-                                    </div>
-                                </section>
-                                <!-- end b-goods-->
-
-
-
-                            </div>
-                            <a href="./catalog-list.html" class="b-goods-carousel__btn-link btn-link">view all</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section-area">
         <div class="block-table block-table_padd_10 block-table_revers">
             <div class="block-table__cell col-md-6">
-                <div class="block-table__inner vc-bg-02 scrollreveal"></div>
+                <img src="/images/Konten/dsfg.jpg" alt="goods" class="b-presentation__img scrollreveal" />
             </div>
             <div class="block-table__cell col-md-6 text-center">
                 <div class="block-table__inner bg-grey">
 
                     <div class="main-flex-box ">
                         <div class="flex-box-content">
-
-
-
                             <h2 class="ui-title-block ui-title-block_mod-a"><span class="text-gradient"><span class="shuffle">Women's Wear</span></span></h2>
-
-
                             <div class="ui-subtitle-block">Quisque nisi nisl accumsan vel odio</div>
-                            <div data-min480="2" data-min768="3" data-min992="2" data-min1200="2" data-pagination="true" data-navigation="false" data-auto-play="4000" data-stop-on-hover="true" class="goods-carousel owl-carousel owl-theme enable-owl-carousel js-zoom-gallery">
+                            <div data-min480="2" data-min768="4" data-min992="4" data-min1200="4" data-pagination="true" data-navigation="false" data-auto-play="4000" data-stop-on-hover="true" class="goods-carousel owl-carousel owl-theme enable-owl-carousel js-zoom-gallery">
                                 <section class="b-goods">
                                     <div class="b-goods__inner">
                                         <a href="/frontend/assets/media/content/goods/womens/220x250/1.jpg" class="b-goods__img js-zoom-images">
