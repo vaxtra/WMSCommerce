@@ -241,7 +241,7 @@
         <script src="/frontend/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
         <!-- Mail scripts-->
        <%-- <script src="/frontend/assets/plugins/jqBootstrapValidation.js"></script>--%>
-        <script src="/frontend/assets/plugins/contact_me.js"></script>
+        <%--<script src="/frontend/assets/plugins/contact_me.js"></script>--%>
         <!-- Filter and sorting images-->
         <script src="/frontend/assets/plugins/isotope/isotope.pkgd.min.js"></script>
         <script src="/frontend/assets/plugins/isotope/imagesLoaded.js"></script>
