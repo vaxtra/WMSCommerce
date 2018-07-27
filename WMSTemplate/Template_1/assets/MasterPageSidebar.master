@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/assets/MasterPageTopbar.master" AutoEventWireup="true" CodeFile="MasterPageSidebar.master.cs" Inherits="assets_MasterPageSidebar" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <nav class="col-md-2 d-md-block sidebar bg-white collapse bd-links" id="sidebars">
+        <div class="form-group text-center mb-0 border-bottom" style="padding-top: 9px; padding-bottom: 9px;">
+            <img src="/images/logo.jpg?w=200" />
+        </div>
+        <div class="sidebar-sticky pt-0">
+            <asp:Literal ID="LiteralMenubar" runat="server"></asp:Literal>
+        </div>
+    </nav>
+
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+        <div class="form-group">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-0 border-bottom">
+                <h1 class="font-weight-light">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderTitle" runat="server">
+                    </asp:ContentPlaceHolder>
+                </h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderTitleRight" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="form-group d-none">
+            <div class="row">
+                <div class="col-md-4">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderSubTitleLeft" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="col-md-4">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderSubTitleCenter" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <div class="col-md-4 float-right">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderSubTitleRight" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <div class="text-center">
+                <a style="font-weight: bold; text-decoration: none; font-size: 12px;" href="#top">Scroll to Top</a>
+            </div>
+        </div>
+    </main>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderJavascript" runat="Server">
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

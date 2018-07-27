@@ -1,0 +1,413 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="assets_MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <link rel="icon" href="/images/icon.ico">
+    <title>WIT. Management System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/plugins/Toastr/toastr.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/DatetimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="/assets/plugins/Select2/select2.css" rel="stylesheet" />
+    <link href="/assets/plugins/BootstrapMultiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="/assets/plugins/CustomWIT/floating-labels.css" rel="stylesheet">
+    <link href="/assets/plugins/CustomWIT/css-backend.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="bg-body">
+    <form id="formWITManagementSystem" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <!-- Bootstrap core JS -->
+        <script src="/assets/plugins/CustomWIT/jquery-3.3.1.js"></script>
+        <script src="/assets/plugins/CustomWIT/popper.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/plugins/CustomWIT/holder.min.js"></script>
+        <script src="/assets/plugins/CustomWIT/feather.min.js"></script>
+        <script>feather.replace()</script>
+
+        <!-- Custom java script for this template -->
+        <script src="/assets/plugins/Toastr/toastr.min.js"></script>
+        <%--<script src="/assets/plugins/JqueryValidation/jquery.validate.min.js"></script>--%>
+        <script src="/assets/plugins/DatetimePicker/jquery.datetimepicker.min.js"></script>
+        <script src="/assets/plugins/Moment/moment.min.js"></script>
+        <script src="/assets/plugins/Select2/select2.min.js"></script>
+        <script src="/assets/plugins/Tablesorter/jquery.tablesorter.js"></script>
+        <script src="/assets/Plugins/FormatCurrency/jquery.formatCurrency-1.4.0.min.js"></script>
+        <script src="/assets/Plugins/FormatCurrency/jquery.formatCurrency.en-US.js"></script>
+        <script src="/assets/plugins/BootstrapMultiselect/bootstrap-multiselect.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                jQuery(function ($) {
+
+                    // #region SELECT2
+                    $(".select2").select2();
+                    // #endregion
+
+                    $("a[href='#top']").click(function () {
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                        return false;
+                    });
+
+                    $('.BootstrapMultiselect').multiselect({
+                        numberDisplayed: 2
+                    });
+
+                    // #region DATETIME PICKER
+                    Date.parseDate = function (input, format) {
+                        return moment(input, format).toDate();
+                    };
+                    Date.prototype.dateFormat = function (format) {
+                        return moment(this).format(format);
+                    };
+
+                    jQuery('.TanggalJam').datetimepicker({
+                        format: 'D MMMM YYYY H:mm',
+                        formatTime: 'H:mm',
+                        formatDate: 'D MMMM YYYY'
+                    });
+
+                    jQuery('.Tanggal').datetimepicker({
+                        format: 'D MMMM YYYY',
+                        timepicker: false,
+                        formatDate: 'D MMMM YYYY'
+                    });
+                    // #endregion
+
+                    // #region FORMAT CURRENCY
+                    $(".OutputDesimal").formatCurrency({
+                        //colorize: true,
+                        roundToDecimalPlace: 2,
+                        region: "en-US"
+                    })
+
+                    $('.InputDesimal').blur(function () {
+                        $(this).formatCurrency({
+                            colorize: true,
+                            roundToDecimalPlace: 2,
+                            region: "en-US"
+                        });
+                    })
+                        .keyup(function (e) {
+                            var e = window.event || e;
+                            var keyUnicode = e.charCode || e.keyCode;
+                            if (e !== undefined) {
+                                switch (keyUnicode) {
+                                    case 16: break;
+                                    case 17: break;
+                                    case 18: break;
+                                    case 27: this.value = ''; break;
+                                    case 35: break;
+                                    case 36: break;
+                                    case 37: break;
+                                    case 38: break;
+                                    case 39: break;
+                                    case 40: break;
+                                    case 78: break;
+                                    case 110: break;
+                                    case 190: break;
+                                    default: $(this).formatCurrency({
+                                        colorize: true,
+                                        roundToDecimalPlace: -1,
+                                        eventOnDecimalsEntered: true,
+                                        region: "en-US"
+                                    });
+                                }
+                            }
+                        });
+
+                    $(".OutputInteger").formatCurrency({
+                        colorize: true,
+                        roundToDecimalPlace: 0,
+                        region: "en-US"
+                    })
+
+                    $('.InputInteger').blur(function () {
+                        $(this).formatCurrency({
+                            colorize: true,
+                            roundToDecimalPlace: 0,
+                            region: "en-US"
+                        });
+                    })
+                        .keyup(function (e) {
+                            var e = window.event || e;
+                            var keyUnicode = e.charCode || e.keyCode;
+                            if (e !== undefined) {
+                                switch (keyUnicode) {
+                                    case 16: break;
+                                    case 27: this.value = ''; break;
+                                    case 35: break;
+                                    case 36: break;
+                                    case 37: break;
+                                    case 38: break;
+                                    case 39: break;
+                                    case 40: break;
+                                    case 78: break;
+                                    case 110: break;
+                                    case 190: break;
+                                    default: $(this).formatCurrency({
+                                        colorize: true,
+                                        roundToDecimalPlace: -1,
+                                        eventOnDecimalsEntered: true,
+                                        region: "en-US"
+                                    });
+                                }
+                            }
+                        });
+                    // #endregion
+
+                    // #region TABLESORTER
+                    $(".TableSorter").tablesorter();
+                    // #endregion
+
+                    // #region MOMENT
+                    function formatDateTime(dates) {
+                        dates.each(function () {
+                            formattedDate = $(this).text();
+                            var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                            $(this).html(d.format("dddd, DD MMMM YYYY, HH:mm:ss"));
+                        });
+                    };
+
+                    formatDateTime($('.ParseDatetime'));
+
+                    function formatDate(dates) {
+                        dates.each(function () {
+                            formattedDate = $(this).text();
+                            var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                            $(this).html(d.format("DD MMMM YYYY"));
+                        });
+                    };
+
+                    formatDate($('.ParseDate'));
+
+                    function formatTime(dates) {
+                        dates.each(function () {
+                            formattedDate = $(this).text();
+                            var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                            $(this).html(d.format("HH:mm:ss"));
+                        });
+                    };
+
+                    formatTime($('.ParseTime'));
+                    // #endregion
+
+                    // #region VALIDATE
+                    //$("#formWITManagementSystem").validate();
+                    // #endregion
+
+                    // #region LOADING
+                    //$('.btn').on('click', function () {
+                    //    var $btn = $(this).button('loading')
+                    //    setTimeout(function () {
+                    //        $btn.button('reset');
+                    //    }, 3600000);
+                    //});
+                    // #endregion
+                });
+            });
+
+            function pageLoad(sender, args) {
+                if (args.get_isPartialLoad()) {
+                    jQuery(function ($) {
+
+                        // #region SELECT2
+                        $(".select2").select2();
+                        // #endregion
+
+                        $("a[href='#top']").click(function () {
+                            $("html, body").animate({ scrollTop: 0 }, "slow");
+                            return false;
+                        });
+
+                        $('.BootstrapMultiselect').multiselect({
+                            numberDisplayed: 2
+                        });
+
+                        // #region DATETIME PICKER
+                        Date.parseDate = function (input, format) {
+                            return moment(input, format).toDate();
+                        };
+                        Date.prototype.dateFormat = function (format) {
+                            return moment(this).format(format);
+                        };
+
+                        jQuery('.TanggalJam').datetimepicker({
+                            format: 'D MMMM YYYY H:mm',
+                            formatTime: 'H:mm',
+                            formatDate: 'D MMMM YYYY'
+                        });
+
+                        jQuery('.Tanggal').datetimepicker({
+                            format: 'D MMMM YYYY',
+                            timepicker: false,
+                            formatDate: 'D MMMM YYYY'
+                        });
+                        // #endregion
+
+                        // #region FORMAT CURRENCY
+                        $(".OutputDesimal").formatCurrency({
+                            //colorize: true,
+                            roundToDecimalPlace: 2,
+                            region: "en-US"
+                        })
+
+                        $('.InputDesimal').blur(function () {
+                            $(this).formatCurrency({
+                                colorize: true,
+                                roundToDecimalPlace: 2,
+                                region: "en-US"
+                            });
+                        })
+                            .keyup(function (e) {
+                                var e = window.event || e;
+                                var keyUnicode = e.charCode || e.keyCode;
+                                if (e !== undefined) {
+                                    switch (keyUnicode) {
+                                        case 16: break;
+                                        case 17: break;
+                                        case 18: break;
+                                        case 27: this.value = ''; break;
+                                        case 35: break;
+                                        case 36: break;
+                                        case 37: break;
+                                        case 38: break;
+                                        case 39: break;
+                                        case 40: break;
+                                        case 78: break;
+                                        case 110: break;
+                                        case 190: break;
+                                        default: $(this).formatCurrency({
+                                            colorize: true,
+                                            roundToDecimalPlace: -1,
+                                            eventOnDecimalsEntered: true,
+                                            region: "en-US"
+                                        });
+                                    }
+                                }
+                            });
+
+                        $(".OutputInteger").formatCurrency({
+                            colorize: true,
+                            roundToDecimalPlace: 0,
+                            region: "en-US"
+                        })
+
+                        $('.InputInteger').blur(function () {
+                            $(this).formatCurrency({
+                                colorize: true,
+                                roundToDecimalPlace: 0,
+                                region: "en-US"
+                            });
+                        })
+                            .keyup(function (e) {
+                                var e = window.event || e;
+                                var keyUnicode = e.charCode || e.keyCode;
+                                if (e !== undefined) {
+                                    switch (keyUnicode) {
+                                        case 16: break;
+                                        case 27: this.value = ''; break;
+                                        case 35: break;
+                                        case 36: break;
+                                        case 37: break;
+                                        case 38: break;
+                                        case 39: break;
+                                        case 40: break;
+                                        case 78: break;
+                                        case 110: break;
+                                        case 190: break;
+                                        default: $(this).formatCurrency({
+                                            colorize: true,
+                                            roundToDecimalPlace: -1,
+                                            eventOnDecimalsEntered: true,
+                                            region: "en-US"
+                                        });
+                                    }
+                                }
+                            });
+                        // #endregion
+
+                        // #region TABLESORTER
+                        $(".TableSorter").tablesorter();
+                        // #endregion
+
+                        // #region MOMENT
+                        function formatDateTime(dates) {
+                            dates.each(function () {
+                                formattedDate = $(this).text();
+                                var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                                $(this).html(d.format("dddd, DD MMMM YYYY, HH:mm:ss"));
+                            });
+                        };
+
+                        formatDateTime($('.ParseDatetime'));
+
+                        function formatDate(dates) {
+                            dates.each(function () {
+                                formattedDate = $(this).text();
+                                var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                                $(this).html(d.format("DD MMMM YYYY"));
+                            });
+                        };
+
+                        formatDate($('.ParseDate'));
+
+                        function formatTime(dates) {
+                            dates.each(function () {
+                                formattedDate = $(this).text();
+                                var d = moment(formattedDate, "MM/DD/YYYYTHH:mm:ss a");
+                                $(this).html(d.format("HH:mm:ss"));
+                            });
+                        };
+
+                        formatTime($('.ParseTime'));
+                        // #endregion
+
+                        // #region VALIDATE
+                        //$("#formWITManagementSystem").validate();
+                        // #endregion
+
+                        // #region LOADING
+                        //$('.btn').on('click', function () {
+                        //    var $btn = $(this).button('loading')
+                        //    setTimeout(function () {
+                        //        $btn.button('reset');
+                        //    }, 3600000);
+                        //});
+                        // #endregion
+                    });
+                }
+            };
+
+            // #region ALERT
+            function AlertMessage(type, title, message) {
+
+                if (type == 'success') {
+                    toastr.success(message, title, { "positionClass": "toast-bottom-right" });
+                }
+                else if (type == 'warning') {
+                    toastr.warning(message, title, { "positionClass": "toast-bottom-right" });
+                }
+                else if (type == 'danger') {
+                    toastr.error(message, title, { "positionClass": "toast-bottom-right" });
+                }
+                else {
+                    toastr.info(message, title, { "positionClass": "toast-bottom-right" });
+                }
+            }
+            // #endregion
+        </script>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderJavascript" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

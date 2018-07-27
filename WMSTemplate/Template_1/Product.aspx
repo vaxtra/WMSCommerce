@@ -8,7 +8,7 @@
     <div class="goods-card">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+              <%--  <div class="col-xs-12">
                     <ol class="breadcrumb">
                         <li><a href="./home.html">Home</a></li>
                         <li><a href="./home.html">Catalog</a></li>
@@ -17,14 +17,14 @@
                     </ol>
                     
                     <a runat="server" id="IDNAONWE" onclick="ButtonAddToCart_Click1">TES</a>
-                </div>
+                </div>--%>
                 <div class="b-goods-carousel">
                     <div class="col-md-1">
                         <div id="bx-pager" class="b-goods-carousel__thumb">
                             <asp:Repeater ID="RepeaterFoto" runat="server">
                                 <ItemTemplate>
                                     
-                                    <a data-slide-index="4" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
+                                    <a data-slide-index="1" href="./catalog-product-2.html" class="b-goods-carousel__thumb-link">
                                         <img src='<%# Eval("Foto") %>' style="width: 100px; height: 100px;" " alt="foto" class="b-goods-carousel__thumb-img" /></a>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -32,17 +32,12 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="b-goods-carousel__main-img bxslider">
-
+                             <asp:Repeater ID="RepeaterFotoBesar" runat="server">
+                                <ItemTemplate>
                             <li>
-                                <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
-                            <li>
-                                <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
-                            <li>
-                                <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
-                            <li>
-                                <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
-                            <li>
-                                <img src="/frontend/assets/media/content/goods-carousel/main/1.jpg" alt="foto" /></li>
+                                <img src="<%# Eval("Foto") %>" alt="foto" /></li>
+                           </ItemTemplate>
+                            </asp:Repeater>
                         </ul>
                     </div>
                     <!-- end b-goods-carousel-->
@@ -51,10 +46,11 @@
                     <div class="col-lg-4 col-lg-offset-1 col-md-5">
                         <section class="b-goods-3 b-goods-3_mod-a">
                             <div class="b-goods-3__category">
-                                <asp:Literal ID="LiteralNama" runat="server"></asp:Literal></div>
+                                </div>
                             <h3 class="b-goods-3__name">
-                                <asp:Literal ID="LiteralHarga" runat="server"></asp:Literal></h3>
-                            <div class="b-goods-3__price color-primary">$85.99</div>
+                                <asp:Literal ID="LiteralNama" runat="server"></asp:Literal>
+                                </h3>
+                            <div class="b-goods-3__price color-primary"><asp:Literal ID="LiteralHarga" runat="server"></asp:Literal></div>
                             <div class="b-goods-3__price-old">$130.00</div>
                             <div class="b-goods-3__label bg-secondary">sale</div>
                             <div class="b-goods-3__description">

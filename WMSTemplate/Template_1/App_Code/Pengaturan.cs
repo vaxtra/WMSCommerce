@@ -64,6 +64,14 @@ public enum PilihanStatusPrint
 
 
 #region Banu
+public enum EnumJenisPostDetail
+{
+    Text = 1,
+    SingleImage,
+    MultipleImage,
+    ImageSlider
+}
+
 public enum PilihanOrderKategori
 {
     Makanan = 1,

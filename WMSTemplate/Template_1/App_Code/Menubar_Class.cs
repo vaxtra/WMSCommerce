@@ -77,7 +77,7 @@ public class Menubar_Class : BaseWMSClass
                 item.Icon,
                 item.Url,
                 HaveChild = item.TBMenubars.Count > 0 ? true : false,
-                MenuLevel2 = item.TBMenubars.Where(item2 => menuAdministrator.Any(item3 => item3.IDMenubar == item2.IDMenubar)).OrderBy(item3 => item3.Urutan).Select(item2 => new
+                MenuLevel2 = item.TBMenubars.Where(item2 => menuAdministrator.Any(item3 => item3.IDMenubar == item2.IDMenubar)).OrderBy(item2 => item2.Urutan).Select(item2 => new
                 {
                     item2.IDMenubar,
                     item2.Urutan,
@@ -86,7 +86,7 @@ public class Menubar_Class : BaseWMSClass
                     item2.Icon,
                     item2.Url,
                     HaveChild = item2.TBMenubars.Count > 0 ? true : false,
-                    MenuLevel3 = item2.TBMenubars.Where(item3 => menuAdministrator.Any(item4 => item4.IDMenubar == item3.IDMenubar)).OrderBy(item4 => item4.Urutan)
+                    MenuLevel3 = item2.TBMenubars.Where(item3 => menuAdministrator.Any(item4 => item4.IDMenubar == item3.IDMenubar)).OrderBy(item3 => item3.Urutan)
                 })
             })
             .OrderBy(item => item.Urutan)

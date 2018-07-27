@@ -560,7 +560,7 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   #endregion
 	
 	public DataClassesDatabaseDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DB13346_WMSCommerceConnectionString"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DB13346_WMSCommerceConnectionString1"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -40745,7 +40745,7 @@ public partial class TBPost : INotifyPropertyChanging, INotifyPropertyChanged
 		OnCreated();
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 	public int IDPost
 	{
 		get
@@ -41130,7 +41130,7 @@ public partial class TBPostDetail : INotifyPropertyChanging, INotifyPropertyChan
 		OnCreated();
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetail", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetail", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 	public int IDPostDetail
 	{
 		get
@@ -41278,7 +41278,7 @@ public partial class TBPostDetail : INotifyPropertyChanging, INotifyPropertyChan
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Konten", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Konten", DbType="Text", UpdateCheck=UpdateCheck.Never)]
 	public string Konten
 	{
 		get
@@ -41426,6 +41426,14 @@ public partial class TBPostDetailImage : INotifyPropertyChanging, INotifyPropert
 	
 	private string _DefaultURL;
 	
+	private string _Judul;
+	
+	private string _Deskripsi;
+	
+	private string _Link;
+	
+	private string _Alt;
+	
 	private EntityRef<TBPostDetail> _TBPostDetail;
 	
     #region Extensibility Method Definitions
@@ -41440,6 +41448,14 @@ public partial class TBPostDetailImage : INotifyPropertyChanging, INotifyPropert
     partial void OnUrutanChanged();
     partial void OnDefaultURLChanging(string value);
     partial void OnDefaultURLChanged();
+    partial void OnJudulChanging(string value);
+    partial void OnJudulChanged();
+    partial void OnDeskripsiChanging(string value);
+    partial void OnDeskripsiChanged();
+    partial void OnLinkChanging(string value);
+    partial void OnLinkChanged();
+    partial void OnAltChanging(string value);
+    partial void OnAltChanged();
     #endregion
 	
 	public TBPostDetailImage()
@@ -41448,7 +41464,7 @@ public partial class TBPostDetailImage : INotifyPropertyChanging, INotifyPropert
 		OnCreated();
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetailImage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPostDetailImage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 	public int IDPostDetailImage
 	{
 		get
@@ -41528,6 +41544,86 @@ public partial class TBPostDetailImage : INotifyPropertyChanging, INotifyPropert
 				this._DefaultURL = value;
 				this.SendPropertyChanged("DefaultURL");
 				this.OnDefaultURLChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Judul", DbType="VarChar(250)")]
+	public string Judul
+	{
+		get
+		{
+			return this._Judul;
+		}
+		set
+		{
+			if ((this._Judul != value))
+			{
+				this.OnJudulChanging(value);
+				this.SendPropertyChanging();
+				this._Judul = value;
+				this.SendPropertyChanged("Judul");
+				this.OnJudulChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deskripsi", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+	public string Deskripsi
+	{
+		get
+		{
+			return this._Deskripsi;
+		}
+		set
+		{
+			if ((this._Deskripsi != value))
+			{
+				this.OnDeskripsiChanging(value);
+				this.SendPropertyChanging();
+				this._Deskripsi = value;
+				this.SendPropertyChanged("Deskripsi");
+				this.OnDeskripsiChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Link", DbType="VarChar(250)")]
+	public string Link
+	{
+		get
+		{
+			return this._Link;
+		}
+		set
+		{
+			if ((this._Link != value))
+			{
+				this.OnLinkChanging(value);
+				this.SendPropertyChanging();
+				this._Link = value;
+				this.SendPropertyChanged("Link");
+				this.OnLinkChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Alt", DbType="VarChar(250)")]
+	public string Alt
+	{
+		get
+		{
+			return this._Alt;
+		}
+		set
+		{
+			if ((this._Alt != value))
+			{
+				this.OnAltChanging(value);
+				this.SendPropertyChanging();
+				this._Alt = value;
+				this.SendPropertyChanged("Alt");
+				this.OnAltChanged();
 			}
 		}
 	}

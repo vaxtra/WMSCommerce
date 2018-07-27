@@ -406,5 +406,60 @@ public static class Manage
                 return string.Empty;
         }
     }
+
+    public static string HTMLJenisPostDetail(int JenisPostDetail)
+    {
+        switch (JenisPostDetail)
+        {
+            case (int)EnumJenisPostDetail.Text:
+                return "<span class=\"badge badge-pill badge-dark\">Text</span>";
+            case (int)EnumJenisPostDetail.SingleImage:
+                return "<span class=\"badge badge-pill badge-info\">Single Image</span>";
+            case (int)EnumJenisPostDetail.MultipleImage:
+                return "<span class=\"badge badge-pill badge-primary\">Multiple Image</span>";
+            case (int)EnumJenisPostDetail.ImageSlider:
+                return "<span class=\"badge badge-pill badge-success\">Image Slider</span>";
+            default:
+                return string.Empty;
+        }
+    }
+
+    public static string HTMLJenisPostDetailButton(int JenisPostDetail)
+    {
+        switch (JenisPostDetail)
+        {
+            case (int)EnumJenisPostDetail.Text:
+                return "btn btn-dark btn-lg btn-block";
+            case (int)EnumJenisPostDetail.SingleImage:
+                return "btn btn-info btn-lg btn-block";
+            case (int)EnumJenisPostDetail.MultipleImage:
+                return "btn btn-primary btn-lg btn-block";
+            case (int)EnumJenisPostDetail.ImageSlider:
+                return "btn btn-success btn-lg btn-block";
+            default:
+                return string.Empty;
+        }
+    }
+
+    public static string HTMLStatusTransaksi(int IDSStatusTransaksi)
+    {
+        switch (IDSStatusTransaksi)
+        {
+            case (int)EnumStatusTransaksi.PendingShippingCost:
+                return "<span class=\"badge badge-pill badge-secondary\">Pending Shipping Cost</span>";
+            case (int)EnumStatusTransaksi.AwaitingPayment:
+                return "<span class=\"badge badge-pill badge-warning\">Awaiting Payment</span>";
+            case (int)EnumStatusTransaksi.AwaitingPaymentVerification:
+                return "<span class=\"badge badge-pill badge-info\">Awaiting Payment Verification</span>";
+            case (int)EnumStatusTransaksi.PaymentVerified:
+                return "<span class=\"badge badge-pill badge-primary\">Payment Verified</span>";
+            case (int)EnumStatusTransaksi.Complete:
+                return "<span class=\"badge badge-pill badge-success\">Complete</span>";
+            case (int)EnumStatusTransaksi.Canceled:
+                return "<span class=\"badge badge-pill badge-danger\">Canceled</span>";
+            default:
+                return string.Empty;
+        }
+    }
     #endregion
 }

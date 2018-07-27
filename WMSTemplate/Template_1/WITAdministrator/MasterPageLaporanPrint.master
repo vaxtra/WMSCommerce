@@ -1,0 +1,51 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageLaporanPrint.master.cs" Inherits="WITAdministrator_MasterPageLaporanPrint" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        body {
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        }
+
+        table {
+            white-space:nowrap;
+        }
+
+        td {
+         padding:2px;
+        }
+    </style>
+</head>
+<body>
+    <form id="formWITEnterpriseSystem" runat="server">
+        <center>
+            <div style="font-size: 20px; font-weight: bold;">
+                <u>Laporan <asp:ContentPlaceHolder ID="ContentPlaceHolderNamaLaporan" runat="server">
+                    </asp:ContentPlaceHolder></u>
+            </div>
+            <span style="font-size: 14px; font-weight: bold;">
+               <asp:ContentPlaceHolder ID="ContentPlaceHolderPeriode" runat="server">
+                </asp:ContentPlaceHolder>
+                <br />
+                <asp:Label ID="LabelNamaStoreLokasi" runat="server"></asp:Label><br />
+                WIT. Enterprise System<br />
+            </span>
+        </center>
+
+        <div style="font-size: 12px;">
+            Tanggal Print :
+            <asp:Label ID="LabelTanggalPrint" runat="server"></asp:Label>
+            -
+            <asp:Label ID="LabelNamaPengguna" runat="server"></asp:Label>
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
