@@ -21,19 +21,15 @@
                                                 <br />
                                                 <p>Sudah mempunyai akun di website kami? <span class="logpop">Log in</span></p>
 
-                                                <asp:TextBox ID="TextBoxAlamatEmailCart" CssClass="input-text" runat="server" placeholder="Alamat Email"></asp:TextBox>
+                                                <asp:TextBox ID="TextBoxAlamatEmail" CssClass="input-text" runat="server" placeholder="Alamat Email"></asp:TextBox>
                                                 <br />
                                                 <br />
                                             </div>
                                             <div class="form-row form-row form-row-first col-md-12 nomargin">
                                                 <h3>Alamat Pengiriman</h3>
                                             </div>
-                                            <div class="form-row form-row form-row-first col-md-6 ">
-                                                <asp:TextBox ID="TextBoxNamaDepan" CssClass="input-text" runat="server" placeholder="Nama Depan"></asp:TextBox>
-                                            </div>
-                                            <div class="form-row form-row form-row-last col-md-6 ">
-
-                                                <asp:TextBox ID="TextBoxNamaBelakang" CssClass="input-text" runat="server" placeholder="Nama Belakang"></asp:TextBox>
+                                            <div class="form-row form-row form-row-first col-md-12">
+                                                <asp:TextBox ID="TextBoxNamaLengkap" CssClass="input-text" runat="server" placeholder="Nama Lengkap"></asp:TextBox>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="form-row form-row form-row-wide col-md-6">
@@ -58,13 +54,13 @@
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
-                                                <asp:TextBox ID="TextBoxAlamatPengiriman" CssClass="input-text" runat="server" placeholder="Alamat Pengiriman"></asp:TextBox>
+                                                <asp:TextBox ID="TextBoxAlamat" CssClass="input-text" runat="server" placeholder="Alamat Pengiriman"></asp:TextBox>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
                                                 <asp:TextBox ID="TextBoxKodePos" CssClass="input-text" runat="server" placeholder="Kode Pos"></asp:TextBox>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
-                                                <asp:TextBox ID="TextBoxNoTelepon" CssClass="input-text" runat="server" placeholder="Nomor Telepon"></asp:TextBox>
+                                                <asp:TextBox ID="TextBoxNomorTelepon" CssClass="input-text" runat="server" placeholder="Nomor Telepon"></asp:TextBox>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -82,15 +78,14 @@
 
                                 <legend>2. DETAIL PENGIRIMAN</legend>
                                 <div class="form-section">
-                                    <%--                                    <div class="woocommerce-billing-fields">
+                                    <div class="woocommerce-billing-fields">
                                         <h3>Alamat Pengiriman </h3>
-                                        <p>Sudah mempunyai akun di website kami?Log in</p>
-                                        <p>Ganjar R</p>
-                                        <p>JL Braga no 123</p>
+                                        <p><asp:Literal ID="LiteralNamaLengkap" runat="server"></asp:Literal></p>
+                                        <p><asp:Literal ID="LiteralAlamat" runat="server"></asp:Literal></p>
                                         <p>Babah Rot, Kabupaten Aceh Barat Daya</p>
-                                        <p>Aceh 40534</p>
-                                        <p>Indonesia</p>
-                                    </div>--%>
+                                        <p>Aceh <asp:Literal ID="LiteralKodePos" runat="server"></asp:Literal></p>
+                                        <p><asp:Literal ID="LiteralNomorTelepon" runat="server"></asp:Literal></p>
+                                    </div>
                                     <div id="payment" class="woocommerce-checkout-payment">
                                         <h3>Pilih Jasa Pengiriman </h3>
                                         <ul class="wc_payment_methods payment_methods methods">
@@ -161,40 +156,24 @@
             <div class="col-md-4">
                 <aside class="l-sidebar cart-detail">
                     <h3>Detail Pemesanan</h3>
-                    <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 nopadding'>
-                            <div class=' col-lg-4 col-md-4 col-sm-4 nopadding'>
-                                <img src='//cdn.shopify.com/s/files/1/0072/3071/8067/products/8d7f3decefd2e286d8da7c9d544b3974_small.jpg?v=1529817727' alt='Claudia - Putih / 37' class="img-responsive" />
+                    <asp:Repeater ID="RepeaterCart" runat="server">
+                        <ItemTemplate>
+                            <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 nopadding'>
+                                    <div class=' col-lg-4 col-md-4 col-sm-4 nopadding'>
+                                        <img src='<%# Eval("Foto") %>' alt='<%# Eval("Nama") %>' class="img-responsive" />
+                                    </div>
+                                    <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
+                                        <p class="product-title"><a href='#'><%# Eval("Quantity") %> x <%# Eval("Nama") %></a></p>
+                                    </div>
+                                    <div class='clearfix'></div>
+                                </div>
+                                <div class='col-lg-4 col-md-4 col-sm-4 ws-value nopadding'>
+                                    <p class='text-right'><small><%# Eval("Total").ToFormatHarga() %></small></p>
+                                </div>
                             </div>
-                            <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
-                                <p class="product-title"><a href='#'>1 x Claudia</a></p>
-                                <ol class='breadcrumb'>
-                                    <li>Putih / 37</li>
-                                </ol>
-                            </div>
-                            <div class='clearfix'></div>
-                        </div>
-                        <div class='col-lg-4 col-md-4 col-sm-4 ws-value nopadding'>
-                            <p class='text-right'><small>Rp 99.000</small></p>
-                        </div>
-                    </div>
-                    <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8 nopadding'>
-                            <div class=' col-lg-4 col-md-4 col-sm-4 nopadding'>
-                                <img src='//cdn.shopify.com/s/files/1/0072/3071/8067/products/8d7f3decefd2e286d8da7c9d544b3974_small.jpg?v=1529817727' alt='Claudia - Putih / 37' class="img-responsive" />
-                            </div>
-                            <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
-                                <p class="product-title"><a href='#'>1 x Claudia</a></p>
-                                <ol class='breadcrumb'>
-                                    <li>Putih / 37</li>
-                                </ol>
-                            </div>
-                            <div class='clearfix'></div>
-                        </div>
-                        <div class='col-lg-4 col-md-4 col-sm-4 ws-value nopadding'>
-                            <p class='text-right'><small>Rp 99.000</small></p>
-                        </div>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                     <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="coupon">
 
@@ -209,7 +188,7 @@
                             <div class=' col-lg-6 col-md-6 col-sm-6 nopadding'>
                                 <p>Subtotal</p>
                             </div>
-                            <p style="float: right;">Rp. 666.000</p>
+                            <p style="float: right;"><asp:Literal ID="LiteralTotal" runat="server"></asp:Literal></p>
                             <div class='clearfix'></div>
                         </div>
                     </div>
