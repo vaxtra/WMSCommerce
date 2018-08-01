@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
             <div class="card">
-                <div class="card-header bg-gradient-black">
+                <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabKomposisi" id="Komposisi-tab" class="nav-link active font-weight-normal" data-toggle="tab">Komposisi</a></li>
                         <li class="nav-item"><a href="#tabBiayaProduksi" id="BiayaProduksi-tab" class="nav-link font-weight-normal" data-toggle="tab">Biaya produksi</a></li>
@@ -174,7 +174,7 @@
                 <ContentTemplate>
                     <div class="form-group">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
+                            <div class="card-header">
                                 <h5 class="font-weight-light">JENIS BIAYA PRODDUKSI</h5>
                             </div>
                             <table class="table table-sm table-hover table-bordered mb-0">
@@ -211,7 +211,7 @@
                     </div>
                     <div class="form-group">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
+                            <div class="card-header">
                                 <h5 class="font-weight-light">HARGA PRODUKSI</h5>
                             </div>
                             <table class="table table-sm table-hover table-bordered mb-0" style="font-weight: bold;">

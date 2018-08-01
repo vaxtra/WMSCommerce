@@ -22,6 +22,14 @@ public class TransaksiPelangganRetail_Model
     }
     #endregion
 
+    #region IDAlamat
+    private int iDAlamat;
+    public int IDAlamat
+    {
+        get { return iDAlamat; }
+    }
+    #endregion
+
     #region GrupPelanggan
     private string grupPelanggan;
     public string GrupPelanggan
@@ -77,6 +85,8 @@ public class TransaksiPelangganRetail_Model
             nama = Pelanggan.NamaLengkap;
 
             TBAlamat Alamat = Pelanggan.TBAlamats.FirstOrDefault();
+
+            iDAlamat = Alamat.IDAlamat;
 
             if (Alamat != null)
                 alamatLengkap = Alamat.AlamatLengkap;

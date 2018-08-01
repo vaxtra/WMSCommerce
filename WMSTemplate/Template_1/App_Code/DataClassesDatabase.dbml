@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB13346_WMSCommerce" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBWITEnterpriseSystem" Class="DataClassesDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\GANJARR;Initial Catalog=DB13346_WMSCommerce;Persist Security Info=True;User ID=warmup" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DB13346_WMSCommerceConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TBAkun" Member="TBAkuns">
     <Type Name="TBAkun">
@@ -108,13 +108,15 @@
       <Column Name="IDProvinsi" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDKota" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NamaLengkap" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="AlamatLengkap" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AlamatLengkap" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Negara" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Provinsi" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Kota" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Kecamatan" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="KodePos" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="Handphone" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="TeleponLain" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
-      <Column Name="Keterangan" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Keterangan" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="BiayaPengiriman" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="TBAlamat_TBTransaksi" Member="TBTransaksis" ThisKey="IDAlamat" OtherKey="IDAlamat" Type="TBTransaksi" />
       <Association Name="TBAlamat_TBTransaksiTemp" Member="TBTransaksiTemps" ThisKey="IDAlamat" OtherKey="IDAlamat" Type="TBTransaksiTemp" />
@@ -800,6 +802,24 @@
       <Association Name="TBWilayah_TBKurirBiaya" Member="TBWilayah" ThisKey="IDWilayah" OtherKey="IDWilayah" Type="TBWilayah" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBKurirKecamatan" Member="TBKurirKecamatans">
+    <Type Name="TBKurirKecamatan">
+      <Column Name="IDKurirKecamatan" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDKurirKota" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="[_IDWMSStore]" Member="_IDWMSStore" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="[_IDWMSKurirKecamatan]" Member="_IDWMSKurirKecamatan" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="[_Urutan]" Member="_Urutan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_TanggalInsert]" Member="_TanggalInsert" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatInsert]" Member="_IDTempatInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaInsert]" Member="_IDPenggunaInsert" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_TanggalUpdate]" Member="_TanggalUpdate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDTempatUpdate]" Member="_IDTempatUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IDPenggunaUpdate]" Member="_IDPenggunaUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[_IsActive]" Member="_IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TBKurirKota_TBKurirKecamatan" Member="TBKurirKota" ThisKey="IDKurirKota" OtherKey="IDKurirKota" Type="TBKurirKota" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.TBKurirKota" Member="TBKurirKotas">
     <Type Name="TBKurirKota">
       <Column Name="IDKurirKota" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -817,6 +837,7 @@
       <Column Name="[_IDTempatUpdate]" Member="_IDTempatUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="[_IDPenggunaUpdate]" Member="_IDPenggunaUpdate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="[_IsActive]" Member="_IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TBKurirKota_TBKurirKecamatan" Member="TBKurirKecamatans" ThisKey="IDKurirKota" OtherKey="IDKurirKota" Type="TBKurirKecamatan" />
       <Association Name="TBKurirProvinsi_TBKurirKota" Member="TBKurirProvinsi" ThisKey="IDKurirProvinsi" OtherKey="IDKurirProvinsi" Type="TBKurirProvinsi" IsForeignKey="true" />
     </Type>
   </Table>
@@ -1202,11 +1223,11 @@
       <Association Name="TBPengguna_TBStokProdukMutasi" Member="TBStokProdukMutasis" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBStokProdukMutasi" />
       <Association Name="TBPengguna_TBStoreKey" Member="TBStoreKeys" ThisKey="IDPengguna" OtherKey="IDPenggunaAktif" Type="TBStoreKey" />
       <Association Name="TBPengguna_TBSyncDatabaseLog" Member="TBSyncDatabaseLogs" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBSyncDatabaseLog" />
-      <Association Name="TBPengguna_TBTransaksi" Member="TBTransaksis" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi1" Member="TBTransaksis1" ThisKey="IDPengguna" OtherKey="IDPenggunaPembayaran" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi2" Member="TBTransaksis2" ThisKey="IDPengguna" OtherKey="IDPenggunaUpdate" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi3" Member="TBTransaksis3" ThisKey="IDPengguna" OtherKey="IDPenggunaMarketing" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi4" Member="TBTransaksis4" ThisKey="IDPengguna" OtherKey="IDPenggunaBatal" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi" Member="TBTransaksis" ThisKey="IDPengguna" OtherKey="IDPenggunaBatal" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi1" Member="TBTransaksis1" ThisKey="IDPengguna" OtherKey="IDPenggunaMarketing" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi2" Member="TBTransaksis2" ThisKey="IDPengguna" OtherKey="IDPenggunaPembayaran" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi3" Member="TBTransaksis3" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi4" Member="TBTransaksis4" ThisKey="IDPengguna" OtherKey="IDPenggunaUpdate" Type="TBTransaksi" />
       <Association Name="TBPengguna_TBTransaksiJenisPembayaran" Member="TBTransaksiJenisPembayarans" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBTransaksiJenisPembayaran" />
       <Association Name="TBPengguna_TBTransaksiPrintLog" Member="TBTransaksiPrintLogs" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBTransaksiPrintLog" />
       <Association Name="TBPengguna_TBTransaksiTemp" Member="TBTransaksiTemps" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksiTemp" />
@@ -2408,8 +2429,10 @@
       <Column Name="Subtotal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="GrandTotal" Type="System.Decimal" DbType="Money" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalPembayaran" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Column Name="Keterangan" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="KodeTransfer" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Keterangan" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="AlasanBatal" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[_IDWMSTransaksi]" Member="_IDWMSTransaksi" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="TBTransaksi_TBProject" Member="TBProjects" ThisKey="IDTransaksi" OtherKey="IDTransaksi" Type="TBProject" />
       <Association Name="TBTransaksi_TBTransaksiDetail" Member="TBTransaksiDetails" ThisKey="IDTransaksi" OtherKey="IDTransaksi" Type="TBTransaksiDetail" />
       <Association Name="TBTransaksi_TBTransaksiJenisPembayaran" Member="TBTransaksiJenisPembayarans" ThisKey="IDTransaksi" OtherKey="IDTransaksi" Type="TBTransaksiJenisPembayaran" />
@@ -2424,11 +2447,11 @@
       <Association Name="TBKurir_TBTransaksi" Member="TBKurir" ThisKey="IDKurir" OtherKey="IDKurir" Type="TBKurir" IsForeignKey="true" />
       <Association Name="TBMeja_TBTransaksi" Member="TBMeja" ThisKey="IDMeja" OtherKey="IDMeja" Type="TBMeja" IsForeignKey="true" />
       <Association Name="TBPelanggan_TBTransaksi" Member="TBPelanggan" ThisKey="IDPelanggan" OtherKey="IDPelanggan" Type="TBPelanggan" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi" Member="TBPengguna" ThisKey="IDPenggunaTransaksi" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi1" Member="TBPengguna1" ThisKey="IDPenggunaPembayaran" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi2" Member="TBPengguna2" ThisKey="IDPenggunaUpdate" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi3" Member="TBPengguna3" ThisKey="IDPenggunaMarketing" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi4" Member="TBPengguna4" ThisKey="IDPenggunaBatal" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi" Member="TBPengguna" ThisKey="IDPenggunaBatal" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi1" Member="TBPengguna1" ThisKey="IDPenggunaMarketing" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi2" Member="TBPengguna2" ThisKey="IDPenggunaPembayaran" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi3" Member="TBPengguna3" ThisKey="IDPenggunaTransaksi" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi4" Member="TBPengguna4" ThisKey="IDPenggunaUpdate" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
       <Association Name="TBStatusTransaksi_TBTransaksi" Member="TBStatusTransaksi" ThisKey="IDStatusTransaksi" OtherKey="IDStatusTransaksi" Type="TBStatusTransaksi" IsForeignKey="true" />
       <Association Name="TBTempat_TBTransaksi" Member="TBTempat" ThisKey="IDTempat" OtherKey="IDTempat" Type="TBTempat" IsForeignKey="true" />
       <Association Name="TBTempat_TBTransaksi1" Member="TBTempat1" ThisKey="IDTempatPengirim" OtherKey="IDTempat" Type="TBTempat" IsForeignKey="true" />

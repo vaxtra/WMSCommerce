@@ -6,23 +6,20 @@ using System.Web;
 
 public class FotoProduk_Class
 {
-    public TBFotoProduk Tambah(int idProduk, string extensiFoto)
+    public TBFotoProduk Tambah(DataClassesDatabaseDataContext db, int idProduk, string extensiFoto)
     {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        var FotoProduk = new TBFotoProduk
         {
-            var FotoProduk = new TBFotoProduk
-            {
-                //IDFotoProduk
-                IDProduk = idProduk,
-                ExtensiFoto = extensiFoto,
-                FotoUtama = false
-            };
+            //IDFotoProduk
+            IDProduk = idProduk,
+            ExtensiFoto = extensiFoto,
+            FotoUtama = false
+        };
 
-            db.TBFotoProduks.InsertOnSubmit(FotoProduk);
-            db.SubmitChanges();
+        db.TBFotoProduks.InsertOnSubmit(FotoProduk);
+        db.SubmitChanges();
 
-            return FotoProduk;
-        }
+        return FotoProduk;
     }
     public TBFotoProduk Cari(DataClassesDatabaseDataContext db, int idFotoProduk)
     {

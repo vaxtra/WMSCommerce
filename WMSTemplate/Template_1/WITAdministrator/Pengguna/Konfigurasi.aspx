@@ -20,7 +20,7 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
             <div class="card">
                 <div class="card-body">
@@ -30,9 +30,7 @@
                         <br />
                     </div>
                     <div class="form-group">
-                        <div class="checkbox-inline">
-                            <asp:CheckBoxList ID="CheckBoxListKonfigurasi" runat="server" RepeatDirection="Horizontal" RepeatColumns="4"></asp:CheckBoxList>
-                        </div>
+                        <asp:CheckBoxList ID="CheckBoxListKonfigurasi" runat="server" CssClass="checkboxlist" RepeatDirection="Horizontal" RepeatColumns="4"></asp:CheckBoxList>
                     </div>
                 </div>
                 <div class="card-footer">

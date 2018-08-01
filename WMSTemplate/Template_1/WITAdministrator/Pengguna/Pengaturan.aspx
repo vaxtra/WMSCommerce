@@ -21,22 +21,18 @@
 </asp:Content>
 
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
-        </div>
-    </div>
-
+    <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#TabProfil" id="Profil-tab" class="nav-link active" data-toggle="tab">Profil</a></li>
                         <li class="nav-item"><a href="#TabLengkap" role="tab" id="Lengkap-tab" class="nav-link" data-toggle="tab">Lengkap</a></li>
                         <li class="nav-item"><a href="#tabGaji" role="tab" id="Gaji-tab" class="nav-link" data-toggle="tab">Gaji</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="TabProfil">
                             <asp:UpdatePanel ID="UpdatePanelProfil" runat="server">

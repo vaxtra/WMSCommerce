@@ -12,26 +12,22 @@
 
     <h3>Alamat Pengiriman</h3>
 
-    <%--    Nama Depan
-    <asp:TextBox ID="TextBoxNamaDepan" runat="server"></asp:TextBox><br />
-
-    Nama Belakang
-    <asp:TextBox ID="TextBoxNamaBelakang" runat="server"></asp:TextBox><br />--%>
-
     Nama Lengkap
     <asp:TextBox ID="TextBoxNamaLengkap" runat="server"></asp:TextBox><br />
 
     Negara
-    <asp:DropDownList ID="DropDownListNegara" runat="server"></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownListNegara" runat="server">
+        <asp:ListItem Selected="True" Text="INDONESIA" Value="1"></asp:ListItem>
+    </asp:DropDownList><br />
 
     Provinsi
-    <asp:DropDownList ID="DropDownListProvinsi" runat="server"></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownListProvinsi" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProvinsi_SelectedIndexChanged"></asp:DropDownList><br />
 
     Kota
-    <asp:DropDownList ID="DropDownListKota" runat="server"></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownListKota" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKota_SelectedIndexChanged"></asp:DropDownList><br />
 
     Kecamatan
-    <asp:DropDownList ID="DropDownListKecamatan" runat="server"></asp:DropDownList><br />
+    <asp:DropDownList ID="DropDownListKecamatan" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKecamatan_SelectedIndexChanged"></asp:DropDownList><br />
 
     Alamat
     <asp:TextBox ID="TextBoxAlamat" runat="server"></asp:TextBox><br />
@@ -69,37 +65,19 @@
     <asp:Literal ID="LiteralNomorTelepon" runat="server"></asp:Literal><br />
 
     <h2>Pilih Jasa Pengiriman</h2>
-
-    <table>
-        <asp:Repeater ID="RepeaterKurir" runat="server">
-            <ItemTemplate>
-                <tr>
-                    <td>
-                        <asp:RadioButton ID="RadioButtonKurir" runat="server" GroupName="Kurir" />
-                    </td>
-                    <td><%# Eval("IDKurir") %></td>
-                    <td><%# Eval("Nama") %></td>
-                    <td><%# Eval("Biaya") %></td>
-                </tr>
-            </ItemTemplate>
-        </asp:Repeater>
-    </table>
-
-    <%--    (Logo JNT)
-    Regular Service Rp 11.000--%>
+    <asp:Literal ID="LiteralWarningPilihJasaPengiriman" runat="server"></asp:Literal>
+    <asp:RadioButtonList ID="RadioButtonListKurir" runat="server">
+    </asp:RadioButtonList>
 
     <asp:Button ID="ButtonKembaliKeInformasiPelanggan" runat="server" Text="Kembali ke Informasi Pelanggan" OnClick="ButtonKembaliKeInformasiPelanggan_Click" />
     <asp:Button ID="ButtonLanjutkanKePembayaran" runat="server" Text="Lanjutkan ke Pembayaran" OnClick="ButtonLanjutkanKePembayaran_Click" />
 
     <h2>Metode Pembayaran</h2>
     <h3>Semua transaksi dienkripsi. Data kartu kredit tidak pernah disimpan.</h3>
+    <asp:Literal ID="LiteralWarningPilihMetodePembayaran" runat="server"></asp:Literal>
 
-    <b>Bank Transfer</b><br />
-    Pembayaran Lewat ATM atau internet Banking. Verifikasi manual.
-    <br />
-    <br />
-
-    <asp:CheckBox ID="CheckBoxSubscribe" runat="server" Text="Pilih untuk Berlangganan Newsletter" />
+    <asp:RadioButtonList ID="RadioButtonListJenisPembayaran" runat="server">
+    </asp:RadioButtonList>
     <br />
     <br />
 
@@ -132,18 +110,11 @@
         </tbody>
     </table>
 
-    <%--  Masukan Kode Voucher Anda
-    <asp:TextBox ID="TextBoxVoucher" runat="server"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" Text="Button" />--%>
-
     Subtotal
     <asp:Label ID="LabelSubtotal" runat="server"></asp:Label><br />
 
     Biaya Pengiriman
     <asp:Label ID="LabelBiayaPengiriman" runat="server"></asp:Label><br />
-
-    <%--Pajak
-Rp 0--%>
 
     Total
   <asp:Label ID="LabelTotal" runat="server"></asp:Label><br />

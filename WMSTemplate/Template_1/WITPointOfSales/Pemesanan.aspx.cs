@@ -11,7 +11,7 @@ public partial class WITPointOfSales_Default2 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
@@ -39,7 +39,7 @@ public partial class WITPointOfSales_Default2 : System.Web.UI.Page
 
             if (Transaksi == null)
             {
-                Transaksi = new Transaksi_Model(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
+                Transaksi = new Transaksi_Class(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
                 ViewState["Transaksi"] = Transaksi;
             }
         }
@@ -66,7 +66,7 @@ public partial class WITPointOfSales_Default2 : System.Web.UI.Page
                         TextBoxTelepon.Text = Pelanggan.Handphone;
                         TextBoxAlamat.Text = Alamat.AlamatLengkap;
 
-                        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
                         Transaksi.BiayaPengiriman = Alamat.BiayaPengiriman.Value;
                         TextBoxBiayaPengiriman.Text = Pengaturan.FormatHarga(Transaksi.BiayaPengiriman);
                     }
@@ -83,7 +83,7 @@ public partial class WITPointOfSales_Default2 : System.Web.UI.Page
     }
     private void LoadDataTransaksi()
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         decimal Persentase = 0;
 
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
@@ -155,7 +155,7 @@ public partial class WITPointOfSales_Default2 : System.Web.UI.Page
     }
     private void Simpan(int idStatusTransaksi)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
         if (Transaksi != null)

@@ -137,7 +137,7 @@ public partial class WITRestaurant_Default : System.Web.UI.Page
                     {
                         PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-                        Transaksi_Model TransaksiAwal = new Transaksi_Model(HiddenFieldTransaksiAwal.Value, Pengguna.IDPengguna);
+                        Transaksi_Class TransaksiAwal = new Transaksi_Class(HiddenFieldTransaksiAwal.Value, Pengguna.IDPengguna);
 
                         var MejaTransaksi = db.TBMejas.FirstOrDefault(item => item.IDMeja == TransaksiAwal.Meja.IDMeja);
 
@@ -212,8 +212,8 @@ public partial class WITRestaurant_Default : System.Web.UI.Page
             {
                 PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-                Transaksi_Model TransaksiAwal = new Transaksi_Model(HiddenFieldTransaksiAwal.Value, Pengguna.IDPengguna);
-                Transaksi_Model TransaksiTujuan = new Transaksi_Model(Transaksi.IDTransaksi, Pengguna.IDPengguna);
+                Transaksi_Class TransaksiAwal = new Transaksi_Class(HiddenFieldTransaksiAwal.Value, Pengguna.IDPengguna);
+                Transaksi_Class TransaksiTujuan = new Transaksi_Class(Transaksi.IDTransaksi, Pengguna.IDPengguna);
 
                 foreach (var item in TransaksiAwal.Detail)
                 {
@@ -247,7 +247,7 @@ public partial class WITRestaurant_Default : System.Web.UI.Page
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-            Transaksi_Model TransaksiReprint = new Transaksi_Model(Transaksi.IDTransaksi, Pengguna.IDPengguna);
+            Transaksi_Class TransaksiReprint = new Transaksi_Class(Transaksi.IDTransaksi, Pengguna.IDPengguna);
 
             TransaksiReprint.PrintOrder(PilihanStatusPrint.Reprint);
             TransaksiReprint.StatusPrint = true;

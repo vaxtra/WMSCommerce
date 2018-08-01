@@ -22,8 +22,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a href="/WITAdministrator/Import/Produk.aspx" class="btn btn-secondary btn-const text-white mr-1">Import</a>
-    <asp:Button ID="ButtonExport" runat="server" class="btn btn-secondary btn-const mr-1" Text="Export" OnClick="ButtonExport_Click" />
+    <a href="/WITAdministrator/Import/Produk.aspx" class="btn btn-dark btn-const text-white mr-1">Import</a>
+    <asp:Button ID="ButtonExport" runat="server" class="btn btn-dark btn-const mr-1" Text="Export" OnClick="ButtonExport_Click" />
     <h5 class="mr-1"><a id="LinkDownload" runat="server" visible="false" style="font-size: 12px !important;">Download File</a></h5>
     <a href="Pengaturan.aspx" class="btn btn-success btn-const text-white">Tambah</a>
 </asp:Content>
@@ -41,8 +41,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabProduk" id="BahanBaku-tab" class="nav-link active" data-toggle="tab">Produk</a></li>
                         <li class="nav-item"><a href="#tabPemilikProduk" id="PemilikProduk-tab" class="nav-link" data-toggle="tab">Brand</a></li>
                         <li class="nav-item"><a href="#tabWarna" id="Warna-tab" class="nav-link" data-toggle="tab">Warna</a></li>
@@ -50,7 +50,8 @@
                         <li class="nav-item"><a href="#tabKategori" id="TidakKomposisi-tab" class="nav-link" data-toggle="tab">Kategori</a></li>
                         <li class="nav-item"><a href="#tabVendor" id="Vendor-tab" class="nav-link" data-toggle="tab">Vendor</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="tabProduk">
                             <asp:UpdatePanel ID="UpdatePanelProduk" runat="server">

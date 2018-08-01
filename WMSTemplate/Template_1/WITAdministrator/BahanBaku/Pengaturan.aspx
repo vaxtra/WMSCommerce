@@ -46,19 +46,11 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label class="text-muted font-weight-bold">Satuan Besar</label>
-                                        <br />
-                                        <asp:DropDownList ID="DropDownListSatuanBesar" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListSatuanBesar_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                        <asp:CustomValidator ID="CustomValidatorSatuanBesar" runat="server" ErrorMessage="-" ControlToValidate="DropDownListSatuanBesar" ForeColor="Red"
-                                            ValidationGroup="groupBahanBaku" Display="Dynamic" OnServerValidate="CustomValidatorSatuanBesar_ServerValidate"></asp:CustomValidator>
+                                        <asp:TextBox ID="TextBoxSatuanBesar" Width="100%" ClientIDMode="Static" CssClass="Satuan" runat="server" AutoPostBack="true" OnTextChanged="TextBoxSatuanBesar_TextChanged"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="text-muted font-weight-bold">Satuan Kecil</label>
-                                        <br />
-                                        <asp:DropDownList ID="DropDownListSatuanKecil" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListSatuanKecil_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                        <asp:CustomValidator ID="CustomValidatorSatuanKecil" runat="server" ErrorMessage="-" ControlToValidate="DropDownListSatuanKecil" ForeColor="Red"
-                                            ValidationGroup="groupBahanBaku" Display="Dynamic" OnServerValidate="CustomValidatorSatuanKecil_ServerValidate"></asp:CustomValidator>
+                                        <asp:TextBox ID="TextBoxSatuanKecil" Width="100%" ClientIDMode="Static" CssClass="Satuan" runat="server" AutoPostBack="true" OnTextChanged="TextBoxSatuanKecil_TextChanged"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-muted font-weight-bold">Konversi</label>
@@ -139,8 +131,8 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label class="text-muted font-weight-bold">Kategori Bahan Baku</label><br />
-                                        <asp:CheckBoxList ID="CheckBoxListKategori" runat="server" class="checkbox-inline"></asp:CheckBoxList>
+                                        <label class="text-muted font-weight-bold">Kategori Bahan Baku</label>
+                                        <asp:TextBox ID="TextBoxKategori" Width="100%" ClientIDMode="Static" CssClass="KategoriBahanBaku" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -165,5 +157,6 @@
 </asp:Content>
 
 <asp:Content ID="Content8" ContentPlaceHolderID="ContentPlaceHolderJavascript" runat="server">
+    <asp:Literal ID="LiteralJavascript" runat="server"></asp:Literal>
 </asp:Content>
 

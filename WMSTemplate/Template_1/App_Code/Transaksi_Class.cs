@@ -5,7 +5,7 @@ using System.Web;
 using System.Net;
 
 [Serializable]
-public partial class Transaksi_Model
+public partial class Transaksi_Class
 {
     #region arie
     public bool isRetur { get; set; }
@@ -210,6 +210,7 @@ public partial class Transaksi_Model
         }
     }
     #endregion
+
     public decimal Subtotal
     {
         get
@@ -240,6 +241,28 @@ public partial class Transaksi_Model
     }
     public string Keterangan { get; set; }
     public string Station { get; set; }
+
+    #region KodeTransfer
+    private decimal kodeTransfer;
+    public decimal KodeTransfer
+    {
+        get
+        {
+            return kodeTransfer;
+        }
+    }
+    #endregion
+
+    #region IDWMSTransaksi
+    private Guid iDWMSTransaksi;
+    public Guid IDWMSTransaksi
+    {
+        get
+        {
+            return iDWMSTransaksi;
+        }
+    }
+    #endregion
 
     //TAMBAHAN
 
@@ -353,7 +376,7 @@ public partial class Transaksi_Model
     private int? idStatusTransaksiSebelumnya; //MENCATAT ID TRANSAKSI AWAL SEBELUM DIRUBAH
 
     //MEMBUKA TRANSAKSI YANG SUDAH TERSIMPAN DI DATABASE
-    public Transaksi_Model(string idTransaksi, int idPenggunaUpdate)
+    public Transaksi_Class(string idTransaksi, int idPenggunaUpdate)
     {
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
@@ -450,7 +473,11 @@ public partial class Transaksi_Model
                 //GrandTotal //AUTO
                 //TotalPembayaran AUTO
 
+                kodeTransfer = Transaksi.KodeTransfer;
+
                 Keterangan = Transaksi.Keterangan;
+
+                iDWMSTransaksi = Transaksi._IDWMSTransaksi;
 
                 //SebelumDiscountTransaksi //AUTO
 
@@ -518,7 +545,7 @@ public partial class Transaksi_Model
     }
 
     //MEMBUAT TRANSAKSI DENGAN DEFAULT VALUE
-    public Transaksi_Model(int idPenggunaTransaksi, int idTempat, DateTime tanggalTransaksi)
+    public Transaksi_Class(int idPenggunaTransaksi, int idTempat, DateTime tanggalTransaksi)
     {
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
@@ -737,6 +764,18 @@ public partial class Transaksi_Model
                 }
             }
             #endregion
+
+            //KODE TRANSFER
+            if (_nomorTransaksi.Value.ToString().Length <= 2)
+                kodeTransfer = 100 + _nomorTransaksi.Value;
+            else
+                kodeTransfer = 100 + Parse.Decimal(_nomorTransaksi.Value.ToString().Substring(_nomorTransaksi.Value.ToString().Length - 2));
+
+            Transaksi.KodeTransfer = kodeTransfer;
+
+            //IDWMSTransaksi
+            iDWMSTransaksi = Guid.NewGuid();
+            Transaksi._IDWMSTransaksi = iDWMSTransaksi;
         }
         #endregion
 
@@ -798,6 +837,7 @@ public partial class Transaksi_Model
         //SebelumDiscountTransaksi AUTO
 
         Transaksi.IDPelanggan = Pelanggan.IDPelanggan;
+        Transaksi.IDAlamat = Pelanggan.IDAlamat;
 
         var MejaTransaksi = db.TBMejas.FirstOrDefault(item => item.IDMeja == Meja.IDMeja);
 

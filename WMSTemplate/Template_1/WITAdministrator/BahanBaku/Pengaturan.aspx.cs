@@ -15,23 +15,7 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
-                TBSatuan[] daftarSatuan = db.TBSatuans.OrderBy(item => item.Nama).ToArray();
-                DropDownListSatuanKecil.DataSource = daftarSatuan;
-                DropDownListSatuanKecil.DataTextField = "Nama";
-                DropDownListSatuanKecil.DataValueField = "IDSatuan";
-                DropDownListSatuanKecil.DataBind();
-                DropDownListSatuanKecil.Items.Insert(0, new ListItem { Text = "-Pilih Satuan-", Value = "0" });
-
-                DropDownListSatuanBesar.DataSource = daftarSatuan;
-                DropDownListSatuanBesar.DataTextField = "Nama";
-                DropDownListSatuanBesar.DataValueField = "IDSatuan";
-                DropDownListSatuanBesar.DataBind();
-                DropDownListSatuanBesar.Items.Insert(0, new ListItem { Text = "-Pilih Satuan-", Value = "0" });
-
-                CheckBoxListKategori.DataSource = db.TBKategoriBahanBakus.Select(item => new { item.IDKategoriBahanBaku, item.Nama }).ToArray();
-                CheckBoxListKategori.DataValueField = "IDKategoriBahanBaku";
-                CheckBoxListKategori.DataTextField = "Nama";
-                CheckBoxListKategori.DataBind();
+                LoadDataJavaScript(db);
 
                 TBBahanBaku bahanBaku = db.TBBahanBakus.FirstOrDefault(item => item.IDBahanBaku == Request.QueryString["id"].ToInt());
 
@@ -42,9 +26,7 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
                     TextBoxKonversi.Text = bahanBaku.Konversi.ToFormatHarga();
                     TextBoxBerat.Text = bahanBaku.Berat.ToString();
                     TextBoxDeskripsi.Text = bahanBaku.Deskripsi;
-                    DropDownListSatuanKecil.SelectedValue = bahanBaku.IDSatuan.ToString();
-                    DropDownListSatuanBesar.SelectedValue = bahanBaku.IDSatuanKonversi.ToString();
-                    
+
                     TBStokBahanBaku stokBahanBaku = bahanBaku.TBStokBahanBakus.FirstOrDefault(item => item.IDTempat == pengguna.IDTempat);
                     if (stokBahanBaku != null)
                     {
@@ -53,16 +35,10 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
                         TextBoxBatasStokAkanHabis.Text = (stokBahanBaku.JumlahMinimum / bahanBaku.Konversi).ToFormatHarga();
                     }
 
-                    LabelSatuanHargaBeli.Text = "/" + DropDownListSatuanBesar.SelectedItem.Text;
-                    LabelSatuanKonversi.Text = DropDownListSatuanKecil.SelectedItem.Text;
-                    LabelSatuanStok.Text = DropDownListSatuanBesar.SelectedItem.Text;
-                    LabelSatuanStokAkanHabis.Text = DropDownListSatuanBesar.SelectedItem.Text;
-
-                    if (bahanBaku.TBRelasiBahanBakuKategoriBahanBakus.Count > 0)
-                    {
-                        foreach (var item in bahanBaku.TBRelasiBahanBakuKategoriBahanBakus)
-                            CheckBoxListKategori.Items.FindByValue(item.IDKategoriBahanBaku.ToString()).Selected = true;
-                    }
+                    LabelSatuanHargaBeli.Text = "/" + TextBoxSatuanBesar.Text;
+                    LabelSatuanKonversi.Text = TextBoxSatuanKecil.Text;
+                    LabelSatuanStok.Text = TextBoxSatuanBesar.Text;
+                    LabelSatuanStokAkanHabis.Text = TextBoxSatuanBesar.Text;
 
                     ButtonSimpan.Text = "Ubah";
                     LabelKeterangan.Text = "Ubah";
@@ -115,54 +91,21 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
             }
         }
     }
-    protected void DropDownListSatuanBesar_SelectedIndexChanged(object sender, EventArgs e)
+
+    protected void TextBoxSatuanBesar_TextChanged(object sender, EventArgs e)
     {
-        if (DropDownListSatuanBesar.SelectedValue != "0")
-        {
-            LabelSatuanHargaBeli.Text = "/" + DropDownListSatuanBesar.SelectedItem.Text;
-            LabelSatuanStok.Text = DropDownListSatuanBesar.SelectedItem.Text;
-            LabelSatuanStokAkanHabis.Text = DropDownListSatuanBesar.SelectedItem.Text;
-        }
-        else
-        {
-            LabelSatuanHargaBeli.Text = string.Empty;
-            LabelSatuanStok.Text = string.Empty;
-            LabelSatuanStokAkanHabis.Text = string.Empty;
-        }
+        LabelSatuanHargaBeli.Text = "/" + TextBoxSatuanBesar.Text;
+        LabelSatuanStok.Text = TextBoxSatuanBesar.Text;
+        LabelSatuanStokAkanHabis.Text = TextBoxSatuanBesar.Text;
     }
-    protected void DropDownListSatuanKecil_SelectedIndexChanged(object sender, EventArgs e)
+
+    protected void TextBoxSatuanKecil_TextChanged(object sender, EventArgs e)
     {
-        if (DropDownListSatuanKecil.SelectedValue != "0")
-            LabelSatuanKonversi.Text = DropDownListSatuanKecil.SelectedItem.Text;
-        else
-            LabelSatuanKonversi.Text = string.Empty;
+        LabelSatuanKonversi.Text = TextBoxSatuanKecil.Text;
     }
     #endregion
 
     #region MASTER
-    private void TambahKategori(TBBahanBaku bahanBaku, DataClassesDatabaseDataContext db)
-    {
-        //reset kategori produk
-        var kategori = db.TBRelasiBahanBakuKategoriBahanBakus.Where(item => item.TBBahanBaku == bahanBaku).ToArray();
-
-        if (kategori.Count() > 0)
-        {
-            db.TBRelasiBahanBakuKategoriBahanBakus.DeleteAllOnSubmit(kategori);
-        }
-
-        foreach (ListItem item in CheckBoxListKategori.Items)
-        {
-            if (item.Selected)
-            {
-                db.TBRelasiBahanBakuKategoriBahanBakus.InsertOnSubmit(new TBRelasiBahanBakuKategoriBahanBaku
-                {
-                    TBBahanBaku = bahanBaku,
-                    IDKategoriBahanBaku = item.Value.ToInt()
-                });
-            }
-        }
-    }
-
     protected void ButtonSimpan_Click(object sender, EventArgs e)
     {
         if (Page.IsValid)
@@ -171,6 +114,9 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
+                KategoriBahanBaku_Class KategoriBahanBaku_Class = new KategoriBahanBaku_Class();
+                Satuan_Class Satuan_Class = new Satuan_Class();
+
                 TBBahanBaku bahanBaku;
                 decimal hargaBeli = TextBoxHargaBeli.Text.ToDecimal() / TextBoxKonversi.Text.ToDecimal();
                 decimal stok = TextBoxStok.Text.ToDecimal() * TextBoxKonversi.Text.ToDecimal();
@@ -178,8 +124,9 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
 
                 if (ButtonSimpan.Text == "Tambah")
                 {
-                    TBSatuan satuanKecil = db.TBSatuans.FirstOrDefault(item => item.IDSatuan == DropDownListSatuanKecil.SelectedValue.ToInt());
-                    TBSatuan satuanBesar = db.TBSatuans.FirstOrDefault(item => item.IDSatuan == DropDownListSatuanBesar.SelectedValue.ToInt());
+
+                    TBSatuan satuanKecil = Satuan_Class.CariTambah(db, TextBoxSatuanKecil.Text);
+                    TBSatuan satuanBesar = Satuan_Class.CariTambah(db, TextBoxSatuanBesar.Text);
 
                     bahanBaku = new TBBahanBaku
                     {
@@ -197,14 +144,14 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
                     };
                     db.TBBahanBakus.InsertOnSubmit(bahanBaku);
 
-                    TambahKategori(bahanBaku, db);
+                    KategoriBahanBaku_Class.KategoriBahanBaku(db, bahanBaku, TextBoxKategori.Text);
 
                     TBStokBahanBaku stokBahanBaku = StokBahanBaku_Class.InsertStokBahanBaku(db, DateTime.Now, pengguna.IDPengguna, pengguna.IDTempat, bahanBaku, hargaBeli, stok, batasStok, "Stok Baru Manual");
                 }
                 else if (ButtonSimpan.Text == "Ubah")
                 {
-                    TBSatuan satuanKecil = db.TBSatuans.FirstOrDefault(item => item.IDSatuan == DropDownListSatuanKecil.SelectedValue.ToInt());
-                    TBSatuan satuanBesar = db.TBSatuans.FirstOrDefault(item => item.IDSatuan == DropDownListSatuanBesar.SelectedValue.ToInt());
+                    TBSatuan satuanKecil = Satuan_Class.CariTambah(db, TextBoxSatuanKecil.Text);
+                    TBSatuan satuanBesar = Satuan_Class.CariTambah(db, TextBoxSatuanBesar.Text);
 
                     bahanBaku = db.TBBahanBakus.FirstOrDefault(item => item.IDBahanBaku == Request.QueryString["id"].ToInt());
                     bahanBaku.TBSatuan = satuanKecil;
@@ -217,7 +164,7 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
                     bahanBaku.Konversi = TextBoxKonversi.Text.ToDecimal();
                     bahanBaku.Deskripsi = TextBoxDeskripsi.Text;
 
-                    TambahKategori(bahanBaku, db);
+                    KategoriBahanBaku_Class.KategoriBahanBaku(db, bahanBaku, TextBoxKategori.Text);
 
                     TBStokBahanBaku stokBahanBaku = db.TBStokBahanBakus.FirstOrDefault(item => item.TBBahanBaku == bahanBaku && item.IDTempat == pengguna.IDTempat);
 
@@ -247,32 +194,49 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
     }
     #endregion
 
-    #region VALIDATION
-    protected void CustomValidatorSatuanBesar_ServerValidate(object source, ServerValidateEventArgs args)
+    private void LoadDataJavaScript(DataClassesDatabaseDataContext db)
     {
-        if (DropDownListSatuanBesar.SelectedValue == "0")
-        {
-            args.IsValid = false;
-            CustomValidatorSatuanBesar.Text = "Satuan harus dipilih";
-        }
-        else
-        {
-            args.IsValid = true;
-            CustomValidatorSatuanBesar.Text = "-";
-        }
+        #region SATUAN
+        string Satuan = "[";
+
+        foreach (var item in db.TBSatuans)
+            Satuan += "\"" + item.Nama + "\", ";
+
+        Satuan += "]";
+        #endregion
+
+
+        #region KATEGORI PRODUK
+        string KategoriBahanBaku = "[";
+
+        foreach (var item in db.TBKategoriBahanBakus)
+            KategoriBahanBaku += "\"" + item.Nama + "\", ";
+
+        KategoriBahanBaku += "]";
+        #endregion
+
+        #region PILIHAN
+        LiteralJavascript.Text = "<script type=\"text/javascript\">";
+        LiteralJavascript.Text += "$(document).ready(function () { jQuery(function ($) { ";
+
+        //KATEGORI PRODUK
+        LiteralJavascript.Text += "$(\".KategoriBahanBaku\").select2({ tags: " + KategoriBahanBaku + ", tokenSeparators: [\",\"] });";
+
+        //PEMILIK PRODUK
+        LiteralJavascript.Text += "$(\".Satuan\").select2({ tags: " + Satuan + ", tokenSeparators: [\",\"], maximumSelectionSize: 1 });";
+
+        LiteralJavascript.Text += " }); });";
+
+        LiteralJavascript.Text += "function pageLoad(sender, args) { if (args.get_isPartialLoad()) { jQuery(function ($) { ";
+
+        //KATEGORI PRODUK
+        LiteralJavascript.Text += "$(\".KategoriBahanBaku\").select2({ tags: " + KategoriBahanBaku + ", tokenSeparators: [\",\"] });";
+
+        //PEMILIK PRODUK
+        LiteralJavascript.Text += "$(\".Satuan\").select2({ tags: " + Satuan + ", tokenSeparators: [\",\"], maximumSelectionSize: 1 });";
+
+        LiteralJavascript.Text += " }); }};";
+        LiteralJavascript.Text += "</script>";
+        #endregion
     }
-    protected void CustomValidatorSatuanKecil_ServerValidate(object source, ServerValidateEventArgs args)
-    {
-        if (DropDownListSatuanKecil.SelectedValue == "0")
-        {
-            args.IsValid = false;
-            CustomValidatorSatuanKecil.Text = "Satuan harus dipilih";
-        }
-        else
-        {
-            args.IsValid = true;
-            CustomValidatorSatuanKecil.Text = "-";
-        }
-    }
-    #endregion
 }

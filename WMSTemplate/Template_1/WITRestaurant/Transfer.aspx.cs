@@ -26,7 +26,7 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
                     if (Transaksi != null)
                     {
                         //JIKA TRANSAKSI DITEMUKAN
-                        Transaksi_Model TransaksiAwal = new Transaksi_Model(Transaksi.IDTransaksi, Pengguna.IDPengguna);
+                        Transaksi_Class TransaksiAwal = new Transaksi_Class(Transaksi.IDTransaksi, Pengguna.IDPengguna);
 
                         ViewState["TransaksiAwal"] = TransaksiAwal;
 
@@ -43,7 +43,7 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
 
                             if (transaksiTujuan != null)
                             {
-                                Transaksi_Model TransaksiTujuan = new Transaksi_Model(transaksiTujuan.IDTransaksi, Pengguna.IDPengguna);
+                                Transaksi_Class TransaksiTujuan = new Transaksi_Class(transaksiTujuan.IDTransaksi, Pengguna.IDPengguna);
 
                                 ViewState["TransaksiTujuan"] = TransaksiTujuan;
 
@@ -66,10 +66,10 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
                 Response.Redirect("Default.aspx");
         }
     }
-    private void MembuatTransaksiBaru(PenggunaLogin Pengguna, Transaksi_Model TransaksiAwal)
+    private void MembuatTransaksiBaru(PenggunaLogin Pengguna, Transaksi_Class TransaksiAwal)
     {
         //JIKA SPLIT BILL MEMBUAT OBJECT CLASS TRANSAKSI BARU
-        var TransaksiTujuan = new Transaksi_Model(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
+        var TransaksiTujuan = new Transaksi_Class(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
 
         if (!string.IsNullOrWhiteSpace(Request.QueryString["table"]))
         {
@@ -94,8 +94,8 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
     {
         if (e.CommandName == "Pindah")
         {
-            Transaksi_Model TransaksiAwal = (Transaksi_Model)ViewState["TransaksiAwal"];
-            Transaksi_Model TransaksiTujuan = (Transaksi_Model)ViewState["TransaksiTujuan"];
+            Transaksi_Class TransaksiAwal = (Transaksi_Class)ViewState["TransaksiAwal"];
+            Transaksi_Class TransaksiTujuan = (Transaksi_Class)ViewState["TransaksiTujuan"];
 
             //MENCARI DETAIL BERDASARKAN ID DETAIL TRANSAKSI
             var DetailAwal = TransaksiAwal.Detail
@@ -158,8 +158,8 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
     {
         if (e.CommandName == "Pindah")
         {
-            Transaksi_Model TransaksiAwal = (Transaksi_Model)ViewState["TransaksiAwal"];
-            Transaksi_Model TransaksiTujuan = (Transaksi_Model)ViewState["TransaksiTujuan"];
+            Transaksi_Class TransaksiAwal = (Transaksi_Class)ViewState["TransaksiAwal"];
+            Transaksi_Class TransaksiTujuan = (Transaksi_Class)ViewState["TransaksiTujuan"];
 
             //MENCARI DETAIL BERDASARKAN ID DETAIL TRANSAKSI
             var DetailTujuan = TransaksiTujuan.Detail
@@ -220,8 +220,8 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
     }
     private void LoadData()
     {
-        Transaksi_Model TransaksiAwal = (Transaksi_Model)ViewState["TransaksiAwal"];
-        Transaksi_Model TransaksiTujuan = (Transaksi_Model)ViewState["TransaksiTujuan"];
+        Transaksi_Class TransaksiAwal = (Transaksi_Class)ViewState["TransaksiAwal"];
+        Transaksi_Class TransaksiTujuan = (Transaksi_Class)ViewState["TransaksiTujuan"];
 
         RepeaterTransaksiDetail.DataSource = TransaksiAwal.Detail.Select(item => new
         {
@@ -262,8 +262,8 @@ public partial class WITRestaurant_SplitBill : System.Web.UI.Page
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-            Transaksi_Model TransaksiAwal = (Transaksi_Model)ViewState["TransaksiAwal"];
-            Transaksi_Model TransaksiTujuan = (Transaksi_Model)ViewState["TransaksiTujuan"];
+            Transaksi_Class TransaksiAwal = (Transaksi_Class)ViewState["TransaksiAwal"];
+            Transaksi_Class TransaksiTujuan = (Transaksi_Class)ViewState["TransaksiTujuan"];
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {

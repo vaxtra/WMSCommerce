@@ -52,12 +52,13 @@
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="form-group">
         <div class="card">
-            <div class="card-body">
-                <ul id="myTab" class="nav nav-tabs">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item"><a href="#tabKomposisi" id="Komposisi-tab" class="nav-link active" data-toggle="tab">Komposisi</a></li>
                     <li class="nav-item"><a href="#tabPemakaian" role="tab" id="Pemakaian-tab" class="nav-link" data-toggle="tab">Cari Pemakaian Bahan Baku</a></li>
                 </ul>
-                <br />
+            </div>
+            <div class="card-body">
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane active" id="tabKomposisi">
                         <asp:UpdatePanel ID="UpdatePanelKomposisi" runat="server">
@@ -146,8 +147,8 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
                                             <div class="card">
-                                                <div class="card-header bg-primary font-weight-bold">
-                                                    BAHAN BAKU
+                                                <div class="card-header">
+                                                    <h5 class="font-weight-light">BAHAN BAKU</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table-responsive">
@@ -177,8 +178,8 @@
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <div class="card">
-                                                <div class="card-header bg-primary font-weight-bold">
-                                                    PRODUK
+                                                <div class="card-header">
+                                                    <h5 class="font-weight-light">PRODUK</h5>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table-responsive">

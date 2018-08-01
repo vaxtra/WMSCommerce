@@ -35,7 +35,7 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
                     ButtonOk.Text = "Ubah";
                     LabelKeterangan.Text = "Ubah";
 
-                    LoadDataFoto(db);
+                    LoadDataFoto(db, Produk.IDProduk);
                     LoadDataKombinasiProduk(db);
                 }
                 else
@@ -103,16 +103,8 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
                 KombinasiProduk_Class.PengaturanBarcode(db, Pengguna.IDTempat, KombinasiProduk);
 
                 Session["IDProduk"] = Produk.IDProduk;
-                HiddenFieldIDProduk.Value = Produk.IDProduk.ToString();
 
-                ButtonOk.Text = "Ubah";
-                LabelKeterangan.Text = "Ubah";
-
-                AjaxFileUploadFoto.Enabled = true;
-                navVarian.Visible = true;
-                navPhoto.Visible = true;;
-
-                LoadDataKombinasiProduk(db);
+                Response.Redirect("Pengaturan.aspx?id=" + Produk.IDProduk);
             }
             else if (ButtonOk.Text == "Ubah")
             {
@@ -141,7 +133,7 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
 
                 db.SubmitChanges();
 
-                LoadDataKombinasiProduk(db);
+                Response.Redirect("Pengaturan.aspx?id=" + Produk.IDProduk);
             }
         }
     }
@@ -201,18 +193,23 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
     #region FOTO
     protected void AjaxFileUploadFoto_UploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
     {
-        string Folder = Server.MapPath("~/images/Produk/");
-
-        if (!Directory.Exists(Folder))
-            Directory.CreateDirectory(Folder);
-
-        if (Session["IDProduk"] != null)
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
-            FotoProduk_Class ClassFotoProduk = new FotoProduk_Class();
+            string Folder = Server.MapPath("~/images/Produk/");
 
-            var FotoProduk = ClassFotoProduk.Tambah(Session["IDProduk"].ToInt(), Path.GetExtension(e.FileName));
+            if (!Directory.Exists(Folder))
+                Directory.CreateDirectory(Folder);
 
-            AjaxFileUploadFoto.SaveAs(Folder + FotoProduk.IDFotoProduk + FotoProduk.ExtensiFoto);
+            if (Session["IDProduk"] != null)
+            {
+                FotoProduk_Class ClassFotoProduk = new FotoProduk_Class();
+
+                TBFotoProduk FotoProduk = ClassFotoProduk.Tambah(db, Session["IDProduk"].ToInt(), Path.GetExtension(e.FileName));
+
+                AjaxFileUploadFoto.SaveAs(Folder + FotoProduk.IDFotoProduk + FotoProduk.ExtensiFoto);
+
+                LoadDataFoto(db, FotoProduk.IDProduk);
+            }
         }
     }
     protected void RepeaterFotoProduk_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -227,14 +224,13 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
                 ClassFotoProduk.FotoUtama(db, e.CommandArgument.ToInt());
 
             db.SubmitChanges();
-            LoadDataFoto(db);
+            LoadDataFoto(db, Request.QueryString["id"].ToInt());
         }
     }
-    private void LoadDataFoto(DataClassesDatabaseDataContext db)
+    private void LoadDataFoto(DataClassesDatabaseDataContext db, int idProduk)
     {
         FotoProduk_Class ClassFotoProduk = new FotoProduk_Class();
-
-        RepeaterFotoProduk.DataSource = ClassFotoProduk.Data(db, HiddenFieldIDProduk.Value.ToInt())
+        RepeaterFotoProduk.DataSource = ClassFotoProduk.Data(db, idProduk)
             .Select(item => new
             {
                 item.IDFotoProduk,
@@ -242,13 +238,6 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
                 Foto = "/images/Produk/" + item.IDFotoProduk + item.ExtensiFoto
             });
         RepeaterFotoProduk.DataBind();
-    }
-    protected void ButtonRefreshFoto_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            LoadDataFoto(db);
-        }
     }
     #endregion
 

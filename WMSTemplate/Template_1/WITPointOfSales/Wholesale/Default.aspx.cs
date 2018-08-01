@@ -44,7 +44,7 @@ public partial class WITPointOfSales_Wholesale_Default : System.Web.UI.Page
                     if (DataTransaksi.IDStatusTransaksi == (int)EnumStatusTransaksi.Complete || DataTransaksi.IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
                     {
                         //TRANSAKSI COMPLETE ATAU CANCELED COPY KE TRANSAKSI BARU
-                        var Transaksi = new Transaksi_Model(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
+                        var Transaksi = new Transaksi_Class(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
 
                         Transaksi.IDJenisTransaksi = (int)EnumJenisTransaksi.Wholesale; //WHOLESALE
 
@@ -253,7 +253,7 @@ public partial class WITPointOfSales_Wholesale_Default : System.Web.UI.Page
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-            Transaksi_Model Transaksi = new Transaksi_Model(LabelIDTransaksi.Text, Pengguna.IDPengguna);
+            Transaksi_Class Transaksi = new Transaksi_Class(LabelIDTransaksi.Text, Pengguna.IDPengguna);
 
             RepeaterTransaksiKombinasiProduk.DataSource = Transaksi.Detail
                 .Join(db.TBKombinasiProduks,
@@ -300,19 +300,19 @@ public partial class WITPointOfSales_Wholesale_Default : System.Web.UI.Page
             {
                 PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
                 StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
-                Transaksi_Model Transaksi;
+                Transaksi_Class Transaksi;
 
                 //CLASS TRANSAKSI
                 if (string.IsNullOrWhiteSpace(LabelIDTransaksi.Text))
                 {
                     //MEMBUAT TRANSAKSI BARU
-                    Transaksi = new Transaksi_Model(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
+                    Transaksi = new Transaksi_Class(Pengguna.IDPengguna, Pengguna.IDTempat, DateTime.Now);
 
                     //3 : WHOLESALE
                     Transaksi.IDJenisTransaksi = 3;
                 }
                 else
-                    Transaksi = new Transaksi_Model(LabelIDTransaksi.Text, Pengguna.IDPengguna);
+                    Transaksi = new Transaksi_Class(LabelIDTransaksi.Text, Pengguna.IDPengguna);
 
                 foreach (RepeaterItem item in RepeaterStokKombinasiProduk.Items)
                 {
@@ -441,7 +441,7 @@ public partial class WITPointOfSales_Wholesale_Default : System.Web.UI.Page
             {
                 PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-                Transaksi_Model Transaksi = new Transaksi_Model(LabelIDTransaksi.Text, Pengguna.IDPengguna);
+                Transaksi_Class Transaksi = new Transaksi_Class(LabelIDTransaksi.Text, Pengguna.IDPengguna);
 
                 Transaksi.UbahJumlahProduk(e.CommandArgument.ToString().ToInt(), 0);
 

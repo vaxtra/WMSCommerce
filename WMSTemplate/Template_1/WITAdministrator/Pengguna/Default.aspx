@@ -21,21 +21,17 @@
 </asp:Content>
 
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
-        </div>
-    </div>
-
+    <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#TabPegawai" id="Pegawai-tab" class="nav-link active" data-toggle="tab">Pegawai</a></li>
                         <li class="nav-item"><a href="#TabGrup" id="Grup-tab" class="nav-link" data-toggle="tab">Grup</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="TabPegawai">
                             <asp:UpdatePanel ID="UpdatePanelPengguna" runat="server">
@@ -75,10 +71,10 @@
                                                         <th></th>
                                                     </tr>
                                                     <tr class="thead-light">
-                                                        <td colspan="7">
-                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block" OnClick="EventData" ClientIDMode="Static" /></td>
+                                                        <th colspan="7">
+                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
+                                                        <th>
+                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block" OnClick="EventData" ClientIDMode="Static" /></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -100,7 +96,7 @@
                                                                 </td>
 
                                                                 <td class="text-right fitSize">
-                                                                    <asp:Button ID="ButtonLogin" runat="server" CssClass="btn btn-success btn-xs" Text="Login" CommandName="Login" CommandArgument='<%# Eval("IDPengguna") %>' />
+                                                                    <asp:Button ID="ButtonLogin" runat="server" CssClass="btn btn-primary btn-xs" Text="Login" CommandName="Login" CommandArgument='<%# Eval("IDPengguna") %>' />
                                                                     <a href='Pengaturan.aspx?id=<%# Eval("IDPengguna") %>' class="btn btn-info btn-xs">Ubah</a>
                                                                     <asp:Button ID="ButtonHapus" runat="server" CssClass="btn btn-danger btn-xs" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDPengguna") %>' />
                                                                 </td>

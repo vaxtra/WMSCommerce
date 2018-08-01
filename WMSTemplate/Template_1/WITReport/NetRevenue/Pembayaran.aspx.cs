@@ -134,7 +134,7 @@ public partial class WITReport_NetRevenue_Pembayaran : System.Web.UI.Page
                     {
                         HiddenField HiddenFieldIDTransaksi = (HiddenField)item.FindControl("HiddenFieldIDTransaksi");
 
-                        Transaksi_Model Transaksi = new Transaksi_Model(HiddenFieldIDTransaksi.Value, Pengguna.IDPengguna);
+                        Transaksi_Class Transaksi = new Transaksi_Class(HiddenFieldIDTransaksi.Value, Pengguna.IDPengguna);
 
                         if (Transaksi.GrandTotal == Transaksi.TotalPembayaran)
                         {

@@ -145,7 +145,7 @@ public partial class Default : System.Web.UI.Page
                     RepeaterTemplateKeterangan.DataBind();
                     #endregion
 
-                    Transaksi_Model Transaksi;
+                    Transaksi_Class Transaksi;
                     string idTransaksi = string.Empty;
 
                     if (!string.IsNullOrWhiteSpace(Request.QueryString["table"]) && Parse.Int(Request.QueryString["table"]) > 2)
@@ -165,7 +165,7 @@ public partial class Default : System.Web.UI.Page
                     if (!string.IsNullOrWhiteSpace(idTransaksi))
                     {
                         //JIKA QUERY STRING ADA LOAD TRANSAKSI
-                        Transaksi = new Transaksi_Model(idTransaksi, Pengguna.IDPengguna);
+                        Transaksi = new Transaksi_Class(idTransaksi, Pengguna.IDPengguna);
 
                         if (Transaksi.IDStatusTransaksi != 0)
                         {
@@ -256,7 +256,7 @@ public partial class Default : System.Web.UI.Page
                             Transaksi = TransaksiBaru(Pengguna);  //JIKA TIDAK DITEMUKAN MAKA MEMBUAT TRANSAKSI BARU
                     }
                     else if (Session["Transaksi"] != null && Pengguna.PointOfSales == TipePointOfSales.Retail) //JIKA SESSION SEBELUMNYA DITEMUKAN DAN BUKA RESTAURANT
-                        Transaksi = (Transaksi_Model)Session["Transaksi"];
+                        Transaksi = (Transaksi_Class)Session["Transaksi"];
                     else
                         Transaksi = TransaksiBaru(Pengguna); //JIKA TIDAK DITEMUKAN MAKA MEMBUAT TRANSAKSI BARU
 
@@ -280,9 +280,9 @@ public partial class Default : System.Web.UI.Page
                 Response.Redirect("/WITAdministrator/Login.aspx?returnUrl=/WITPointOfSales/");
         }
     }
-    private Transaksi_Model TransaksiBaru(PenggunaLogin Pengguna)
+    private Transaksi_Class TransaksiBaru(PenggunaLogin Pengguna)
     {
-        Transaksi_Model Transaksi = new Transaksi_Model(Pengguna.IDPengguna, Pengguna.IDTempat, Parse.dateTime(TextBoxTanggal.Text));
+        Transaksi_Class Transaksi = new Transaksi_Class(Pengguna.IDPengguna, Pengguna.IDTempat, Parse.dateTime(TextBoxTanggal.Text));
 
         //JIKA MENGIRIM PARAMETER MEJA TRANSAKSI
         if (!string.IsNullOrWhiteSpace(Request.QueryString["table"]))
@@ -406,7 +406,7 @@ public partial class Default : System.Web.UI.Page
 
         if (_inputProdukManual.StartsWith("=")) //Merubah Produk
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -416,7 +416,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.StartsWith("+") || _inputProdukManual.StartsWith("-")) //Menambah dan Mengurangi Produk
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -426,7 +426,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.StartsWith("%")) //Diskon Nominal
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -436,7 +436,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.EndsWith("%")) //Diskon Persentase
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -446,7 +446,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.StartsWith("$$")) //Subtotal
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -456,7 +456,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.StartsWith("$")) //Harga Produk
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -466,7 +466,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (_inputProdukManual.StartsWith("#"))
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -528,7 +528,7 @@ public partial class Default : System.Web.UI.Page
     private int TambahDetailTransaksi(int idKombinasiProduk, int jumlahProduk)
     {
         //MENAMBAH DETAIL TRANSAKSI BARU
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         //MENAMBAH DETAIL TRANSAKSI
         int IDDetailTransaksi = Transaksi.TambahDetailTransaksi(idKombinasiProduk, jumlahProduk);
@@ -539,7 +539,7 @@ public partial class Default : System.Web.UI.Page
     private void LoadTransaksi()
     {
         //LOAD SEMUA DATA TRANSAKSI
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         if (Transaksi != null)
@@ -634,7 +634,7 @@ public partial class Default : System.Web.UI.Page
     }
     private void PengaturanTanggal()
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
             Transaksi.TanggalTransaksi = Parse.dateTime(TextBoxTanggal.Text);
@@ -655,7 +655,7 @@ public partial class Default : System.Web.UI.Page
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         //MEMBUAT TRANSAKSI BARU
-        Transaksi_Model Transaksi = TransaksiBaru(Pengguna);
+        Transaksi_Class Transaksi = TransaksiBaru(Pengguna);
 
         ViewState["Transaksi"] = Transaksi;
         Session["Transaksi"] = ViewState["Transaksi"];
@@ -689,7 +689,7 @@ public partial class Default : System.Web.UI.Page
             PengaturanHelper("Harga Produk", e.CommandArgument.ToString(), LabelIDDetailTransaksi.Text);
         else if (e.CommandName == "Hapus")
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -699,7 +699,7 @@ public partial class Default : System.Web.UI.Page
         }
         else if (e.CommandName == "Deskripsi")
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -718,7 +718,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonDiscount_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
             PengaturanHelper("Discount", Pengaturan.FormatHarga(Transaksi.PotonganTransaksi.ToString()), "");
@@ -731,7 +731,7 @@ public partial class Default : System.Web.UI.Page
         //membedakan dia sedang memasukkan angka tapi salah input atau memang dia sedang merubah jadi 0
         if ((_TextBoxHelper <= 0 && TextBoxHelper.Text == "0") || _TextBoxHelper > 0 || TextBoxHelper.Text.Contains("%") || LabelHeaderHelper.Text == "Jumlah Produk")
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -845,7 +845,7 @@ public partial class Default : System.Web.UI.Page
         {
             if (TextBoxPencarianProduk.Text.StartsWith("=")) //MERUBAH QUANTITY PRODUK
             {
-                Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
                 if (Transaksi != null)
                 {
@@ -857,7 +857,7 @@ public partial class Default : System.Web.UI.Page
             }
             else if (TextBoxPencarianProduk.Text.StartsWith("%")) //Diskon Nominal
             {
-                Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
                 if (Transaksi != null)
                 {
@@ -869,7 +869,7 @@ public partial class Default : System.Web.UI.Page
             }
             else if (TextBoxPencarianProduk.Text.EndsWith("%")) //Diskon Persentase
             {
-                Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
                 if (Transaksi != null)
                 {
@@ -881,7 +881,7 @@ public partial class Default : System.Web.UI.Page
             }
             else if (TextBoxPencarianProduk.Text.StartsWith("$$")) //Subtotal
             {
-                Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
                 if (Transaksi != null)
                 {
@@ -893,7 +893,7 @@ public partial class Default : System.Web.UI.Page
             }
             else if (TextBoxPencarianProduk.Text.StartsWith("$")) //Harga Produk
             {
-                Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+                Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
                 if (Transaksi != null)
                 {
@@ -959,7 +959,7 @@ public partial class Default : System.Web.UI.Page
 
     protected void ButtonPelanggan_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         DropDownListJenisTransaksi.SelectedValue = Transaksi.IDJenisTransaksi.ToString();
         MultiViewPelanggan.ActiveViewIndex = 0;
@@ -1000,7 +1000,7 @@ public partial class Default : System.Web.UI.Page
     }
     private void PengaturanPelanggan(int idPelanggan)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
         {
@@ -1146,7 +1146,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void DropDownListJenisTransaksi_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         Transaksi.IDJenisTransaksi = Parse.Int(DropDownListJenisTransaksi.SelectedValue);
 
@@ -1169,7 +1169,7 @@ public partial class Default : System.Web.UI.Page
     }
     private void PengaturanPrint()
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         #region PRINT
@@ -1378,7 +1378,7 @@ public partial class Default : System.Web.UI.Page
     protected void ButtonKeteranganTambahan_Click(object sender, EventArgs e)
     {
         //SIMPAN KETERANGAN DETAIL TRANSAKSI
-        Transaksi_Model transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (transaksi != null)
         {
@@ -1393,7 +1393,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonOrderTunai_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         if (Pengguna.PointOfSales == TipePointOfSales.Restaurant)
@@ -1413,7 +1413,7 @@ public partial class Default : System.Web.UI.Page
     protected void ButtonTambahKeterangan_Click(object sender, EventArgs e)
     {
         //MENAMBAHKAN KETERANGAN TRANSAKSI
-        Transaksi_Model transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (transaksi != null)
         {
@@ -1427,7 +1427,7 @@ public partial class Default : System.Web.UI.Page
     {
         try
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -1474,7 +1474,7 @@ public partial class Default : System.Web.UI.Page
     protected void ButtonTunai_Click(object sender, EventArgs e)
     {
         //DEFAULT JENIS PEMBAYARAN TUNAI
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
         {
@@ -1509,7 +1509,7 @@ public partial class Default : System.Web.UI.Page
     protected void ButtonConfirmPayment_Click(object sender, EventArgs e)
     {
         //DEFAULT JENIS PEMBAYARAN TUNAI
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
         {
@@ -1534,7 +1534,7 @@ public partial class Default : System.Web.UI.Page
     #region SPLIT PAYMENT
     private void LoadDataSplitPayment()
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         LabelSplitPaymentLebihKurang.Text = "";
         LiteralSplitPaymentWarning.Text = "";
@@ -1575,7 +1575,7 @@ public partial class Default : System.Web.UI.Page
     {
         if (Pengaturan.FormatAngkaInput(TextBoxSplitPaymentNominal.Text) > 0)
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -1594,7 +1594,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonSplitPaymentDeposit_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (Transaksi != null)
         {
@@ -1625,7 +1625,7 @@ public partial class Default : System.Web.UI.Page
     {
         if (e.CommandName == "Hapus")
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             if (Transaksi != null)
             {
@@ -1660,7 +1660,7 @@ public partial class Default : System.Web.UI.Page
     #region CONFIRM PEMBAYARAN
     protected void ButtonSplitPaymentBayar_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         //UANG YANG DIBAYAR SAMA DENGAN TAGIHAN
@@ -1674,7 +1674,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonBayarTunai_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         decimal Bayar = Pengaturan.FormatAngkaInput(TextBoxJumlahBayar);
@@ -1704,7 +1704,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonSimpanPembayaranLainnya_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         Transaksi.TambahPembayaran(DateTime.Now, Pengguna.IDPengguna, Parse.Int(HiddenFieldIDJenisPembayaran.Value), Transaksi.GrandTotal, TextBoxPembayaranLainnya.Text);
@@ -1712,7 +1712,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonPembayaranDeposit_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
         PenggunaLogin Pengguna = (PenggunaLogin)ViewState["PenggunaLogin"];
 
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
@@ -1738,7 +1738,7 @@ public partial class Default : System.Web.UI.Page
             }
         }
     }
-    private bool ConfirmPembayaran(Transaksi_Model Transaksi)
+    private bool ConfirmPembayaran(Transaksi_Class Transaksi)
     {
         try
         {
@@ -1788,7 +1788,7 @@ public partial class Default : System.Web.UI.Page
     #region CHECKBOX
     protected void CheckBoxBiayaTambahan1_CheckedChanged(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (CheckBoxBiayaTambahan1.Checked)
             Transaksi.EnumBiayaTambahan1 = EnumBiayaTambahan.Persentase;
@@ -1799,7 +1799,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void CheckBoxBiayaTambahan2_CheckedChanged(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         if (CheckBoxBiayaTambahan2.Checked)
             Transaksi.EnumBiayaTambahan2 = EnumBiayaTambahan.Persentase;
@@ -1837,7 +1837,7 @@ public partial class Default : System.Web.UI.Page
 
     protected void ButtonBiayaPengiriman_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         TextBoxBiayaPengiriman.Text = Pengaturan.FormatHarga(Transaksi.BiayaPengiriman);
 
@@ -1855,7 +1855,7 @@ public partial class Default : System.Web.UI.Page
     {
         if (!string.IsNullOrWhiteSpace(TextBoxZona.Text))
         {
-            Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+            Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
@@ -1877,7 +1877,7 @@ public partial class Default : System.Web.UI.Page
     }
     protected void ButtonSimpanBiayaPengiriman_Click(object sender, EventArgs e)
     {
-        Transaksi_Model Transaksi = (Transaksi_Model)ViewState["Transaksi"];
+        Transaksi_Class Transaksi = (Transaksi_Class)ViewState["Transaksi"];
 
         Transaksi.BiayaPengiriman = Parse.Decimal(TextBoxBiayaPengiriman.Text.Replace("%", "").Replace(".", "").Replace(",", "."));
         Transaksi.IDTempatPengirim = Parse.Int(DropDownListTempatPengirim.SelectedValue);

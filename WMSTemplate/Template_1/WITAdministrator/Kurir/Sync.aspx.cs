@@ -8,6 +8,8 @@ using System.IO;
 using AjaxControlToolkit;
 using System.Net;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
+using System.Text;
 
 public partial class WITAdministrator_Import_Produk : System.Web.UI.Page
 {
@@ -84,12 +86,37 @@ public partial class WITAdministrator_Import_Produk : System.Web.UI.Page
         //request.AddHeader("key", "878877515f833cae89c2a0990bb40273");
         //IRestResponse response = client.Execute(request);
 
-        string Key = "?key=878877515f833cae89c2a0990bb40273";
+        string Key = "?key=4fd02ed39a703a1d052da67aebdf8d2d";
 
-        string URLProvinsi = "https://api.rajaongkir.com/starter/province" + Key;
-        string URLKota = "https://api.rajaongkir.com/starter/city" + Key;
+        string URLProvinsi = "https://pro.rajaongkir.com/api/province" + Key;
+        string URLKota = "https://pro.rajaongkir.com/api/city" + Key;
+
+        //https://pro.rajaongkir.com/api/subdistrict?key=4fd02ed39a703a1d052da67aebdf8d2d&city=23
 
         Provinsi(URLProvinsi);
+        Kota(URLKota);
+
+        //using (WebClient webClient = new WebClient())
+        //{
+        //    var Values = new NameValueCollection();
+        //    Values["key"] = "878877515f833cae89c2a0990bb40273";
+        //    Values["origin"] = "79";
+        //    Values["destination"] = "23";
+        //    Values["weight"] = "1000";
+        //    Values["courier"] = "jne";
+
+        //    var Respose = webClient.UploadValues(new Uri("https://api.rajaongkir.com/starter/cost"), Values);
+
+        //    string Result = Encoding.Default.GetString(Respose);
+
+        //    //Response.Write(Result);
+
+        //    LiteralResult.Text = Result;
+
+        //    //var ResultJson = JsonConvert.DeserializeObject<Result_Product_Combination>(Result);
+
+        //    //Console.WriteLine(ResultJson.Message + " : " + ResultJson.Message_Detail);
+        //}
     }
 
     private void Provinsi(string URLProvinsi)
@@ -116,7 +143,7 @@ public partial class WITAdministrator_Import_Produk : System.Web.UI.Page
                     db.TBKurirProvinsis.InsertOnSubmit(new TBKurirProvinsi
                     {
                         IDKurirProvinsi = item.province_id,
-                        Nama = item.province,
+                        Nama = item.province.ToUpper(),
 
                         _IDPenggunaInsert = Pengguna.IDPengguna,
                         _IDPenggunaUpdate = Pengguna.IDPengguna,
@@ -133,7 +160,7 @@ public partial class WITAdministrator_Import_Produk : System.Web.UI.Page
                 else
                 {
                     //IDKurirProvinsi
-                    Data.Nama = item.province;
+                    Data.Nama = item.province.ToUpper();
                     //_IDPenggunaInsert
                     Data._IDPenggunaUpdate = Pengguna.IDPengguna;
                     //_IDTempatInsert
@@ -177,29 +204,32 @@ public partial class WITAdministrator_Import_Produk : System.Web.UI.Page
                         IDKurirKota = item.city_id,
                         IDKurirProvinsi = item.province_id,
                         KodePos = item.postal_code,
-                        Nama = item.city_name,
-                        Tipe = item.type,
+                        Nama = (item.type.Replace("Kabupaten", "Kab.") + " " + item.city_name).ToUpper(),
+                        Tipe = item.type.ToUpper(),
                         _IDPenggunaInsert = Pengguna.IDPengguna,
                         _IDPenggunaUpdate = Pengguna.IDPengguna,
                         _IDTempatInsert = Pengguna.IDTempat,
                         _IDTempatUpdate = Pengguna.IDTempat,
-                        //////_IDWMSKurirProvinsi =,
-                        //////_IDWMSStore =,
-                        //////_IsActive =,
-                        //////_TanggalInsert =,
-                        //////_TanggalUpdate =,
+                        _IDWMSKurirKota = Guid.NewGuid(),
+                        _IDWMSStore = Pengguna.IDWMSStore,
+                        _IsActive = true,
+                        _TanggalInsert = DateTime.Now,
+                        _TanggalUpdate = DateTime.Now,
                         _Urutan = 1
                     });
                 }
                 else
                 {
-                    //IDKurirProvinsi
-                    Data.Nama = item.province;
+                    //IDKurirKota
+                    Data.IDKurirProvinsi = item.province_id;
+                    Data.KodePos = item.postal_code;
+                    Data.Nama = (item.type.Replace("Kabupaten", "Kab.") + " " + item.city_name).ToUpper();
+                    Data.Tipe = item.type.ToUpper();
                     //_IDPenggunaInsert
                     Data._IDPenggunaUpdate = Pengguna.IDPengguna;
                     //_IDTempatInsert
                     Data._IDTempatUpdate = Pengguna.IDTempat;
-                    //_IDWMSKurirProvinsi
+                    //_IDWMSKurirKota
                     //_IDWMSStore
                     //_IsActive
                     //_TanggalInsert

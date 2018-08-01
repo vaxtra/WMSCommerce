@@ -160,7 +160,7 @@ public partial class WITPointOfSales_Wholesale_Transaksi : System.Web.UI.Page
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-            Transaksi_Model Transaksi = new Transaksi_Model(HiddenFieldIDTransaksi.Value, Pengguna.IDPengguna);
+            Transaksi_Class Transaksi = new Transaksi_Class(HiddenFieldIDTransaksi.Value, Pengguna.IDPengguna);
 
             Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
 

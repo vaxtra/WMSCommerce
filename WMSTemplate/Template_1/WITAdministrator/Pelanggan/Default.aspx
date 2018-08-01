@@ -35,12 +35,13 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabPelanggan" id="Pegawai-tab" class="nav-link active" data-toggle="tab">Pelanggan</a></li>
                         <li class="nav-item"><a href="#tabGrup" role="tab" id="Grup-tab" class="nav-link" data-toggle="tab">Grup</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="tabPelanggan">
                             <asp:UpdatePanel ID="UpdatePanelPelanggan" runat="server">

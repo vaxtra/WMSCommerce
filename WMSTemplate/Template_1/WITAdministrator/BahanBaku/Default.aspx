@@ -22,8 +22,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a href="/WITAdministrator/Import/BahanBaku.aspx" class="btn btn-secondary btn-const mr-1">Import</a>
-    <asp:Button ID="ButtonExport" runat="server" class="btn btn-secondary btn-const mr-1" Text="Export" OnClick="ButtonExport_Click" />
+    <a href="/WITAdministrator/Import/BahanBaku.aspx" class="btn btn-dark btn-const mr-1">Import</a>
+    <asp:Button ID="ButtonExport" runat="server" class="btn btn-dark btn-const mr-1" Text="Export" OnClick="ButtonExport_Click" />
     <h6 class="mr-1 mt-2"><a id="LinkDownload" runat="server" visible="false">Download File</a></h6>
     <a href="Pengaturan.aspx" class="btn btn-success btn-const">Tambah</a>
 </asp:Content>
@@ -41,14 +41,15 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabBahanBaku" id="BahanBaku-tab" class="nav-link active" data-toggle="tab">Bahan Baku</a></li>
                         <li class="nav-item"><a href="#tabSatuan" id="Satuan-tab" class="nav-link" data-toggle="tab">Satuan</a></li>
                         <li class="nav-item"><a href="#tabKategori" id="TidakKomposisi-tab" class="nav-link" data-toggle="tab">Kategori</a></li>
                         <li class="nav-item"><a href="#tabSupplier" id="Supplier-tab" class="nav-link" data-toggle="tab">Supplier</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="tabBahanBaku">
                             <asp:UpdatePanel ID="UpdatePanelBahanBaku" runat="server">

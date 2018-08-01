@@ -67,8 +67,6 @@ public partial class _Cart : System.Web.UI.Page
                     })
                     .ToArray();
                 RepeaterCart.DataBind();
-
-                var total = TransaksiECommerceDetail.Sum(item => item.Quantity * item.TBStokProduk.HargaJual).ToString();
             }
             else
                 MultiView1.ActiveViewIndex = 0;

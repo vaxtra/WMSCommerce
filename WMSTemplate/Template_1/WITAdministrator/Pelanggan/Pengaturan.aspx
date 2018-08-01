@@ -24,12 +24,13 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <ul id="myTab" class="nav nav-tabs">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabProfil" id="Profil-tab" class="nav-link active" data-toggle="tab">Profil</a></li>
                         <li class="nav-item"><a href="#tabLengkap" id="Lengkap-tab" class="nav-link" data-toggle="tab">Lengkap</a></li>
                     </ul>
-                    <br />
+                </div>
+                <div class="card-body">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane active" id="tabProfil">
                             <div class="row">

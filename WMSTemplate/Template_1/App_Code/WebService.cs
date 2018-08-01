@@ -1182,12 +1182,12 @@ public class WebService : System.Web.Services.WebService
 
                     var tempTransaksi = db.TBTransaksis.FirstOrDefault(item => item.IDTransaksi == ResultJson.Transaksi.idTransaksi);
 
-                    Transaksi_Model Transaksi;
+                    Transaksi_Class Transaksi;
 
                     if (tempTransaksi != null)
                     {
                         //UPDATE TRANSAKSI
-                        Transaksi = new Transaksi_Model(ResultJson.Transaksi.idTransaksi, ResultJson.Transaksi.idPenggunaTransaksi);
+                        Transaksi = new Transaksi_Class(ResultJson.Transaksi.idTransaksi, ResultJson.Transaksi.idPenggunaTransaksi);
 
                         //RESET TRANSAKSI
                         Transaksi.ResetTransaksiDetail();
@@ -1198,7 +1198,7 @@ public class WebService : System.Web.Services.WebService
                     else
                     {
                         //INSERT TRANSAKSI
-                        Transaksi = new Transaksi_Model(ResultJson.Transaksi.idPenggunaTransaksi, ResultJson.Transaksi.idTempat, DateTime.Parse(ResultJson.Transaksi.tanggalTransaksi));
+                        Transaksi = new Transaksi_Class(ResultJson.Transaksi.idPenggunaTransaksi, ResultJson.Transaksi.idTempat, DateTime.Parse(ResultJson.Transaksi.tanggalTransaksi));
                     }
 
                     Transaksi.IDJenisTransaksi = ResultJson.Transaksi.idJenisTransaksi;
@@ -2417,7 +2417,7 @@ public class WebService : System.Web.Services.WebService
 
                 var ResultJson = JsonConvert.DeserializeObject<Mobile.RootObject>(Data.Data);
 
-                Transaksi_Model Transaksi = new Transaksi_Model(1, 1, DateTime.Parse(ResultJson.Transaksi.tanggalTransaksi));
+                Transaksi_Class Transaksi = new Transaksi_Class(1, 1, DateTime.Parse(ResultJson.Transaksi.tanggalTransaksi));
 
                 foreach (var item in ResultJson.Transaksi.transaksiDetails)
                 {
