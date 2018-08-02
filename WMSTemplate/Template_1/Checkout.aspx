@@ -10,10 +10,10 @@
                     <div class="col-md-8">
                         <div id="sectional" class="checkout-page">
 
-                            <fieldset>
+                            <fieldset id="PanelPelanggan" runat="server">
                                 <legend>1. INFORMASI PELANGGAN</legend>
 
-                                <div class="form-section">
+                                <div class="form-section" id="FormPelanggan" runat="server">
                                     <div class="col2-set" id="customer_details">
                                         <div class="woocommerce-billing-fields">
                                             <div class="form-row form-row form-row-first col-md-12 nomargin">
@@ -38,18 +38,18 @@
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-first col-md-6">
-                                                <asp:DropDownList ID="DropDownListProvinsi" CssClass="input-text" runat="server">
+                                                <asp:DropDownList ID="DropDownListProvinsi" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProvinsi_SelectedIndexChanged">
                                                     <asp:ListItem Text="Irian Jaya"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-last col-md-6">
-                                                <asp:DropDownList ID="DropDownListKota" CssClass="input-text" runat="server">
+                                                <asp:DropDownList ID="DropDownListKota" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKota_SelectedIndexChanged">
                                                     <asp:ListItem Text="Port Akaba"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="form-row form-row form-row-wide col-md-6">
-                                                <asp:DropDownList ID="DropDownListKecamatan" CssClass="input-text" runat="server">
+                                                <asp:DropDownList ID="DropDownListKecamatan" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKecamatan_SelectedIndexChanged">
                                                     <asp:ListItem Text="Cimahi Selatan"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
@@ -67,59 +67,59 @@
 
                                     </div>
                                     <nav class="form-section-nav col-md-12">
-                                        <span class="button alt form-nav-next">Lanjut Ke Pengiriman</span>
+                                        
+                                            <span class="btn-std form-nav-next"><asp:Button ID="ButtonLanjutPengiriman" runat="server" Text="Lanjut ke pengiriman" OnClick="ButtonLanjutkanKePengiriman_Click" /></span>
                                     </nav>
                                 </div>
 
                             </fieldset>
 
 
-                            <fieldset>
+                            <fieldset id="PanelPengiriman" runat="server">
 
                                 <legend>2. DETAIL PENGIRIMAN</legend>
-                                <div class="form-section">
+                                <div class="form-section" id="FormPengiriman" runat="server">
                                     <div class="woocommerce-billing-fields">
                                         <h3>Alamat Pengiriman </h3>
                                         <p><asp:Literal ID="LiteralNamaLengkap" runat="server"></asp:Literal></p>
                                         <p><asp:Literal ID="LiteralAlamat" runat="server"></asp:Literal></p>
-                                        <p>Babah Rot, Kabupaten Aceh Barat Daya</p>
-                                        <p>Aceh <asp:Literal ID="LiteralKodePos" runat="server"></asp:Literal></p>
+                                        <p><asp:Literal ID="LiteralKecamatan" runat="server"></asp:Literal>, <asp:Literal ID="LiteralKota" runat="server"></asp:Literal></p>
+                                        <p><asp:Literal ID="LiteralProvinsi" runat="server"></asp:Literal> <asp:Literal ID="LiteralKodePos" runat="server"></asp:Literal></p>
+                                        <p><asp:Literal ID="LiteralNegara" runat="server"></asp:Literal></p>
                                         <p><asp:Literal ID="LiteralNomorTelepon" runat="server"></asp:Literal></p>
                                     </div>
                                     <div id="payment" class="woocommerce-checkout-payment">
                                         <h3>Pilih Jasa Pengiriman </h3>
+                                        <span class="warning-message"><asp:Literal ID="LiteralWarningPilihJasaPengiriman" runat="server"></asp:Literal></span>
                                         <ul class="wc_payment_methods payment_methods methods">
-                                            <li class="wc_payment_method payment_method_cheque" style="border: 1px solid #eee; padding: 10px;">
-                                                <input type="radio" class="input-radio" />
-                                                <img src="https://indoco.smasterapps.com/application/views/images/shipping/jnt.jpg" alt="logo" class="scroll-logo hidden-xs" />
-                                                <label for="payment_method_cheque">Regular Service </label>
-                                                <label for="payment_method_cheque" style="float: right;">Rp.250.000 </label>
-                                            </li>
-
+                                            <asp:RadioButtonList ID="RadioButtonListKurir" CssClass="wc_payment_methods payment_methods methods" runat="server" datas>
+                                            </asp:RadioButtonList>
                                         </ul>
 
                                     </div>
                                     <nav class="form-section-nav">
-                                        <span class="btn-secondary form-nav-prev">Kembali ke Alamat</span>
-                                        <span class="btn-std form-nav-next">Lanjut ke Pembayaran</span>
+                                        <span class="btn-secondary form-nav-prev"><asp:Button ID="ButtonKembaliKeInformasiPelanggan" runat="server" Text="Kembali ke Alamat" OnClick="ButtonKembaliKeInformasiPelanggan_Click" /></span>
+                                        <span class="btn-std form-nav-next"><asp:Button ID="ButtonLanjutPembayaran" runat="server" Text="Lanjut ke Pembayaran" OnClick="ButtonLanjutkanKePembayaran_Click" /></span>
                                     </nav>
 
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset id="PanelPembayaran" runat="server">
                                 <legend>3. METODDE PEMBAYARAN</legend>
-                                <div class="form-section">
+                                <div class="form-section" id="FormPembayaran" runat="server">
                                     <div class="col-2">
                                         <div class="woocommerce-checkout-payment">
                                             <p>Pilih Metode Pembayaran yang dikehendaki.</p>
-                                            <ul class="wc_payment_methods payment_methods methods">
+                                            <asp:RadioButtonList ID="RadioButtonListJenisPembayaran" runat="server">
+                                            </asp:RadioButtonList>
+                                            <%--<ul class="wc_payment_methods payment_methods methods">
                                                 <li class="wc_payment_method payment_method_cheque" style="border: 1px solid #eee; padding: 10px;">
                                                     <input type="radio" class="input-radio" />
                                                     <img src="https://indoco.smasterapps.com/application/views/images/shipping/jnt.jpg" alt="logo" class="scroll-logo hidden-xs" />
                                                     <label for="payment_method_cheque">Bank Transfer </label>
                                                 </li>
 
-                                            </ul>
+                                            </ul>--%>
                                         </div>
                                         <div class="woocommerce-shipping-fields">
                                             <h3>Additional Information</h3>
@@ -130,8 +130,8 @@
                                         </div>
                                     </div>
                                     <nav class="form-section-nav">
-                                        <span class="btn-secondary form-nav-prev">Kembali ke Pengiriman</span>
-                                        <span class="btn-std form-nav-next">Konfirmasi Pemesanan</span>
+                                        <span class="btn-secondary form-nav-prev"><asp:Button ID="ButtonKembaliKeDetailPengiriman" runat="server" Text="Kembali ke Pengiriman" OnClick="ButtonKembaliKeDetailPengiriman_Click" /></span>
+                                        <span class="btn-std form-nav-next"><asp:Button ID="ButtonProsesPemesanan" runat="server" Text="Konfirmasi Pemesanan" OnClick="ButtonProsesPemesanan_Click" /></span>
                                     </nav>
                                 </div>
                             </fieldset>
@@ -192,7 +192,7 @@
                             <div class='clearfix'></div>
                         </div>
                     </div>
-                    <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<%--                    <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding'>
                             <div class=' col-lg-6 col-md-6 col-sm-6 nopadding'>
                                 <p>Biaya Pengiriman</p>
@@ -209,7 +209,7 @@
                             <p style="float: right;">Rp. 1666.000</p>
                             <div class='clearfix'></div>
                         </div>
-                    </div>
+                    </div>--%>
                 </aside>
                 <!-- end .sidebar-->
             </div>
@@ -273,79 +273,79 @@
                 $(".panel-login").delay(400).fadeIn();
             });
 
-            $('#sectional').formalize({
-                timing: 300,
-                nextCallBack: function () {
-                    if (validateEmpty($('#sectional .open'))) {
-                        scrollToNewSection($('#sectional .open'));
-                        return true;
-                    };
-                    return false;
-                },
-                prevCallBack: function () {
-                    return scrollToNewSection($('#sectional .open').prev())
-                }
-            });
-            $('#global').formalize({
-                navType: 'global',
-                prevNav: '#global-nav-prev',
-                nextNav: '#global-nav-next',
-                timing: 300,
-                nextCallBack: function () {
-                    return validateEmpty($('#global .open'));
-                }
-            });
+            //$('#sectional').formalize({
+            //    timing: 300,
+            //    nextCallBack: function () {
+            //        if (validateEmpty($('#sectional .open'))) {
+            //            scrollToNewSection($('#sectional .open'));
+            //            return true;
+            //        };
+            //        return false;
+            //    },
+            //    prevCallBack: function () {
+            //        return scrollToNewSection($('#sectional .open').prev())
+            //    }
+            //});
+            //$('#global').formalize({
+            //    navType: 'global',
+            //    prevNav: '#global-nav-prev',
+            //    nextNav: '#global-nav-next',
+            //    timing: 300,
+            //    nextCallBack: function () {
+            //        return validateEmpty($('#global .open'));
+            //    }
+            //});
 
-            $('#btn-global').on('click', function () {
-                $('#btn-sectional').removeClass('disabled');
-                $(this).addClass('disabled');
-                $('#sectional').hide();
-                $('#global').show();
-            });
+            //$('#btn-global').on('click', function () {
+            //    $('#btn-sectional').removeClass('disabled');
+            //    $(this).addClass('disabled');
+            //    $('#sectional').hide();
+            //    $('#global').show();
+            //});
 
-            $('#btn-sectional').on('click', function () {
-                $('#btn-global').removeClass('disabled');
-                $(this).addClass('disabled');
-                $('#global').hide();
-                $('#sectional').show();
-            });
+            //$('#btn-sectional').on('click', function () {
+            //    $('#btn-global').removeClass('disabled');
+            //    $(this).addClass('disabled');
+            //    $('#global').hide();
+            //    $('#sectional').show();
+            //});
 
-            $('input').on('keyup change', function () {
-                $(this).closest($('.valid')).removeClass('valid');
-            });
+            //$('input').on('keyup change', function () {
+            //    $(this).closest($('.valid')).removeClass('valid');
+            //});
 
-            function validateEmpty(section) {
-                var errors = 0;
-                section.find($('.required-field')).each(function () {
-                    var $this = $(this),
-                        input = $this.find($('input'));
-                    if (input.val() === "") {
-                        errors++;
-                        $this.addClass('field-error');
-                        $this.append('\<div class="form-error-msg">This field is required!\</div>');
-                    }
-                });
-                if (errors > 0) {
-                    section.removeClass('valid');
-                    return false;
-                }
-                section.find($('.field-error')).each(function () {
-                    $(this).removeClass('field-error');
-                });
-                section.find($('.form-error-msg')).each(function () {
-                    $(this).remove();
-                });
-                section.addClass('valid');
-                return true;
-            }
+            //function validateEmpty(section) {
+            //    var errors = 0;
+            //    section.find($('.required-field')).each(function () {
+            //        var $this = $(this),
+            //            input = $this.find($('input'));
+            //        if (input.val() === "") {
+            //            errors++;
+            //            $this.addClass('field-error');
+            //            $this.append('\<div class="form-error-msg">This field is required!\</div>');
+            //        }
+            //    });
+            //    if (errors > 0) {
+            //        section.removeClass('valid');
+            //        return false;
+            //    }
+            //    section.find($('.field-error')).each(function () {
+            //        $(this).removeClass('field-error');
+            //    });
+            //    section.find($('.form-error-msg')).each(function () {
+            //        $(this).remove();
+            //    });
+            //    section.addClass('valid');
+            //    return true;
+            //}
 
-            function scrollToNewSection(section) {
-                var top = section.offset().top;
-                $("html, body").animate({
-                    scrollTop: top
-                }, '200');
-                return true;
-            }
+            //function scrollToNewSection(section) {
+            //    var top = section.offset().top;
+            //    $("html, body").animate({
+            //        scrollTop: top
+            //    }, '200');
+            //    return true;
+            //}
         });
     </script>
 </asp:Content>

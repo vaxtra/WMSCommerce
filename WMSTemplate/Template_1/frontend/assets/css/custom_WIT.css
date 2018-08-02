@@ -207,6 +207,15 @@ ul.wc_payment_methods {
 {
     float:right;
 }
+.warning-message
+{
+    font-size:16px;
+    color:red;
+}
+.wc_payment_methods
+{
+    width:100%;
+}
 @media (min-width:992px) {
     .main-slider__label {
         margin-top: 170px;

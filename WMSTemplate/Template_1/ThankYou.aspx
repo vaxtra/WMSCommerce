@@ -22,29 +22,32 @@
                                 <div class='text-center'>
 
                                     <h2>Terimakasih Atas Pemesanan Anda!</h2>
-                                    <p>Email konfirmasi telah dikirim ke alamat email <strong>ganajr@gmail.com</strong></p>
-                                    <p>Nomor order anda adalah:#<strong>1018</strong></p>
+                                    <p>Email konfirmasi telah dikirim ke alamat email <strong>
+                                        <asp:Literal ID="LiteralEmail" runat="server"></asp:Literal></strong></p>
+                                    <p>Nomor order anda adalah:#<strong><asp:Literal ID="LiteralIDTransaksi" runat="server"></asp:Literal></strong></p>
                                 </div>
                                 <hr />
                                 <div class='col-lg-12 col-md-12 col-sm-12 information'>
                                     <div class='col-lg-6 col-md-6 col-sm-6 '>
                                         <h3>Alamat Pengiriman</h3>
-                                        Ganjar Rizkiawan,
+                                        <asp:Literal ID="LiteralNamaLengkap" runat="server"></asp:Literal>,
 								<br />
-                                        Jl Triwuasan,								Langsa Kota,							
+                                        <asp:Literal ID="LiteralAlamat" runat="server"></asp:Literal>,
+                                        <asp:Literal ID="LiteralKecamatan" runat="server"></asp:Literal>,							
                                         <br />
-                                        Kota Langsa,
+                                        <asp:Literal ID="LiteralKota" runat="server"></asp:Literal>,
 								<br />
-                                        Aceh 42054,
+                                        <asp:Literal ID="LiteralProvinsi" runat="server"></asp:Literal>
+                                        <asp:Literal ID="LiteralKodePos" runat="server"></asp:Literal>,
 								<br />
-                                        Indonesia
+                                        <asp:Literal ID="LiteralNegara" runat="server"></asp:Literal>
                                     </div>
                                     <div class='col-lg-6 col-md-6 col-sm-6 '>
                                         <h3>Informasi Pembayaran</h3>
                                         <p>Metode Pembayaran: <strong>Bank Transfer</strong></p>
                                         <p>
-                                            Status Pembayaran:
-																<strong>pending</strong>
+                                            Status Pembayaran: <strong>
+                                                <asp:Literal ID="LiteralStatusPembayaran" runat="server"></asp:Literal></strong>
                                         </p>
 
                                     </div>
@@ -89,46 +92,31 @@
         <div class="col-md-4">
             <aside class="l-sidebar">
                 <h3>Detail Pemesanan</h3>
-                <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
-                        <div class=' col-lg-4 col-md-4 col-sm-4'>
-                            <img src='//cdn.shopify.com/s/files/1/0072/3071/8067/products/8d7f3decefd2e286d8da7c9d544b3974_small.jpg?v=1529817727' alt='Claudia - Putih / 37' class="img-responsive" />
+                <asp:ListView ID="ListViewDetailTransaksi" runat="server">
+                    <ItemTemplate>
+                        <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
+                                <div class=' col-lg-4 col-md-4 col-sm-4'>
+                                    <img src='<%# Eval("Foto") %>' alt='<%# Eval("Nama") %>' class="img-responsive" />
+                                </div>
+                                <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
+                                    <p><a href='#'><%# Eval("Quantity") %> x <%# Eval("Nama") %></a></p>
+                                </div>
+                                <div class='clearfix'></div>
+                            </div>
+                            <div class='col-lg-4 col-md-4 col-sm-4 ws-value'>
+                                <p class='text-right'><small><%# Eval("Total").ToFormatHarga() %></small></p>
+                            </div>
                         </div>
-                        <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
-                            <p><a href='#'>1 x Claudia</a></p>
-                            <ol class='breadcrumb'>
-                                <li>Putih / 37</li>
-                            </ol>
-                        </div>
-                        <div class='clearfix'></div>
-                    </div>
-                    <div class='col-lg-4 col-md-4 col-sm-4 ws-value'>
-                        <p class='text-right'><small>Rp 99.000,00</small></p>
-                    </div>
-                </div>
-                <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class='col-lg-8 col-md-8 col-sm-8 col-xs-8'>
-                        <div class=' col-lg-4 col-md-4 col-sm-4'>
-                            <img src='//cdn.shopify.com/s/files/1/0072/3071/8067/products/8d7f3decefd2e286d8da7c9d544b3974_small.jpg?v=1529817727' alt='Claudia - Putih / 37' class="img-responsive" />
-                        </div>
-                        <div class=' col-lg-8 col-md-8 col-sm-8' id="item-detail">
-                            <p><a href='#'>1 x Claudia</a></p>
-                            <ol class='breadcrumb'>
-                                <li>Putih / 37</li>
-                            </ol>
-                        </div>
-                        <div class='clearfix'></div>
-                    </div>
-                    <div class='col-lg-4 col-md-4 col-sm-4 ws-value'>
-                        <p class='text-right'><small>Rp 99.000,00</small></p>
-                    </div>
-                </div>
+                    </ItemTemplate>
+                </asp:ListView>
+
                 <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                         <div class=' col-lg-6 col-md-6 col-sm-6'>
                             <p>Subtotal</p>
                         </div>
-                        <p style="float: right;">Rp. 666.000</p>
+                        <p style="float: right;"><asp:Literal ID="LiteralTotal" runat="server"></asp:Literal></p>
                         <div class='clearfix'></div>
                     </div>
                 </div>
@@ -137,7 +125,7 @@
                         <div class=' col-lg-6 col-md-6 col-sm-6'>
                             <p>Biaya Pengiriman</p>
                         </div>
-                        <p style="float: right;">Rp. 1666.000</p>
+                        <p style="float: right;"><asp:Literal ID="LiteralBiayaPengiriman" runat="server"></asp:Literal></p>
                         <div class='clearfix'></div>
                     </div>
                 </div>
@@ -146,7 +134,7 @@
                         <div class=' col-lg-6 col-md-6 col-sm-6'>
                             <b>TOTAL</b>
                         </div>
-                        <p style="float: right;">Rp. 1666.000</p>
+                        <p style="float: right;"><asp:Literal ID="LiteralSubotal" runat="server"></asp:Literal></p>
                         <div class='clearfix'></div>
                     </div>
                 </div>

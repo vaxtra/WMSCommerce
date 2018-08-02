@@ -21,7 +21,7 @@ using System.Reflection;
 
 
 
-[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DB13346_WMSCommerce")]
+[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DBWITEnterpriseSystem")]
 public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataContext
 {
 	
@@ -563,7 +563,7 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   #endregion
 	
 	public DataClassesDatabaseDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DB13346_WMSCommerceConnectionString1"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DBWITEnterpriseSystemConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
