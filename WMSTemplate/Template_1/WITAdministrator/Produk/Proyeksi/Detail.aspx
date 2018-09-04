@@ -19,32 +19,31 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="card">
-        <div class="card-header">
-            <ul id="myTab" class="nav nav-tabs card-header-tabs">
-                <li class="nav-item"><a href="#tabBahanBaku" id="Data-tab" class="nav-link active font-weight-normal" data-toggle="tab">Data</a></li>
-                <li class="nav-item"><a href="#tabPOProduksiBahanBaku" id="BahanBaku-tab" class="nav-link font-weight-normal" data-toggle="tab">Bahan Baku</a></li>
-                <li class="nav-item"><a href="#tabPOProduksiProduk" id="Produk-tab" class="nav-link font-weight-normal" data-toggle="tab">Produk</a></li>
+        <div class="card-header bg-smoke">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item"><a href="#tabBahanBaku" id="Data-tab" class="nav-link active" data-toggle="tab">Data</a></li>
+                <li class="nav-item"><a href="#tabPOProduksiBahanBaku" id="BahanBaku-tab" class="nav-link" data-toggle="tab">Bahan Baku</a></li>
+                <li class="nav-item"><a href="#tabPOProduksiProduk" id="Produk-tab" class="nav-link" data-toggle="tab">Produk</a></li>
             </ul>
         </div>
         <div class="card-body">
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active" id="tabBahanBaku">
-                    <h3 class="border-bottom">PIC</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">Pegawai</label>
+                                    <label class="form-label bold text-muted">Pegawai</label>
                                     <asp:TextBox ID="TextBoxPegawai" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label class="form-label bold">Tanggal Proyeksi</label>
+                                            <label class="form-label bold text-muted">Tanggal Proyeksi</label>
                                             <asp:TextBox ID="TextBoxTanggalProyeksi" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label bold">Tanggal Target</label>
+                                            <label class="form-label bold text-muted">Tanggal Target</label>
                                             <asp:TextBox ID="TextBoxTanggalTarget" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                         </div>
                                     </div>
@@ -52,17 +51,16 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
                                     <tr class="thead-light">
                                         <th colspan="7" style="vertical-align: middle;">
-                                            <label class="form-label bold">Produk</label>
+                                            <label class="form-label bold text-muted">Produk</label>
                                         </th>
                                         <th class="dropdown fitSize">
-                                            <a id="ButtonProduk" runat="server" class="btn btn-primary btn-block dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proses</a>
+                                            <a id="ButtonProduk" runat="server" class="btn btn-success btn-block dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proses</a>
                                             <div class="dropdown-menu" aria-labelledby="ButtonProduk">
                                                 <asp:LinkButton ID="LinkButtonPurchase" runat="server" class="dropdown-item py-0" CommandName="purchase" OnClick="LinkButtonPurchase_Click">PURCHASE ORDER</asp:LinkButton>
                                                 <asp:LinkButton ID="LinkButtonProduksi" runat="server" class="dropdown-item py-0" CommandName="produksi" OnClick="LinkButtonProduksi_Click">IN-HOUSE PRODUCTION</asp:LinkButton>
@@ -110,10 +108,10 @@
                                             <thead>
                                                 <tr class="table-warning">
                                                     <th colspan="4" style="vertical-align: middle;">
-                                                        <label class="form-label bold">Bahan Baku Dasar</label>
+                                                        <label class="form-label bold text-muted">Bahan Baku Dasar</label>
                                                     </th>
                                                     <th>
-                                                        <asp:LinkButton ID="LinkButtonPurchaseOrder" runat="server" class="btn btn-primary btn-block" OnClick="LinkButtonPurchaseOrder_Click">PURCHASE</asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButtonPurchaseOrder" runat="server" class="btn btn-success btn-block" OnClick="LinkButtonPurchaseOrder_Click">PURCHASE</asp:LinkButton>
                                                 </tr>
                                                 <tr class="thead-light">
                                                     <th class="text-center">No</th>
@@ -147,9 +145,9 @@
                                                     <thead>
                                                         <tr class="table-warning">
                                                             <th colspan="4" style="vertical-align: middle">
-                                                                <asp:Label ID="LabelLevelBahanBaku" runat="server" class="form-label bold" Text='<%# "Produksi Bahan Baku Level " + Eval("LevelProduksi") %>'></asp:Label></th>
+                                                                <asp:Label ID="LabelLevelBahanBaku" runat="server" class="form-label bold text-muted" Text='<%# "Produksi Bahan Baku Level " + Eval("LevelProduksi") %>'></asp:Label></th>
                                                             <th class="dropdown">
-                                                                <a id="ButtonProduksi" runat="server" class="btn btn-primary btn-block dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PROSES</a>
+                                                                <a id="ButtonProduksi" runat="server" class="btn btn-success btn-block dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PROSES</a>
                                                                 <div class="dropdown-menu" aria-labelledby="ButtonProduksi">
                                                                     <asp:LinkButton ID="LinkButtonProduksi" runat="server" class="dropdown-item py-0" CommandArgument='<%# Eval("LevelProduksi") %>' CommandName="produksi">IN-HOUSE PRODUCTION</asp:LinkButton>
                                                                     <asp:LinkButton ID="LinkButtonSupplier" runat="server" class="dropdown-item py-0" CommandArgument='<%# Eval("LevelProduksi") %>' CommandName="supplier">PROUCTION TO SUPPLIER</asp:LinkButton>
@@ -186,13 +184,13 @@
                         </div>
                     </asp:Panel>
                     <div class="form-group">
-                        <label class="form-label bold">Keterangan</label>
+                        <label class="form-label bold text-muted">Keterangan</label>
                         <asp:TextBox ID="TextBoxKeterangan" CssClass="form-control input-sm" runat="server" TextMode="MultiLine" Enabled="false"></asp:TextBox>
                     </div>
                 </div>
                 <div class="tab-pane" id="tabPOProduksiBahanBaku">
                     <div class="form-group">
-                        <label class="form-label bold">Produksi Bahan Baku</label>
+                        <label class="form-label bold text-muted">Produksi Bahan Baku</label>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -225,7 +223,7 @@
                 </div>
                 <div class="tab-pane" id="tabPOProduksiProduk">
                     <div class="form-group">
-                        <label class="form-label bold">Produksi Produk</label>
+                        <label class="form-label bold text-muted">Produksi Produk</label>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>

@@ -41,6 +41,4 @@ public class StokProduk_Model
 
     public decimal Berat { get; set; }
     public string Keterangan { get; set; }
-
-    public TBStokProduk StokProduk { get; set; }
 }

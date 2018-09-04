@@ -516,7 +516,7 @@ public partial class WITAdministrator_Produk_Transfer_Kirim_Pengaturan : System.
                     TransferProduk_Class TransferProduk = new TransferProduk_Class();
                     TransferProduk.GenerateFile(DataTransferProduk);
 
-                    Response.Redirect("Detail.aspx?id=" + DataTransferProduk.IDTransferProduk, false);
+                    Response.Redirect("/WITAdministrator/Produk/Transfer/Detail.aspx?id=" + DataTransferProduk.IDTransferProduk, false);
                 }
             }
         }

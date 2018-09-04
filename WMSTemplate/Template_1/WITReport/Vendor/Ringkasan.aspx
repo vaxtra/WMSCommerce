@@ -30,39 +30,49 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                         <div class="form-inline">
-                            <div class="btn-group" style="margin: 5px 5px 0 0">
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHari" runat="server" Text="Hari Ini" OnClick="ButtonHari_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMinggu" runat="server" Text="Minggu Ini" OnClick="ButtonMinggu_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulan" runat="server" Text="Bulan Ini" OnClick="ButtonBulan_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahun" runat="server" Text="Tahun Ini" OnClick="ButtonTahun_Click" />
+                            <div class="form-group mr-1 mb-1">
+                                <a id="ButtonPeriodeTanggal" runat="server" class="btn btn-light btn-const dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Periode</a>
+                                <div class="dropdown-menu p-1">
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonHari" runat="server" Text="Hari Ini" Width="115px" OnClick="ButtonHari_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonMinggu" runat="server" Text="Minggu Ini" Width="115px" OnClick="ButtonMinggu_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonBulan" runat="server" Text="Bulan Ini" Width="115px" OnClick="ButtonBulan_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonTahun" runat="server" Text="Tahun Ini" Width="115px" OnClick="ButtonTahun_Click" />
+                                    <hr class="my-1" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" Width="115px" OnClick="ButtonHariSebelumnya_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" Width="115px" OnClick="ButtonMingguSebelumnya_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" Width="115px" OnClick="ButtonBulanSebelumnya_Click" />
+                                    <asp:Button CssClass="btn btn-outline-light border" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" Width="115px" OnClick="ButtonTahunSebelumnya_Click" />
+                                </div>
                             </div>
-                            <div class="btn-group" style="margin: 5px 5px 0 0">
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" OnClick="ButtonHariSebelumnya_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" OnClick="ButtonMingguSebelumnya_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" OnClick="ButtonBulanSebelumnya_Click" />
-                                <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" OnClick="ButtonTahunSebelumnya_Click" />
+                            <div class="form-group mr-1 mb-1">
+                                <asp:TextBox ID="TextBoxTanggalAwal" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
                             </div>
-                            <div style="margin: 5px 5px 0 0" class="form-group">
-                                <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAwal" runat="server"></asp:TextBox>
-                                <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAkhir" runat="server"></asp:TextBox>
-                                <asp:Button CssClass="btn btn-primary btn-sm" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
+                            <div class="form-group mr-1 mb-1">
+                                <asp:TextBox ID="TextBoxTanggalAkhir" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="form-group mb-1">
+                                <asp:Button CssClass="btn btn-light btn-const" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" style="font-weight: bold;">
-                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2" runat="server" Width="100%" Style="font-weight: bold;" AutoPostBack="true" OnSelectedIndexChanged="ButtonCariTanggal_Click"></asp:DropDownList>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <asp:DropDownList ID="DropDownListTempat" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ButtonCariTanggal_Click"></asp:DropDownList>
+                            </div>
+                        </div>
                     </div>
+                    <h4 class="text-uppercase mb-3">
+                        <asp:Label ID="LabelPeriode" runat="server"></asp:Label></h4>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="panel panel-success">
-                                    <div class="panel-heading">
-                                        <asp:Label ID="LabelPeriode" runat="server"></asp:Label>
-                                    </div>
+                                <div class="card">
+                                    <h5 class="card-header bg-gradient-green">PROGRESS</h5>
                                     <div class="table-responsive">
-                                        <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
+                                        <table class="table table-sm table-hover table-bordered">
                                             <thead>
-                                                <tr class="active">
+                                                <tr class="thead-light">
                                                     <th rowspan="2">No.</th>
                                                     <th rowspan="2">Jenis</th>
                                                     <th colspan="2">Baru</th>
@@ -71,7 +81,7 @@
                                                     <th colspan="2">Total</th>
                                                     <th rowspan="2">Progress</th>
                                                 </tr>
-                                                <tr class="active">
+                                                <tr class="thead-light">
                                                     <th>PO</th>
                                                     <th>Grandtotal</th>
                                                     <th>PO</th>
@@ -89,13 +99,13 @@
                                                             <td class="fitSize text-center"><%# Container.ItemIndex + 1 %></td>
                                                             <td class="fitSize"><%# Eval("JenisPO") %></td>
                                                             <td class="fitSize text-right"><strong><%# Eval("Baru").ToFormatHargaBulat() %></strong></td>
-                                                            <td class="fitSize text-right"><strong><%# Eval("GrandtotalBaru").ToFormatHarga() %></strong></td>
-                                                            <td class="fitSize warning text-right"><strong><%# Eval("Proses").ToFormatHargaBulat() %></strong></td>
-                                                            <td class="fitSize warning text-right"><strong><%# Eval("GrandtotalProses").ToFormatHarga() %></strong></td>
-                                                            <td class="fitSize info text-right"><strong><%# Eval("Selesai").ToFormatHargaBulat() %></strong></td>
-                                                            <td class="fitSize info text-right"><strong><%# Eval("GrandtotalSelesai").ToFormatHarga() %></strong></td>
-                                                            <td class="fitSize success text-right"><strong><%# Eval("Total").ToFormatHargaBulat() %></strong></td>
-                                                            <td class="fitSize success text-right"><strong><%# Eval("GrandtotalTotal").ToFormatHarga() %></strong></td>
+                                                            <td class="fitSize table-warning text-right"><strong><%# Eval("GrandtotalBaru").ToFormatHarga() %></strong></td>
+                                                            <td class="fitSize text-right"><strong><%# Eval("Proses").ToFormatHargaBulat() %></strong></td>
+                                                            <td class="fitSize table-warning text-right"><strong><%# Eval("GrandtotalProses").ToFormatHarga() %></strong></td>
+                                                            <td class="fitSize text-right"><strong><%# Eval("Selesai").ToFormatHargaBulat() %></strong></td>
+                                                            <td class="fitSize table-warning text-right"><strong><%# Eval("GrandtotalSelesai").ToFormatHarga() %></strong></td>
+                                                            <td class="fitSize text-right"><strong><%# Eval("Total").ToFormatHargaBulat() %></strong></td>
+                                                            <td class="fitSize table-warning text-right"><strong><%# Eval("GrandtotalTotal").ToFormatHarga() %></strong></td>
                                                             <td>
                                                                 <div class="progress" style="margin: 0px;">
                                                                     <%# Eval("Progress") %>
@@ -106,7 +116,7 @@
                                                 </asp:Repeater>
                                             </tbody>
                                             <tfoot>
-                                                <tr class="success text-right" style="font-weight: bold;">
+                                                <tr class="table-success text-right" style="font-weight: bold;">
                                                     <td colspan="2"></td>
                                                     <td>
                                                         <asp:Label ID="LabelBaru" runat="server" Text="0"></asp:Label></td>
@@ -131,11 +141,15 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading"><strong>Summary</strong></div>
+                                        <div class="card">
+                                            <h5 class="card-header bg-gradient-blue">SUMMARY</h5>
                                             <div class="table-responsive">
                                                 <table class="table table-condensed table-hover" style="font-size: 12px; font-weight: bold;">
                                                     <tr class="active">
@@ -206,8 +220,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading"><strong>Kategori</strong></div>
+                                        <div class="card">
+                                            <h5 class="card-header bg-gradient-blue">KATEGORI</h5>
                                             <div class="table-responsive">
                                                 <table class="table table-condensed table-hover" style="font-size: 12px;">
                                                     <thead>
@@ -234,165 +248,168 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading"><strong>Penerimaan</strong></div>
-                                            <div class="table-responsive">
-                                                <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
-                                                    <thead>
-                                                        <tr class="active">
-                                                            <th>No.</th>
-                                                            <th>Brand</th>
-                                                            <%--<th>Produk</th>--%>
-                                                            <%--<th>Varian</th>--%>
-                                                            <th>Kategori</th>
-                                                            <th>Terima</th>
-                                                            <th>Subtotal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <asp:Repeater ID="RepeaterPenerimaan" runat="server">
-                                                            <ItemTemplate>
-                                                                <tr>
-                                                                    <td class="fitSize text-center"><%# Container.ItemIndex + 1 %></td>
-                                                                    <td class="fitSize"><%# Eval("PemilikProduk") %></td>
-                                                                    <%--<td><%# Eval("Produk") %></td>--%>
-                                                                    <%--<td class="fitSize text-center"><%# Eval("AtributProduk") %></td>--%>
-                                                                    <td><%# Eval("Kategori") %></td>
-                                                                    <td class="fitSize text-right"><%# Eval("Diterima") %></td>
-                                                                    <td class="fitSize warning text-right"><strong><%# Eval("Subtotal") %></strong></td>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <h5 class="card-header bg-gradient-red">JATUH TEMPO</h5>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <asp:DropDownList ID="DropDownListJatuhTempo" CssClass="select2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListJatuhTempo_SelectedIndexChanged">
+                                                <asp:ListItem Text="-Semua-" Value="0" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="Purchase Order" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="Production To Vendor" Value="3"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item"><a class="nav-link active" id="satu-tab" data-toggle="tab" href="#tabSatu">0 Hari</a></li>
+                                                <li class="nav-item"><a class="nav-link" id="dua-tab" data-toggle="tab" href="#tabDua">
+                                                    <asp:Label ID="LabelPanelSetengahJatuhTempo" runat="server" Text="Label"></asp:Label></a></li>
+                                                <li class="nav-item"><a class="nav-link" id="tiga-tab" data-toggle="tab" href="#tabTiga">
+                                                    <asp:Label ID="LabelPanelJatuhTempo" runat="server" Text="Label"></asp:Label></a></li>
+                                            </ul>
+                                            <br />
+                                            <div id="myTabContent" class="tab-content">
+                                                <div class="tab-pane active" id="tabSatu">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-hover table-bordered">
+                                                            <thead>
+                                                                <tr class="thead-light">
+                                                                    <th>No</th>
+                                                                    <th>ID</th>
+                                                                    <th>Pegawai</th>
+                                                                    <th>Supplier</th>
+                                                                    <th>Tanggal</th>
+                                                                    <th>Jatuh Tempo</th>
+                                                                    <th>Jarak</th>
                                                                 </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </tbody>
-                                                </table>
+                                                            </thead>
+                                                            <tbody>
+                                                                <asp:Repeater ID="RepeaterPOProdukJatuhTempoSatu" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <tr class='<%# Eval("ClassWarna") %>'>
+                                                                            <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                            <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
+                                                                            <td><%# Eval("Pengguna") %></td>
+                                                                            <td><%# Eval("Nama") %></td>
+                                                                            <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
+                                                                            <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
+                                                                            <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tabDua">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-hover table-bordered">
+                                                            <thead>
+                                                                <tr class="thead-light">
+                                                                    <th>No</th>
+                                                                    <th>ID</th>
+                                                                    <th>Pegawai</th>
+                                                                    <th>Supplier</th>
+                                                                    <th>Tanggal</th>
+                                                                    <th>Jatuh Tempo</th>
+                                                                    <th>Jarak</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <asp:Repeater ID="RepeaterPOProdukJatuhTempoDua" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <tr class='<%# Eval("ClassWarna") %>'>
+                                                                            <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                            <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
+                                                                            <td><%# Eval("Pengguna") %></td>
+                                                                            <td><%# Eval("Nama") %></td>
+                                                                            <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
+                                                                            <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
+                                                                            <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tabTiga">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-hover table-bordered">
+                                                            <thead>
+                                                                <tr class="thead-light">
+                                                                    <th>No</th>
+                                                                    <th>ID</th>
+                                                                    <th>Pegawai</th>
+                                                                    <th>Supplier</th>
+                                                                    <th>Tanggal</th>
+                                                                    <th>Jatuh Tempo</th>
+                                                                    <th>Jarak</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <asp:Repeater ID="RepeaterPOProdukJatuhTempoTiga" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <tr class='<%# Eval("ClassWarna") %>'>
+                                                                            <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                            <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
+                                                                            <td><%# Eval("Pengguna") %></td>
+                                                                            <td><%# Eval("Nama") %></td>
+                                                                            <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
+                                                                            <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
+                                                                            <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-6">
-                                <div class="panel panel-danger">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <strong>Jatuh Tempo</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body" style="padding: 0px;">
-                                        <ul id="myTab" class="nav nav-tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#tabSatu" id="satu-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">0 Hari</a></li>
-                                            <li role="presentation"><a href="#tabDua" role="tab" id="dua-tab" data-toggle="tab" aria-controls="profile">
-                                                <asp:Label ID="LabelPanelSetengahJatuhTempo" runat="server" Text="Label"></asp:Label></a></li>
-                                            <li role="presentation"><a href="#tabTiga" role="tab" id="tiga-tab" data-toggle="tab" aria-controls="profile">
-                                                <asp:Label ID="LabelPanelJatuhTempo" runat="server" Text="Label"></asp:Label></a></li>
-                                            <li class="pull-right" style="font-weight: bold;">
-                                                <asp:DropDownList ID="DropDownListJatuhTempo" CssClass="select2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListJatuhTempo_SelectedIndexChanged">
-                                                    <asp:ListItem Text="-Semua-" Value="0" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Purchase Order" Value="1"></asp:ListItem>
-                                                    <asp:ListItem Text="Production To Vendor" Value="3"></asp:ListItem>
-                                                </asp:DropDownList></li>
-                                        </ul>
-                                        <br />
-                                        <div id="myTabContent" class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="tabSatu" aria-labelledby="satu-tab">
-                                                <div class="table-responsive">
-                                                    <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
-                                                        <thead>
-                                                            <tr class="active">
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Supplier</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Jatuh Tempo</th>
-                                                                <th>Jarak</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterPOProdukJatuhTempoSatu" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr class='<%# Eval("ClassWarna") %>'>
-                                                                        <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
-                                                                        <td><%# Eval("Pengguna") %></td>
-                                                                        <td><%# Eval("Nama") %></td>
-                                                                        <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
-                                                                        <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
-                                                                        <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="tabDua" aria-labelledby="dua-tab">
-                                                <div class="table-responsive">
-                                                    <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
-                                                        <thead>
-                                                            <tr class="active">
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Supplier</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Jatuh Tempo</th>
-                                                                <th>Jarak</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterPOProdukJatuhTempoDua" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr class='<%# Eval("ClassWarna") %>'>
-                                                                        <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
-                                                                        <td><%# Eval("Pengguna") %></td>
-                                                                        <td><%# Eval("Nama") %></td>
-                                                                        <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
-                                                                        <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
-                                                                        <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="tabTiga" aria-labelledby="tiga-tab">
-                                                <div class="table-responsive">
-                                                    <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
-                                                        <thead>
-                                                            <tr class="active">
-                                                                <th>No</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Supplier</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Jatuh Tempo</th>
-                                                                <th>Jarak</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterPOProdukJatuhTempoTiga" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr class='<%# Eval("ClassWarna") %>'>
-                                                                        <td class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><%# Eval("IDPOProduksiProduk") %></td>
-                                                                        <td><%# Eval("Pengguna") %></td>
-                                                                        <td><%# Eval("Nama") %></td>
-                                                                        <td><%# Eval("Tanggal").ToFormatTanggal() %></td>
-                                                                        <td><%# Eval("TanggalJatuhTempo").ToFormatTanggal() %></td>
-                                                                        <td class="text-right fitSize"><strong><%# Eval("Jarak").ToFormatHargaBulat() + " Hari" %></strong></td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="card">
+                                    <h5 class="card-header bg-gradient-blue">PENRIMAAN</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
+                                            <thead>
+                                                <tr class="active">
+                                                    <th>No.</th>
+                                                    <th>Brand</th>
+                                                    <%--<th>Produk</th>--%>
+                                                    <%--<th>Varian</th>--%>
+                                                    <th>Kategori</th>
+                                                    <th>Terima</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="RepeaterPenerimaan" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="fitSize text-center"><%# Container.ItemIndex + 1 %></td>
+                                                            <td class="fitSize"><%# Eval("PemilikProduk") %></td>
+                                                            <%--<td><%# Eval("Produk") %></td>--%>
+                                                            <%--<td class="fitSize text-center"><%# Eval("AtributProduk") %></td>--%>
+                                                            <td><%# Eval("Kategori") %></td>
+                                                            <td class="fitSize text-right"><%# Eval("Diterima") %></td>
+                                                            <td class="fitSize warning text-right"><strong><%# Eval("Subtotal") %></strong></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

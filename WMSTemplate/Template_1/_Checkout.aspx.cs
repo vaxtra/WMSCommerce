@@ -17,6 +17,9 @@ public partial class _Checkout : System.Web.UI.Page
         {
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
+                //VALIDASI STOK PRODUK
+                ValidasiStokProdukTransaksi(db);
+
                 //PROVINSI
                 DropDownListProvinsi.DataSource = db.TBKurirProvinsis.OrderBy(item => item.Nama).ToArray();
                 DropDownListProvinsi.DataValueField = "IDKurirProvinsi";
@@ -65,17 +68,17 @@ public partial class _Checkout : System.Web.UI.Page
                         RepeaterCart.DataBind();
                     }
                     else
-                        Response.Redirect("Cart.aspx");
+                        Response.Redirect("_Cart.aspx");
                 }
                 else
-                    Response.Redirect("Cart.aspx");
+                    Response.Redirect("_Cart.aspx");
             }
         }
     }
 
     protected void ButtonKembaliKeKeranjangBelanja_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Cart.aspx");
+        Response.Redirect("_Cart.aspx");
     }
 
     protected void ButtonLanjutkanKePengiriman_Click(object sender, EventArgs e)
@@ -256,6 +259,22 @@ public partial class _Checkout : System.Web.UI.Page
 
     }
 
+    public void ValidasiStokProdukTransaksi(DataClassesDatabaseDataContext db)
+    {
+        PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
+
+        //MENCARI TRANSAKSI SESSION
+        var TransaksiECommerce = db.TBTransaksiECommerces
+            .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
+
+        StokProduk_Class ClassStokProduk = new StokProduk_Class(db);
+
+        var Result = ClassStokProduk.ValidasiStokProdukTransaksi(TransaksiECommerce.TBTransaksiECommerceDetails.ToArray());
+
+        if (Result.Count > 0)
+            Response.Redirect("_Cart.aspx");
+    }
+
     protected void ButtonProsesPemesanan_Click(object sender, EventArgs e)
     {
         if (RadioButtonListJenisPembayaran.SelectedValue == "")
@@ -268,6 +287,9 @@ public partial class _Checkout : System.Web.UI.Page
 
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
+            //VALIDASI STOK PRODUK
+            ValidasiStokProdukTransaksi(db);
+
             PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
 
             //MENCARI TRANSAKSI SESSION

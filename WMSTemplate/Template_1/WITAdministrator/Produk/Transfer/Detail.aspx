@@ -15,8 +15,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a runat="server" id="linkDownload" class="btn btn-dark mr-1">Download</a>
-    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-dark btn-const mr-1" />
+    <a runat="server" id="linkDownload" class="btn btn-secondary mr-1">Download</a>
+    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-secondary btn-const mr-1" />
     <a runat="server" id="linkKembali" class="btn btn-danger btn-const">Kembali</a>
 </asp:Content>
 
@@ -101,16 +101,16 @@
                                         <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Container.ItemIndex + 1 %></td>
                                         <td rowspan='<%# Eval("Count").ToInt() + 1 %>'><%# Eval("Produk") %></td>
                                         <td rowspan='<%# Eval("Count").ToInt() + 1 %>'><%# Eval("Kategori") %></td>
-                                        <td colspan="4" style="padding: 0px; border-bottom: 0;"></td>
+                                        <%--<td colspan="4" style="padding: 0px; border-bottom: 0;"></td>--%>
                                     </tr>
                                     <asp:Repeater ID="RepeaterBody" runat="server" DataSource='<%# Eval("Body") %>'>
                                         <ItemTemplate>
-                                            <tr>
+                                            <%--<tr>--%>
                                                 <td class="text-center"><%# Eval("AtributProduk") %></td>
-                                                <td class="fitSize"><%# Eval("Kode") %></td>
-                                                <td class="text-right fitSize"><%# Eval("HargaJual").ToFormatHarga() %></td>
+                                                <td><%# Eval("Kode") %></td>
+                                                <td class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
                                                 <td class="text-right fitSize"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
-                                                <td class="text-right fitSize"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
+                                                <td class="text-right"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>

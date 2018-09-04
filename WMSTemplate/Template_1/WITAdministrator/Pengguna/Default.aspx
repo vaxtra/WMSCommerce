@@ -1,6 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/assets/MasterPageSidebar.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="WITAdministrator_Pengguna_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script>
+        function Func_ButtonCari(e) {
+            var evt = e ? e : window.event;
+
+            //ENTER
+            if (evt.keyCode == 13) {
+                var bt = document.getElementById('ButtonCari');
+                if (bt) {
+                    bt.click();
+                    return false;
+                }
+            }
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
@@ -8,7 +22,6 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a href="Pengaturan.aspx" class="btn btn-success btn-const">Tambah</a>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -25,7 +38,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-smoke">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#TabPegawai" id="Pegawai-tab" class="nav-link active" data-toggle="tab">Pegawai</a></li>
                         <li class="nav-item"><a href="#TabGrup" id="Grup-tab" class="nav-link" data-toggle="tab">Grup</a></li>
@@ -58,23 +71,24 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="table-responsive">
-                                            <table class="table table-sm table-hover table-bordered TableSorter">
+                                            <table class="table table-sm table-hover table-bordered">
                                                 <thead>
                                                     <tr class="thead-light">
                                                         <th>No.</th>
-                                                        <th>Nama Lengkap <span aria-hidden="true" class="glyphicon glyphicon-sort pull-right"></span></th>
-                                                        <th>Username <span aria-hidden="true" class="glyphicon glyphicon-sort pull-right"></span></th>
-                                                        <th>Grup <span aria-hidden="true" class="glyphicon glyphicon-sort pull-right"></span></th>
-                                                        <th>Lokasi <span aria-hidden="true" class="glyphicon glyphicon-sort pull-right"></span></th>
-                                                        <th>Handphone <span aria-hidden="true" class="glyphicon glyphicon-sort pull-right"></span></th>
+                                                        <th>Nama Lengkap</th>
+                                                        <th>Username</th>
+                                                        <th>Grup</th>
+                                                        <th>Lokasi</th>
+                                                        <th>Handphone</th>
                                                         <th>Status</th>
                                                         <th></th>
                                                     </tr>
                                                     <tr class="thead-light">
                                                         <th colspan="7">
-                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
+                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)" placeholder="Cari Pegawai"></asp:TextBox></th>
                                                         <th>
-                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block" OnClick="EventData" ClientIDMode="Static" /></th>
+                                                            <a href="Pengaturan.aspx" class="btn btn-success btn-block">Tambah</a>
+                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block d-none" OnClick="EventData" ClientIDMode="Static" /></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,19 +100,15 @@
                                                                 <td><%# Eval("Username") %></td>
                                                                 <td><%# Eval("GrupPengguna") %></td>
                                                                 <td><%# Eval("Tempat") %></td>
-
-                                                                <td>
-                                                                    <a href='<%# "tel:" + Eval("Handphone") %>'><%# Eval("Handphone") %></a>
-                                                                </td>
-
+                                                                <td><%# Eval("Handphone") %></td>
                                                                 <td class="text-center">
                                                                     <asp:ImageButton ID="ImageStatus" runat="server" ImageUrl='<%# Pengaturan.FormatStatus(Eval("Status").ToString()) %>' CommandName="UbahStatus" CommandArgument='<%# Eval("IDPengguna") %>' BorderStyle="None" />
                                                                 </td>
 
                                                                 <td class="text-right fitSize">
-                                                                    <asp:Button ID="ButtonLogin" runat="server" CssClass="btn btn-primary btn-xs" Text="Login" CommandName="Login" CommandArgument='<%# Eval("IDPengguna") %>' />
-                                                                    <a href='Pengaturan.aspx?id=<%# Eval("IDPengguna") %>' class="btn btn-info btn-xs">Ubah</a>
-                                                                    <asp:Button ID="ButtonHapus" runat="server" CssClass="btn btn-danger btn-xs" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDPengguna") %>' />
+                                                                    <asp:Button ID="ButtonLogin" runat="server" CssClass="btn btn-outline-primary btn-xs" Text="Login" CommandName="Login" CommandArgument='<%# Eval("IDPengguna") %>' />
+                                                                    <a href='Pengaturan.aspx?id=<%# Eval("IDPengguna") %>' class="btn btn-outline-info btn-xs">Ubah</a>
+                                                                    <asp:Button ID="ButtonHapus" runat="server" CssClass="btn btn-outline-danger btn-xs" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDPengguna") %>' />
                                                                 </td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -154,8 +164,8 @@
                                                                         <td><%# Eval("Nama") %></td>
                                                                         <td><%# Eval("DefaultURL") %></td>
                                                                         <td class="text-right fitSize">
-                                                                            <asp:Button ID="ButtonUbah" CssClass="btn btn-info btn-xs" runat="server" Text="Ubah" CommandArgument='<%# Eval("IDGrupPengguna") %>' CommandName="Ubah" />
-                                                                            <asp:Button ID="ButtonHapus" CssClass="btn btn-danger btn-xs" runat="server" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDGrupPengguna") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin menghapus data\")" %>' />
+                                                                            <asp:Button ID="ButtonUbah" CssClass="btn btn-outline-info btn-xs" runat="server" Text="Ubah" CommandArgument='<%# Eval("IDGrupPengguna") %>' CommandName="Ubah" />
+                                                                            <asp:Button ID="ButtonHapus" CssClass="btn btn-outline-danger btn-xs" runat="server" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDGrupPengguna") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin menghapus data\")" %>' />
                                                                         </td>
                                                                     </tr>
                                                                 </ItemTemplate>

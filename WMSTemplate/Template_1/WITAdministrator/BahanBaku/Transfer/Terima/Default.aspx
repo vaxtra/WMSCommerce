@@ -8,7 +8,7 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a href="Import.aspx" class="btn btn-dark btn-const">Import</a>
+    <a href="Import.aspx" class="btn btn-secondary btn-const">Import</a>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -91,7 +91,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="/WITWarehouse/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanbaku") %>"><%# Eval("IDTransferBahanbaku") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanbaku") %>"><%# Eval("IDTransferBahanbaku") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>
@@ -140,7 +140,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td><a href="/WITWarehouse/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanbaku") %>"><%# Eval("IDTransferBahanbaku") %></a></td>
+                                                                <td><a href="/WITAdministrator/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanbaku") %>"><%# Eval("IDTransferBahanbaku") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>

@@ -1,6 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/assets/MasterPageSidebar.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="WITAdministrator_Pelanggan_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+        <script>
+        function Func_ButtonCari(e) {
+            var evt = e ? e : window.event;
+
+            //ENTER
+            if (evt.keyCode == 13) {
+                var bt = document.getElementById('ButtonCari');
+                if (bt) {
+                    bt.click();
+                    return false;
+                }
+            }
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
@@ -8,9 +22,8 @@
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <asp:Button ID="ButtonExcel" CssClass="btn btn-dark btn-const mx-1" runat="server" Text="Export" OnClick="ButtonExcel_Click" />
-    <h5 class="mx-1"><a id="LinkDownload" runat="server" visible="false">Download File</a></h5>
-    <a href="Pengaturan.aspx" class="btn btn-success btn-const">Tambah</a>
+    <asp:Button ID="ButtonExcel" CssClass="btn btn-secondary btn-const" runat="server" Text="Export" OnClick="ButtonExcel_Click" />
+    <h5><a id="LinkDownload" runat="server" visible="false">Download File</a></h5>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -35,7 +48,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-smoke">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item"><a href="#tabPelanggan" id="Pegawai-tab" class="nav-link active" data-toggle="tab">Pelanggan</a></li>
                         <li class="nav-item"><a href="#tabGrup" role="tab" id="Grup-tab" class="nav-link" data-toggle="tab">Grup</a></li>
@@ -68,23 +81,24 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="table-responsive">
-                                            <table class="table table-sm table-hover table-bordered TableSorter">
+                                            <table class="table table-sm table-hover table-bordered">
                                                 <thead>
                                                     <tr class="thead-light">
                                                         <th class="fitSize">No</th>
-                                                        <th>Grup <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
-                                                        <th>Nama <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
-                                                        <th>Email <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
-                                                        <th>Phone <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
-                                                        <th>Deposit <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
-                                                        <th>Status <span aria-hidden="true" class="glyphicon glyphicon-sort float-right"></span></th>
+                                                        <th>Nama</th>
+                                                        <th>Grup</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Deposit</th>
+                                                        <th>Status</th>
                                                         <th></th>
                                                     </tr>
                                                     <tr class="thead-light">
-                                                        <td colspan="7">
-                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></td>
-                                                        <td>
-                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block" OnClick="EventData" ClientIDMode="Static" /></td>
+                                                        <th colspan="7">
+                                                            <asp:TextBox ID="TextBoxCari" runat="server" CssClass="form-control" onkeypress="return Func_ButtonCari(event)" placeholder="Cari Pelanggan"></asp:TextBox></th>
+                                                        <th>
+                                                            <a href="Pengaturan.aspx" class="btn btn-success btn-block">Tambah</a>
+                                                            <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-outline-light btn-block d-none" OnClick="EventData" ClientIDMode="Static" /></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -92,8 +106,8 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td><%# Container.ItemIndex + 1 + ((DropDownListJumlahData.SelectedValue.ToInt() * (DropDownListHalaman.SelectedValue.ToInt()))) %></td>
-                                                                <td><%# Eval("Grup") %></td>
                                                                 <td><%# Eval("NamaLengkap") %></td>
+                                                                <td><%# Eval("Grup") %></td>
                                                                 <td><%# Eval("Email") %></td>
                                                                 <td><%# Eval("Handphone") %></td>
                                                                 <td class="OutputDesimal text-right"><%# Eval("Deposit") %></td>
@@ -103,8 +117,8 @@
                                                                 </td>
 
                                                                 <td class="fitSize hidden-print">
-                                                                    <a class="btn btn-xs btn-info" href="Pengaturan.aspx?id=<%# Eval("IDPelanggan") %>">Ubah</a>
-                                                                    <asp:Button ID="ButtonHapus" runat="server" Text="Hapus" CssClass="btn btn-xs btn-danger" CommandName="Hapus" CommandArgument='<%# Eval("IDPelanggan") %>' />
+                                                                    <a class="btn btn-outline-info  btn-xs " href="Pengaturan.aspx?id=<%# Eval("IDPelanggan") %>">Ubah</a>
+                                                                    <asp:Button ID="ButtonHapus" runat="server" Text="Hapus" CssClass="btn btn-outline-danger btn-xs " CommandName="Hapus" CommandArgument='<%# Eval("IDPelanggan") %>' />
                                                                 </td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -172,8 +186,8 @@
                                                                         <td><%# (PilihanBonusGrupPelanggan)Eval("EnumBonusGrupPelanggan") %></td>
                                                                         <td><%# Eval("Persentase").ToFormatHarga() %>%</td>
                                                                         <td class="text-right fitSize">
-                                                                            <asp:Button Visible='<%# (int.Parse((Eval("IDGrupPelanggan").ToString())) > 1) ? true : false %>' ID="ButtonUbah" runat="server" Text="Ubah" CommandName="Ubah" CommandArgument='<%# Eval("IDGrupPelanggan") %>' CssClass="btn btn-info btn-xs" />
-                                                                            <asp:Button Visible='<%# (int.Parse((Eval("IDGrupPelanggan").ToString())) > 1) ? true : false %>' ID="ButtonHapus" runat="server" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDGrupPelanggan") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin menghapus data No." + Eval("IDGrupPelanggan") + "\")" %>' CssClass="btn btn-danger btn-xs" />
+                                                                            <asp:Button Visible='<%# (int.Parse((Eval("IDGrupPelanggan").ToString())) > 1) ? true : false %>' ID="ButtonUbah" runat="server" Text="Ubah" CommandName="Ubah" CommandArgument='<%# Eval("IDGrupPelanggan") %>' CssClass="btn btn-outline-info btn-xs" />
+                                                                            <asp:Button Visible='<%# (int.Parse((Eval("IDGrupPelanggan").ToString())) > 1) ? true : false %>' ID="ButtonHapus" runat="server" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDGrupPelanggan") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin menghapus data No." + Eval("IDGrupPelanggan") + "\")" %>' CssClass="btn btn-outline-danger btn-xs" />
                                                                         </td>
                                                                     </tr>
                                                                 </ItemTemplate>

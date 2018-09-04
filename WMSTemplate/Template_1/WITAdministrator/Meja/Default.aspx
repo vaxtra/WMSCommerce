@@ -25,9 +25,7 @@
 
     <div class="form-group">
         <div class="card">
-            <div class="card-header bg-gradient-black">
-                <h5 class="font-weight-light">REGULER</h5>
-            </div>
+            <h4 class="card-header bg-smoke">Reguler</h4>
             <div class="card-body">
                 <div class="table-responsive">
                     <table style="width: 100%;">
@@ -67,9 +65,7 @@
     </div>
     <div class="form-group">
         <div class="card">
-            <div class="card-header bg-gradient-black">
-                <h5 class="font-weight-light">VIP</h5>
-            </div>
+            <h4 class="card-header bg-smoke">VIP</h4>
             <div class="card-body">
                 <div class="table-responsive">
                     <table style="width: 100%;">

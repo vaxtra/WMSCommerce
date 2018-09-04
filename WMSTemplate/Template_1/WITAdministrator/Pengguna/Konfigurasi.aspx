@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
-    Konfigurasi Pengguna
+    Fitur Pengguna
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
@@ -19,13 +19,14 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolderSubTitleRight" runat="Server">
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-            <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
             <div class="card">
+                <h4 class="card-header bg-smoke">Konfigurasi</h4>
                 <div class="card-body">
                     <div class="form-group">
-                        <asp:DropDownList ID="DropDownListGrupPengguna" Width="40%" CssClass="select2" AutoPostBack="true" OnSelectedIndexChanged="DropDownListGrupPengguna_SelectedIndexChanged" runat="server">
+                        <asp:DropDownList ID="DropDownListGrupPengguna" CssClass="select2 w-100" AutoPostBack="true" OnSelectedIndexChanged="DropDownListGrupPengguna_SelectedIndexChanged" runat="server">
                         </asp:DropDownList>
                         <br />
                     </div>

@@ -25,7 +25,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h3 class="border-bottom text-info">VENDOR</h3>
+                    <h3 class="border-bottom">VENDOR</h3>
                     <div class="form-group">
                         <div class="form-group">
                             <div class="row">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <label class="font-weight-bold text-muted">Produk</label>
                         <div class="table-responsive">

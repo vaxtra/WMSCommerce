@@ -34,9 +34,9 @@
         <ContentTemplate>
             <div class="form-inline">
                 <div class="form-group">
-                    <asp:Button ID="ButtonExcel" CssClass="btn btn-dark btn-const mr-1" runat="server" Text="Export" OnClick="ButtonExcel_Click" />
+                    <asp:Button ID="ButtonExcel" CssClass="btn btn-secondary btn-const mr-1" runat="server" Text="Export" OnClick="ButtonExcel_Click" />
                     <h5><a id="LinkDownload" runat="server" class="mr-1" visible="false">Download File</a></h5>
-                    <asp:Button ID="ButtonCetakBahanBaku" CssClass="btn btn-dark btn-const" runat="server" Text="Cetak" />
+                    <asp:Button ID="ButtonCetakBahanBaku" CssClass="btn btn-secondary btn-const" runat="server" Text="Cetak" />
                 </div>
             </div>
 

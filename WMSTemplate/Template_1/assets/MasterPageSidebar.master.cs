@@ -14,7 +14,7 @@ public partial class assets_MasterPageSidebar : System.Web.UI.MasterPage
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
             //LabelUsername.Text = Pengguna.NamaLengkap;
-            //LabelTempat.Text = Pengguna.Tempat;
+            LabelTempat.Text = Pengguna.Store + " - " + Pengguna.Tempat;
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {

@@ -35,11 +35,11 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <asp:Button ID="ButtonTabel" runat="server" Text="Tabel" CssClass="btn btn-default btn-sm" OnClick="ButtonTabel_Click" />
-    <asp:Button ID="ButtonChart" runat="server" Text="Chart" CssClass="btn btn-default btn-sm" OnClick="ButtonChart_Click" />
-    <asp:Button ID="ButtonPrint" runat="server" Text="Print" CssClass="btn btn-default btn-sm" />
-    <asp:Button ID="ButtonExcel" runat="server" Text="Excel" CssClass="btn btn-default btn-sm" OnClick="ButtonExcel_Click" />
-    <a id="LinkDownload" runat="server" visible="false">Download File</a>
+    <asp:Button ID="ButtonTabel" runat="server" Text="Tabel" CssClass="btn btn-secondary btn-const mr-1" OnClick="ButtonTabel_Click" />
+    <asp:Button ID="ButtonChart" runat="server" Text="Chart" CssClass="btn btn-secondary btn-const mr-1" OnClick="ButtonChart_Click" />
+    <asp:Button ID="ButtonExcel" runat="server" Text="Excel" CssClass="btn btn-secondary btn-const" OnClick="ButtonExcel_Click" />
+    <h6 class="mr-1 mt-2"><a id="LinkDownload" runat="server" visible="false">Download File</a></h6>
+    <asp:Button ID="ButtonPrint" runat="server" Text="Print" CssClass="btn btn-secondary btn-const mr-1" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -52,71 +52,73 @@
 </asp:Content>
 
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <ul id="myTab" class="nav nav-tabs">
-                <li><a href="ProdukVarian.aspx">Produk & Varian</a></li>
-                <li><a href="Produk.aspx">Produk</a></li>
-                <li class="active"><a href="#tabBrand" id="Brand-tab" data-toggle="tab">Brand</a></li>
-                <li><a href="Warna.aspx">Warna</a></li>
-                <li><a href="Varian.aspx">Varian</a></li>
-                <li><a href="Kategori.aspx">Kategori</a></li>
-            </ul>
-            <br />
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane active" id="tabBrand">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-inline">
-                                    <div class="btn-group" style="margin: 5px 5px 0 0">
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHari" runat="server" Text="Hari Ini" OnClick="ButtonHari_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMinggu" runat="server" Text="Minggu Ini" OnClick="ButtonMinggu_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulan" runat="server" Text="Bulan Ini" OnClick="ButtonBulan_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahun" runat="server" Text="Tahun Ini" OnClick="ButtonTahun_Click" />
-                                    </div>
-                                    <div class="btn-group" style="margin: 5px 5px 0 0">
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" OnClick="ButtonHariSebelumnya_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" OnClick="ButtonMingguSebelumnya_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" OnClick="ButtonBulanSebelumnya_Click" />
-                                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" OnClick="ButtonTahunSebelumnya_Click" />
-                                    </div>
-                                    <div style="margin: 5px 5px 0 0" class="form-group">
-                                        <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAwal" runat="server"></asp:TextBox>
-                                        <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAkhir" runat="server"></asp:TextBox>
-                                        <asp:Button CssClass="btn btn-primary btn-sm" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row" style="font-weight: bold;">
-                            <div class="col-sm-4 col-md-4">
-                                <asp:DropDownList ID="DropDownListTempat" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                            </div>
-                            <div class="col-sm-4 col-md-4">
-                                <asp:DropDownList ID="DropDownListJenisTransaksi" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                            </div>
-                            <div class="col-sm-4 col-md-4">
-                                <asp:DropDownList ID="DropDownListOrderBy" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event">
-                                    <asp:ListItem Text="Berdasarkan Quantity" Value="1" />
-                                    <asp:ListItem Text="Berdasarkan Discount" Value="2" />
-                                    <asp:ListItem Text="Berdasarkan Penjualan" Value="3" />
-                                    <asp:ListItem Text="Berdasarkan Quantity & Penjualan" Value="0" />
-                                </asp:DropDownList>
-                            </div>
-                        </div>
-                    </div>
-                    <asp:Panel ID="PanelTabel" runat="server">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <asp:Label ID="LabelPeriode" runat="server"></asp:Label>
-                            </div>
+    <div class="form-group">
+        <div class="form-inline">
+            <div class="form-group mr-1 mb-1">
+                <a id="ButtonPeriodeTanggal" runat="server" class="btn btn-light btn-const dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Periode</a>
+                <div class="dropdown-menu p-1">
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonHari" runat="server" Text="Hari Ini" Width="115px" OnClick="ButtonHari_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonMinggu" runat="server" Text="Minggu Ini" Width="115px" OnClick="ButtonMinggu_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonBulan" runat="server" Text="Bulan Ini" Width="115px" OnClick="ButtonBulan_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonTahun" runat="server" Text="Tahun Ini" Width="115px" OnClick="ButtonTahun_Click" />
+                    <hr class="my-1" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" Width="115px" OnClick="ButtonHariSebelumnya_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" Width="115px" OnClick="ButtonMingguSebelumnya_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" Width="115px" OnClick="ButtonBulanSebelumnya_Click" />
+                    <asp:Button CssClass="btn btn-light border" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" Width="115px" OnClick="ButtonTahunSebelumnya_Click" />
+                </div>
+            </div>
+            <div class="form-group mr-1 mb-1">
+                <asp:TextBox ID="TextBoxTanggalAwal" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
+            </div>
+            <div class="form-group mr-1 mb-1">
+                <asp:TextBox ID="TextBoxTanggalAkhir" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
+            </div>
+            <div class="form-group mb-1">
+                <asp:Button CssClass="btn btn-light btn-const" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-4">
+                <asp:DropDownList ID="DropDownListTempat" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+            </div>
+            <div class="col-4">
+                <asp:DropDownList ID="DropDownListJenisTransaksi" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+            </div>
+            <div class="col-4">
+                <asp:DropDownList ID="DropDownListOrderBy" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event">
+                    <asp:ListItem Text="Berdasarkan Quantity" Value="1" />
+                    <asp:ListItem Text="Berdasarkan Discount" Value="2" />
+                    <asp:ListItem Text="Berdasarkan Penjualan" Value="3" />
+                    <asp:ListItem Text="Berdasarkan Quantity & Penjualan" Value="0" />
+                </asp:DropDownList>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="card">
+            <div class="card-header bg-gradient-green">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item"><a href="ProdukVarian.aspx" class="nav-link" style="color: #FFFFFF !important;">Produk & Varian</a></li>
+                    <li class="nav-item"><a href="Produk.aspx" class="nav-link" style="color: #FFFFFF !important;">Produk</a></li>
+                    <li class="nav-item"><a href="#tabBrand" id="Brand-tab" class="nav-link active" data-toggle="tab">Brand</a></li>
+                    <li class="nav-item"><a href="Warna.aspx" class="nav-link" style="color: #FFFFFF !important;">Warna</a></li>
+                    <li class="nav-item"><a href="Varian.aspx" class="nav-link" style="color: #FFFFFF !important;">Varian</a></li>
+                    <li class="nav-item"><a href="Kategori.aspx" class="nav-link" style="color: #FFFFFF !important;">Kategori</a></li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane active" id="tabBrand">
+                        <h4 class="text-uppercase mb-3">
+                            <asp:Label ID="LabelPeriode" runat="server"></asp:Label></h4>
+                        <asp:Panel ID="PanelTabel" runat="server">
                             <div class="table-responsive">
-                                <table class="table table-condensed table-hover table-bordered" style="font-size: 12px;">
+                                <table class="table table-sm table-bordered table-hover">
                                     <thead>
-                                        <tr class="active">
+                                        <tr class="thead-light">
                                             <th>No.</th>
                                             <th>Brand</th>
                                             <th>Quantity</th>
@@ -124,7 +126,7 @@
                                             <th>Total Penjualan</th>
                                             <th>%</th>
                                         </tr>
-                                        <tr class="text-right success" style="font-weight: bold;">
+                                        <tr class="text-right font-weight-bold table-success">
                                             <td class="text-center" colspan="2">TOTAL</td>
                                             <td>
                                                 <asp:Label ID="LabelQuantity" runat="server"></asp:Label>
@@ -147,14 +149,14 @@
                                                     <td class="text-right" runat="server" id="quantity"><%# Eval("Quantity").ToFormatHargaBulat() %></td>
                                                     <td class="text-right" runat="server" id="totalDiscount"><%# Eval("TotalDiscount").ToFormatHarga() %></td>
                                                     <td class="text-right" runat="server" id="totalPenjualan"><%# Eval("TotalPenjualan").ToFormatHarga() %></td>
-                                                    <td class="text-right info"><strong><%# Eval("Persentase").ToFormatHarga() %> %</strong></td>
+                                                    <td class="text-right table-warning"><strong><%# Eval("Persentase").ToFormatHarga() %> %</strong></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </tbody>
                                     <tfoot>
-                                        <tr class="text-right success" style="font-weight: bold;">
-                                            <td colspan="2"></td>
+                                        <tr class="text-right font-weight-bold table-success">
+                                            <td class="text-center" colspan="2">TOTAL</td>
                                             <td>
                                                 <asp:Label ID="LabelQuantity1" runat="server"></asp:Label>
                                             </td>
@@ -169,12 +171,12 @@
                                     </tfoot>
                                 </table>
                             </div>
-                        </div>
-                    </asp:Panel>
+                        </asp:Panel>
 
-                    <asp:Panel ID="PanelChart" runat="server">
-                        <div id="container" runat="server" clientidmode="Static"></div>
-                    </asp:Panel>
+                        <asp:Panel ID="PanelChart" runat="server">
+                            <div id="container" runat="server" clientidmode="Static"></div>
+                        </asp:Panel>
+                    </div>
                 </div>
             </div>
         </div>

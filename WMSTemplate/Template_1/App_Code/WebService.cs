@@ -1258,7 +1258,7 @@ public class WebService : System.Web.Services.WebService
                             Transaksi.StatusPrint = true;
 
                             SyncData.TanggalSync = DateTime.Now;
-                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi);
+                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi, true);
                             db.SubmitChanges();
                         }
                         else if (ResultJson.Transaksi.idStatusTransaksi == (int)EnumStatusTransaksi.Complete)
@@ -1267,7 +1267,7 @@ public class WebService : System.Web.Services.WebService
                             Transaksi.StatusPrint = true;
 
                             SyncData.TanggalSync = DateTime.Now;
-                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi);
+                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi, true);
                             db.SubmitChanges();
                         }
                         else if (ResultJson.Transaksi.idStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
@@ -1275,7 +1275,7 @@ public class WebService : System.Web.Services.WebService
                             Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
 
                             SyncData.TanggalSync = DateTime.Now;
-                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi);
+                            Transaksi.ConfirmTransaksi(db, ResultJson.Transaksi.idTransaksi, true);
                             db.SubmitChanges();
                         }
                     }

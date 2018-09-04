@@ -24,9 +24,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">PROFIL</h5>
-                    </div>
+                    <h5 class="card-header bg-smoke">Profil</h5>
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-weight-bold text-muted">Kategori</label>
@@ -78,13 +76,15 @@
                             <asp:TextBox ID="TextBoxFooterPrint" CssClass="form-control input-sm" runat="server" TextMode="MultiLine"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <asp:Button ID="ButtonSimpan" runat="server" Text="Tambah" OnClick="ButtonSimpan_Click" CssClass="btn btn-success btn-const" />
+                        <asp:Button ID="ButtonBatal" runat="server" Text="Batal" OnClick="ButtonBatal_Click" CssClass="btn btn-danger btn-const" />
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">BIAYA TAMBAHAN TRANSAKSI</h5>
-                    </div>
+                    <h5 class="card-header bg-smoke">Biaya Tamabahan Transaksi</h5>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
@@ -138,10 +138,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <asp:Button ID="ButtonSimpan" runat="server" Text="Tambah" OnClick="ButtonSimpan_Click" CssClass="btn btn-success btn-const" />
-        <asp:Button ID="ButtonBatal" runat="server" Text="Batal" OnClick="ButtonBatal_Click" CssClass="btn btn-danger btn-const" />
     </div>
 </asp:Content>
 

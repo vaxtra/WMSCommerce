@@ -25,7 +25,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h3 class="border-bottom text-info">PIC</h3>
+                    <h3 class="border-bottom">PIC</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h3 class="border-bottom text-info">DETAIL</h3>
+                        <h3 class="border-bottom">DETAIL</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered" id="daftarPenerimaan">
                                 <thead>

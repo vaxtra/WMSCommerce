@@ -4,10 +4,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
+    <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
+
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="View1" runat="server">
             Keranjang belanja Anda kosong.<br />
-            <a href="_Default.aspx">Lanjutkan Belanja</a>
+            <a href="Default.aspx">Lanjutkan Belanja</a>
         </asp:View>
 
         <asp:View ID="View2" runat="server">

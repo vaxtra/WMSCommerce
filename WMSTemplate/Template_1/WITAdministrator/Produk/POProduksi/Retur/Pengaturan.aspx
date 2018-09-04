@@ -17,34 +17,36 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="ContentPlaceHolderSubTitleRight" runat="Server">
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <asp:UpdatePanel ID="UpdatePanelData" runat="server">
-        <ContentTemplate>
+<%--    <asp:UpdatePanel ID="UpdatePanelData" runat="server">
+        <ContentTemplate>--%>
             <div id="peringatan" class="alert alert-danger" runat="server" visible="false">
                 <b>PERINGATAN :</b>
                 <asp:Label ID="LabelPeringatan" runat="server" Text="-"></asp:Label>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h3 class="border-bottom text-info">VENDOR</h3>
+                    <h3 class="border-bottom">VENDOR</h3>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
-                                <label class="font-weight-bold text-muted">Tanggal</label>
-                                <asp:TextBox ID="TextBoxTanggal" runat="server" CssClass="form-control input-sm Tanggal"></asp:TextBox>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+                            <div class="col-xs-12 col-sm-4 col-md-6 col-lg-3">
                                 <label class="font-weight-bold text-muted">Vendor</label>
                                 <asp:DropDownList runat="server" ID="DropDownListVendor" CssClass="select2" Width="100%" AutoPostBack="true" OnSelectedIndexChanged="DropDownListVendor_SelectedIndexChanged"></asp:DropDownList>
                                 <asp:CustomValidator ID="CustomValidatorVendor" runat="server" ErrorMessage="-" ControlToValidate="DropDownListVendor" ForeColor="Red"
                                     Display="Dynamic" OnServerValidate="CustomValidatorVendor_ServerValidate" ValidationGroup="simpan"></asp:CustomValidator>
                             </div>
-                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+                            <div class="col-xs-12 col-sm-4 col-md-6 col-lg-3">
                                 <label class="font-weight-bold text-muted">Penerimaan</label>
                                 <asp:DropDownList runat="server" ID="DropDownListPenerimaan" CssClass="select2" Width="100%" Enabled="false"></asp:DropDownList>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-6 col-lg-6">
+                                <label class="font-weight-bold text-muted">Tanggal</label>
+                                <asp:TextBox ID="TextBoxTanggal" runat="server" CssClass="form-control input-sm Tanggal"></asp:TextBox>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <label class="font-weight-bold text-muted">Produk</label>
                         <div class="table-responsive">
@@ -88,16 +90,17 @@
                                                 <td class="text-center"><%# Eval("Atribut") %></td>
                                                 <td class="text-right"><%# Eval("HargaVendor").ToFormatHarga() %></td>
                                                 <td class="text-right"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
-                                                <td class="text-right fitSize warning"><strong><%# Eval("SubtotalHargaBeli").ToFormatHarga() %></strong></td>
+                                                <td class="text-right fitSize"><strong><%# Eval("SubtotalHargaBeli").ToFormatHarga() %></strong></td>
                                                 <td class="text-center fitSize">
-                                                    <asp:Button runat="server" ID="ButtonHapus" Text="X" CssClass="btn btn-danger btn-xs" CommandName="Hapus" CommandArgument='<%# Eval("IDStokProduk") %>' /></td>
+                                                    <asp:Button runat="server" ID="ButtonHapus" Text="Hapus" CssClass="btn btn-outline-danger btn-xs" CommandName="Hapus" CommandArgument='<%# Eval("IDStokProduk") %>' /></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                     <tr class="table-success">
                                         <td colspan="6" class="text-center font-weight-bold">TOTAL</td>
-                                        <td colspan="2" class="text-right font-weight-bold">
+                                        <td class="text-right font-weight-bold">
                                             <asp:Label ID="LabelTotal" Text="0" runat="server"></asp:Label></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -114,7 +117,7 @@
                 </div>
             </div>
 
-            <asp:UpdateProgress ID="updateProgressData" runat="server" AssociatedUpdatePanelID="UpdatePanelData">
+<%--            <asp:UpdateProgress ID="updateProgressData" runat="server" AssociatedUpdatePanelID="UpdatePanelData">
                 <ProgressTemplate>
                     <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: Black; filter: alpha(opacity=90); opacity: 0.5;">
                         <asp:Image ID="imgUpdateProgressData" runat="server" ImageUrl="/assets/images/ajax-loader.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="margin-top: 17%;" />
@@ -122,7 +125,7 @@
                 </ProgressTemplate>
             </asp:UpdateProgress>
         </ContentTemplate>
-    </asp:UpdatePanel>
+    </asp:UpdatePanel>--%>
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="ContentPlaceHolderJavascript" runat="Server">
 </asp:Content>

@@ -19,11 +19,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
-    Minimum Stok Produk
+    Pengaturan Minimum Stok Produk
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <asp:Button ID="ButtonSimpan" runat="server" Text="Simpan" CssClass="btn btn-success btn-const" OnClick="ButtonSimpan_Click" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -49,7 +48,6 @@
                             <th>Varian</th>
                             <th>Warna</th>
                             <th>Kategori</th>
-                            <th>Stok</th>
                             <th>Minimum</th>
                         </tr>
                     </thead>
@@ -65,14 +63,18 @@
                                     <td class="fitSize"><%# Eval("Atribut") %></td>
                                     <td class="fitSize"><%# Eval("Warna") %></td>
                                     <td><%# Eval("Kategori") %></td>
-                                    <td class="text-right fitSize table-warning font-weight-bold"><%# Eval("Jumlah") %></td>
-                                    <td class="table-success" style="width: 100px;">
+                                    <td class="table-warning" style="width: 100px;">
                                         <asp:TextBox ID="TextBoxJumlahMinimum" runat="server" CssClass="form-control angka text-right form-control-sm" onfocus="this.select();" Text='<%# Eval("JumlahMinimum") %>'></asp:TextBox></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
                     </tbody>
                 </table>
+            </div>
+            <div class="card">
+                <div class="card-footer">
+                    <asp:Button ID="ButtonSimpan" runat="server" Text="Simpan" CssClass="btn btn-success btn-const" OnClick="ButtonSimpan_Click" />
+                </div>
             </div>
         </div>
     </div>

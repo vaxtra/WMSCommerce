@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using RendFramework;
 
-public partial class WITAdministrator_Page_Default : System.Web.UI.Page
+public partial class WITAdministrator_Frontend_Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {

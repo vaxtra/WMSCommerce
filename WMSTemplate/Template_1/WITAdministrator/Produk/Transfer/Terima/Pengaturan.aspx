@@ -8,7 +8,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-        <h3><span class="badge badge-info font-weight-normal"><asp:Label ID="LabelIDTransferProduk" runat="server"></asp:Label></span></h3>
+    <h3><span class="badge badge-info font-weight-normal">
+        <asp:Label ID="LabelIDTransferProduk" runat="server"></asp:Label></span></h3>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -28,9 +29,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card h-100">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">PENGIRIM</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Pengirim</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label bold text-muted">Tempat</label>
@@ -51,9 +50,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card h-100">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">PENERIMA</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Penerima</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label bold text-muted">Tempat</label>
@@ -71,9 +68,7 @@
             </div>
             <div class="form-group">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">DETAIL</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">Detail</h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-hover table-bordered mb-0">
                             <thead>
@@ -98,11 +93,11 @@
                                         </tr>
                                         <asp:Repeater ID="RepeaterBody" runat="server" DataSource='<%# Eval("Body") %>'>
                                             <ItemTemplate>
-                                                    <td class="text-center"><%# Eval("AtributProduk") %></td>
-                                                    <td class="fitSize"><%# Eval("Kode") %></td>
-                                                    <td class="text-right fitSize"><%# Eval("HargaJual").ToFormatHarga() %></td>
-                                                    <td class="text-right fitSize"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right fitSize"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
+                                                <td class="text-center"><%# Eval("AtributProduk") %></td>
+                                                <td><%# Eval("Kode") %></td>
+                                                <td class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
+                                                <td class="text-right fitSize"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
+                                                <td class="text-right"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -119,11 +114,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer">
+                        <asp:Button ID="ButtonTerima" runat="server" CssClass="btn btn-success btn-const" Text="Terima" OnClick="ButtonTerima_Click"  />
+                        <a href="Default.aspx" class="btn btn-danger btn-const">Kembali</a>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <asp:Button ID="ButtonTerima" runat="server" Text="Terima" OnClick="ButtonTerima_Click" CssClass="btn btn-success btn-const" />
-                <a href="Default.aspx" class="btn btn-danger btn-const">Kembali</a>
             </div>
 
             <asp:UpdateProgress ID="updateProgressTransfer" runat="server" AssociatedUpdatePanelID="UpdatePanelTransfer">

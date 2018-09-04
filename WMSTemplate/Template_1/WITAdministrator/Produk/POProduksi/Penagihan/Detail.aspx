@@ -23,7 +23,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="border-bottom text-info">STATUS</h3>
+                        <h3 class="border-bottom">STATUS</h3>
                         <div class="form-group">
                             <label class="font-weight-bold text-muted">ID</label>
                             <asp:TextBox ID="TextBoxIDPOProduksiBahanBakuPenagihan" runat="server" Enabled="false" CssClass="form-control input-sm"></asp:TextBox>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3 class="border-bottom text-info">VENDOR</h3>
+                        <h3 class="border-bottom">VENDOR</h3>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="border-bottom text-info">DETAIL</h3>
+            <h3 class="border-bottom">DETAIL</h3>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4">

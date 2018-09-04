@@ -31,7 +31,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
     <asp:UpdatePanel ID="UpdatePanelTitleRight" runat="server">
         <ContentTemplate>
-            <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-dark btn-const" />
+            <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-secondary btn-const" />
 
             <asp:UpdateProgress ID="updateProgressTitleRight" runat="server" AssociatedUpdatePanelID="UpdatePanelTitleRight">
                 <ProgressTemplate>
@@ -56,23 +56,25 @@
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <asp:UpdatePanel ID="UpdatePanelDiscount" runat="server">
         <ContentTemplate>
-            <div class="form-group">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <asp:DropDownList ID="DropDownListCariTempat" CssClass="select2 mr-1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                        <asp:DropDownList ID="DropDownListCariStatusDiskon" CssClass="select2 mr-1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event">
-                            <asp:ListItem Text="-Semua-" Value="Semua" Selected="True"></asp:ListItem>
-                            <asp:ListItem Text="Diskon" Value="Diskon"></asp:ListItem>
-                            <asp:ListItem Text="Tidak Diskon" Value="TidakDiskon"></asp:ListItem>
-                        </asp:DropDownList>
-                        <asp:Button CssClass="btn btn-primary btn-block d-none" ID="ButtonCari" runat="server" Text="Cari" Width="100%" ClientIDMode="Static" OnClick="ButtonCari_Click" />
-                    </div>
-                </div>
-            </div>
             <div id="peringatan" class="alert alert-danger" runat="server" visible="false">
                 <b>PERINGATAN :</b>
                 <br />
                 <asp:Literal ID="LiteralPeringatan" runat="server"></asp:Literal>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListCariTempat" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+                    </div>
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListCariStatusDiskon" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event">
+                            <asp:ListItem Text="-Status Diskon-" Value="Semua" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Diskon" Value="Diskon"></asp:ListItem>
+                            <asp:ListItem Text="Tidak Diskon" Value="TidakDiskon"></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <asp:Button CssClass="btn btn-primary btn-block d-none" ID="ButtonCari" runat="server" Text="Cari" Width="100%" ClientIDMode="Static" OnClick="ButtonCari_Click" />
+                </div>
             </div>
             <div class="form-group">
                 <div class="table-responsive">
@@ -154,6 +156,7 @@
                     </table>
                 </div>
             </div>
+
             <asp:UpdateProgress ID="updateProgressDiscount" runat="server" AssociatedUpdatePanelID="UpdatePanelDiscount">
                 <ProgressTemplate>
                     <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: Black; filter: alpha(opacity=90); opacity: 0.5;">

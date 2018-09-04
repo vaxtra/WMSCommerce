@@ -68,7 +68,7 @@ public partial class WITAdministrator_Produk_POProduksi_Retur_Default : System.W
                 item.Grandtotal,
                 Status = Pengaturan.StatusPOProduksi(item.EnumStatusRetur.ToString()),
                 Cetak = "return popitup('Cetak.aspx?id=" + item.IDPOProduksiProdukRetur + "')",
-                Batal = item.EnumStatusRetur != (int)EnumStatusPORetur.Batal ? "btn btn-danger btn-xs" : "btn btn-danger btn-xs hidden"
+                Batal = item.EnumStatusRetur != (int)EnumStatusPORetur.Batal ? "btn btn-outline-danger btn-xs" : "d-none"
             }).OrderByDescending(item => item.Nomor).ToArray();
             RepeaterData.DataBind();
         }

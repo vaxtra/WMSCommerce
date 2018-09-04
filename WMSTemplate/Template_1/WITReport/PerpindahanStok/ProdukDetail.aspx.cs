@@ -23,7 +23,6 @@ public partial class WITAdministrator_Laporan_Transaksi_Transaksi : System.Web.U
                 Tempat_Class ClassTempat = new Tempat_Class(db);
                 Pengguna_Class ClassPengguna = new Pengguna_Class(db);
                 AtributProduk_Class ClassAtributProduk = new AtributProduk_Class(db);
-                KategoriProduk_Class KategoriProduk_Class = new KategoriProduk_Class();
                 JenisPerpindahanStok_Class JenisPerpindahanStok_Class = new JenisPerpindahanStok_Class();
 
                 DropDownListCariTempat.Items.AddRange(ClassTempat.DataDropDownList());
@@ -31,7 +30,6 @@ public partial class WITAdministrator_Laporan_Transaksi_Transaksi : System.Web.U
 
                 DropDownListCariPengguna.Items.AddRange(ClassPengguna.DropDownList(true));
                 DropDownListCariAtributProduk.Items.AddRange(ClassAtributProduk.Dropdownlist());
-                DropDownListCariKategori.Items.AddRange(KategoriProduk_Class.Dropdownlist(db));
 
                 DropDownListCariJenisPerpindahanStok.Items.AddRange(JenisPerpindahanStok_Class.DataDropDownList(db));
                 DropDownListCariJenisPerpindahanStok.SelectedValue = "0";
@@ -125,7 +123,7 @@ public partial class WITAdministrator_Laporan_Transaksi_Transaksi : System.Web.U
         {
             Laporan_Class Laporan_Class = new Laporan_Class(db, (PenggunaLogin)Session["PenggunaLogin"], (DateTime)ViewState["TanggalAwal"], (DateTime)ViewState["TanggalAkhir"], GenerateExcel);
 
-            var Result = Laporan_Class.PerpindahanStokProdukDetail(DropDownListCariTempat.SelectedValue.ToInt(), DropDownListCariPengguna.SelectedValue.ToInt(), TextBoxCariKode.Text, DropDownListCariProduk.SelectedValue.ToInt(), DropDownListCariAtributProduk.SelectedValue.ToInt(), DropDownListCariKategori.SelectedValue.ToInt(), DropDownListCariJenisPerpindahanStok.SelectedValue.ToInt(), TextBoxCariKeterangan.Text, false);
+            var Result = Laporan_Class.PerpindahanStokProdukDetail(DropDownListCariTempat.SelectedValue.ToInt(), DropDownListCariPengguna.SelectedValue.ToInt(), TextBoxCariKode.Text, DropDownListCariProduk.SelectedValue.ToInt(), DropDownListCariAtributProduk.SelectedValue.ToInt(), 0, DropDownListCariJenisPerpindahanStok.SelectedValue.ToInt(), TextBoxCariKeterangan.Text, false);
 
             #region KONFIGURASI LAPORAN
             LabelPeriode.Text = Laporan_Class.Periode;

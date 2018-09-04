@@ -102,35 +102,35 @@ public partial class WITAdministrator_Produk_POProduksi_Penagihan_Pembayaran : S
 
 
                     #region Arie, Input Jurnal Pembayaran Hutang PO
-                    //var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
-                    //TBJurnal Jurnal = new TBJurnal
-                    //{
-                    //    IDTempat = 1,
-                    //    Tanggal = TextBoxTanggalBayar.Text.ToDateTime(),
-                    //    Keterangan = TextBoxKeterangan.Text,
-                    //    IDPengguna = pengguna.IDPengguna,
-                    //    Referensi = produksiProdukPenagihan.IDPOProduksiProdukPenagihan
-                    //};
+                    ////////////var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
+                    ////////////TBJurnal Jurnal = new TBJurnal
+                    ////////////{
+                    ////////////    IDTempat = 1,
+                    ////////////    Tanggal = TextBoxTanggalBayar.Text.ToDateTime(),
+                    ////////////    Keterangan = TextBoxKeterangan.Text,
+                    ////////////    IDPengguna = pengguna.IDPengguna,
+                    ////////////    Referensi = produksiProdukPenagihan.IDPOProduksiProdukPenagihan
+                    ////////////};
 
-                    //#region JURNAL
-                    ////DEBIT     : PERSEDIAAN
-                    ////KREDIT    : HUTANG DAGANG
-                    ////KAS
-                    //Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    //{
-                    //    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == produksiProdukPenagihan.IDJenisPembayaran.ToString()).IDAkun,
-                    //    Debit = 0,
-                    //    Kredit = produksiProdukPenagihan.Grandtotal
-                    //});
-                    ////HUTANG DAGANG
-                    //Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    //{
-                    //    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG DAGANG").IDAkun,
-                    //    Debit = produksiProdukPenagihan.Grandtotal,
-                    //    Kredit = 0
-                    //});
-                    //db.TBJurnals.InsertOnSubmit(Jurnal);
-                    //#endregion
+                    ////////////#region JURNAL
+                    //////////////DEBIT     : PERSEDIAAN
+                    //////////////KREDIT    : HUTANG DAGANG
+                    //////////////KAS
+                    ////////////Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+                    ////////////{
+                    ////////////    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == produksiProdukPenagihan.IDJenisPembayaran.ToString()).IDAkun,
+                    ////////////    Debit = 0,
+                    ////////////    Kredit = produksiProdukPenagihan.Grandtotal
+                    ////////////});
+                    //////////////HUTANG DAGANG
+                    ////////////Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+                    ////////////{
+                    ////////////    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG DAGANG").IDAkun,
+                    ////////////    Debit = produksiProdukPenagihan.Grandtotal,
+                    ////////////    Kredit = 0
+                    ////////////});
+                    ////////////db.TBJurnals.InsertOnSubmit(Jurnal);
+                    ////////////#endregion
                     #endregion
 
                     db.SubmitChanges();

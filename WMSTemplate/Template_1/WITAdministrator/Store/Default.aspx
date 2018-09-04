@@ -29,9 +29,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card h-100">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">PROFIL</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">Profil</h4>
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-weight-bold text-muted">Nama</label>
@@ -74,9 +72,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">KONFIGURASI</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">Konfigurasi</h4>
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-weight-bold text-muted">Upload Logo (height: 115px & Width: 380px)</label>

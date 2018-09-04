@@ -21,7 +21,7 @@ public partial class WITReport_Niion_XForecast : System.Web.UI.Page
                 DropDownListBulan.Items.AddRange(Tanggal_Class.DropdownlistBulan());
                 DropDownListTahun.Items.AddRange(Tanggal_Class.DropdownlistTahun());
 
-                DropDownListBulan.Visible = false;
+                DropDownListBulan.Visible = true;
             }
         }
     }

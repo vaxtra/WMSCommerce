@@ -16,15 +16,18 @@ public partial class WITAdministrator_BahanBaku_Pengaturan : System.Web.UI.Page
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
                 LoadDataJavaScript(db);
-
+                KategoriBahanBaku_Class KategoriBahanBaku_Class = new KategoriBahanBaku_Class();
                 TBBahanBaku bahanBaku = db.TBBahanBakus.FirstOrDefault(item => item.IDBahanBaku == Request.QueryString["id"].ToInt());
 
                 if (bahanBaku != null)
                 {
                     TextBoxNama.Text = bahanBaku.Nama;
                     TextBoxKodeBahanBaku.Text = bahanBaku.KodeBahanBaku;
+                    TextBoxSatuanBesar.Text = bahanBaku.TBSatuan1.Nama;
+                    TextBoxSatuanKecil.Text = bahanBaku.TBSatuan.Nama;
                     TextBoxKonversi.Text = bahanBaku.Konversi.ToFormatHarga();
                     TextBoxBerat.Text = bahanBaku.Berat.ToString();
+                    TextBoxKategori.Text = KategoriBahanBaku_Class.Data(bahanBaku.TBRelasiBahanBakuKategoriBahanBakus.ToArray());
                     TextBoxDeskripsi.Text = bahanBaku.Deskripsi;
 
                     TBStokBahanBaku stokBahanBaku = bahanBaku.TBStokBahanBakus.FirstOrDefault(item => item.IDTempat == pengguna.IDTempat);

@@ -118,12 +118,12 @@ public partial class WITReport_TransferStok_ProdukDetail : System.Web.UI.Page
                 #region KONFIGURASI LAPORAN
                 LabelPeriode.Text = Laporan_Class.Periode;
 
-                LinkDownloadTransferDetail.Visible = GenerateExcel;
+                LinkDownload.Visible = GenerateExcel;
 
-                if (LinkDownloadTransferDetail.Visible)
-                    LinkDownloadTransferDetail.HRef = Laporan_Class.LinkDownload;
+                if (LinkDownload.Visible)
+                    LinkDownload.HRef = Laporan_Class.LinkDownload;
 
-                ButtonPrintTransferDetail.OnClientClick = "return popitup('ProdukDetailPrint.aspx" + Laporan_Class.TempPencarian + "')";
+                ButtonPrint.OnClientClick = "return popitup('ProdukDetailPrint.aspx" + Laporan_Class.TempPencarian + "')";
                 #endregion
 
                 LabelTotalJumlahHeaderTransferDetail.Text = Result["Jumlah"];
@@ -142,12 +142,12 @@ public partial class WITReport_TransferStok_ProdukDetail : System.Web.UI.Page
                 #region KONFIGURASI LAPORAN
                 LabelPeriode.Text = Laporan_Class.Periode;
 
-                LinkDownloadTransferDetail.Visible = GenerateExcel;
+                LinkDownload.Visible = GenerateExcel;
 
-                if (LinkDownloadTransferDetail.Visible)
-                    LinkDownloadTransferDetail.HRef = Laporan_Class.LinkDownload;
+                if (LinkDownload.Visible)
+                    LinkDownload.HRef = Laporan_Class.LinkDownload;
 
-                ButtonPrintTransferDetail.OnClientClick = "return popitup('ProdukDetailPrint.aspx" + Laporan_Class.TempPencarian + "')";
+                ButtonPrint.OnClientClick = "return popitup('ProdukDetailPrint.aspx" + Laporan_Class.TempPencarian + "')";
                 #endregion
 
                 LabelTotalJumlahHeaderTransferDetail.Text = Result["Jumlah"];
@@ -166,11 +166,11 @@ public partial class WITReport_TransferStok_ProdukDetail : System.Web.UI.Page
     {
         LoadData(false);
     }
-    protected void ButtonExcelTransferDetail_Click(object sender, EventArgs e)
+    protected void ButtonExcel_Click(object sender, EventArgs e)
     {
         LoadData(true);
     }
-    protected void LoadData_EventTransferDetail(object sender, EventArgs e)
+    protected void LoadData_Event(object sender, EventArgs e)
     {
         LoadData();
     }

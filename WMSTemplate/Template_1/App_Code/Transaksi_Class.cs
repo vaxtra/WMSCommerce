@@ -643,10 +643,10 @@ public partial class Transaksi_Class
 
     public string ConfirmTransaksi(DataClassesDatabaseDataContext db)
     {
-        return ConfirmTransaksi(db, " ");
+        return ConfirmTransaksi(db, " ", true);
     }
 
-    public string ConfirmTransaksi(DataClassesDatabaseDataContext db, string idTransaksi)
+    public string ConfirmTransaksi(DataClassesDatabaseDataContext db, string idTransaksi, bool statusStok)
     {
         StoreKonfigurasi_Class StoreKonfigurasi_Class = new StoreKonfigurasi_Class();
 
@@ -961,32 +961,36 @@ public partial class Transaksi_Class
             #endregion
 
             #region MENGHAPUS DETAIL LAMA
-            foreach (var item in TransaksiDetail)
+            if (statusStok)
             {
-                if (item.Quantity != 0)
+                foreach (var item in TransaksiDetail)
                 {
-                    EnumJenisPerpindahanStok tempStatus;
-
-                    if (item.Quantity > 0)
+                    if (item.Quantity != 0)
                     {
-                        if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
-                            tempStatus = EnumJenisPerpindahanStok.TransaksiBatal;
-                        else
-                            tempStatus = EnumJenisPerpindahanStok.PerubahanTransaksi;
-                    }
-                    else
-                    {
-                        if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
-                            tempStatus = EnumJenisPerpindahanStok.ReturDariPembeliBatal;
-                        else
-                            tempStatus = EnumJenisPerpindahanStok.PerubahanReturDariPembeli;
-                    }
+                        EnumJenisPerpindahanStok tempStatus;
 
-                    StokProduk_Class.BertambahBerkurang(IDTempat, IDPenggunaUpdate.Value, item.IDKombinasiProduk, item.Quantity, item.HargaBeli.Value, item.HargaJual, tempStatus, "Transaksi #" + Transaksi.IDTransaksi);
+                        if (item.Quantity > 0)
+                        {
+                            if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
+                                tempStatus = EnumJenisPerpindahanStok.TransaksiBatal;
+                            else
+                                tempStatus = EnumJenisPerpindahanStok.PerubahanTransaksi;
+                        }
+                        else
+                        {
+                            if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled)
+                                tempStatus = EnumJenisPerpindahanStok.ReturDariPembeliBatal;
+                            else
+                                tempStatus = EnumJenisPerpindahanStok.PerubahanReturDariPembeli;
+                        }
+
+                        StokProduk_Class.BertambahBerkurang(IDTempat, IDPenggunaUpdate.Value, item.IDKombinasiProduk, item.Quantity, item.HargaBeli.Value, item.HargaJual, tempStatus, "Transaksi #" + Transaksi.IDTransaksi);
+                    }
                 }
-            }
 
-            db.TBTransaksiDetails.DeleteAllOnSubmit(TransaksiDetail);
+                db.TBTransaksiDetails.DeleteAllOnSubmit(TransaksiDetail);
+            }
+            
             #endregion
 
             #region MENGHAPUS VOUCHER LAMA
@@ -1011,54 +1015,57 @@ public partial class Transaksi_Class
             PrintOrder(PilihanStatusPrint.Order);
 
         #region DETAIL
-        var TipePenghitunganConsignment = StoreKonfigurasi_Class.Cari(db, EnumStoreKonfigurasi.TipePenghitunganConsignment).Pengaturan;
-
-        //PENGHITUNGAN CONSIGNMENT
-        if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete && TipePenghitunganConsignment.ToInt() == (int)EnumTipePenghitunganConsignment.ConsignmentSubtotal)
-            PenghitunganConsignment();
-
-        Transaksi.TBTransaksiDetails.AddRange(Detail.Select(item => new TBTransaksiDetail
+        if (statusStok)
         {
-            //IDDetailTransaksi
-            //IDTransaksi
-            IDKombinasiProduk = item.IDKombinasiProduk,
-            IDStokProduk = item.IDStokProduk,
-            Quantity = item.Quantity,
-            Berat = item.Berat,
-            HargaBeliKotor = item.HargaBeliKotor,
-            //HargaBeli
-            HargaJual = item.HargaJual,
-            //HargaJualBersih
-            DiscountStore = item.DiscountStore,
-            DiscountKonsinyasi = item.DiscountKonsinyasi,
-            //Discount
-            //Revenue
-            //TotalBerat
-            //TotalHargaBeliKotor
-            //TotalHargaBeli
-            //TotalHargaJual
-            //TotalDiscount
-            //TotalRevenue
-            //Subtotal
-            Keterangan = item.Keterangan
-        }));
+            var TipePenghitunganConsignment = StoreKonfigurasi_Class.Cari(db, EnumStoreKonfigurasi.TipePenghitunganConsignment).Pengaturan;
 
-        if (IDStatusTransaksi != (int)EnumStatusTransaksi.Canceled)
-        {
-            //JIKA TIDAK STATUS CANCELED MAKA STOK BERKURANG LAGI
+            //PENGHITUNGAN CONSIGNMENT
+            if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete && TipePenghitunganConsignment.ToInt() == (int)EnumTipePenghitunganConsignment.ConsignmentSubtotal)
+                PenghitunganConsignment();
 
-            foreach (var item in Detail)
+            Transaksi.TBTransaksiDetails.AddRange(Detail.Select(item => new TBTransaksiDetail
             {
-                if (item.Quantity != 0)
+                //IDDetailTransaksi
+                //IDTransaksi
+                IDKombinasiProduk = item.IDKombinasiProduk,
+                IDStokProduk = item.IDStokProduk,
+                Quantity = item.Quantity,
+                Berat = item.Berat,
+                HargaBeliKotor = item.HargaBeliKotor,
+                //HargaBeli
+                HargaJual = item.HargaJual,
+                //HargaJualBersih
+                DiscountStore = item.DiscountStore,
+                DiscountKonsinyasi = item.DiscountKonsinyasi,
+                //Discount
+                //Revenue
+                //TotalBerat
+                //TotalHargaBeliKotor
+                //TotalHargaBeli
+                //TotalHargaJual
+                //TotalDiscount
+                //TotalRevenue
+                //Subtotal
+                Keterangan = item.Keterangan
+            }));
+
+            if (IDStatusTransaksi != (int)EnumStatusTransaksi.Canceled)
+            {
+                //JIKA TIDAK STATUS CANCELED MAKA STOK BERKURANG LAGI
+
+                foreach (var item in Detail)
                 {
-                    EnumJenisPerpindahanStok tempStatus;
+                    if (item.Quantity != 0)
+                    {
+                        EnumJenisPerpindahanStok tempStatus;
 
-                    if (item.Quantity > 0)
-                        tempStatus = EnumJenisPerpindahanStok.Transaksi;
-                    else
-                        tempStatus = EnumJenisPerpindahanStok.ReturDariPembeli;
+                        if (item.Quantity > 0)
+                            tempStatus = EnumJenisPerpindahanStok.Transaksi;
+                        else
+                            tempStatus = EnumJenisPerpindahanStok.ReturDariPembeli;
 
-                    StokProduk_Class.BertambahBerkurang(IDTempat, IDPenggunaUpdate.HasValue ? IDPenggunaUpdate.Value : IDPenggunaTransaksi, item.IDKombinasiProduk, item.Quantity, item.HargaBeli, item.HargaJual, tempStatus, "Transaksi #" + Transaksi.IDTransaksi);
+                        StokProduk_Class.BertambahBerkurang(IDTempat, IDPenggunaUpdate.HasValue ? IDPenggunaUpdate.Value : IDPenggunaTransaksi, item.IDKombinasiProduk, item.Quantity, item.HargaBeli, item.HargaJual, tempStatus, "Transaksi #" + Transaksi.IDTransaksi);
+                    }
                 }
             }
         }
@@ -1132,898 +1139,898 @@ public partial class Transaksi_Class
         #endregion
 
         #region AKUNTANSI
-        int IDAkunPembayaran = 0;
-        var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
-
-        if (KonfigurasiAkun != null)
-        {
-            if (Pembayaran.Count > 0)
-                IDAkunPembayaran = (int)db.TBKonfigurasiAkuns.FirstOrDefault(item => item.Nama == Pembayaran.FirstOrDefault().IDJenisPembayaran.ToString()
-                && item.IDTempat == 1).IDAkun;
-
-            #region BARU > COMPLETE
-            //TRANSAKSI BARU > COMPLETED
-            if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete
-                && Pembayaran.Count > 0 && !idStatusTransaksiSebelumnya.HasValue)
-            {
-                var _pembayaran = Pembayaran.FirstOrDefault();
-
-                TBJurnal Jurnal = new TBJurnal
-                {
-                    IDTempat = Transaksi.IDTempat,
-                    Tanggal = _pembayaran.Tanggal,
-                    Keterangan = isRetur == true ? Transaksi.Keterangan : "",
-                    IDPengguna = _pembayaran.IDPengguna,
-                    Referensi = IDTransaksi
-                };
-
-                #region DISCOUNT
-                //DEBIT     : KAS & POTONGAN/DISKON PENJUALAN & HPP
-                //KREDIT    : PENJUALAN & PERSEDIAAN
-                if (TotalPotonganHargaJualDetail > 0)
-                {
-                    if (Pembayaran.Count > 1)
-                    {
-                        foreach (var item in Pembayaran)
-                        {
-                            //387 - KAS
-                            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                            {
-                                IDAkun = (int)db.TBKonfigurasiAkuns.FirstOrDefault(x => x.Nama == item.IDJenisPembayaran.ToString()
-                                && x.IDTempat == 1).IDAkun,
-                                Debit = item.Bayar,
-                                Kredit = 0
-                            });
-                        }
-                    }
-                    else if (Pembayaran.Count == 1)
-                    {
-                        //387 - KAS
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = IDAkunPembayaran,
-                            Debit = GrandTotal,
-                            Kredit = 0
-                        });
-                    }
-
-                    //403 - POTONGAN/DISKON PENJUALAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                        Debit = TotalPotonganHargaJualDetail,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-                }
-                #endregion
-
-                #region NO DISCOUNT
-                //DEBIT     : KAS & HPP
-                //KREDIT    : PENJUALAN & PERSEDIAAN && TAX && SERVICES
-                else
-                {
-                    if (Pembayaran.Count > 1)
-                    {
-                        foreach (var item in Pembayaran)
-                        {
-                            //387 - KAS
-                            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                            {
-                                IDAkun = (int)db.TBKonfigurasiAkuns.FirstOrDefault(x => x.Nama == item.IDJenisPembayaran.ToString()
-                                && x.IDTempat == 1).IDAkun,
-                                Debit = item.Bayar,
-                                Kredit = 0
-                            });
-                        }
-                    }
-                    else if (Pembayaran.Count == 1)
-                    {
-                        //387 - KAS
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = IDAkunPembayaran,
-                            Debit = GrandTotal,
-                            Kredit = 0
-                        });
-                    }
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-                }
-                #endregion
-
-                db.TBJurnals.InsertOnSubmit(Jurnal);
-            }
-            #endregion
-
-            #region BARU > AWAITING PAYMENT
-            //TRANSAKSI BARU > AWAITING PAYMENT
-            else if (IDStatusTransaksi == (int)EnumStatusTransaksi.AwaitingPayment
-                && Pembayaran.Count == 0 && !idStatusTransaksiSebelumnya.HasValue)
-            {
-                TBJurnal Jurnal = new TBJurnal
-                {
-                    IDTempat = Transaksi.IDTempat,
-                    Tanggal = TanggalTransaksi,
-                    Keterangan = "",
-                    IDPengguna = IDPenggunaTransaksi,
-                    Referensi = IDTransaksi
-                };
-
-                #region DISCOUNT
-                //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
-                //KREDIT    : PERSEDIAAN & PENJUALAN
-                if (TotalPotonganHargaJualDetail > 0)
-                {
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-
-                    //412 - PIUTANG AFILIASI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //403 - POTONGAN/DISKON PENJUALAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                        Debit = TotalPotonganHargaJualDetail,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-                }
-                #endregion
-
-                #region NO DISCOUNT
-                //DEBIT     : PIUTANG AFILIASI & HPP
-                //KREDIT    : PERSEDIAAN & PENJUALAN
-                else
-                {
-                    //412 - PIUTANG AFILIASI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-
-
-                }
-                #endregion
-
-                db.TBJurnals.InsertOnSubmit(Jurnal);
-            }
-            #endregion
-
-            #region AWAITING PAYMENT > COMPLETED
-            //TRANSAKSI AWAITING PAYMENT > COMPLETED
-            else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete
-                && Pembayaran.Count > 0
-                && idStatusTransaksiSebelumnya.HasValue
-                && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
-            {
-                var _pembayaran = Pembayaran.FirstOrDefault();
-
-                TBJurnal Jurnal = new TBJurnal
-                {
-                    IDTempat = Transaksi.IDTempat,
-                    Tanggal = _pembayaran.Tanggal,
-                    Keterangan = "",
-                    IDPengguna = _pembayaran.IDPengguna,
-                    Referensi = IDTransaksi
-                };
-
-                #region DISCOUNT
-                //DEBIT     : KAS
-                //KREDIT    : PIUTANG  
-                if (TotalPotonganHargaJualDetail > 0)
-                {
-
-                    #region EDIT JURNAL PAS AWAITING PAYMENT NYA HARUS DI EDIT, KARENA ADA PERUBAHAN DISCOUNT DI AKHIR
-                    var DataJurnalAwaitingPayment = db.TBJurnals.FirstOrDefault(dataJurnal => dataJurnal.Referensi == Transaksi.IDTransaksi && dataJurnal.TBJurnalDetails.Count > 3);
-                    db.TBJurnalDetails.DeleteAllOnSubmit(DataJurnalAwaitingPayment.TBJurnalDetails);
-                    db.SubmitChanges();
-
-                    //388 - Penjualan
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-
-                    //412 - PIUTANG
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //403 - POTONGAN/DISKON PENJUALAN
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                        Debit = TotalPotonganHargaJualDetail,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                    db.TBJurnalDetails.InsertAllOnSubmit(DataJurnalAwaitingPayment.TBJurnalDetails);
-                    #endregion
-
-                    #region ADD JURNAL PEMBAYARAN
-                    //387 - KAS
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = IDAkunPembayaran,
-                        Debit = GrandTotal,
-                        Kredit = 0
-                    });
-
-                    //412 - PIUTANG
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = 0,
-                        Kredit = GrandTotal
-                    });
-                    #endregion
-                }
-                #endregion
-
-                #region NO DISCOUNT
-                else
-                {
-                    //DEBIT     : KAS
-                    //KREDIT    : PIUTANG AFILIASI
-                    //387 - KAS
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = IDAkunPembayaran,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //412 - PIUTANG AFILIASI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = 0,
-                        Kredit = GrandTotal + PembulatanJurnal
-                    });
-
-                }
-                #endregion
-
-                db.TBJurnals.InsertOnSubmit(Jurnal);
-            }
-            #endregion
-
-            #region AWAITING PAYMENT > AWAITING PAYMENT (UBAH ORDER)
-            //TRANSAKSI AWAITING PAYMENT > AWAITING PAYMENT
-            else if (IDStatusTransaksi == (int)EnumStatusTransaksi.AwaitingPayment
-                && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
-            {
-                TBJurnal Jurnal = db.TBJurnals.FirstOrDefault(item => item.Referensi.Contains(IDTransaksi));
-                db.TBJurnalDetails.DeleteAllOnSubmit(Jurnal.TBJurnalDetails);
-                db.SubmitChanges();
-
-                #region DISCOUNT
-                //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
-                //KREDIT    : PERSEDIAAN & PENJUALAN
-                if (TotalPotonganHargaJualDetail > 0)
-                {
-                    //412 - PIUTANG AFILIASI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //403 - POTONGAN/DISKON PENJUALAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                        Debit = TotalPotonganHargaJualDetail,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-                }
-                #endregion
-
-                #region NO DISCOUNT
-                //DEBIT     : PIUTANG AFILIASI & HPP
-                //KREDIT    : PERSEDIAAN & PENJUALAN
-                else
-                {
-                    //412 - PIUTANG AFILIASI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                        Debit = GrandTotal + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = Subtotal + Pembulatan + PembulatanJurnal
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan2
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = 0,
-                        Kredit = BiayaTambahan1
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-
-                }
-                #endregion
-
-                db.TBJurnalDetails.InsertAllOnSubmit(Jurnal.TBJurnalDetails);
-            }
-            #endregion
-
-            #region AWAITING PAYMENT > CANCELED
-            //TRANSAKSI AWAITING PAYMENT > CANCELED
-            else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled && idStatusTransaksiSebelumnya.HasValue
-                && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
-            {
-                //INI HANYA DIPANGGIL, KETIKA KLIK TOMBOL BATAL TRANSAKSI
-                if (Transaksi.JumlahProduk != 0)
-                {
-                    TBJurnal Jurnal = new TBJurnal
-                    {
-                        IDTempat = Transaksi.IDTempat,
-                        Tanggal = DateTime.Now,
-                        Keterangan = "VOID TRANSAKSI (AWAITING PAYMENT) - #" + IDTransaksi,
-                        IDPengguna = IDPenggunaTransaksi,
-                        Referensi = IDTransaksi
-                    };
-
-                    #region DISCOUNT
-                    //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
-                    //KREDIT    : PERSEDIAAN & PENJUALAN
-                    if (TotalPotonganHargaJualDetail > 0)
-                    {
-                        //388 - Penjualan
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                            Debit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal,
-                            Kredit = 0
-                        });
-
-                        //TAX
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                            Debit = BiayaTambahan2,
-                            Kredit = 0
-                        });
-
-                        //SERVICES
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                            Debit = BiayaTambahan1,
-                            Kredit = 0
-                        });
-
-                        //400 - PERSEDIAAN
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                            Debit = TotalHargaBeli,
-                            Kredit = 0
-                        });
-
-                        //412 - PIUTANG AFILIASI
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                            Debit = 0,
-                            Kredit = GrandTotal + PembulatanJurnal
-                        });
-
-                        //403 - POTONGAN/DISKON PENJUALAN
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                            Debit = 0,
-                            Kredit = TotalPotonganHargaJualDetail
-                        });
-
-                        //404 - HARGA POKOK PRODUKSI
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                            Debit = 0,
-                            Kredit = TotalHargaBeli
-                        });
-                    }
-                    #endregion
-
-                    #region NO DISCOUNT
-                    //DEBIT     : PIUTANG AFILIASI & HPP
-                    //KREDIT    : PERSEDIAAN & PENJUALAN
-                    else
-                    {
-                        //412 - PIUTANG AFILIASI
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
-                            Debit = 0,
-                            Kredit = GrandTotal + PembulatanJurnal
-                        });
-
-                        //404 - HARGA POKOK PRODUKSI
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                            Debit = 0,
-                            Kredit = TotalHargaBeli
-                        });
-
-                        //388 - Penjualan
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                            Debit = Subtotal + Pembulatan + PembulatanJurnal,
-                            Kredit = 0
-                        });
-
-                        //TAX
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                            Debit = BiayaTambahan2,
-                            Kredit = 0
-                        });
-
-                        //SERVICES
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                            Debit = BiayaTambahan1,
-                            Kredit = 0
-                        });
-
-                        //400 - PERSEDIAAN
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                            Debit = TotalHargaBeli,
-                            Kredit = 0
-                        });
-                    }
-                    #endregion
-
-                    db.TBJurnals.InsertOnSubmit(Jurnal);
-
-                }
-                else //KEJADIAN SPLITBILL ALL ITEM KE TABLE BARU, DAN TRANSFER ALL ITEM.. TP BOCOR KALAU CROSS SEMUA ITEM LALU TEKAN ORDER LG
-                {
-                    TBJurnal DataJurnal = db.TBJurnals.FirstOrDefault(item => item.Referensi == Transaksi.IDTransaksi);
-
-                    db.TBJurnalDetails.DeleteAllOnSubmit(DataJurnal.TBJurnalDetails);
-                    db.TBJurnals.DeleteOnSubmit(DataJurnal);
-
-                    //DataJurnal.Keterangan = "VOID TRANSAKSI (TRANSFER ITEM / SPLITBILL ELSE BAWAH) - #" + IDTransaksi;
-
-                    //foreach (var item in DataJurnal.TBJurnalDetails)
-                    //{
-                    //    if (item.Debit != 0)
-                    //    {
-                    //        item.Kredit = item.Debit;
-                    //        item.Debit = 0;
-                    //    }
-                    //    else
-                    //    {
-                    //        item.Debit = item.Kredit;
-                    //        item.Kredit = 0;
-                    //    }
-                    //}
-                    db.SubmitChanges();
-                }
-
-            }
-            #endregion
-
-            #region COMPLETED > CANCELED
-            //TRANSAKSI COMPLETED > CANCELED
-            else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled && idStatusTransaksiSebelumnya.HasValue
-                && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.Complete)
-            {
-                TBJurnal Jurnal = new TBJurnal
-                {
-                    IDTempat = Transaksi.IDTempat,
-                    Tanggal = DateTime.Now,
-                    Keterangan = "VOID TRANSAKSI - #" + IDTransaksi,
-                    IDPengguna = IDPenggunaTransaksi,
-                    Referensi = IDTransaksi
-                };
-
-                #region DISCOUNT
-                //DEBIT     : PENJUALAN & PERSEDIAAN & POTONGAN/DISKON PENJUALAN
-                //KREDIT    : KAS & HPP
-                if (TotalPotonganHargaJualDetail > 0)
-                {
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = BiayaTambahan2,
-                        Kredit = 0
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = BiayaTambahan1,
-                        Kredit = 0
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                    //KAS
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = IDAkunPembayaran,
-                        Debit = 0,
-                        Kredit = GrandTotal
-                    });
-
-                    //403 - POTONGAN/DISKON PENJUALAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalPotonganHargaJualDetail
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-                }
-                #endregion
-
-                #region NO DISCOUNT
-                //DEBIT     : PENJUALAN & PERSEDIAAN
-                //KREDIT    : KAS & HPP
-                else
-                {
-                    //KAS
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = IDAkunPembayaran,
-                        Debit = 0,
-                        Kredit = GrandTotal
-                    });
-
-                    //404 - HARGA POKOK PRODUKSI
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
-                        Debit = 0,
-                        Kredit = TotalHargaBeli
-                    });
-
-                    //388 - Penjualan
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
-                        Debit = Subtotal + Pembulatan + PembulatanJurnal,
-                        Kredit = 0
-                    });
-
-                    //TAX
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
-                        Debit = BiayaTambahan2,
-                        Kredit = 0
-                    });
-
-                    //SERVICES
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
-                        Debit = BiayaTambahan1,
-                        Kredit = 0
-                    });
-
-                    //400 - PERSEDIAAN
-                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                    {
-                        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                        Debit = TotalHargaBeli,
-                        Kredit = 0
-                    });
-
-                }
-                #endregion
-
-                db.TBJurnals.InsertOnSubmit(Jurnal);
-            }
-            #endregion
-        }
+        ////////////int IDAkunPembayaran = 0;
+        ////////////var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
+
+        ////////////if (KonfigurasiAkun != null)
+        ////////////{
+        ////////////    if (Pembayaran.Count > 0)
+        ////////////        IDAkunPembayaran = (int)db.TBKonfigurasiAkuns.FirstOrDefault(item => item.Nama == Pembayaran.FirstOrDefault().IDJenisPembayaran.ToString()
+        ////////////        && item.IDTempat == 1).IDAkun;
+
+        ////////////    #region BARU > COMPLETE
+        ////////////    //TRANSAKSI BARU > COMPLETED
+        ////////////    if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete
+        ////////////        && Pembayaran.Count > 0 && !idStatusTransaksiSebelumnya.HasValue)
+        ////////////    {
+        ////////////        var _pembayaran = Pembayaran.FirstOrDefault();
+
+        ////////////        TBJurnal Jurnal = new TBJurnal
+        ////////////        {
+        ////////////            IDTempat = Transaksi.IDTempat,
+        ////////////            Tanggal = _pembayaran.Tanggal,
+        ////////////            Keterangan = isRetur == true ? Transaksi.Keterangan : "",
+        ////////////            IDPengguna = _pembayaran.IDPengguna,
+        ////////////            Referensi = IDTransaksi
+        ////////////        };
+
+        ////////////        #region DISCOUNT
+        ////////////        //DEBIT     : KAS & POTONGAN/DISKON PENJUALAN & HPP
+        ////////////        //KREDIT    : PENJUALAN & PERSEDIAAN
+        ////////////        if (TotalPotonganHargaJualDetail > 0)
+        ////////////        {
+        ////////////            if (Pembayaran.Count > 1)
+        ////////////            {
+        ////////////                foreach (var item in Pembayaran)
+        ////////////                {
+        ////////////                    //387 - KAS
+        ////////////                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                    {
+        ////////////                        IDAkun = (int)db.TBKonfigurasiAkuns.FirstOrDefault(x => x.Nama == item.IDJenisPembayaran.ToString()
+        ////////////                        && x.IDTempat == 1).IDAkun,
+        ////////////                        Debit = item.Bayar,
+        ////////////                        Kredit = 0
+        ////////////                    });
+        ////////////                }
+        ////////////            }
+        ////////////            else if (Pembayaran.Count == 1)
+        ////////////            {
+        ////////////                //387 - KAS
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = IDAkunPembayaran,
+        ////////////                    Debit = GrandTotal,
+        ////////////                    Kredit = 0
+        ////////////                });
+        ////////////            }
+
+        ////////////            //403 - POTONGAN/DISKON PENJUALAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                Debit = TotalPotonganHargaJualDetail,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        #region NO DISCOUNT
+        ////////////        //DEBIT     : KAS & HPP
+        ////////////        //KREDIT    : PENJUALAN & PERSEDIAAN && TAX && SERVICES
+        ////////////        else
+        ////////////        {
+        ////////////            if (Pembayaran.Count > 1)
+        ////////////            {
+        ////////////                foreach (var item in Pembayaran)
+        ////////////                {
+        ////////////                    //387 - KAS
+        ////////////                    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                    {
+        ////////////                        IDAkun = (int)db.TBKonfigurasiAkuns.FirstOrDefault(x => x.Nama == item.IDJenisPembayaran.ToString()
+        ////////////                        && x.IDTempat == 1).IDAkun,
+        ////////////                        Debit = item.Bayar,
+        ////////////                        Kredit = 0
+        ////////////                    });
+        ////////////                }
+        ////////////            }
+        ////////////            else if (Pembayaran.Count == 1)
+        ////////////            {
+        ////////////                //387 - KAS
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = IDAkunPembayaran,
+        ////////////                    Debit = GrandTotal,
+        ////////////                    Kredit = 0
+        ////////////                });
+        ////////////            }
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        db.TBJurnals.InsertOnSubmit(Jurnal);
+        ////////////    }
+        ////////////    #endregion
+
+        ////////////    #region BARU > AWAITING PAYMENT
+        ////////////    //TRANSAKSI BARU > AWAITING PAYMENT
+        ////////////    else if (IDStatusTransaksi == (int)EnumStatusTransaksi.AwaitingPayment
+        ////////////        && Pembayaran.Count == 0 && !idStatusTransaksiSebelumnya.HasValue)
+        ////////////    {
+        ////////////        TBJurnal Jurnal = new TBJurnal
+        ////////////        {
+        ////////////            IDTempat = Transaksi.IDTempat,
+        ////////////            Tanggal = TanggalTransaksi,
+        ////////////            Keterangan = "",
+        ////////////            IDPengguna = IDPenggunaTransaksi,
+        ////////////            Referensi = IDTransaksi
+        ////////////        };
+
+        ////////////        #region DISCOUNT
+        ////////////        //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
+        ////////////        //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////        if (TotalPotonganHargaJualDetail > 0)
+        ////////////        {
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+
+        ////////////            //412 - PIUTANG AFILIASI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //403 - POTONGAN/DISKON PENJUALAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                Debit = TotalPotonganHargaJualDetail,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        #region NO DISCOUNT
+        ////////////        //DEBIT     : PIUTANG AFILIASI & HPP
+        ////////////        //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////        else
+        ////////////        {
+        ////////////            //412 - PIUTANG AFILIASI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+
+
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        db.TBJurnals.InsertOnSubmit(Jurnal);
+        ////////////    }
+        ////////////    #endregion
+
+        ////////////    #region AWAITING PAYMENT > COMPLETED
+        ////////////    //TRANSAKSI AWAITING PAYMENT > COMPLETED
+        ////////////    else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Complete
+        ////////////        && Pembayaran.Count > 0
+        ////////////        && idStatusTransaksiSebelumnya.HasValue
+        ////////////        && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
+        ////////////    {
+        ////////////        var _pembayaran = Pembayaran.FirstOrDefault();
+
+        ////////////        TBJurnal Jurnal = new TBJurnal
+        ////////////        {
+        ////////////            IDTempat = Transaksi.IDTempat,
+        ////////////            Tanggal = _pembayaran.Tanggal,
+        ////////////            Keterangan = "",
+        ////////////            IDPengguna = _pembayaran.IDPengguna,
+        ////////////            Referensi = IDTransaksi
+        ////////////        };
+
+        ////////////        #region DISCOUNT
+        ////////////        //DEBIT     : KAS
+        ////////////        //KREDIT    : PIUTANG  
+        ////////////        if (TotalPotonganHargaJualDetail > 0)
+        ////////////        {
+
+        ////////////            #region EDIT JURNAL PAS AWAITING PAYMENT NYA HARUS DI EDIT, KARENA ADA PERUBAHAN DISCOUNT DI AKHIR
+        ////////////            var DataJurnalAwaitingPayment = db.TBJurnals.FirstOrDefault(dataJurnal => dataJurnal.Referensi == Transaksi.IDTransaksi && dataJurnal.TBJurnalDetails.Count > 3);
+        ////////////            db.TBJurnalDetails.DeleteAllOnSubmit(DataJurnalAwaitingPayment.TBJurnalDetails);
+        ////////////            db.SubmitChanges();
+
+        ////////////            //388 - Penjualan
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+
+        ////////////            //412 - PIUTANG
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //403 - POTONGAN/DISKON PENJUALAN
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                Debit = TotalPotonganHargaJualDetail,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            DataJurnalAwaitingPayment.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            db.TBJurnalDetails.InsertAllOnSubmit(DataJurnalAwaitingPayment.TBJurnalDetails);
+        ////////////            #endregion
+
+        ////////////            #region ADD JURNAL PEMBAYARAN
+        ////////////            //387 - KAS
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = IDAkunPembayaran,
+        ////////////                Debit = GrandTotal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //412 - PIUTANG
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = GrandTotal
+        ////////////            });
+        ////////////            #endregion
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        #region NO DISCOUNT
+        ////////////        else
+        ////////////        {
+        ////////////            //DEBIT     : KAS
+        ////////////            //KREDIT    : PIUTANG AFILIASI
+        ////////////            //387 - KAS
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = IDAkunPembayaran,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //412 - PIUTANG AFILIASI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = GrandTotal + PembulatanJurnal
+        ////////////            });
+
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        db.TBJurnals.InsertOnSubmit(Jurnal);
+        ////////////    }
+        ////////////    #endregion
+
+        ////////////    #region AWAITING PAYMENT > AWAITING PAYMENT (UBAH ORDER)
+        ////////////    //TRANSAKSI AWAITING PAYMENT > AWAITING PAYMENT
+        ////////////    else if (IDStatusTransaksi == (int)EnumStatusTransaksi.AwaitingPayment
+        ////////////        && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
+        ////////////    {
+        ////////////        TBJurnal Jurnal = db.TBJurnals.FirstOrDefault(item => item.Referensi.Contains(IDTransaksi));
+        ////////////        db.TBJurnalDetails.DeleteAllOnSubmit(Jurnal.TBJurnalDetails);
+        ////////////        db.SubmitChanges();
+
+        ////////////        #region DISCOUNT
+        ////////////        //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
+        ////////////        //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////        if (TotalPotonganHargaJualDetail > 0)
+        ////////////        {
+        ////////////            //412 - PIUTANG AFILIASI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //403 - POTONGAN/DISKON PENJUALAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                Debit = TotalPotonganHargaJualDetail,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        #region NO DISCOUNT
+        ////////////        //DEBIT     : PIUTANG AFILIASI & HPP
+        ////////////        //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////        else
+        ////////////        {
+        ////////////            //412 - PIUTANG AFILIASI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                Debit = GrandTotal + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = Subtotal + Pembulatan + PembulatanJurnal
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan2
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = BiayaTambahan1
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        db.TBJurnalDetails.InsertAllOnSubmit(Jurnal.TBJurnalDetails);
+        ////////////    }
+        ////////////    #endregion
+
+        ////////////    #region AWAITING PAYMENT > CANCELED
+        ////////////    //TRANSAKSI AWAITING PAYMENT > CANCELED
+        ////////////    else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled && idStatusTransaksiSebelumnya.HasValue
+        ////////////        && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.AwaitingPayment)
+        ////////////    {
+        ////////////        //INI HANYA DIPANGGIL, KETIKA KLIK TOMBOL BATAL TRANSAKSI
+        ////////////        if (Transaksi.JumlahProduk != 0)
+        ////////////        {
+        ////////////            TBJurnal Jurnal = new TBJurnal
+        ////////////            {
+        ////////////                IDTempat = Transaksi.IDTempat,
+        ////////////                Tanggal = DateTime.Now,
+        ////////////                Keterangan = "VOID TRANSAKSI (AWAITING PAYMENT) - #" + IDTransaksi,
+        ////////////                IDPengguna = IDPenggunaTransaksi,
+        ////////////                Referensi = IDTransaksi
+        ////////////            };
+
+        ////////////            #region DISCOUNT
+        ////////////            //DEBIT     : PIUTANG AFILIASI & POTONGAN/DISKON PENJUALAN & HPP
+        ////////////            //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////            if (TotalPotonganHargaJualDetail > 0)
+        ////////////            {
+        ////////////                //388 - Penjualan
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                    Debit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //TAX
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                    Debit = BiayaTambahan2,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //SERVICES
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                    Debit = BiayaTambahan1,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //400 - PERSEDIAAN
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                    Debit = TotalHargaBeli,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //412 - PIUTANG AFILIASI
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                    Debit = 0,
+        ////////////                    Kredit = GrandTotal + PembulatanJurnal
+        ////////////                });
+
+        ////////////                //403 - POTONGAN/DISKON PENJUALAN
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                    Debit = 0,
+        ////////////                    Kredit = TotalPotonganHargaJualDetail
+        ////////////                });
+
+        ////////////                //404 - HARGA POKOK PRODUKSI
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                    Debit = 0,
+        ////////////                    Kredit = TotalHargaBeli
+        ////////////                });
+        ////////////            }
+        ////////////            #endregion
+
+        ////////////            #region NO DISCOUNT
+        ////////////            //DEBIT     : PIUTANG AFILIASI & HPP
+        ////////////            //KREDIT    : PERSEDIAAN & PENJUALAN
+        ////////////            else
+        ////////////            {
+        ////////////                //412 - PIUTANG AFILIASI
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PIUTANG").IDAkun,
+        ////////////                    Debit = 0,
+        ////////////                    Kredit = GrandTotal + PembulatanJurnal
+        ////////////                });
+
+        ////////////                //404 - HARGA POKOK PRODUKSI
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                    Debit = 0,
+        ////////////                    Kredit = TotalHargaBeli
+        ////////////                });
+
+        ////////////                //388 - Penjualan
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                    Debit = Subtotal + Pembulatan + PembulatanJurnal,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //TAX
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                    Debit = BiayaTambahan2,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //SERVICES
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                    Debit = BiayaTambahan1,
+        ////////////                    Kredit = 0
+        ////////////                });
+
+        ////////////                //400 - PERSEDIAAN
+        ////////////                Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////                {
+        ////////////                    IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                    Debit = TotalHargaBeli,
+        ////////////                    Kredit = 0
+        ////////////                });
+        ////////////            }
+        ////////////            #endregion
+
+        ////////////            db.TBJurnals.InsertOnSubmit(Jurnal);
+
+        ////////////        }
+        ////////////        else //KEJADIAN SPLITBILL ALL ITEM KE TABLE BARU, DAN TRANSFER ALL ITEM.. TP BOCOR KALAU CROSS SEMUA ITEM LALU TEKAN ORDER LG
+        ////////////        {
+        ////////////            TBJurnal DataJurnal = db.TBJurnals.FirstOrDefault(item => item.Referensi == Transaksi.IDTransaksi);
+
+        ////////////            db.TBJurnalDetails.DeleteAllOnSubmit(DataJurnal.TBJurnalDetails);
+        ////////////            db.TBJurnals.DeleteOnSubmit(DataJurnal);
+
+        ////////////            //DataJurnal.Keterangan = "VOID TRANSAKSI (TRANSFER ITEM / SPLITBILL ELSE BAWAH) - #" + IDTransaksi;
+
+        ////////////            //foreach (var item in DataJurnal.TBJurnalDetails)
+        ////////////            //{
+        ////////////            //    if (item.Debit != 0)
+        ////////////            //    {
+        ////////////            //        item.Kredit = item.Debit;
+        ////////////            //        item.Debit = 0;
+        ////////////            //    }
+        ////////////            //    else
+        ////////////            //    {
+        ////////////            //        item.Debit = item.Kredit;
+        ////////////            //        item.Kredit = 0;
+        ////////////            //    }
+        ////////////            //}
+        ////////////            db.SubmitChanges();
+        ////////////        }
+
+        ////////////    }
+        ////////////    #endregion
+
+        ////////////    #region COMPLETED > CANCELED
+        ////////////    //TRANSAKSI COMPLETED > CANCELED
+        ////////////    else if (IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled && idStatusTransaksiSebelumnya.HasValue
+        ////////////        && idStatusTransaksiSebelumnya == (int)EnumStatusTransaksi.Complete)
+        ////////////    {
+        ////////////        TBJurnal Jurnal = new TBJurnal
+        ////////////        {
+        ////////////            IDTempat = Transaksi.IDTempat,
+        ////////////            Tanggal = DateTime.Now,
+        ////////////            Keterangan = "VOID TRANSAKSI - #" + IDTransaksi,
+        ////////////            IDPengguna = IDPenggunaTransaksi,
+        ////////////            Referensi = IDTransaksi
+        ////////////        };
+
+        ////////////        #region DISCOUNT
+        ////////////        //DEBIT     : PENJUALAN & PERSEDIAAN & POTONGAN/DISKON PENJUALAN
+        ////////////        //KREDIT    : KAS & HPP
+        ////////////        if (TotalPotonganHargaJualDetail > 0)
+        ////////////        {
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = Subtotal + TotalPotonganHargaJualDetail + BiayaPengiriman + Pembulatan + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = BiayaTambahan2,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = BiayaTambahan1,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //KAS
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = IDAkunPembayaran,
+        ////////////                Debit = 0,
+        ////////////                Kredit = GrandTotal
+        ////////////            });
+
+        ////////////            //403 - POTONGAN/DISKON PENJUALAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "POTONGAN/DISKON PENJUALAN").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalPotonganHargaJualDetail
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        #region NO DISCOUNT
+        ////////////        //DEBIT     : PENJUALAN & PERSEDIAAN
+        ////////////        //KREDIT    : KAS & HPP
+        ////////////        else
+        ////////////        {
+        ////////////            //KAS
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = IDAkunPembayaran,
+        ////////////                Debit = 0,
+        ////////////                Kredit = GrandTotal
+        ////////////            });
+
+        ////////////            //404 - HARGA POKOK PRODUKSI
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HPP").IDAkun,
+        ////////////                Debit = 0,
+        ////////////                Kredit = TotalHargaBeli
+        ////////////            });
+
+        ////////////            //388 - Penjualan
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PENJUALAN").IDAkun,
+        ////////////                Debit = Subtotal + Pembulatan + PembulatanJurnal,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //TAX
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG TAX").IDAkun,
+        ////////////                Debit = BiayaTambahan2,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //SERVICES
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG SERVICE").IDAkun,
+        ////////////                Debit = BiayaTambahan1,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////            //400 - PERSEDIAAN
+        ////////////            Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+        ////////////            {
+        ////////////                IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+        ////////////                Debit = TotalHargaBeli,
+        ////////////                Kredit = 0
+        ////////////            });
+
+        ////////////        }
+        ////////////        #endregion
+
+        ////////////        db.TBJurnals.InsertOnSubmit(Jurnal);
+        ////////////    }
+        ////////////    #endregion
+        ////////////}
         #endregion
 
         return IDTransaksi;

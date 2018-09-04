@@ -40,7 +40,7 @@ public partial class WITAdministrator_Laporan_Transaksi_Transaksi : System.Web.U
                     KategoriProduk_Class KategoriProduk_Class = new KategoriProduk_Class();
                     PemilikProduk_Class ClassPemilikProduk = new PemilikProduk_Class(db);
 
-                    DropDownListJenisStok.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
+                    DropDownListJenisStok.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
                     DropDownListJenisStok.Items.Insert(1, new ListItem { Value = "1", Text = "Ada Stok", Selected = true });
                     DropDownListJenisStok.Items.Insert(2, new ListItem { Value = "2", Text = "Tidak Ada Stok" });
                     DropDownListJenisStok.Items.Insert(3, new ListItem { Value = "3", Text = "Minus" });

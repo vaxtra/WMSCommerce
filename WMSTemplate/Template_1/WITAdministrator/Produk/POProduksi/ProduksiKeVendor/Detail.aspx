@@ -27,8 +27,8 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="card">
-        <div class="card-header">
-            <ul id="myTab" class="nav nav-tabs card-header-tabs">
+        <div class="card-header bg-smoke">
+            <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a href="#tabData" id="data-tab" class="nav-link active font-weight-normal" data-toggle="tab">Data</a></li>
                 <li class="nav-item"><a href="#tabPengiriman" id="pengiriman-tab" class="nav-link font-weight-normal" data-toggle="tab">Pengiriman</a></li>
                 <li class="nav-item"><a href="#tabPenerimaan" id="penerimaan-tab" class="nav-link font-weight-normal" data-toggle="tab">Penerimaan</a></li>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 class="border-bottom text-info">STATUS</h3>
+                                <h3 class="border-bottom">STATUS</h3>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="border-bottom text-info">VENDOR</h3>
+                                <h3 class="border-bottom">VENDOR</h3>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
@@ -261,7 +261,7 @@
                 </div>
                 <div class="tab-pane" id="tabPengiriman">
                     <div class="form-group">
-                        <h3 class="border-bottom text-info">PENGIRIMAN</h3>
+                        <h3 class="border-bottom">PENGIRIMAN</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -293,7 +293,7 @@
                     <asp:UpdatePanel ID="UpdatePanelPengirimanDetail" runat="server">
                         <ContentTemplate>
                             <div class="form-group">
-                                <h3 class="border-bottom text-info">DETAIL PENGIRIMAN
+                                <h3 class="border-bottom">DETAIL PENGIRIMAN
                             <asp:Label ID="LabelIDPengiriman" runat="server"></asp:Label></h3>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover table-bordered">
@@ -328,7 +328,7 @@
                 </div>
                 <div class="tab-pane" id="tabPenerimaan">
                     <div class="form-group">
-                        <h3 class="border-bottom text-info">PENERIMAAN</h3>
+                        <h3 class="border-bottom">PENERIMAAN</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -360,7 +360,7 @@
                     <asp:UpdatePanel ID="UpdatePanelPenerimaanDetail" runat="server">
                         <ContentTemplate>
                             <div class="form-group">
-                                <h3 class="border-bottom text-info">DETAIL PENERIMAAN
+                                <h3 class="border-bottom">DETAIL PENERIMAAN
                             <asp:Label ID="LabelIDPenerimaan" runat="server"></asp:Label></h3>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover table-bordered">

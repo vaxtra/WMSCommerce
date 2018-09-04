@@ -52,8 +52,8 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="card">
-        <div class="card-header">
-            <ul id="myTab" class="nav nav-tabs card-header-tabs">
+        <div class="card-header bg-smoke">
+            <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a href="#tabInHouseProduction" id="InHouseProduction-tab" class="nav-link active" data-toggle="tab">In-House Production</a></li>
                 <li class="nav-item"><a href="#tabPenerimaan" id="Penerimaan-tab" class="nav-link" data-toggle="tab">Penerimaan</a></li>
             </ul>

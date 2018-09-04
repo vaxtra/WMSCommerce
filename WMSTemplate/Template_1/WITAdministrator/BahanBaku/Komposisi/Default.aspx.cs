@@ -138,7 +138,7 @@ public partial class WITAdministrator_BahanBaku_Komposisi_Default : System.Web.U
     }
     #endregion
 
-    protected void ButtonPerbaharuiSemuaHargaPokokProduksiBahanBaku_Click(object sender, EventArgs e)
+    protected void ImageButtonUpdate_Click(object sender, ImageClickEventArgs e)
     {
         PenggunaLogin pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 

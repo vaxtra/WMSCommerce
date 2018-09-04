@@ -14,8 +14,8 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a runat="server" id="linkDownload" class="btn btn-dark mr-1">Download</a>
-    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-dark btn-const mr-1" />
+    <a runat="server" id="linkDownload" class="btn btn-secondary mr-1">Download</a>
+    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-secondary btn-const mr-1" />
     <a runat="server" id="linkKembali" class="btn btn-danger btn-const">Kembali</a>
 </asp:Content>
 

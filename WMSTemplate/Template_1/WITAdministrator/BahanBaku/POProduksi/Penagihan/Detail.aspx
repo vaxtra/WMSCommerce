@@ -24,9 +24,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">STATUS</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Status</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="text-muted font-weight-bold">ID</label>
@@ -45,9 +43,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">SUPPLIER</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Supplier</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -84,9 +80,7 @@
             </div>
             <div class="form-group">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">DETAIL</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">Detail</h4>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">

@@ -1619,7 +1619,7 @@ public class ImportExcel_Class
                 KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
                 StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
 
-                List<StokProduk_Model> ListPerubahanStokProduk = new List<StokProduk_Model>();
+                List<StokProduk_ModelImport> ListPerubahanStokProduk = new List<StokProduk_ModelImport>();
 
                 for (int rowIndex = Sheet.Cells.FirstRowIndex + 1; rowIndex <= Sheet.Cells.LastRowIndex; rowIndex++)
                 {
@@ -1706,7 +1706,7 @@ public class ImportExcel_Class
                         StokProduk.HargaJual = _hargaJual.StringValue.ToDecimal();
                     }
 
-                    ListPerubahanStokProduk.Add(new StokProduk_Model
+                    ListPerubahanStokProduk.Add(new StokProduk_ModelImport
                     {
                         StokProduk = StokProduk,
                         Jumlah = _quantity.StringValue.ToInt()

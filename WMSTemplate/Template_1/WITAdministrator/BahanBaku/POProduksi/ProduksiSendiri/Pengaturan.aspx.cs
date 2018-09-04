@@ -213,7 +213,7 @@ public partial class WITAdministrator_BahanBaku_POProduksi_ProduksiSendiri_Penga
             proyeksiKomposisi = db.TBProyeksiKomposisis.Where(item => item.IDProyeksi == IDProyeksi && item.BahanBakuDasar == false).OrderBy(data => data.TBBahanBaku.Nama).ToArray();
         }
 
-        TBStokBahanBaku[] daftarStokBahanBaku = db.TBStokBahanBakus.AsEnumerable().Where(item => item.IDTempat == pengguna.IDTempat && proyeksiKomposisi.Any(data => data.IDBahanBaku == item.IDBahanBaku)).OrderBy(item => item.TBBahanBaku.Nama).ToArray();
+        TBStokBahanBaku[] daftarStokBahanBaku = db.TBStokBahanBakus.AsEnumerable().Where(item => item.IDTempat == pengguna.IDTempat).OrderBy(item => item.TBBahanBaku.Nama).ToArray();
         DropDownListStokBahanBaku.DataSource = daftarStokBahanBaku.Select(item => new { item.IDStokBahanBaku, item.TBBahanBaku.Nama }).ToArray();
         DropDownListStokBahanBaku.DataTextField = "Nama";
         DropDownListStokBahanBaku.DataValueField = "IDStokBahanBaku";

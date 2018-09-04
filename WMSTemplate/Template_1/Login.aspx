@@ -4,7 +4,7 @@
 
 <head runat="server">
     <%--    <link rel="icon" href="../images/Support/fav.png" />--%>
-    <title>WIT. Management System</title>
+    <title>LOGIN</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,15 +31,14 @@
             align-items: center;
             padding-top: 40px;
             padding-bottom: 40px;
-            background-color: #f5f5f5;
         }
     </style>
 </head>
 <body class="bg-light">
     <form id="formWITEnterpriseSystem" runat="server" class="form-signin">
         <div class="text-center mb-4">
-            <img class="mb-4" src="/images/logo_wms.png?w=72" />
-            <h3 class="font-weight-light">WIT. MANAGEMENT SYSTEM</h3>
+            <img class="mb-4" src="/images/logo_wit.png?w=72" />
+            <h3 class="font-weight-light">WMS COMMERCE</h3>
             <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
         </div>
 
@@ -53,13 +52,13 @@
             <label for="TextBoxPassword">Password</label>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                <asp:Button ID="ButtonLogin" runat="server" class="btn btn-lg btn-block text-white" Text="Login" style="background: #02aab0; border-color: #02aab0;" OnClick="ButtonLogin_Click" />
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <asp:Button ID="ButtonLogin" runat="server" class="btn btn-lg btn-success btn-block" Text="Login" OnClick="ButtonLogin_Click" />
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                <a href="Key.aspx" class="btn btn-danger btn-lg btn-block text-white" style="background: #00cdac; border-color: #00cdac;">Store Key</a>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                <a href="Key.aspx" class="btn btn-link btn-sm">Store Key</a>
             </div>
         </div>
-        <p class="mt-5 mb-3 text-black-50 text-center">Developed by <a href="http://wit.co.id" target="_blank">WIT. Indonesia</a>  &copy; 2013</p>
+        <p class="mt-5 mb-3 text-black-50 text-center">Developed by <a href="http://wit.co.id" target="_blank">WIT. Indonesia</a>  &copy; 2018</p>
     </form>
 </body>

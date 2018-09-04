@@ -22,7 +22,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h3 class="border-bottom text-info">VENDOR</h3>
+                    <h3 class="border-bottom">VENDOR</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <label class="font-weight-bold text-muted">Produk</label>
                         <div class="table-responsive">
@@ -137,33 +137,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="font-weight-bold text-muted">Grandtotal</label>
-                                            <asp:TextBox ID="TextBoxGrandtotal" runat="server" CssClass="form-control text-right input-sm" Text="0" Enabled="false"></asp:TextBox>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="font-weight-bold text-muted">Pembayar</label>
-                                            <asp:TextBox ID="TextBoxPenggunaDP" runat="server" CssClass="form-control text-right input-sm" Text="0" Enabled="false"></asp:TextBox>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold text-muted">Tanggal</label>
-                                            <asp:TextBox ID="TextBoxTanggal" runat="server" CssClass="form-control input-sm Tanggal"></asp:TextBox>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold text-muted">Jenis Pembayaran</label>
-                                            <asp:DropDownList ID="DropDownListJenisPembayaran" CssClass="select2" Width="100%" runat="server"></asp:DropDownList>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold text-muted">Down Payment</label>
-                                            <asp:TextBox ID="TextBoxDownPayment" runat="server" onfocus="this.select();" CssClass="form-control input-sm text-right InputDesimal" Text="0"></asp:TextBox>
-                                        </div>
-                                    </div>
+                                    <label class="font-weight-bold text-muted">Grandtotal</label>
+                                    <asp:TextBox ID="TextBoxGrandtotal" runat="server" CssClass="form-control text-right input-sm" Text="0" Enabled="false"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -171,6 +146,31 @@
                                     <label class="font-weight-bold text-muted">Keterangan</label>
                                     <asp:TextBox ID="TextBoxKeterangan" CssClass="form-control input-sm" Enabled="false" runat="server" TextMode="MultiLine"></asp:TextBox>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="border-bottom">BAYAR</h3>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="font-weight-bold text-muted">Tanggal</label>
+                                <asp:TextBox ID="TextBoxTanggal" runat="server" CssClass="form-control input-sm Tanggal"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="font-weight-bold text-muted">Pembayar</label>
+                                <asp:TextBox ID="TextBoxPenggunaDP" runat="server" CssClass="form-control text-right input-sm" Text="0" Enabled="false"></asp:TextBox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="font-weight-bold text-muted">Jenis Pembayaran</label>
+                                <asp:DropDownList ID="DropDownListJenisPembayaran" CssClass="select2" Width="100%" runat="server"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="font-weight-bold text-muted">Down Payment</label>
+                                <asp:TextBox ID="TextBoxDownPayment" runat="server" onfocus="this.select();" CssClass="form-control input-sm text-right InputDesimal" Text="0"></asp:TextBox>
                             </div>
                         </div>
                     </div>

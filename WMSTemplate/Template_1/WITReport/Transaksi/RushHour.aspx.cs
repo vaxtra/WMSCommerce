@@ -276,8 +276,8 @@ public partial class WITReport_Transaksi_RushHour : System.Web.UI.Page
 
         if (Pengguna.PointOfSales == TipePointOfSales.Retail)
         {
-            ((HtmlTableCell)(e.Item.FindControl("BodyTamu"))).Attributes.Add("class", "hidden");
-            ((HtmlTableCell)(e.Item.FindControl("BodyPersentase"))).Attributes.Add("class", "hidden");
+            ((HtmlTableCell)(e.Item.FindControl("BodyTamu"))).Attributes.Add("class", "d-none");
+            ((HtmlTableCell)(e.Item.FindControl("BodyPersentase"))).Attributes.Add("class", "d-none");
         }
     }
 }

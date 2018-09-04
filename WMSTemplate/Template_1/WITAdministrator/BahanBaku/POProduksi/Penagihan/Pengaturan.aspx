@@ -27,9 +27,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">SUPPLIER</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Supplier</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -58,9 +56,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">DETAIL</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Detail</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row">

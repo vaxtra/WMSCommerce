@@ -9,7 +9,7 @@ body {
 
 tbody > tr > td .form-control {
     width: 100%;
-    height: 38px;
+    /*height: 38px;*/
 }
 
 .card-header {
@@ -130,7 +130,7 @@ thead th.header {
 .bg-sticky-yellow {
     background-color: #fff2b5 !important;
 }
- 
+
 .bg-sticky-green {
     background-color: #c7efc4 !important;
 }
@@ -139,6 +139,7 @@ thead th.header {
     background: linear-gradient(120deg, #1dccdf 0%, #1de4bd 100%);
     color: #FFFFFF !important;
 }
+
 .bg-gradient-red {
     background: linear-gradient(to right, #cb2d3e 0%, #ef473a 100%);
     color: #FFFFFF !important;
@@ -298,7 +299,7 @@ thead th.header {
     .nav-tabs > li > a {
         padding: 10px 20px;
         font-weight: bold;
-        color: #BDBDBD !important;
+        color: #212529 !important;
     }
 
 .card-header-tabs > li > a {
@@ -306,9 +307,9 @@ thead th.header {
     font-weight: bold;
 }
 
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        color: #212529 !important;
-    }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #212529 !important;
+}
 
 /*ALERT*/
 .alert-primary {
@@ -355,8 +356,12 @@ thead th.header {
     background-color: #fafafa;
     border-color: #e9eaec;
     text-transform: uppercase;
-    color: #717171;
+    color: #6c757d;
 }
+
+    .table .thead-light th, a {
+        text-transform: unset !important;
+    }
 
 .table-primary, .table-primary > td, .table-primary > th {
     background-color: #BBDEFB;
@@ -691,12 +696,12 @@ th > .select2 {
         margin-top: 3px;
     }
 
-.select2-container .select2-choice .select2-arrow {
-    border-left: 0px;
-    background: unset;
-    background-image: none;
-    margin-top: 3px;
-}
+    .select2-container .select2-choice .select2-arrow {
+        border-left: 0px;
+        background: unset;
+        background-image: none;
+        margin-top: 3px;
+    }
 
 .select2-drop {
     border-radius: 0 0 .25rem .25rem;
@@ -762,3 +767,22 @@ th > .select2 {
     margin: 7px 7px;
     color: #495057 !important;
 }
+
+.btn-group-vertical > .btn, .btn-group > .btn {
+    color: #616161;
+    background-color: #F8F9FA;
+    border-color: #BDBDBD;
+    font-weight: 400;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+/*.multiselect-container > li > a {
+    text-decoration: left !important;
+}
+
+.multiselect-container{
+    width: 300px;
+}*/

@@ -127,6 +127,7 @@ public class Menubar_Class : BaseWMSClass
         {
             if (Menubar != null)
             {
+                db.TBMenubarPenggunaGrups.DeleteAllOnSubmit(Menubar.TBMenubarPenggunaGrups);
                 db.TBMenubars.DeleteOnSubmit(Menubar);
 
                 Notifikasi(EnumAlert.success, Pengguna.IDPengguna, "Hapus Menubar " + Menubar.Nama + " berhasil");

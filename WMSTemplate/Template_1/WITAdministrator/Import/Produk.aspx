@@ -23,9 +23,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="card">
-                <div class="card-header bg-gradient-black">
-                    <h5 class="font-weight-light">IMPORT PRODUK</h5>
-                </div>
+                <h4 class="card-header bg-smoke">Import Produk</h4>
                 <div class="card-body">
                     <div class="form-group">
                         <a href="/file_excel/template/(Format) Produk.xls">download template</a>
@@ -56,9 +54,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="card h-100">
-                <div class="card-header bg-gradient-black">
-                    <h5 class="font-weight-light">IMPORT CHECK EXCEL PRODUCT DUPLICATE</h5>
-                </div>
+                <h4 class="card-header bg-smoke">Import Check Excel Product Duplicate</h4>
                 <div class="card-body">
                     <div class="form-group">
                         <asp:FileUpload ID="FileUploadChecker" runat="server" CssClass="form-control" Width="100%" />

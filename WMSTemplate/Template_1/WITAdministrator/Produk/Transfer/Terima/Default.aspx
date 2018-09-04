@@ -4,11 +4,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
-    Penerimaan Transfer Produk
+    Terima Transfer Produk
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <a href="Import.aspx" class="btn btn-dark btn-const">Import</a>
+    <a href="Import.aspx" class="btn btn-secondary btn-const">Import</a>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -61,12 +61,13 @@
             </asp:UpdatePanel>
             <div class="form-group">
                 <div class="card">
-                    <div class="card-body">
-                        <ul class="nav nav-tabs" role="tablist">
+                    <div class="card-header bg-smoke">
+                        <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item"><a href="#proses" class="nav-link active" data-toggle="tab">Proses</a></li>
                             <li class="nav-item"><a href="#selesai" class="nav-link" data-toggle="tab">Selesai</a></li>
                         </ul>
-                        <br />
+                    </div>
+                    <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="proses">
                                 <asp:UpdatePanel ID="UpdatePanelProses" runat="server">
@@ -92,7 +93,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="/WITWarehouse/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>
@@ -101,7 +102,7 @@
                                                                 <td class="text-right fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
                                                                 <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
                                                                 <td class="text-right fitSize">
-                                                                    <a class="btn btn-primary btn-xs" href="Pengaturan.aspx?id=<%# Eval("IDTransferProduk") %>">Terima</a>
+                                                                    <a class="btn btn-outline-primary btn-xs" href="Pengaturan.aspx?id=<%# Eval("IDTransferProduk") %>">Terima</a>
                                                                 </td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -143,7 +144,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="/WITWarehouse/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>

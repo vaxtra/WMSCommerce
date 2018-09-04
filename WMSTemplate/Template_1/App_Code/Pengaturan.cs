@@ -299,7 +299,7 @@ public static class Pengaturan
         var Harga = harga.HasValue ? harga.Value : 0;
 
         if (Harga < 0)
-            return "<td class='text-right FontRed'>" + "(" + Pengaturan.FormatHarga(Math.Abs(Harga)) + ")" + "</td>";
+            return "<td class='text-right text-danger'>" + "(" + Pengaturan.FormatHarga(Math.Abs(Harga)) + ")" + "</td>";
         else
             return "<td class='text-right'>" + Pengaturan.FormatHarga(Harga) + "</td>";
     }
@@ -1104,14 +1104,14 @@ public static class Pengaturan
     {
         switch (status.ToInt())
         {
-            case (int)PilihanJenisTransfer.TransferProses: return "<label class=\"label label-info\">Proses</label>";
-            case (int)PilihanJenisTransfer.PermintaanProses: return "<label class=\"label label-info\">Proses</label>";
-            case (int)PilihanJenisTransfer.TransferBatal: return "<label class=\"label label-danger\">Batal</label>";
-            case (int)PilihanJenisTransfer.PermintaanBatal: return "<label class=\"label label-danger\">Batal</label>";
-            case (int)PilihanJenisTransfer.TransferPending: return "<label class=\"label label-default\">Pending</label>";
-            case (int)PilihanJenisTransfer.PermintaanPending: return "<label class=\"label label-default\">Pending</label>";
-            case (int)PilihanJenisTransfer.TransferSelesai: return "<label class=\"label label-success\">Selesai</label>";
-            case (int)PilihanJenisTransfer.PermintaanSelesai: return "<label class=\"label label-success\">Selesai</label>";
+            case (int)PilihanJenisTransfer.TransferProses: return Manage.HTMLBagde(EnumColor.Info, "Proses");
+            case (int)PilihanJenisTransfer.PermintaanProses: return Manage.HTMLBagde(EnumColor.Info, "Proses");
+            case (int)PilihanJenisTransfer.TransferBatal: return Manage.HTMLBagde(EnumColor.Danger, "Batal");
+            case (int)PilihanJenisTransfer.PermintaanBatal: return Manage.HTMLBagde(EnumColor.Danger, "Batal");
+            case (int)PilihanJenisTransfer.TransferPending: return Manage.HTMLBagde(EnumColor.Secondary, "Pending");
+            case (int)PilihanJenisTransfer.PermintaanPending: return Manage.HTMLBagde(EnumColor.Secondary, "Pending");
+            case (int)PilihanJenisTransfer.TransferSelesai: return Manage.HTMLBagde(EnumColor.Success, "Selesai");
+            case (int)PilihanJenisTransfer.PermintaanSelesai: return Manage.HTMLBagde(EnumColor.Success, "Selesai");
             default: return string.Empty;
         }
     }

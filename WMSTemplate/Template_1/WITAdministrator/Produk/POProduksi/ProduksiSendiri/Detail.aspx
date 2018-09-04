@@ -27,8 +27,8 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="card">
-        <div class="card-header">
-            <ul id="myTab" class="nav nav-tabs card-header-tabs">
+        <div class="card-header bg-smoke">
+            <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item"><a href="#tabData" id="data-tab" class="nav-link active font-weight-normal" data-toggle="tab">Data</a></li>
                 <li class="nav-item"><a href="#tabPengiriman" id="pengiriman-tab" class="nav-link font-weight-normal" data-toggle="tab">Pengiriman</a></li>
                 <li class="nav-item"><a href="#tabPenerimaan" id="penerimaan-tab" class="nav-link font-weight-normal" data-toggle="tab">Penerimaan</a></li>
@@ -37,7 +37,7 @@
         <div class="card-body">
             <div id="myTabContent" class="tab-content">
                 <div role="tabpanel" class="tab-pane in active" id="tabData" aria-labelledby="data-tab">
-                    <h3 class="border-bottom text-info">STATUS</h3>
+                    <h3 class="border-bottom">STATUS</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
@@ -66,7 +66,7 @@
                         <label class="font-weight-bold text-muted">Pembuat</label>
                         <asp:TextBox ID="TextBoxPembuat" runat="server" Enabled="false" CssClass="form-control input-sm"></asp:TextBox>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <label class="font-weight-bold text-muted">Produk</label>
                         <div class="table-responsive">
@@ -188,7 +188,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="tabPengiriman" aria-labelledby="penerimaan-tab">
                     <div class="form-group">
-                        <h3 class="border-bottom text-info">PENGIRIMAN</h3>
+                        <h3 class="border-bottom">PENGIRIMAN</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -220,7 +220,7 @@
                     <asp:UpdatePanel ID="UpdatePanelPengirimanDetail" runat="server">
                         <ContentTemplate>
                             <div class="form-group">
-                                <h3 class="border-bottom text-info">DETAIL PENGIRIMAN
+                                <h3 class="border-bottom">DETAIL PENGIRIMAN
                             <asp:Label ID="LabelIDPengiriman" runat="server"></asp:Label></h3>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover table-bordered">
@@ -255,7 +255,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="tabPenerimaan" aria-labelledby="penerimaan-tab">
                     <div class="form-group">
-                        <h3 class="border-bottom text-info">PENERIMAAN</h3>
+                        <h3 class="border-bottom">PENERIMAAN</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -287,7 +287,7 @@
                     <asp:UpdatePanel ID="UpdatePanelPenerimaanDetail" runat="server">
                         <ContentTemplate>
                             <div class="form-group">
-                                <h3 class="border-bottom text-info">DETAIL PENERIMAAN
+                                <h3 class="border-bottom">DETAIL PENERIMAAN
                             <asp:Label ID="LabelIDPenerimaan" runat="server"></asp:Label></h3>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover table-bordered">

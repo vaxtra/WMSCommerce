@@ -69,7 +69,7 @@ public partial class assets_MasterPage_MasterPageSession : System.Web.UI.MasterP
                 ClassStoreKey.Validasi(out enumAlert);
 
                 if (enumAlert == EnumAlert.danger)
-                    Response.Redirect("/WITAdministrator/Login.aspx?do=logout");
+                    Response.Redirect("/Login.aspx?do=logout");
             }
             #endregion
         }

@@ -80,7 +80,7 @@ public partial class WITAdministrator_Produk_POProduksi_PurchaseOrder_Default : 
                 Vendor = item.TBVendor.Nama,
                 item.Grandtotal,
                 CetakPO = "return popitup('../Cetak.aspx?id=" + item.IDPOProduksiProduk + "')",
-                Hapus = item.TBPenerimaanPOProduksiProduks.Count == 0 && item.TBPengirimanPOProduksiProduks.Count == 0 ? "btn btn-danger btn-xs" : "d-none"
+                Hapus = item.TBPenerimaanPOProduksiProduks.Count == 0 && item.TBPengirimanPOProduksiProduks.Count == 0 ? "btn btn-outline-danger btn-xs" : "d-none"
             }).OrderByDescending(item => item.Nomor).ToArray();
         RepeaterDataPO.DataBind();
     }

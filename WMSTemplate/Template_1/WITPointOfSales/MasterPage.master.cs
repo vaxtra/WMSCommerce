@@ -27,10 +27,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     Response.Cookies["WITEnterpriseSystem"].Expires = DateTime.Now.AddYears(1);
                 }
                 else
-                    Response.Redirect("/WITAdministrator/Login.aspx?returnUrl=" + Request.RawUrl);
+                    Response.Redirect("/Login.aspx?returnUrl=" + Request.RawUrl);
             }
             else
-                Response.Redirect("/WITAdministrator/Login.aspx?returnUrl=" + Request.RawUrl);
+                Response.Redirect("/Login.aspx?returnUrl=" + Request.RawUrl);
         }
 
         PenggunaLogin pengguna = (PenggunaLogin)Session["PenggunaLogin"];

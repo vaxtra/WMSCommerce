@@ -456,6 +456,30 @@ public class StokProduk_Class
     }
     #endregion
 
+    public List<string> ValidasiStokProdukTransaksi(TBTransaksiECommerceDetail[] TransaksiDetail)
+    {
+        List<string> PesanStokHabis = new List<string>();
+
+        foreach (var item in TransaksiDetail)
+        {
+            var StokProduk = db.TBStokProduks
+                .FirstOrDefault(item2 =>
+                    item2.IDStokProduk == item.IDStokProduk);
+
+            if (StokProduk.TBKombinasiProduk.TBProduk._IsActive)
+            {
+                if (StokProduk.Jumlah == 0)
+                    PesanStokHabis.Add(StokProduk.TBKombinasiProduk.Nama + " sold out");
+                else if (StokProduk.Jumlah < item.Quantity)
+                    PesanStokHabis.Add(StokProduk.TBKombinasiProduk.Nama + " melebihi jumlah stok yang tersedia");
+            }
+            else
+                PesanStokHabis.Add(StokProduk.TBKombinasiProduk.Nama + " tidak ditemukan, silahkan hapus dari keranjang belanja");
+        }
+
+        return PesanStokHabis;
+    }
+
     public TBStokProduk Ubah(int idTempat, int idPengguna, TBKombinasiProduk KombinasiProduk, decimal hargaBeli, decimal hargaJual)
     {
         if (KombinasiProduk == null)

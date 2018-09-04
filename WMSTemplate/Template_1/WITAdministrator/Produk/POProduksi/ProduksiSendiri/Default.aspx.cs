@@ -68,7 +68,7 @@ public partial class WITAdministrator_Produk_POProduksi_ProduksiSendiri_Default 
                 item.Grandtotal,
                 StatusKirim = item.TBPOProduksiProdukKomposisis.Sum(data => data.Sisa) > 0 ? "class='btn btn-primary btn-xs'" : "class='d-none'",
                 CetakPO = "return popitup('../Cetak.aspx?id=" + item.IDPOProduksiProduk + "')",
-                Hapus = item.TBPenerimaanPOProduksiProduks.Count == 0 && item.TBPengirimanPOProduksiProduks.Count == 0 ? "btn btn-danger btn-xs" : "d-none"
+                Hapus = item.TBPenerimaanPOProduksiProduks.Count == 0 && item.TBPengirimanPOProduksiProduks.Count == 0 ? "btn btn-outline-danger btn-xs" : "d-none"
             }).OrderByDescending(item => item.Nomor).ToArray();
         RepeaterDataPO.DataBind();
     }

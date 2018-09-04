@@ -116,9 +116,9 @@
                                             <td class="text-right success"><strong><%# Eval("TotalBayar").ToFormatHarga() %></strong></td>
                                             <td class="text-center"><%# Eval("Status") %></td>
                                             <td class="fitSize">
-                                                <a href='<%# "Pembayaran.aspx?id=" + Eval("IDPOProduksiProdukPenagihan") %>' class='<%# Eval("StatusPembayaran").ToBool() == false ? "btn btn-info btn-xs" : "hidden" %>'>Bayar</a>
-                                                <asp:Button ID="ButtonCetak" CssClass="btn btn-default btn-xs" runat="server" Style="margin-bottom: 0px" CommandName="Cetak" CommandArgument='<%# Eval("IDPOProduksiProdukPenagihan") %>' OnClientClick='<%# Eval("Cetak") %>' Text="Cetak" />
-                                                <asp:Button ID="ButtonHapus" CssClass='<%# Eval("StatusPembayaran").ToBool() == false ? "btn btn-danger btn-xs" : "btn btn-danger btn-xs hidden" %>' runat="server" Style="margin-bottom: 0px" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDPOProduksiProdukPenagihan") %>' />
+                                                <a href='<%# "Pembayaran.aspx?id=" + Eval("IDPOProduksiProdukPenagihan") %>' class='<%# Eval("StatusPembayaran").ToBool() == false ? "btn btn-outline-info btn-xs" : "d-none" %>'>Bayar</a>
+                                                <asp:Button ID="ButtonCetak" CssClass="btn btn-light btn-xs" runat="server" Style="margin-bottom: 0px" CommandName="Cetak" CommandArgument='<%# Eval("IDPOProduksiProdukPenagihan") %>' OnClientClick='<%# Eval("Cetak") %>' Text="Cetak" />
+                                                <asp:Button ID="ButtonHapus" CssClass='<%# Eval("StatusPembayaran").ToBool() == false ? "btn btn-outline-danger btn-xs" : "d-none" %>' runat="server" Style="margin-bottom: 0px" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDPOProduksiProdukPenagihan") %>' />
                                             </td>
                                         </tr>
                                     </ItemTemplate>

@@ -29,11 +29,11 @@
 
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
     <div class="card">
-        <div class="card-header bg-gradient-black">
+        <div class="card-header bg-smoke">
             <ul id="myTab" class="nav nav-tabs card-header-tabs">
-                <li class="nav-item"><a href="#tabData" id="data-tab" class="nav-link active font-weight-normal" data-toggle="tab">Data</a></li>
-                <li class="nav-item"><a href="#tabPengiriman" id="pengiriman-tab" class="nav-link font-weight-normal" data-toggle="tab">Pengiriman</a></li>
-                <li class="nav-item"><a href="#tabPenerimaan" id="penerimaan-tab" class="nav-link font-weight-normal" data-toggle="tab">Penerimaan</a></li>
+                <li class="nav-item"><a href="#tabData" id="data-tab" class="nav-link active" data-toggle="tab">Data</a></li>
+                <li class="nav-item"><a href="#tabPengiriman" id="pengiriman-tab" class="nav-link" data-toggle="tab">Pengiriman</a></li>
+                <li class="nav-item"><a href="#tabPenerimaan" id="penerimaan-tab" class="nav-link" data-toggle="tab">Penerimaan</a></li>
             </ul>
         </div>
         <div class="card-body">

@@ -62,9 +62,9 @@ public partial class WITAdministrator_Produk_Transfer_Detail : System.Web.UI.Pag
                     linkDownload.HRef = "~/Files/Transfer Produk/Transfer/" + DataTransferProduk.TBTempat.Nama + " " + DataTransferProduk.IDTransferProduk + " " + (DataTransferProduk.TanggalKirim).ToString("d MMMM yyyy HH.mm") + ".WIT_enc.zip";
 
                     if (DataTransferProduk.IDTempatPenerima == Pengguna.IDTempat)
-                        linkKembali.HRef = "/WITWarehouse/Produk/Penerimaan/Default.aspx";
+                        linkKembali.HRef = "/WITAdministrator/Produk/Transfer/Terima/Default.aspx";
                     else
-                        linkKembali.HRef = "Default.aspx";
+                        linkKembali.HRef = "/WITAdministrator/Produk/Transfer/Kirim/Default.aspx";
 
                     if ((PilihanJenisTransfer)DataTransferProduk.EnumJenisTransfer == PilihanJenisTransfer.TransferBatal ||
                         (PilihanJenisTransfer)DataTransferProduk.EnumJenisTransfer == PilihanJenisTransfer.TransferPending)

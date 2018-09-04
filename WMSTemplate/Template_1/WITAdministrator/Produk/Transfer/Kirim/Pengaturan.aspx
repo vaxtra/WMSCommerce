@@ -112,8 +112,8 @@
                                                 <td class="text-right fitSize"><%# Eval("HargaJual").ToFormatHarga() %></td>
                                                 <td class="text-right fitSize"><strong>
                                                     <asp:Label ID="Labeljumlah" runat="server" Text='<%# Eval("Jumlah").ToFormatHargaBulat() %>'></asp:Label></strong></td>
-                                                <td class="fitSize table-warning">
-                                                    <asp:TextBox ID="TextBoxJumlahTransfer" CssClass="form-control text-right input-sm InputInteger" runat="server"></asp:TextBox></td>
+                                                <td class="fitSize table-warning" style="width: 100px;">
+                                                    <asp:TextBox ID="TextBoxJumlahTransfer" CssClass="form-control form-control-sm text-right InputInteger" runat="server"></asp:TextBox></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -127,9 +127,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-gradient-black">
-                                        <h5 class="font-weight-light">PENGIRIM</h5>
-                                    </div>
+                                        <h4 class="card-header bg-smoke">Pengirim</h4>
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label class="form-label bold text-muted">Tempat</label>
@@ -145,9 +143,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="card">
-                                    <div class="card-header bg-gradient-black">
-                                        <h5 class="font-weight-light">PENERIMA</h5>
-                                    </div>
+                                        <h4 class="card-header bg-smoke">Penerima</h4>
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label class="form-label bold text-muted">Tempat</label>
@@ -165,9 +161,7 @@
                     </div>
                     <div class="form-group">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">DETAIL</h5>
-                            </div>
+                                <h5 class="card-header bg-smoke">Detail</h5>
                             <div class="table-responsive">
                                 <table class="table table-sm table-hover table-bordered mb-0">
                                     <thead>
@@ -196,12 +190,12 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="text-center"><%# Eval("AtributProduk") %></td>
-                                                            <td class="fitSize"><%# Eval("Kode") %></td>
-                                                            <td class="text-right fitSize"><%# Eval("HargaJual").ToFormatHarga() %></td>
+                                                            <td><%# Eval("Kode") %></td>
+                                                            <td class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
                                                             <td class="text-right fitSize"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
-                                                            <td class="text-right fitSize"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
+                                                            <td class="text-right"><%# Eval("SubtotalHargaJual").ToFormatHarga() %></td>
                                                             <td class="text-right fitSize">
-                                                                <asp:Button ID="ButtonHapus" CssClass="btn btn-danger btn-xs" runat="server" Text="X" CommandName="Hapus" CommandArgument='<%# Eval("IDTransferProdukDetail") %>' /></td>
+                                                                <asp:Button ID="ButtonHapus" CssClass="btn btn-outline-danger btn-xs" runat="server" Text="Hapus" CommandName="Hapus" CommandArgument='<%# Eval("IDTransferProdukDetail") %>' /></td>
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater>

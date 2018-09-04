@@ -25,44 +25,82 @@
             <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
         </div>
     </div>
-    <div class="form-group" id="PanelAktifitasTransaksi1" runat="server">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="font-weight-light">Penjualan Bulan Ini</h5>
+    <div id="PanelAktifitasTransaksi3" runat="server" class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h4 class="font-weight-light float-left">Penjualan</h4>
+                            <h4 class="text-primary float-right">
+                                <asp:Label ID="LabelPenjualanBulanIni" runat="server"></asp:Label></h4>
+                        </div>
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <canvas id="CanvasChartPenjualan" class="m-0 w-100" height="180px"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <canvas id="CanvasChartPenjualan" class="m-0 w-100" height="300px"></canvas>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h4 class="font-weight-light float-left">Transaksi</h4>
+                            <h4 class="text-primary float-right">
+                                <asp:Label ID="LabelTransaksiBulanIni" runat="server"></asp:Label></h4>
+                        </div>
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <canvas id="CanvasChartTransaksi" class="m-0 w-100" height="180px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h4 class="font-weight-light float-left">Produk</h4>
+                            <h4 class="text-primary float-right">
+                                <asp:Label ID="LabelQuantityBulanIni" runat="server"></asp:Label></h4>
+                        </div>
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <canvas id="CanvasChartJumlahProduk" class="m-0 w-100" height="180px"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="form-group mb-0">
         <div class="row">
-            <div id="panelTransaksiTerakhir" runat="server" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 pb-3">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="font-weight-light">10 Transaksi Terakhir</h5>
-                    </div>
-                    <div class="card-body">
+            <div id="panelTransaksiTerakhir" runat="server" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">
+                <div class="form-group">
+                    <div class="card">
+                        <h5 class="card-header bg-gradient-blue">TOP TRANSAKSI</h5>
                         <div class="table-responsive">
                             <table class="table table-sm table-bordered table-hover">
                                 <thead>
                                     <tr class="thead-light">
-                                        <th>No</th>
+                                        <th>ID</th>
                                         <th>Tanggal</th>
-                                        <th>Status</th>
+                                        <th>Pelanggan</th>
                                         <th>Qty</th>
                                         <th>Grandtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <asp:Repeater ID="RepeaterOrder" runat="server">
+                                    <asp:Repeater ID="RepeaterTopTransaksi" runat="server">
                                         <ItemTemplate>
                                             <tr>
                                                 <td class="fitSize"><%# Eval("IDTransaksi") %></td>
-                                                <td class="fitSize"><%# Eval("TanggalTransaksi").ToFormatTanggalHari() %></td>
-                                                <td>
-                                                    <%# Eval("Persentase") %>
-                                                </td>
+                                                <td class="fitSize"><%# Eval("TanggalOperasional").ToFormatTanggalHari() %></td>
+                                                <td><%# Eval("Pelanggan") %></td>
                                                 <td class="text-right fitSize"><%# Eval("JumlahProduk").ToFormatHargaBulat() %></td>
                                                 <td class="text-right fitSize"><%# Eval("GrandTotal").ToFormatHarga() %></td>
                                             </tr>
@@ -73,162 +111,47 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="PanelAktifitasTransaksi3" runat="server" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="font-weight-light">Aktifitas Hari Ini</h5>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-left mb-0">
-                                        <tbody>
+                    <div class="card">
+                        <h5 class="card-header bg-gradient-blue">TOP PRODUK</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-hover">
+                                <thead>
+                                    <tr class="thead-light">
+                                        <th>No</th>
+                                        <th>Kode</th>
+                                        <th>Produk</th>
+                                        <th>Varian</th>
+                                        <th>Jumlah</th>
+                                        <th>Grandtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="RepeaterTopProduk" runat="server">
+                                        <ItemTemplate>
                                             <tr>
-                                                <td style="width: 50%">Penjualan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPenjualanHariIni" runat="server"></asp:Label></td>
+                                                <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                <td class="fitSize"><%# Eval("KodeKombinasiProduk") %></td>
+                                                <td><%# Eval("Produk") %></td>
+                                                <td class="text-center fitSize"><%# Eval("AtributProduk") %></td>
+                                                <td class="text-right fitSize"><%# Eval("JumlahProduk").ToFormatHargaBulat() %></td>
+                                                <td class="text-right fitSize"><%# Eval("Subtotal").ToFormatHarga() %></td>
                                             </tr>
-                                            <tr>
-                                                <td style="width: 50%">Pelanggan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPelangganHariIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Quantity</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelQuantityHariIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Transaksi</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelTransaksiHariIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="font-weight-light">Aktifitas Kemarin</h5>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-left mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 50%">Penjualan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPenjualanKemarin" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Pelanggan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPelangganKemarin" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Quantity</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelQuantityKemarin" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Transaksi</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelTransaksiKemarin" runat="server"></asp:Label></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="font-weight-light">Aktifitas Bulan Ini</h5>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hovers text-left mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 50%">Penjualan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPenjualanBulanIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Pelanggan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPelangganBulanIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Quantity</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelQuantityBulanIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Transaksi</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelTransaksiBulanIni" runat="server"></asp:Label></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="font-weight-light">Aktifitas Bulan Lalu</h5>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover text-left mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 50%">Penjualan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPenjualanBulanLalu" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Pelanggan</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelPelangganBulanLalu" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Quantity</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelQuantityBulanLalu" runat="server"></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">Transaksi</td>
-                                                <td style="width: 50%" class="text-right">
-                                                    <asp:Label ID="LabelTransaksiBulanLalu" runat="server"></asp:Label></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div id="panelStokProdukHabis" runat="server" class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div id="panelStokProdukHabis" runat="server" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="font-weight-light">Stok Produk Akan Habis</h5>
-                    </div>
+                    <h5 class="card-header bg-gradient-green">PRODUK AKAN HABIS</h5>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <asp:DropDownList ID="DropDownListJumlahData" CssClass="select2" runat="server" AutoPostBack="true" OnSelectedIndexChanged="EventData">
                                         <asp:ListItem Text="10" Value="10" />
                                         <asp:ListItem Text="20" Value="20" />
@@ -236,10 +159,10 @@
                                         <asp:ListItem Text="100" Value="100" />
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <div class="form-group float-right mb-0">
                                         <asp:Button ID="ButtonPrevious" runat="server" CssClass="btn btn-outline-light" Text="<<" OnClick="ButtonPrevious_Click" />
-                                        <asp:DropDownList ID="DropDownListHalaman" CssClass="select2 select2-fix-width-sm" runat="server" AutoPostBack="true" OnSelectedIndexChanged="EventData">
+                                        <asp:DropDownList ID="DropDownListHalaman" CssClass="select2 select2-fix-width-sm" runat="server" Style="width: 50px !important;" AutoPostBack="true" OnSelectedIndexChanged="EventData">
                                         </asp:DropDownList>
                                         <asp:Button ID="ButtonNext" runat="server" CssClass="btn btn-outline-light" Text=">>" OnClick="ButtonNext_Click" />
                                     </div>
@@ -252,10 +175,8 @@
                                     <thead>
                                         <tr class="thead-light">
                                             <th>No</th>
-                                            <th>Tempat</th>
                                             <th>Produk</th>
                                             <th>Varian</th>
-                                            <th>Minimum</th>
                                             <th>Stok</th>
                                         </tr>
                                     </thead>
@@ -264,11 +185,9 @@
                                             <ItemTemplate>
                                                 <tr class="gradeX">
                                                     <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                    <td class="fitSize"><%# Eval("Tempat") %></td>
                                                     <td><%# Eval("Produk") %></td>
-                                                    <td><%# Eval("AtributProduk") %></td>
-                                                    <td><%# Eval("JumlahMinimum").ToFormatHargaBulat() %></td>
-                                                    <td><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
+                                                    <td class="text-center fitSize"><%# Eval("AtributProduk") %></td>
+                                                    <td class="text-right"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -285,9 +204,7 @@
         <div class="row">
             <div id="PanelPOBahanBakuJatuhTempo" runat="server" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="font-weight-light">PO Bahan Baku Jatuh Tempo</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">PO Bahan Baku Jatuh Tempo</h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-hover">
                             <thead>
@@ -318,9 +235,7 @@
             </div>
             <div id="PanelPOProdukJatuhTempo" runat="server" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="font-weight-light">PO Produk Jatuh Tempo</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">PO Produk Jatuh Tempo</h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-hover">
                             <thead>
@@ -359,4 +274,6 @@
     <script src="/assets/Plugins/CustomWIT/Chart.bundle.min.js"></script>
 
     <asp:Literal ID="LiteralChartPenjualan" runat="server"></asp:Literal>
+    <asp:Literal ID="LiteralChartTransaksi" runat="server"></asp:Literal>
+    <asp:Literal ID="LiteralChartJumlahProduk" runat="server"></asp:Literal>
 </asp:Content>

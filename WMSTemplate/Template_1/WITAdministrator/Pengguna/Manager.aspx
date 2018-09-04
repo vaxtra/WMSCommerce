@@ -4,11 +4,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
-    Pengaturan Manager
+    Kelola Bawahan
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <asp:Button ID="ButtonSimpan" CssClass="btn btn-success btn-const" runat="server" Text="Simpan" OnClick="ButtonSimpan_Click" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -27,9 +26,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="font-weight-light">PILIH BAWAHAN</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Pilih Bawahan</h4>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-hover table-bordered mb-0">
@@ -60,13 +57,14 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <asp:Button ID="ButtonSimpan" CssClass="btn btn-success btn-const" runat="server" Text="Simpan" OnClick="ButtonSimpan_Click" />
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="font-weight-light">DAFTAR BAWAHAN</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Struktur</h4>
                             <div class="card-body">
                                 <asp:DropDownList ID="DropDownListPengguna" CssClass="select2" Width="100%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListPengguna_SelectedIndexChanged">
                                 </asp:DropDownList>

@@ -29,9 +29,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card h-100">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">PENGIRIM</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Pengirim</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label bold text-muted">Tempat</label>
@@ -52,9 +50,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card h-100">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">PENERIMA</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Penerima</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="form-label bold text-muted">Tempat</label>
@@ -73,9 +69,7 @@
 
             <div class="form-group">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">DETAIL</h5>
-                    </div>
+                    <h4 class="card-header bg-smoke">Detail</h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-hover table-bordered mb-0">
                             <thead>

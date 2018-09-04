@@ -157,8 +157,7 @@ public partial class WITAdministrator_BahanBaku_POProduksi_PurchaseOrder_Pengatu
         }
 
         var proyeksiKomposisi = db.TBProyeksiKomposisis.Where(item => item.IDProyeksi == IDProyeksi && 
-            item.BahanBakuDasar == true && 
-            (DropDownListSupplier.SelectedValue != "0" ? db.TBHargaSuppliers.Where(item2 => item2.IDSupplier == DropDownListSupplier.SelectedValue.ToInt()).Any(item2 => item2.TBStokBahanBaku.IDBahanBaku == item.IDBahanBaku) : true))
+            item.BahanBakuDasar == true)
         .GroupBy(item => new
         {
             item.TBBahanBaku

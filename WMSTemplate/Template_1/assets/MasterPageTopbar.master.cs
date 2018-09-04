@@ -12,7 +12,7 @@ public partial class assets_MasterPageTopbar : System.Web.UI.MasterPage
         if (!IsPostBack)
         {
             PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
-            LabelNamaTempat.Text = Pengguna.Store + " - " + Pengguna.Tempat;
+            //LabelNamaTempat.Text = Pengguna.Store + " - " + Pengguna.Tempat;
             LabelUsername.Text = Pengguna.NamaLengkap;
         }
     }

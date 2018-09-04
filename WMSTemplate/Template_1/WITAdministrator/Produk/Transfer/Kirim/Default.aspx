@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitle" runat="Server">
-    Transfer Produk
+    Kirim Transfer Produk
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
@@ -62,56 +62,57 @@
 
             <div class="form-group">
                 <div class="card">
-                    <div class="card-body">
-                        <ul class="nav nav-tabs">
+                    <div class="card-header bg-smoke">
+                        <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item"><a href="#proses" role="tab" class="nav-link active" data-toggle="tab">Proses</a></li>
                             <li class="nav-item"><a href="#selesai" role="tab" class="nav-link" data-toggle="tab">Selesai</a></li>
                             <li class="nav-item"><a href="#batal" role="tab" class="nav-link" data-toggle="tab">Batal</a></li>
                         </ul>
-                        <br />
+                    </div>
+                    <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="proses">
                                 <asp:UpdatePanel ID="UpdatePanelProses" runat="server">
                                     <ContentTemplate>
-                                                <div class="table-responsive">
-                                                    <table class="table table-sm table-hover table-bordered">
-                                                        <thead>
-                                                            <tr class="thead-light">
-                                                                <th>No.</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Kirim</th>
-                                                                <th>Tujuan</th>
-                                                                <th>Jumlah</th>
-                                                                <th>Subtotal</th>
-                                                                <th>Status</th>
-                                                                <th></th>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="thead-light">
+                                                        <th>No.</th>
+                                                        <th>ID</th>
+                                                        <th>Pegawai</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Kirim</th>
+                                                        <th>Tujuan</th>
+                                                        <th>Jumlah</th>
+                                                        <th>Subtotal</th>
+                                                        <th>Status</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="RepeaterTransferProses" runat="server" OnItemCommand="Repeater_ItemCommand">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
+                                                                <td><%# Eval("TBPengguna.NamaLengkap") %></td>
+                                                                <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
+                                                                <td><%# Eval("TBTempat.Nama") %></td>
+                                                                <td><%# Eval("TBTempat1.Nama") %></td>
+                                                                <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
+                                                                <td class="text-center fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
+                                                                <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
+                                                                <td class="text-right fitSize">
+                                                                    <a class='<%# Eval("EnumJenisTransfer").ToInt() == (int)PilihanJenisTransfer.TransferPending ? "btn btn-outline-info btn-xs" : "d-none" %>' href='Pengaturan.aspx?id=<%# Eval("IDTransferProduk") %>'>Proses</a>
+                                                                    <asp:Button CssClass="btn btn-outline-danger btn-xs" ID="ButtonBatal" runat="server" Text="Batal" CommandName="Batal" CommandArgument='<%# Eval("IDTransferProduk") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin membatalkan transfer\")" %>' />
+                                                                </td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterTransferProses" runat="server" OnItemCommand="Repeater_ItemCommand">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
-                                                                        <td><%# Eval("TBPengguna.NamaLengkap") %></td>
-                                                                        <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
-                                                                        <td><%# Eval("TBTempat.Nama") %></td>
-                                                                        <td><%# Eval("TBTempat1.Nama") %></td>
-                                                                        <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
-                                                                        <td class="text-center fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
-                                                                        <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
-                                                                        <td class="text-right fitSize">
-                                                                            <a class='<%# Eval("EnumJenisTransfer").ToInt() == (int)PilihanJenisTransfer.TransferPending ? "btn btn-info btn-xs" : "d-none" %>' href='Pengaturan.aspx?id=<%# Eval("IDTransferProduk") %>'>Proses</a>
-                                                                            <asp:Button CssClass="btn btn-danger btn-xs" ID="ButtonBatal" runat="server" Text="Batal" CommandName="Batal" CommandArgument='<%# Eval("IDTransferProduk") %>' OnClientClick='<%# "return confirm(\"Apakah Anda yakin membatalkan transfer\")" %>' />
-                                                                        </td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                         <asp:UpdateProgress ID="updateProgressProses" runat="server" AssociatedUpdatePanelID="UpdatePanelProses">
                                             <ProgressTemplate>
@@ -126,40 +127,40 @@
                             <div class="tab-pane" id="selesai">
                                 <asp:UpdatePanel ID="UpdatePanelSelesai" runat="server">
                                     <ContentTemplate>
-                                                <div class="table-responsive">
-                                                    <table class="table table-sm table-hover table-bordered">
-                                                        <thead>
-                                                            <tr class="thead-light">
-                                                                <th>No.</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Kirim</th>
-                                                                <th>Tujuan</th>
-                                                                <th>Jumlah</th>
-                                                                <th>Subtotal</th>
-                                                                <th>Status</th>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="thead-light">
+                                                        <th>No.</th>
+                                                        <th>ID</th>
+                                                        <th>Pegawai</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Kirim</th>
+                                                        <th>Tujuan</th>
+                                                        <th>Jumlah</th>
+                                                        <th>Subtotal</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="RepeaterTransferSelesai" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
+                                                                <td><%# Eval("TBPengguna.NamaLengkap") %></td>
+                                                                <td class="fitSize"><%#Eval("TanggalKirim").ToFormatTanggal()  %></td>
+                                                                <td><%# Eval("TBTempat.Nama") %></td>
+                                                                <td><%# Eval("TBTempat1.Nama") %></td>
+                                                                <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
+                                                                <td class="text-right fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
+                                                                <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterTransferSelesai" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
-                                                                        <td><%# Eval("TBPengguna.NamaLengkap") %></td>
-                                                                        <td class="fitSize"><%#Eval("TanggalKirim").ToFormatTanggal()  %></td>
-                                                                        <td><%# Eval("TBTempat.Nama") %></td>
-                                                                        <td><%# Eval("TBTempat1.Nama") %></td>
-                                                                        <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
-                                                                        <td class="text-right fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
-                                                                        <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                         <asp:UpdateProgress ID="updateProgressSelesai" runat="server" AssociatedUpdatePanelID="UpdatePanelSelesai">
                                             <ProgressTemplate>
@@ -174,44 +175,44 @@
                             <div class="tab-pane" id="batal">
                                 <asp:UpdatePanel ID="UpdatePanelBatal" runat="server">
                                     <ContentTemplate>
-                                                <div class="table-responsive">
-                                                    <table class="table table-sm table-hover table-bordered">
-                                                        <thead>
-                                                            <tr class="thead-light">
-                                                                <th>No.</th>
-                                                                <th>ID</th>
-                                                                <th>Pegawai</th>
-                                                                <th>Tanggal</th>
-                                                                <th>Kirim</th>
-                                                                <th>Tujuan</th>
-                                                                <th>Jumlah</th>
-                                                                <th>Subtotal</th>
-                                                                <th>Status</th>
-                                                                <th></th>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="thead-light">
+                                                        <th>No.</th>
+                                                        <th>ID</th>
+                                                        <th>Pegawai</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Kirim</th>
+                                                        <th>Tujuan</th>
+                                                        <th>Jumlah</th>
+                                                        <th>Subtotal</th>
+                                                        <th>Status</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="RepeaterTransferBatal" runat="server" OnItemCommand="Repeater_ItemCommand">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/Produk/Transfer/Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
+                                                                <td><%# Eval("TBPengguna.NamaLengkap") %></td>
+                                                                <td class="fitSize"><%# Eval("TanggalKirim").ToFormatHarga() %></td>
+                                                                <td><%# Eval("TBTempat.Nama") %></td>
+                                                                <td><%# Eval("TBTempat1.Nama") %></td>
+                                                                <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
+                                                                <td class="text-right fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
+                                                                <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
+                                                                <td class="text-center fitSize">
+                                                                    <asp:Button ID="ButtonTransferBaru" runat="server" Text="Transfer Ulang" CommandName="TransferUlang" CommandArgument='<%# Eval("IDTransferProduk") %>' CssClass="btn btn-outline-success btn-xs" />
+                                                                </td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="RepeaterTransferBatal" runat="server" OnItemCommand="Repeater_ItemCommand">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                        <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferProduk") %>"><%# Eval("IDTransferProduk") %></a></td>
-                                                                        <td><%# Eval("TBPengguna.NamaLengkap") %></td>
-                                                                        <td class="fitSize"><%# Eval("TanggalKirim").ToFormatHarga() %></td>
-                                                                        <td><%# Eval("TBTempat.Nama") %></td>
-                                                                        <td><%# Eval("TBTempat1.Nama") %></td>
-                                                                        <td class="text-right fitSize"><%# Eval("TotalJumlah").ToFormatHargaBulat() %></td>
-                                                                        <td class="text-right fitSize"><%# Eval("GrandTotalHargaJual").ToFormatHarga() %></td>
-                                                                        <td class="text-center fitSize"><%# Pengaturan.StatusTransfer(Eval("EnumJenisTransfer").ToString()) %></td>
-                                                                        <td class="text-center fitSize">
-                                                                            <asp:Button ID="ButtonTransferBaru" runat="server" Text="Transfer Ulang" CommandName="TransferUlang" CommandArgument='<%# Eval("IDTransferProduk") %>' CssClass="btn btn-success btn-xs" />
-                                                                        </td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
                                         <asp:UpdateProgress ID="updateProgressBatal" runat="server" AssociatedUpdatePanelID="UpdatePanelBatal">
                                             <ProgressTemplate>

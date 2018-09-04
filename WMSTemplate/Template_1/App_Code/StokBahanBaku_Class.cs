@@ -97,6 +97,23 @@ public class StokBahanBaku_Class
         });
     }
 
+    public static void InsertPerpindahanStok(DataClassesDatabaseDataContext db, int idJenisPerindahanStok, TBStokBahanBaku stokBahanBaku, int idPengguna, TBSatuan Satuan, DateTime tanggal, decimal hargaBeli, decimal jumlah, string keterangan)
+    {
+        db.TBPerpindahanStokBahanBakus.InsertOnSubmit(new TBPerpindahanStokBahanBaku
+        {
+            IDWMS = Guid.NewGuid(),
+            IDJenisPerpindahanStok = idJenisPerindahanStok,
+            TBStokBahanBaku = stokBahanBaku,
+            IDTempat = stokBahanBaku.IDTempat.Value,
+            IDPengguna = idPengguna,
+            TBSatuan = Satuan,
+            Tanggal = tanggal,
+            HargaBeli = hargaBeli,
+            Jumlah = jumlah,
+            Keterangan = keterangan
+        });
+    }
+
     //public static void InsertStokBahanBakuDetail(DataClassesDatabaseDataContext db, string kodeStokBahanBaku, int idStokBahanBaku, int idSupplier, DateTime tanggalDaftar, decimal hargaBeli, decimal jumlah)
     //{
     //    db.TBStokBahanBakuDetails.InsertOnSubmit(new TBStokBahanBakuDetail
@@ -165,9 +182,8 @@ public class StokBahanBaku_Class
                         db: db,
                         idJenisPerindahanStok: JenisPerpindahanStok.IDJenisPerpindahanStok,
                         stokBahanBaku: stokBahanBaku,
-                        idTempat: stokBahanBaku.IDTempat.Value,
                         idPengguna: idPengguna,
-                        idSatuan: stokBahanBaku.TBBahanBaku.IDSatuan,
+                        Satuan: stokBahanBaku.TBBahanBaku.TBSatuan,
                         tanggal: tanggal,
                         hargaBeli: hargaBeliPerpindahanStok,
                         jumlah: jumlahStok,

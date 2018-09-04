@@ -187,47 +187,44 @@ public partial class WITAdministrator_Produk_POProduksi_PurchaseOrder_Penerimaan
                     poProduksiProduk.TBPenerimaanPOProduksiProduks.Add(penerimaan);
 
                     #region arie - INPUT JURNAL
+                    ////////////var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
 
+                    ////////////if (KonfigurasiAkun != null)
+                    ////////////{
+                    ////////////    #region Pembuatan Jurnal Penerimaan PO YG Belum Bayar
+                    ////////////    TBJurnal Jurnal = new TBJurnal
+                    ////////////    {
+                    ////////////        IDTempat = Pengguna.IDTempat,
+                    ////////////        Tanggal = penerimaan.TanggalTerima,
+                    ////////////        Keterangan = penerimaan.Keterangan,
+                    ////////////        IDPengguna = penerimaan.IDPenggunaTerima,
+                    ////////////        Referensi = penerimaan.IDPenerimaanPOProduksiProduk
+                    ////////////    };
 
-                    var KonfigurasiAkun = db.TBKonfigurasiAkuns.Where(item => item.IDTempat == 1);
+                    ////////////    #region JOURNAL ENTRY
+                    ////////////    //DEBIT     : PERSEDIAAN
+                    ////////////    //KREDIT    : HUTANG DAGANG
 
-                    if (KonfigurasiAkun != null)
-                    {
-                        #region Pembuatan Jurnal Penerimaan PO YG Belum Bayar
-                        TBJurnal Jurnal = new TBJurnal
-                        {
-                            IDTempat = Pengguna.IDTempat,
-                            Tanggal = penerimaan.TanggalTerima,
-                            Keterangan = penerimaan.Keterangan,
-                            IDPengguna = penerimaan.IDPenggunaTerima,
-                            Referensi = penerimaan.IDPenerimaanPOProduksiProduk
-                        };
+                    ////////////    //PERSEDIAAN
+                    ////////////    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+                    ////////////    {
+                    ////////////        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
+                    ////////////        Debit = penerimaan.Grandtotal,
+                    ////////////        Kredit = 0
+                    ////////////    });
 
-                        #region JOURNAL ENTRY
-                        //DEBIT     : PERSEDIAAN
-                        //KREDIT    : HUTANG DAGANG
+                    ////////////    //HUTANG DAGANG
+                    ////////////    Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
+                    ////////////    {
+                    ////////////        IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG DAGANG").IDAkun,
+                    ////////////        Debit = 0,
+                    ////////////        Kredit = penerimaan.Grandtotal
+                    ////////////    });
+                    ////////////    #endregion
 
-                        //PERSEDIAAN
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "PERSEDIAAN").IDAkun,
-                            Debit = penerimaan.Grandtotal,
-                            Kredit = 0
-                        });
-
-                        //HUTANG DAGANG
-                        Jurnal.TBJurnalDetails.Add(new TBJurnalDetail
-                        {
-                            IDAkun = KonfigurasiAkun.FirstOrDefault(item => item.Nama == "HUTANG DAGANG").IDAkun,
-                            Debit = 0,
-                            Kredit = penerimaan.Grandtotal
-                        });
-                        #endregion
-
-                        db.TBJurnals.InsertOnSubmit(Jurnal);
-                        #endregion
-                    }
-
+                    ////////////    db.TBJurnals.InsertOnSubmit(Jurnal);
+                    ////////////    #endregion
+                    ////////////}
                     #endregion
 
                     db.SubmitChanges();

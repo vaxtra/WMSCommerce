@@ -93,7 +93,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>
@@ -143,7 +143,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>
@@ -189,7 +189,7 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="fitSize"><%# Container.ItemIndex + 1 %></td>
-                                                                <td class="fitSize"><a href="Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
+                                                                <td class="fitSize"><a href="/WITAdministrator/BahanBaku/Transfer/Detail.aspx?id=<%# Eval("IDTransferBahanBaku") %>"><%# Eval("IDTransferBahanBaku") %></a></td>
                                                                 <td><%# Eval("TBPengguna.NamaLengkap") %></td>
                                                                 <td><%# Eval("TanggalKirim").ToFormatTanggal() %></td>
                                                                 <td><%# Eval("TBTempat.Nama") %></td>

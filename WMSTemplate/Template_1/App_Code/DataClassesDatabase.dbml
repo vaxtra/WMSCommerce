@@ -1223,11 +1223,11 @@
       <Association Name="TBPengguna_TBStokProdukMutasi" Member="TBStokProdukMutasis" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBStokProdukMutasi" />
       <Association Name="TBPengguna_TBStoreKey" Member="TBStoreKeys" ThisKey="IDPengguna" OtherKey="IDPenggunaAktif" Type="TBStoreKey" />
       <Association Name="TBPengguna_TBSyncDatabaseLog" Member="TBSyncDatabaseLogs" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBSyncDatabaseLog" />
-      <Association Name="TBPengguna_TBTransaksi" Member="TBTransaksis" ThisKey="IDPengguna" OtherKey="IDPenggunaBatal" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi1" Member="TBTransaksis1" ThisKey="IDPengguna" OtherKey="IDPenggunaMarketing" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi2" Member="TBTransaksis2" ThisKey="IDPengguna" OtherKey="IDPenggunaPembayaran" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi3" Member="TBTransaksis3" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksi" />
-      <Association Name="TBPengguna_TBTransaksi4" Member="TBTransaksis4" ThisKey="IDPengguna" OtherKey="IDPenggunaUpdate" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi" Member="TBTransaksis" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi1" Member="TBTransaksis1" ThisKey="IDPengguna" OtherKey="IDPenggunaPembayaran" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi2" Member="TBTransaksis2" ThisKey="IDPengguna" OtherKey="IDPenggunaUpdate" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi3" Member="TBTransaksis3" ThisKey="IDPengguna" OtherKey="IDPenggunaMarketing" Type="TBTransaksi" />
+      <Association Name="TBPengguna_TBTransaksi4" Member="TBTransaksis4" ThisKey="IDPengguna" OtherKey="IDPenggunaBatal" Type="TBTransaksi" />
       <Association Name="TBPengguna_TBTransaksiJenisPembayaran" Member="TBTransaksiJenisPembayarans" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBTransaksiJenisPembayaran" />
       <Association Name="TBPengguna_TBTransaksiPrintLog" Member="TBTransaksiPrintLogs" ThisKey="IDPengguna" OtherKey="IDPengguna" Type="TBTransaksiPrintLog" />
       <Association Name="TBPengguna_TBTransaksiTemp" Member="TBTransaksiTemps" ThisKey="IDPengguna" OtherKey="IDPenggunaTransaksi" Type="TBTransaksiTemp" />
@@ -1342,6 +1342,13 @@
       <Association Name="TBBahanBaku_TBPengirimanPOProduksiProdukDetail" Member="TBBahanBaku" ThisKey="IDBahanBaku" OtherKey="IDBahanBaku" Type="TBBahanBaku" IsForeignKey="true" />
       <Association Name="TBPengirimanPOProduksiProduk_TBPengirimanPOProduksiProdukDetail" Member="TBPengirimanPOProduksiProduk" ThisKey="IDPengirimanPOProduksiProduk" OtherKey="IDPengirimanPOProduksiProduk" Type="TBPengirimanPOProduksiProduk" IsForeignKey="true" />
       <Association Name="TBSatuan_TBPengirimanPOProduksiProdukDetail" Member="TBSatuan" ThisKey="IDSatuan" OtherKey="IDSatuan" Type="TBSatuan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBPengirimanTemplate" Member="TBPengirimanTemplates">
+    <Type Name="TBPengirimanTemplate">
+      <Column Name="IDPengirimanTemplate" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nama" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Template" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.TBPerpindahanStokBahanBaku" Member="TBPerpindahanStokBahanBakus">
@@ -2447,11 +2454,11 @@
       <Association Name="TBKurir_TBTransaksi" Member="TBKurir" ThisKey="IDKurir" OtherKey="IDKurir" Type="TBKurir" IsForeignKey="true" />
       <Association Name="TBMeja_TBTransaksi" Member="TBMeja" ThisKey="IDMeja" OtherKey="IDMeja" Type="TBMeja" IsForeignKey="true" />
       <Association Name="TBPelanggan_TBTransaksi" Member="TBPelanggan" ThisKey="IDPelanggan" OtherKey="IDPelanggan" Type="TBPelanggan" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi" Member="TBPengguna" ThisKey="IDPenggunaBatal" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi1" Member="TBPengguna1" ThisKey="IDPenggunaMarketing" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi2" Member="TBPengguna2" ThisKey="IDPenggunaPembayaran" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi3" Member="TBPengguna3" ThisKey="IDPenggunaTransaksi" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
-      <Association Name="TBPengguna_TBTransaksi4" Member="TBPengguna4" ThisKey="IDPenggunaUpdate" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi" Member="TBPengguna" ThisKey="IDPenggunaTransaksi" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi1" Member="TBPengguna1" ThisKey="IDPenggunaPembayaran" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi2" Member="TBPengguna2" ThisKey="IDPenggunaUpdate" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi3" Member="TBPengguna3" ThisKey="IDPenggunaMarketing" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
+      <Association Name="TBPengguna_TBTransaksi4" Member="TBPengguna4" ThisKey="IDPenggunaBatal" OtherKey="IDPengguna" Type="TBPengguna" IsForeignKey="true" />
       <Association Name="TBStatusTransaksi_TBTransaksi" Member="TBStatusTransaksi" ThisKey="IDStatusTransaksi" OtherKey="IDStatusTransaksi" Type="TBStatusTransaksi" IsForeignKey="true" />
       <Association Name="TBTempat_TBTransaksi" Member="TBTempat" ThisKey="IDTempat" OtherKey="IDTempat" Type="TBTempat" IsForeignKey="true" />
       <Association Name="TBTempat_TBTransaksi1" Member="TBTempat1" ThisKey="IDTempatPengirim" OtherKey="IDTempat" Type="TBTempat" IsForeignKey="true" />

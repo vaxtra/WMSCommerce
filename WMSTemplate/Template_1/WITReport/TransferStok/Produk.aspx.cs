@@ -111,12 +111,12 @@ public partial class WITReport_TransferStok_Produk : System.Web.UI.Page
             #region KONFIGURASI LAPORAN
             LabelPeriode.Text = Laporan_Class.Periode;
 
-            LinkDownloadTransfer.Visible = GenerateExcel;
+            LinkDownload.Visible = GenerateExcel;
 
-            if (LinkDownloadTransfer.Visible)
-                LinkDownloadTransfer.HRef = Laporan_Class.LinkDownload;
+            if (LinkDownload.Visible)
+                LinkDownload.HRef = Laporan_Class.LinkDownload;
 
-            ButtonPrintTransfer.OnClientClick = "return popitup('ProdukPrint.aspx" + Laporan_Class.TempPencarian + "')";
+            ButtonPrint.OnClientClick = "return popitup('ProdukPrint.aspx" + Laporan_Class.TempPencarian + "')";
             #endregion
 
             LabelTotalJumlahHeaderTransfer.Text = Result["Jumlah"];
@@ -133,11 +133,11 @@ public partial class WITReport_TransferStok_Produk : System.Web.UI.Page
     {
         LoadData(false);
     }
-    protected void ButtonExcelTransfer_Click(object sender, EventArgs e)
+    protected void ButtonExcel_Click(object sender, EventArgs e)
     {
         LoadData(true);
     }
-    protected void LoadData_EventTransfer(object sender, EventArgs e)
+    protected void LoadData_Event(object sender, EventArgs e)
     {
         LoadData();
     }

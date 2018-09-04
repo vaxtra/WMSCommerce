@@ -21,29 +21,29 @@
 </asp:Content>
 
 <asp:Content ID="Content7" ContentPlaceHolderID="ContentPlaceHolderBody" runat="Server">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-condensed table-hover TableSorter">
                     <thead>
                         <tr class="active">
-                            <th class="text-center" rowspan="2">No.</th>
-                            <th class="text-center" rowspan="2">Kode</th>
-                            <th class="text-center" rowspan="2">Produk</th>
-                            <th class="text-center" rowspan="2">Warna</th>
-                            <th class="text-center" rowspan="2">Varian</th>
-                            <th class="text-center" rowspan="2">Kategori</th>
-                            <th class="text-center" rowspan="2">Pemilik</th>
-                            <th class="text-center" rowspan="2">Harga</th>
-                            <th class="text-center" rowspan="2">Stok</th>
-                            <th class="text-center" colspan="2">Disc. Store</th>
-                            <th class="text-center" colspan="2">Disc. Consignment</th>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2">Kode</th>
+                            <th rowspan="2">Produk</th>
+                            <th rowspan="2">Warna</th>
+                            <th rowspan="2">Varian</th>
+                            <th rowspan="2">Kategori</th>
+                            <th rowspan="2">Pemilik</th>
+                            <th rowspan="2">Harga</th>
+                            <th rowspan="2">Stok</th>
+                            <th colspan="2">Disc. Store</th>
+                            <th colspan="2">Disc. Consignment</th>
                         </tr>
                         <tr class="active">
-                            <th class="text-center">Persentase</th>
-                            <th class="text-center">Nominal</th>
-                            <th class="text-center">Persentase</th>
-                            <th class="text-center">Nominal</th>
+                            <th>Persentase</th>
+                            <th>Nominal</th>
+                            <th>Persentase</th>
+                            <th>Nominal</th>
                         </tr>
                     </thead>
                     <tbody>

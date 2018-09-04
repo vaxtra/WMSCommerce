@@ -111,7 +111,7 @@ public partial class WITAdministrator_Produk_Transfer_Terima_Pengaturan : System
 
                     db.SubmitChanges();
 
-                    Response.Redirect("/WITWarehouse/Produk/Transfer/Detail.aspx?id=" + TransferProduk.IDTransferProduk, false);
+                    Response.Redirect("/WITAdministrator/Produk/Transfer/Detail.aspx?id=" + TransferProduk.IDTransferProduk, false);
                 }
                 else
                     Response.Redirect("Default.aspx", false);

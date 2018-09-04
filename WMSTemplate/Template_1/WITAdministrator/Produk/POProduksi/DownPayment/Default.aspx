@@ -50,7 +50,7 @@
                                         <th>Pegawai</th>
                                         <th>Vendor</th>
                                         <th>Grandtotal</th>
-                                        <th>Down Payment</th>
+                                        <th class="fitSize">Down Payment</th>
                                     </tr>
                                     <tr class="thead-light">
                                         <th></th>
@@ -83,7 +83,7 @@
                                             <asp:DropDownList ID="DropDownListCariVendorPO" runat="server" CssClass="select2" Width="100%" AutoPostBack="true" OnSelectedIndexChanged="Event_CariPO">
                                             </asp:DropDownList></th>
                                         <th></th>
-                                                                                <th class="fitSize">
+                                        <th class="fitSize">
                                             <asp:Button ID="ButtonCariPO" runat="server" Text="Cari" class="btn btn-outline-light d-none" ClientIDMode="Static" OnClick="Event_CariPO" />
                                             <asp:Button ID="ButtonTambah" runat="server" Text="Tambah" class="btn btn-success btn-block" OnClick="ButtonTambah_Click" />
                                         </th>
@@ -98,8 +98,8 @@
                                                 <td colspan="2"><%# Eval("Tanggal").ToFormatTanggal() %></td>
                                                 <td><%# Eval("Pegawai") %></td>
                                                 <td><%# Eval("Vendor") %></td>
-                                                <td class="text-right warning"><strong><%# Eval("Grandtotal").ToFormatHarga() %></strong></td>
-                                                <td class="text-right info"><strong><%# Eval("DownPayment").ToFormatHarga() %></strong></td>
+                                                <td class="text-right"><strong><%# Eval("Grandtotal").ToFormatHarga() %></strong></td>
+                                                <td class="text-right table-warning"><strong><%# Eval("DownPayment").ToFormatHarga() %></strong></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>

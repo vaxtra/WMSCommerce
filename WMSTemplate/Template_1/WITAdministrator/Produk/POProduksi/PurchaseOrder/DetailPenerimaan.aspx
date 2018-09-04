@@ -23,7 +23,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="border-bottom text-info">PENERIMAAN</h3>
+                        <h3 class="border-bottom">PENERIMAAN</h3>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3 class="border-bottom text-info">VENDOR</h3>
+                        <h3 class="border-bottom">VENDOR</h3>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <h3 class="border-bottom text-info">DETAIL</h3>
+                <h3 class="border-bottom">DETAIL</h3>
                 <label class="font-weight-bold text-muted">Produk</label>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover table-bordered">

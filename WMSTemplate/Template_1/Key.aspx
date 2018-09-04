@@ -10,53 +10,54 @@
     <meta content="" name="author" />
     <link rel="icon" type="image/ico" href="/images/icon.ico" />
 
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/login.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/Plugins/CustomWIT/floating-labels.css" rel="stylesheet" />
+    <link href="/assets/Plugins/CustomWIT/css-backend.css" rel="stylesheet" />
+
+        <style type="text/css">
+        :root {
+            --input-padding-x: .75rem;
+            --input-padding-y: .75rem;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
-<body>
-    <form id="formWITEnterpriseSystem" runat="server" class="site-wrapper">
-        <div class="site-wrapper-inner">
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3"></div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-md-1 col-lg-2"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
-                        <div class="inner cover">
-                            <div class="row">
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <img src="/images/logo_wms.png" data-src="/images/logo_wms.png" class="pull-left" style="margin-bottom: 20px; height: 100px;" />
-                                </div>
-                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <h1 class="text-right">STORE KEY</h1>
-                                    <h4 class="text-right">WIT. Management System</h4>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <div class="form-group">
-                                        <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
-                                    </div>
-                                    <div class="form-group">
-                                        <asp:TextBox ID="TextBoxStoreKey" runat="server" CssClass="customtextbox" placeholder="Store Key" onfocus="this.select();"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                <a href="Login.aspx" class="btn btn-danger btn-block" style="background: #2cb5e8; border-color: #2cb5e8;">Login</a>
-                                            </div>
-                                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                <asp:Button ID="ButtonVerifikasi" runat="server" Text="Verifikasi" CssClass="btn btn-success btn-block" Style="background: #0fb8ad; border-color: #0fb8ad;" OnClick="ButtonVerifikasi_Click" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="text-center">Supported System by <a href="https://wit.co.id">WIT.</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-lg-2"></div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3"></div>
+<body class="bg-light">
+    <form id="formWITEnterpriseSystem" runat="server" class="form-signin">
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/images/logo_wms.png?w=72" />
+            <h3 class="font-weight-light">WMS COMMERCE</h3>
+            <asp:Literal ID="LiteralWarning" runat="server"></asp:Literal>
         </div>
-        <script src="assets/js/bootstrap.min.js"></script>
+
+        <div class="form-label-group">
+            <asp:TextBox ID="TextBoxStoreKey" runat="server" class="form-control" placeholder="Store Key" required autofocus></asp:TextBox>
+            <label for="TextBoxStoreKey">Store Key</label>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <asp:Button ID="ButtonVerifikasi" runat="server" Text="Verifikasi" CssClass="btn btn-lg btn-primary btn-block" OnClick="ButtonVerifikasi_Click" />
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                <a href="Login.aspx" class="btn btn-link btn-sm">Login</a>
+            </div>
+        </div>
+        <p class="mt-5 mb-3 text-black-50 text-center">Developed by <a href="http://wit.co.id" target="_blank">WIT. Indonesia</a>  &copy; 2018</p>
     </form>
 </body>

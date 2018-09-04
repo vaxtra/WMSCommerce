@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class WITAdministrator_Produk_Stok_ButuhRestok : System.Web.UI.Page
+public partial class WITReport_Transaksi_JenisPembayaran : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -92,7 +92,7 @@ public partial class WITAdministrator_Produk_Stok_ButuhRestok : System.Web.UI.Pa
     }
     #endregion
 
-    protected void ButtonTable_Click(object sender, EventArgs e)
+    protected void ButtonTabel_Click(object sender, EventArgs e)
     {
         divTabel.Visible = true;
         divChart.Visible = false;
@@ -186,10 +186,10 @@ public partial class WITAdministrator_Produk_Stok_ButuhRestok : System.Web.UI.Pa
 
                 foreach (var item in JenisPembayaran)
                 {
-                    JumlahTotal += "<td class='text-right success' style='font-size: 12px;'><b>" + ListJenisPembayaran.Where(item2 => item2.Key.IDJenisPembayaran == item.IDJenisPembayaran).Sum(item2 => item2.Total).ToFormatHarga() + "</b></td>";
+                    JumlahTotal += "<td class='text-right table-success' style='font-size: 12px;'><b>" + ListJenisPembayaran.Where(item2 => item2.Key.IDJenisPembayaran == item.IDJenisPembayaran).Sum(item2 => item2.Total).ToFormatHarga() + "</b></td>";
                 }
 
-                JumlahTotal += "<td class='text-right success' style='font-size: 12px;'><b>" + ListJenisPembayaran.Sum(item2 => item2.Total).ToFormatHarga() + "</b></td>";
+                JumlahTotal += "<td class='text-right table-success' style='font-size: 12px;'><b>" + ListJenisPembayaran.Sum(item2 => item2.Total).ToFormatHarga() + "</b></td>";
                 JumlahTotal += "</tr>";
 
                 LiteralLaporan.Text += JumlahTotal;
@@ -209,12 +209,12 @@ public partial class WITAdministrator_Produk_Stok_ButuhRestok : System.Web.UI.Pa
                     foreach (var item in JenisPembayaran)
                     {
                         decimal Persentase = ListJenisPembayaran.Where(item2 => item2.Key.IDJenisPembayaran == item.IDJenisPembayaran).Sum(item2 => item2.Total.Value) / GrandTotal * 100;
-                        JumlahPersentase += "<td class='text-right active' style='font-size: 10px;'><b>" + Persentase.ToFormatHarga() + " %</b></td>";
+                        JumlahPersentase += "<td class='text-right table-secondary' style='font-size: 10px;'><b>" + Persentase.ToFormatHarga() + " %</b></td>";
 
                         TotalPersentase += Persentase;
                     }
 
-                    JumlahPersentase += "<td class='text-right active' style='font-size: 10px;'><b>" + TotalPersentase.ToFormatHarga() + " %</b></td>";
+                    JumlahPersentase += "<td class='text-right table-secondary' style='font-size: 10px;'><b>" + TotalPersentase.ToFormatHarga() + " %</b></td>";
                     JumlahPersentase += "</tr>";
                 }
 
@@ -245,7 +245,7 @@ public partial class WITAdministrator_Produk_Stok_ButuhRestok : System.Web.UI.Pa
                             LiteralLaporan.Text += "<td></td>";
                     }
 
-                    LiteralLaporan.Text += "<td class='text-right warning'><b>" + (Total > 0 ? Total.ToFormatHarga() : "") + "</b></td>";
+                    LiteralLaporan.Text += "<td class='text-right table-warning'><b>" + (Total > 0 ? Total.ToFormatHarga() : "") + "</b></td>";
 
                     LiteralLaporan.Text += "</tr>";
                 }

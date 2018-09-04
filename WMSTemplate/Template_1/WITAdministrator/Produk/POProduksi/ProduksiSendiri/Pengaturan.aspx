@@ -25,7 +25,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h3 class="border-bottom text-info">PIC</h3>
+                    <h3 class="border-bottom">PIC</h3>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="border-bottom text-info">DETAIL</h3>
+                    <h3 class="border-bottom">DETAIL</h3>
                     <div class="form-group">
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
@@ -105,14 +105,12 @@
                                                 <td class="text-right"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
                                                 <td class="text-right warning"><strong><%# Eval("SubtotalHPP").ToFormatHarga() %></strong></td>
                                                 <td class="text-center fitSize">
-                                                    <asp:Button ID="ButtonHapus" runat="server" CssClass="btn btn-danger btn-xs" Text="X" CommandName="Hapus" CommandArgument='<%# Eval("IDKombinasiProduk") %>' /></td>
+                                                    <asp:Button ID="ButtonHapus" runat="server" CssClass="btn btn-outline-danger btn-xs" Text="X" CommandName="Hapus" CommandArgument='<%# Eval("IDKombinasiProduk") %>' /></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                     <tr class="table-success">
-                                        <td colspan="6" class="text-center font-weight-bold">TOTAL</td>
-                                        <td class="text-right font-weight-bold">
-                                            <asp:Label ID="LabelTotalJumlah" runat="server" Text="0"></asp:Label></td>
+                                        <td colspan="7" class="text-center font-weight-bold">TOTAL</td>
                                         <td class="text-right font-weight-bold">
                                             <asp:Label ID="LabelTotalSubtotal" runat="server" Text="0"></asp:Label></td>
                                         <td></td>

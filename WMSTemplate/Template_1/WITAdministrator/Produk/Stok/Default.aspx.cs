@@ -31,28 +31,27 @@ public partial class WITAdministrator_Produk_Stok_Default : System.Web.UI.Page
                 DropDownListKategori.DataTextField = "Nama";
                 DropDownListKategori.DataValueField = "IDKategoriProduk";
                 DropDownListKategori.DataBind();
-                DropDownListKategori.Items.Insert(0, new ListItem { Value = "-1", Text = "- Semua -" });
-                DropDownListKategori.Items.Insert(1, new ListItem { Value = "0", Text = " " });
+                DropDownListKategori.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
 
                 DropDownListPemilik.DataSource = ClassPemilikProduk.Data();
                 DropDownListPemilik.DataTextField = "Nama";
                 DropDownListPemilik.DataValueField = "IDPemilikProduk";
                 DropDownListPemilik.DataBind();
-                DropDownListPemilik.Items.Insert(0, new ListItem { Value = "-1", Text = "- Semua -" });
+                DropDownListPemilik.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
 
                 DropDownListVarian.DataSource = ClassAtributProduk.Data();
                 DropDownListVarian.DataTextField = "Nama";
                 DropDownListVarian.DataValueField = "IDAtributProduk";
                 DropDownListVarian.DataBind();
-                DropDownListVarian.Items.Insert(0, new ListItem { Value = "-1", Text = "- Semua -" });
+                DropDownListVarian.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
 
                 DropDownListWarna.DataSource = ClassWarna.Data();
                 DropDownListWarna.DataTextField = "Nama";
                 DropDownListWarna.DataValueField = "IDWarna";
                 DropDownListWarna.DataBind();
-                DropDownListWarna.Items.Insert(0, new ListItem { Value = "-1", Text = "- Semua -" });
+                DropDownListWarna.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
 
-                DropDownListJenisStok.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
+                DropDownListJenisStok.Items.Insert(0, new ListItem { Value = "0", Text = "-Semua-" });
                 DropDownListJenisStok.Items.Insert(1, new ListItem { Value = "1", Text = "Ada Stok", Selected = true });
                 DropDownListJenisStok.Items.Insert(2, new ListItem { Value = "2", Text = "Tidak Ada Stok" });
                 DropDownListJenisStok.Items.Insert(3, new ListItem { Value = "3", Text = "Minus" });
@@ -75,180 +74,61 @@ public partial class WITAdministrator_Produk_Stok_Default : System.Web.UI.Page
         DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext();
 
         string _tempPencarian = string.Empty;
-
-        #region TEMPAT
         _tempPencarian = "?IDTempat=" + DropDownListTempat.SelectedValue;
-
-        IQueryable<TBStokProduk> _stokProduk;
-
-        if (DropDownListTempat.SelectedValue == "0")
-            _stokProduk = db.TBStokProduks.Where(item => item.TBKombinasiProduk.TBProduk._IsActive);
-        else
-        {
-            _stokProduk = db.TBStokProduks
-                .Where(item =>
-                    item.IDTempat == DropDownListTempat.SelectedValue.ToInt() &&
-                    item.TBKombinasiProduk.TBProduk._IsActive);
-        }
-        #endregion
-
-        #region STATUS STOK
         _tempPencarian += "&IDJenisStok=" + DropDownListJenisStok.SelectedValue;
+        _tempPencarian += "&Kode=" + TextBoxKode.Text;
+        _tempPencarian += "&Produk=" + TextBoxProduk.Text;
+        _tempPencarian += "&IDWarna=" + DropDownListWarna.SelectedValue;
+        _tempPencarian += "&HargaJual=" + TextBoxHargaJual.Text;
+        _tempPencarian += "&Stok=" + TextBoxStok.Text;
+        _tempPencarian += "&IDAtribut=" + DropDownListVarian.SelectedValue;
+        _tempPencarian += "&IDKategori=" + DropDownListKategori.SelectedValue;
 
-        if (DropDownListJenisStok.SelectedValue == "1")
-            _stokProduk = _stokProduk.Where(item => item.Jumlah > 0);
-        else if (DropDownListJenisStok.SelectedValue == "2")
-            _stokProduk = _stokProduk.Where(item => item.Jumlah == 0);
-        else if (DropDownListJenisStok.SelectedValue == "3")
-            _stokProduk = _stokProduk.Where(item => item.Jumlah < 0);
-        #endregion
-
-        #region KODE
-        if (!string.IsNullOrWhiteSpace(TextBoxKode.Text))
-        {
-            _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.KodeKombinasiProduk.Contains(TextBoxKode.Text));
-            TextBoxKode.Focus();
-
-            _tempPencarian += "&Kode=" + TextBoxKode.Text;
-        }
-        #endregion
-
-        #region PRODUK
-        if (!string.IsNullOrWhiteSpace(TextBoxProduk.Text))
-        {
-            _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.TBProduk.Nama.Contains(TextBoxProduk.Text));
-            TextBoxProduk.Focus();
-
-            _tempPencarian += "&Produk=" + TextBoxProduk.Text;
-        }
-        #endregion
-
-        #region WARNA
-        if (DropDownListWarna.SelectedValue != "-1")
-        {
-            _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.TBProduk.IDWarna == DropDownListWarna.SelectedValue.ToInt());
-
-            TextBoxProduk.Focus();
-            _tempPencarian += "&IDWarna=" + DropDownListWarna.SelectedValue;
-        }
-        #endregion
-
-        #region HARGA JUAL
-        if (!string.IsNullOrWhiteSpace(TextBoxHargaJual.Text))
-        {
-            if (TextBoxHargaJual.Text.Contains("-"))
+        var _dataStok = db.TBStokProduks
+            .Where(item => (item.TBKombinasiProduk.TBProduk._IsActive) &&
+                (DropDownListTempat.SelectedValue != "0" ? item.IDTempat == DropDownListTempat.SelectedValue.ToInt() : true) &&
+                (DropDownListJenisStok.SelectedValue != "0" ? (DropDownListJenisStok.SelectedValue != "1" ? (DropDownListJenisStok.SelectedValue != "2" ? item.Jumlah < 0 : item.Jumlah == 0) : item.Jumlah > 0) : true) &&
+                (!string.IsNullOrWhiteSpace(TextBoxKode.Text) ? item.TBKombinasiProduk.KodeKombinasiProduk.Contains(TextBoxKode.Text) : true) &&
+                (!string.IsNullOrWhiteSpace(TextBoxProduk.Text) ? item.TBKombinasiProduk.TBProduk.Nama.Contains(TextBoxProduk.Text) : true) &&
+                (!string.IsNullOrWhiteSpace(TextBoxProduk.Text) ? item.TBKombinasiProduk.TBProduk.Nama.Contains(TextBoxProduk.Text) : true) &&
+                (DropDownListWarna.SelectedValue != "0" ? item.TBKombinasiProduk.TBProduk.IDWarna == DropDownListWarna.SelectedValue.ToInt() : true) &&
+                (!string.IsNullOrWhiteSpace(TextBoxHargaJual.Text) ? item.HargaJual == TextBoxHargaJual.Text.ToDecimal() : true) &&
+                (!string.IsNullOrWhiteSpace(TextBoxStok.Text) ? item.Jumlah == TextBoxStok.Text.ToInt() : true) &&
+                (DropDownListPemilik.SelectedValue != "0" ? item.TBKombinasiProduk.TBProduk.IDPemilikProduk == DropDownListPemilik.SelectedValue.ToInt() : true) &&
+                (DropDownListVarian.SelectedValue != "0" ? item.TBKombinasiProduk.IDAtributProduk == DropDownListVarian.SelectedValue.ToInt() : true) &&
+                (DropDownListKategori.SelectedValue != "0" ? item.TBKombinasiProduk.TBProduk.TBRelasiProdukKategoriProduks.FirstOrDefault(item2 => item2.IDKategoriProduk == DropDownListKategori.SelectedValue.ToInt()) != null : true))
+            .GroupBy(item => new
             {
-                string[] _angka = TextBoxHargaJual.Text.Split('-');
-                _stokProduk = _stokProduk.Where(item => item.HargaJual >= _angka[0].ToDecimal() && item.HargaJual <= _angka[1].ToDecimal()).OrderBy(item => item.HargaJual);
-            }
-            else
-                _stokProduk = _stokProduk.Where(item => item.HargaJual == TextBoxHargaJual.Text.ToDecimal());
-
-            TextBoxHargaJual.Focus();
-            _tempPencarian += "&HargaJual=" + TextBoxHargaJual.Text;
-        }
-        #endregion
-
-        #region STOK PRODUK
-        if (!string.IsNullOrWhiteSpace(TextBoxStok.Text))
-        {
-            if (TextBoxStok.Text.Contains("-"))
+                item.TBKombinasiProduk.TBProduk
+            })
+            .Select(item => new
             {
-                string[] _angka = TextBoxStok.Text.Split('-');
-                _stokProduk = _stokProduk.Where(item => item.Jumlah >= _angka[0].ToInt() && item.Jumlah <= _angka[1].ToInt()).OrderBy(item => item.Jumlah);
-            }
-            else
-                _stokProduk = _stokProduk.Where(item => item.Jumlah == TextBoxStok.Text.ToInt());
-
-            TextBoxStok.Focus();
-
-            _tempPencarian += "&Stok=" + TextBoxStok.Text;
-        }
-        #endregion
-
-        #region PEMILIK PRODUK
-        if (DropDownListPemilik.SelectedValue != "-1")
-        {
-            _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.TBProduk.IDPemilikProduk == DropDownListPemilik.SelectedValue.ToInt());
-
-            TextBoxProduk.Focus();
-            _tempPencarian += "&IDPemilikProduk=" + DropDownListPemilik.SelectedValue;
-        }
-        #endregion
-
-        #region ATRIBUT
-        if (DropDownListVarian.SelectedValue != "-1")
-        {
-            _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.IDAtributProduk == DropDownListVarian.SelectedValue.ToInt());
-
-            TextBoxProduk.Focus();
-            _tempPencarian += "&IDAtribut=" + DropDownListVarian.SelectedValue;
-        }
-        #endregion
-
-        #region KATEGORI
-        if (DropDownListKategori.SelectedValue != "-1")
-        {
-            if (DropDownListKategori.SelectedValue == "0")
-                _stokProduk = _stokProduk.Where(item => item.TBKombinasiProduk.TBProduk.TBRelasiProdukKategoriProduks.Count == 0);
-            else
-            {
-                _stokProduk = _stokProduk.Where(item =>
-                    item.TBKombinasiProduk.TBProduk.TBRelasiProdukKategoriProduks.Count > 0 &&
-                    item.TBKombinasiProduk.TBProduk.TBRelasiProdukKategoriProduks.FirstOrDefault().IDKategoriProduk == int.Parse(DropDownListKategori.SelectedValue));
-            }
-
-            TextBoxProduk.Focus();
-            _tempPencarian += "&IDKategori=" + DropDownListKategori.SelectedValue;
-        }
-        #endregion
-
-        var _dataStok = _stokProduk.Select(item => new
-        {
-            IDProduk = item.TBKombinasiProduk.TBProduk.IDProduk,
-            IDKombinasiProduk = item.IDKombinasiProduk,
-            Kode = item.TBKombinasiProduk.KodeKombinasiProduk,
-            Atribut = item.TBKombinasiProduk.TBAtributProduk.Nama,
-            HargaJual = item.HargaJual.Value,
-            Jumlah = item.Jumlah.Value
-        });
+                Produk = item.Key.TBProduk.Nama,
+                Warna = item.Key.TBProduk.TBWarna.Nama,
+                PemilikProduk = item.Key.TBProduk.TBPemilikProduk.Nama,
+                Kategori = StokProduk_Class.GabungkanSemuaKategoriProduk(db, null, item.Key.TBProduk.TBKombinasiProduks.FirstOrDefault()),
+                Body = item.Select(item2 => new
+                {
+                    IDKombinasiProduk = item2.IDKombinasiProduk,
+                    Kode = item2.TBKombinasiProduk.KodeKombinasiProduk,
+                    AtributProduk = item2.TBKombinasiProduk.TBAtributProduk.Nama,
+                    HargaJual = item2.HargaJual.Value,
+                    Jumlah = item2.Jumlah.Value
+                }),
+                Jumlah = item.Sum(item2 => item2.Jumlah),
+                Subtotal = item.Sum(item2 => item2.Jumlah * item2.HargaJual),
+                Count = item.Count()
+            }).OrderBy(item => item.Produk);
 
         ButtonPrint.OnClientClick = "return popitup('ProdukPrint.aspx" + _tempPencarian + "')";
 
-        if (_dataStok.Count() > 0)
-        {
-            var _dataProduk = _dataStok.Select(item => item.IDProduk).Distinct();
+        RepeaterProduk.DataSource = _dataStok;
+        RepeaterProduk.DataBind();
 
-            var _produk = db.TBProduks
-                .Where(item => _dataProduk.Any(item2 => item2 == item.IDProduk))
-                .Select(item => new
-                {
-                    ID = item.IDProduk,
-                    Produk = item.Nama,
-                    Kategori = (item.TBRelasiProdukKategoriProduks.Count > 0) ? item.TBRelasiProdukKategoriProduks.FirstOrDefault().TBKategoriProduk.Nama : "",
-                    PemilikProduk = item.TBPemilikProduk.Nama,
-                    Warna = item.TBWarna.Nama,
-                    Stok = _dataStok.Where(item2 => item2.IDProduk == item.IDProduk)
-                }).OrderBy(item => item.Produk);
+        LabelTotalJumlah.Text = _dataStok.Sum(item => item.Jumlah).ToFormatHargaBulat();
+        LabelTotalNominal.Text = _dataStok.Sum(item => item.Subtotal).ToFormatHarga();
 
-            RepeaterProduk.DataSource = _produk;
-            RepeaterProduk.DataBind();
-
-            LabelTotalJumlah.Text = _dataStok.Sum(item => item.Jumlah).ToFormatHargaBulat();
-            LabelTotalNominal.Text = _dataStok.ToArray().Sum(item => item.Jumlah * item.HargaJual).ToFormatHarga();
-
-            return _produk;
-        }
-        else
-        {
-            RepeaterProduk.DataSource = null;
-            RepeaterProduk.DataBind();
-
-            LabelTotalJumlah.Text = "0";
-            LabelTotalNominal.Text = "0";
-
-            return null;
-        }
+        return _dataStok;
     }
     protected void ButtonExcel_Click(object sender, EventArgs e)
     {

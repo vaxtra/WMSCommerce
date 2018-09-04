@@ -51,9 +51,9 @@ public partial class WITAdministrator_BahanBaku_Transfer_Detail : System.Web.UI.
                     linkDownload.HRef = "~/Files/Transfer Bahan Baku/Transfer/" + DataTransferBahanBaku.TBTempat.Nama + " " + DataTransferBahanBaku.IDTransferBahanBaku + " " + (DataTransferBahanBaku.TanggalKirim).ToString("d MMMM yyyy HH.mm") + ".WIT_enc.zip";
 
                     if (DataTransferBahanBaku.IDTempatPenerima == Pengguna.IDTempat)
-                        linkKembali.HRef = "/WITWarehouse/BahanBaku/Penerimaan/Default.aspx";
+                        linkKembali.HRef = "/WITAdministrator/BahanBaku/Transfer/Kirim/Default.aspx";
                     else
-                        linkKembali.HRef = "Default.aspx";
+                        linkKembali.HRef = "/WITAdministrator/BahanBaku/Transfer/Terima/Default.aspx";
 
                     if ((PilihanJenisTransfer)DataTransferBahanBaku.EnumJenisTransfer == PilihanJenisTransfer.TransferBatal ||
                         (PilihanJenisTransfer)DataTransferBahanBaku.EnumJenisTransfer == PilihanJenisTransfer.TransferPending)

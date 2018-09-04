@@ -49,7 +49,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
     <asp:UpdatePanel ID="UpdatePanelTitleRight" runat="server">
         <ContentTemplate>
-            <asp:Button ID="ButtonCetak" runat="server" Text="Cetak" CssClass="btn btn-dark btn-const" />
+            <asp:Button ID="ButtonCetak" runat="server" Text="Cetak" CssClass="btn btn-secondary btn-const" />
 
             <asp:UpdateProgress ID="updateProgressTitleRight" runat="server" AssociatedUpdatePanelID="UpdatePanelTitleRight">
                 <ProgressTemplate>
@@ -75,13 +75,15 @@
     <asp:UpdatePanel ID="UpdatePanelStokOpname" runat="server">
         <ContentTemplate>
             <div class="form-group">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2 mr-1" runat="server" Enabled="false"></asp:DropDownList>
-                        <asp:DropDownList ID="DropDownListJenisStok" CssClass="select2 mr-1" runat="server"></asp:DropDownList>
-                        <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-primary" ClientIDMode="Static" OnClick="LoadData_Event" />
+                <div class="row">
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2 w-100" runat="server" Enabled="false" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+                    </div>
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListJenisStok" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
                     </div>
                 </div>
+                <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-primary btn-const d-none" ClientIDMode="Static" OnClick="LoadData_Event" />
             </div>
             <div class="form-group">
                 <div class="table-responsive">
@@ -119,43 +121,42 @@
                                     </asp:DropDownList></th>
                                 <th></th>
                                 <th></th>
-                                <th class="fitSize">
-                                    <asp:Button ID="ButtonSimpan" runat="server" Text="Simpan" CssClass="btn btn-success btn-block" ClientIDMode="Static" OnClick="ButtonSimpan_Click" /></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <asp:Repeater ID="RepeaterLaporan" runat="server">
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="fitSize" rowspan='<%# Eval("Count") %>'>
-                                            <%# Container.ItemIndex + 1 %>
-                                        </td>
-                                        <td rowspan='<%# Eval("Count") %>'><%# Eval("Produk") %></td>
-                                        <td rowspan='<%# Eval("Count") %>'><%# Eval("Warna") %></td>
-                                        <td rowspan='<%# Eval("Count") %>'><%# Eval("Brand") %></td>
-                                        <td rowspan='<%# Eval("Count") %>'><%# Eval("Kategori") %></td>
-
-                                        <asp:Repeater ID="RepeaterKombinasiProduk" runat="server" DataSource='<%# Eval("Stok") %>'>
-                                            <ItemTemplate>
-                                                <td class="align-middle fitSize">
-                                                    <%# Eval("Kode") %>
-                                                    <asp:Label ID="LabelIDStokProduk" Visible="false" runat="server" Text='<%# Eval("IDStokProduk") %>'></asp:Label>
-                                                </td>
-                                                <td class="align-middle fitSize"><%# Eval("Varian") %></td>
-                                                <td class="align-middle text-righ fitSize"><%# Eval("HargaJual").ToFormatHarga() %></td>
-                                                <td class="align-middle text-right fitSize table-warning font-weight-bold">
-                                                    <%# Eval("Jumlah").ToFormatHargaBulat() %>
-                                                </td>
-                                                <td class="table-success" style="width: 100px;">
-                                                    <asp:TextBox ID="TextBoxStokTerbaru" runat="server" CssClass="form-control text-right form-control-sm InputInteger" onfocus="this.select();" onkeypress="return Func_ButtonSimpan(event)"></asp:TextBox></td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("Produk") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("Warna") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("Brand") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>'><%# Eval("Kategori") %></td>
                                     </tr>
+                                    <asp:Repeater ID="RepeaterKombinasiProduk" runat="server" DataSource='<%# Eval("Stok") %>'>
+                                        <ItemTemplate>
+                                            <td>
+                                                <%# Eval("Kode") %>
+                                                <asp:Label ID="LabelIDStokProduk" Visible="false" runat="server" Text='<%# Eval("IDStokProduk") %>'></asp:Label>
+                                            </td>
+                                            <td class="text-center"><%# Eval("Varian") %></td>
+                                            <td class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
+                                            <td class="text-right"><%# Eval("Jumlah").ToFormatHargaBulat() %></td>
+                                            <td class="table-warning" style="width: 100px;">
+                                                <asp:TextBox ID="TextBoxStokTerbaru" runat="server" CssClass="form-control form-control-sm text-right InputInteger" onfocus="this.select();" onkeypress="return Func_ButtonSimpan(event)"></asp:TextBox></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </tbody>
                     </table>
+                </div>
+                <div class="card">
+                    <div class="card-footer">
+                        <asp:Button ID="ButtonSimpan" runat="server" Text="Simpan" CssClass="btn btn-success btn-const" ClientIDMode="Static" OnClick="ButtonSimpan_Click" />
+                    </div>
                 </div>
             </div>
 

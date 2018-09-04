@@ -310,16 +310,7 @@ public partial class WITAdministrator_Produk_POProduksi_ProduksiSendiri_Pengatur
         RepeaterDetail.DataSource = ViewStateListDetail;
         RepeaterDetail.DataBind();
 
-        if (ViewStateListDetail.Count == 0)
-        {
-            LabelTotalJumlah.Text = "0";
-            LabelTotalSubtotal.Text = "0";
-        }
-        else
-        {
-            LabelTotalJumlah.Text = ViewStateListDetail.Sum(item => item.Jumlah).ToFormatHargaBulat();
-            LabelTotalSubtotal.Text = ViewStateListDetail.Sum(item => item.SubtotalHPP).ToFormatHarga();
-        }
+        LabelTotalSubtotal.Text = ViewStateListDetail.Sum(item => item.SubtotalHPP).ToFormatHarga();
 
         ViewState["ViewStateListDetail"] = ViewStateListDetail;
 

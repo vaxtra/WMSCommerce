@@ -44,8 +44,6 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
                     LabelKeterangan.Text = "Tambah";
 
                     AjaxFileUploadFoto.Enabled = false;
-                    navVarian.Visible = false;
-                    navPhoto.Visible = false;
                 }
 
                 LoadDataDropdown(db);
@@ -191,6 +189,18 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
     }
 
     #region FOTO
+    private void LoadDataFoto(DataClassesDatabaseDataContext db, int idProduk)
+    {
+        FotoProduk_Class ClassFotoProduk = new FotoProduk_Class();
+        RepeaterFotoProduk.DataSource = ClassFotoProduk.Data(db, idProduk)
+            .Select(item => new
+            {
+                item.IDFotoProduk,
+                item.FotoUtama,
+                Foto = "/images/Produk/" + item.IDFotoProduk + item.ExtensiFoto
+            });
+        RepeaterFotoProduk.DataBind();
+    }
     protected void AjaxFileUploadFoto_UploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
     {
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
@@ -227,17 +237,13 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
             LoadDataFoto(db, Request.QueryString["id"].ToInt());
         }
     }
-    private void LoadDataFoto(DataClassesDatabaseDataContext db, int idProduk)
+
+    protected void ButtonRefreshFoto_Click(object sender, EventArgs e)
     {
-        FotoProduk_Class ClassFotoProduk = new FotoProduk_Class();
-        RepeaterFotoProduk.DataSource = ClassFotoProduk.Data(db, idProduk)
-            .Select(item => new
-            {
-                item.IDFotoProduk,
-                item.FotoUtama,
-                Foto = "/images/Produk/" + item.IDFotoProduk + item.ExtensiFoto
-            });
-        RepeaterFotoProduk.DataBind();
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            LoadDataFoto(db, Request.QueryString["id"].ToInt());
+        }
     }
     #endregion
 
@@ -271,40 +277,40 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
 
     protected void ButtonSimpanVarian_Click(object sender, EventArgs e)
     {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
+        //    using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        //    {
+        //        PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 
-            KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
-            StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
+        //        KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
+        //        StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
 
-            foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
-            {
-                HiddenField HiddenFieldIDKombinasiProduk = (HiddenField)item.FindControl("HiddenFieldIDKombinasiProduk");
-                HiddenField HiddenFieldJumlah = (HiddenField)item.FindControl("HiddenFieldJumlah");
-                TextBox TextBoxKodeKombinasiProduk = (TextBox)item.FindControl("TextBoxKodeKombinasiProduk");
-                TextBox TextBoxAtributProduk = (TextBox)item.FindControl("TextBoxAtributProduk");
-                TextBox TextBoxBerat = (TextBox)item.FindControl("TextBoxBerat");
-                TextBox TextBoxHargaBeli = (TextBox)item.FindControl("TextBoxHargaBeli");
-                TextBox TextBoxHargaJual = (TextBox)item.FindControl("TextBoxHargaJual");
-                TextBox TextBoxJumlah = (TextBox)item.FindControl("TextBoxJumlah");
+        //        foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+        //        {
+        //            HiddenField HiddenFieldIDKombinasiProduk = (HiddenField)item.FindControl("HiddenFieldIDKombinasiProduk");
+        //            HiddenField HiddenFieldJumlah = (HiddenField)item.FindControl("HiddenFieldJumlah");
+        //            TextBox TextBoxKodeKombinasiProduk = (TextBox)item.FindControl("TextBoxKodeKombinasiProduk");
+        //            TextBox TextBoxAtributProduk = (TextBox)item.FindControl("TextBoxAtributProduk");
+        //            TextBox TextBoxBerat = (TextBox)item.FindControl("TextBoxBerat");
+        //            TextBox TextBoxHargaBeli = (TextBox)item.FindControl("TextBoxHargaBeli");
+        //            TextBox TextBoxHargaJual = (TextBox)item.FindControl("TextBoxHargaJual");
+        //            TextBox TextBoxJumlah = (TextBox)item.FindControl("TextBoxJumlah");
 
-                //KOMBINASI PRODUK
-                var KombinasiProduk = KombinasiProduk_Class.Ubah(db, Pengguna.IDTempat, HiddenFieldIDKombinasiProduk.Value.ToInt(), "", TextBoxAtributProduk.Text, TextBoxKodeKombinasiProduk.Text, TextBoxBerat.Text.ToDecimal(), "");
+        //            //KOMBINASI PRODUK
+        //            var KombinasiProduk = KombinasiProduk_Class.Ubah(db, Pengguna.IDTempat, HiddenFieldIDKombinasiProduk.Value.ToInt(), "", TextBoxAtributProduk.Text, TextBoxKodeKombinasiProduk.Text, TextBoxBerat.Text.ToDecimal(), "");
 
-                //STOK PRODUK
-                var StokProduk = StokProduk_Class.Ubah(Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk, TextBoxHargaBeli.Text.ToDecimal(), TextBoxHargaJual.Text.ToDecimal());
+        //            //STOK PRODUK
+        //            var StokProduk = StokProduk_Class.Ubah(Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk, TextBoxHargaBeli.Text.ToDecimal(), TextBoxHargaJual.Text.ToDecimal());
 
-                if (StokProduk == null && (TextBoxHargaBeli.Text.ToDecimal() > 0 || TextBoxHargaJual.Text.ToDecimal() > 0 || TextBoxJumlah.Text.ToInt() > 0))
-                    StokProduk = StokProduk_Class.MembuatStok(0, Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk, TextBoxHargaBeli.Text.ToDecimal(), TextBoxHargaJual.Text.ToDecimal(), "");
+        //            if (StokProduk == null && (TextBoxHargaBeli.Text.ToDecimal() > 0 || TextBoxHargaJual.Text.ToDecimal() > 0 || TextBoxJumlah.Text.ToInt() > 0))
+        //                StokProduk = StokProduk_Class.MembuatStok(0, Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk, TextBoxHargaBeli.Text.ToDecimal(), TextBoxHargaJual.Text.ToDecimal(), "");
 
-                StokProduk_Class.Penyesuaian(Pengguna.IDTempat, Pengguna.IDPengguna, StokProduk, TextBoxJumlah.Text.ToDecimal().ToInt(), "");
-            }
+        //            StokProduk_Class.Penyesuaian(Pengguna.IDTempat, Pengguna.IDPengguna, StokProduk, TextBoxJumlah.Text.ToDecimal().ToInt(), "");
+        //        }
 
-            db.SubmitChanges();
+        //        db.SubmitChanges();
 
-            LoadDataKombinasiProduk(db);
-        }
+        //        LoadDataKombinasiProduk(db);
+        //    }
     }
 
     protected void ButtonKeluar_Click(object sender, EventArgs e)
@@ -424,5 +430,155 @@ public partial class WITAdministrator_Produk_PengaturanX : System.Web.UI.Page
         LiteralJavascript.Text += " }); }};";
         LiteralJavascript.Text += "</script>";
         #endregion
+    }
+
+    protected void ButtonUpdate_Click(object sender, EventArgs e)
+    {
+        LabelKeterangan.Text = "Testing";
+    }
+
+    protected void CheckBoxSemua_CheckedChanged(object sender, EventArgs e)
+    {
+        foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+        {
+            CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+            CheckBoxPilih.Checked = CheckBoxSemua.Checked;
+        }
+    }
+
+    protected void ButtonUpdateBerat_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
+
+            KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
+
+            foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+            {
+                CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+                if (CheckBoxPilih.Checked)
+                {
+                    Label LabelIDKombinasiProduk = (Label)item.FindControl("LabelIDKombinasiProduk");
+                    Label LabelKodeKombinasiProduk = (Label)item.FindControl("LabelKodeKombinasiProduk");
+                    Label LabelAtribut = (Label)item.FindControl("LabelAtribut");
+                    Label LabelBerat = (Label)item.FindControl("LabelBerat");
+
+                    KombinasiProduk_Class.Ubah(db, Pengguna.IDTempat, LabelIDKombinasiProduk.Text.ToInt(), "", LabelAtribut.Text, LabelKodeKombinasiProduk.Text, TextBoxUpdateBerat.Text.ToDecimal(), "");
+
+                    LabelBerat.Text = TextBoxUpdateBerat.Text;
+                }
+            }
+
+            db.SubmitChanges();
+        }
+    }
+
+    protected void ButtonUpdateHargaBeli_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
+
+            KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
+            StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
+
+            foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+            {
+                CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+                if (CheckBoxPilih.Checked)
+                {
+                    Label LabelIDKombinasiProduk = (Label)item.FindControl("LabelIDKombinasiProduk");
+                    Label LabelHargaBeli = (Label)item.FindControl("LabelHargaBeli");
+                    Label LabelHargaJual = (Label)item.FindControl("LabelHargaJual");
+                    Label LabelStok = (Label)item.FindControl("LabelStok");
+
+                    //STOK PRODUK
+                    var StokProduk = StokProduk_Class.Ubah(Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), TextBoxUpdateHargaBeli.Text.ToDecimal(), LabelHargaJual.Text.ToDecimal());
+
+                    if (StokProduk == null && (TextBoxUpdateHargaBeli.Text.ToDecimal() > 0 || LabelHargaJual.Text.ToDecimal() > 0 || LabelStok.Text.ToInt() > 0))
+                        StokProduk = StokProduk_Class.MembuatStok(0, Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), TextBoxUpdateHargaBeli.Text.ToDecimal(), LabelHargaJual.Text.ToDecimal(), "");
+
+                    StokProduk_Class.Penyesuaian(Pengguna.IDTempat, Pengguna.IDPengguna, StokProduk, LabelStok.Text.ToDecimal().ToInt(), "");
+
+                    LabelHargaBeli.Text = TextBoxUpdateHargaBeli.Text;
+                }
+            }
+
+            db.SubmitChanges();
+        }
+    }
+
+    protected void ButtonUpdateHargaJual_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
+
+            KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
+            StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
+            foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+            {
+                CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+                if (CheckBoxPilih.Checked)
+                {
+                    Label LabelIDKombinasiProduk = (Label)item.FindControl("LabelIDKombinasiProduk");
+                    Label LabelHargaBeli = (Label)item.FindControl("LabelHargaBeli");
+                    Label LabelHargaJual = (Label)item.FindControl("LabelHargaJual");
+                    Label LabelStok = (Label)item.FindControl("LabelStok");
+
+                    //STOK PRODUK
+                    var StokProduk = StokProduk_Class.Ubah(Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), LabelHargaBeli.Text.ToDecimal(), TextBoxUpdateHargaJual.Text.ToDecimal());
+
+                    if (StokProduk == null && (LabelHargaBeli.Text.ToDecimal() > 0 || TextBoxUpdateHargaJual.Text.ToDecimal() > 0 || LabelStok.Text.ToInt() > 0))
+                        StokProduk = StokProduk_Class.MembuatStok(0, Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), LabelHargaBeli.Text.ToDecimal(), TextBoxUpdateHargaJual.Text.ToDecimal(), "");
+
+                    StokProduk_Class.Penyesuaian(Pengguna.IDTempat, Pengguna.IDPengguna, StokProduk, LabelStok.Text.ToDecimal().ToInt(), "");
+
+                    LabelHargaJual.Text = TextBoxUpdateHargaJual.Text;
+                }
+            }
+
+            db.SubmitChanges();
+        }
+    }
+
+    protected void ButtonUpdateStok_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin Pengguna = (PenggunaLogin)Session["PenggunaLogin"];
+
+            KombinasiProduk_Class KombinasiProduk_Class = new KombinasiProduk_Class();
+            StokProduk_Class StokProduk_Class = new StokProduk_Class(db);
+            foreach (RepeaterItem item in RepeaterKombinasiProduk.Items)
+            {
+                CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+                if (CheckBoxPilih.Checked)
+                {
+                    Label LabelIDKombinasiProduk = (Label)item.FindControl("LabelIDKombinasiProduk");
+                    Label LabelHargaBeli = (Label)item.FindControl("LabelHargaBeli");
+                    Label LabelHargaJual = (Label)item.FindControl("LabelHargaJual");
+                    Label LabelStok = (Label)item.FindControl("LabelStok");
+
+                    //STOK PRODUK
+                    var StokProduk = StokProduk_Class.Ubah(Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), LabelHargaBeli.Text.ToDecimal(), LabelHargaJual.Text.ToDecimal());
+
+                    if (StokProduk == null && (LabelHargaBeli.Text.ToDecimal() > 0 || LabelHargaJual.Text.ToDecimal() > 0 || TextBoxUpdateStok.Text.ToInt() > 0))
+                        StokProduk = StokProduk_Class.MembuatStok(0, Pengguna.IDTempat, Pengguna.IDPengguna, KombinasiProduk_Class.Cari(db, LabelIDKombinasiProduk.Text.ToInt()), LabelHargaBeli.Text.ToDecimal(), LabelHargaJual.Text.ToDecimal(), "");
+
+                    StokProduk_Class.Penyesuaian(Pengguna.IDTempat, Pengguna.IDPengguna, StokProduk, TextBoxUpdateStok.Text.ToDecimal().ToInt(), "");
+
+                    LabelStok.Text = TextBoxUpdateStok.Text;
+                }
+            }
+
+            db.SubmitChanges();
+        }
     }
 }

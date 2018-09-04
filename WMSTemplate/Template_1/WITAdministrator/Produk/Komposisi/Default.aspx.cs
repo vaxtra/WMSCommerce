@@ -139,7 +139,7 @@ public partial class WITAdministrator_Produk_Komposisi_Default : System.Web.UI.P
         }
     }
 
-    protected void ButtonPerbaharuiSemuaHargaPokokProduksiProduk_Click(object sender, EventArgs e)
+    protected void ImageButtonUpdate_Click(object sender, ImageClickEventArgs e)
     {
         PenggunaLogin pengguna = (PenggunaLogin)Session["PenggunaLogin"];
 

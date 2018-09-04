@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
-    <link rel="icon" href="/images/icon.ico">
-    <title>WIT. Management System</title>
+    <link rel="icon" href="/images/icon_wit.ico">
+    <title>WMS Commerce</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="bg-body">
+<body class="bg-light">
     <form id="formWITManagementSystem" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:ContentPlaceHolder ID="ContentPlaceHolderBody" runat="server">

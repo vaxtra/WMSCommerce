@@ -92,195 +92,162 @@ public partial class WITAdministrator_Default : System.Web.UI.Page
         HariIni = Pengaturan.HariIni();
         Kemarin = Pengaturan.HariSebelumnya();
 
-        #region Aktifitas Transaksi
-        if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.AktifitasTransaksi))
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
-            PanelAktifitasTransaksi1.Visible = true;
-            //////PanelAktifitasTransaksi2.Visible = true;
-            PanelAktifitasTransaksi3.Visible = true;
-
-            using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-            {
-                var _transaksi = db.TBTransaksis
+            var _transaksi = db.TBTransaksis
                             .Where(item => item.IDTempat == Pengguna.IDTempat &&
-                                item.TanggalOperasional.Value.Date >= BulanLalu[0] &&
+                                item.TanggalOperasional.Value.Date >= BulanIni[0] &&
                                 item.TanggalOperasional.Value.Date <= BulanIni[1] &&
                                 item.IDStatusTransaksi == (int)EnumStatusTransaksi.Complete)
                             .Select(item => new
                             {
                                 item.IDTempat,
+                                item.IDTransaksi,
                                 item.TanggalOperasional,
+                                Pelanggan = item.TBPelanggan.NamaLengkap,
                                 item.JumlahProduk,
                                 item.GrandTotal
                             }).ToArray();
 
-                var _transaksiHariIni = _transaksi
-                                            .Where(item =>
-                                                item.TanggalOperasional.Value.Date >= HariIni[0] &&
-                                                item.TanggalOperasional.Value.Date <= HariIni[1]).ToArray();
+            var _prooduk = db.TBTransaksiDetails
+                            .Where(item => item.TBTransaksi.IDTempat == Pengguna.IDTempat &&
+                                item.TBTransaksi.TanggalOperasional.Value.Date >= BulanIni[0] &&
+                                item.TBTransaksi.TanggalOperasional.Value.Date <= BulanIni[1] &&
+                                item.TBTransaksi.IDStatusTransaksi == (int)EnumStatusTransaksi.Complete)
+                            .Select(item => new
+                            {
+                                item.TBKombinasiProduk.KodeKombinasiProduk,
+                                Produk = item.TBKombinasiProduk.TBProduk.Nama,
+                                AtributProduk = item.TBKombinasiProduk.TBAtributProduk.Nama,
+                                JumlahProduk = item.Quantity,
+                                Subtotal = item.Subtotal
+                            }).ToArray();
 
-                var _transaksiKemarin = _transaksi
-                                            .Where(item =>
-                                                item.TanggalOperasional.Value.Date >= Kemarin[0] &&
-                                                item.TanggalOperasional.Value.Date <= Kemarin[1]).ToArray();
+            #region Aktifitas Transaksi
+            if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.AktifitasTransaksi))
+            {
+                //////PanelAktifitasTransaksi1.Visible = true;
+                //////PanelAktifitasTransaksi2.Visible = true;
+                PanelAktifitasTransaksi3.Visible = true;
 
-                var _pelanggan = db.TBPelanggans
-                                            .Where(item =>
-                                                item.TanggalDaftar.Value.Date >= BulanLalu[0] &&
-                                                item.TanggalDaftar.Value.Date <= BulanIni[1]).ToArray();
-
-                var _pelangganBulanLalu = db.TBPelanggans
-                            .Where(item =>
-                                item.TanggalDaftar.Value.Date >= BulanLalu[0] &&
-                                item.TanggalDaftar.Value.Date <= BulanLalu[1]).Count();
-
-                #region GRAFIK TRANSAKSI
-                string ResultTransaksi = string.Empty;
-
-                var _dataTransaksi = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanIni[0] && item.TanggalOperasional.Value.Date <= BulanIni[1])
+                string[] labelsXTanggal = Manage.GetRangeDayOfMonth(Manage.GetJamServer());
+                ReportChart_Class ClassReport = new ReportChart_Class();
+                ReportChartLine_Class LineSingle = new ReportChartLine_Class();
+                var SourceGrafik = _transaksi
                     .GroupBy(item => item.TanggalOperasional.Value.Day)
                     .Select(item => new
                     {
                         Key = item.Key,
-                        GrandTotal = item.Sum(item2 => item2.GrandTotal) ?? 0
+                        Transaksi = item.Count(),
+                        GrandTotal = item.Sum(item2 => item2.GrandTotal) ?? 0,
+                        JumlahProduk = item.Sum(item2 => item2.JumlahProduk) ?? 0
                     }).ToArray();
 
-                Random rd = new Random();
-
-                string[] labelsXTanggal = Manage.GetRangeDayOfMonth(Manage.GetJamServer());
-
-                ReportChart_Class ClassReport = new ReportChart_Class();
-                ReportChartLine_Class LineSingle = new ReportChartLine_Class();
-                LineSingle.Label = "My dataset";
-                LineSingle.Color = Manage.GetHexadecimalSAP(EnumColorSAP.Hue1);
-                LineSingle.Data = new List<string>();
+                #region GRAFIK TRANSAKSI
+                ReportChartLine_Class LineSinglePenjualan = new ReportChartLine_Class();
+                LineSinglePenjualan.Color = Manage.GetHexadecimalSAP(EnumColorSAP.Hue1);
+                LineSinglePenjualan.Data = new List<string>();
                 foreach (var item in labelsXTanggal)
                 {
-                    if (_dataTransaksi.FirstOrDefault(item2 => item2.Key.ToString() == item) != null)
+                    if (SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item) != null)
                     {
-                        LineSingle.Data.Add(_dataTransaksi.FirstOrDefault(item2 => item2.Key.ToString() == item).GrandTotal.ToString());
+                        LineSinglePenjualan.Data.Add(SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item).GrandTotal.ToString());
                     }
                     else
                     {
-                        LineSingle.Data.Add("0");
+                        LineSinglePenjualan.Data.Add("0");
                     }
                 }
-                LiteralChartPenjualan.Text = ClassReport.GetChartTrendAnalysis("CanvasChartPenjualan", string.Empty, "Tanggal", "Sales", labelsXTanggal, LineSingle);
+                LiteralChartPenjualan.Text = ClassReport.GetChartTrendAnalysis("CanvasChartPenjualan", string.Empty, "Tanggal", "Sales", labelsXTanggal, LineSinglePenjualan);
                 #endregion
 
-                #region GRAFIK TRANSAKSI PELANGGAN
-                //LiteralChart.Text += "<script> $(function () { var dataChart = [";
+                #region GRAFIK TRANSAKSI
+                ReportChartLine_Class LineSingleTransaksi = new ReportChartLine_Class();
+                LineSingleTransaksi.Color = Manage.GetHexadecimalSAP(EnumColorSAP.Hue1);
+                LineSingleTransaksi.Data = new List<string>();
+                foreach (var item in labelsXTanggal)
+                {
+                    if (SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item) != null)
+                    {
+                        LineSingleTransaksi.Data.Add(SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item).Transaksi.ToString());
+                    }
+                    else
+                    {
+                        LineSingleTransaksi.Data.Add("0");
+                    }
+                }
+                LiteralChartTransaksi.Text = ClassReport.GetChartTrendAnalysis("CanvasChartTransaksi", string.Empty, "Tanggal", "Transaksi", labelsXTanggal, LineSingleTransaksi);
+                #endregion
 
-                //var dataTransaksi = _transaksiBulanIni
-                //    .GroupBy(item => item.TanggalOperasional.Value.Date)
-                //    .Select(item => new
-                //    {
-                //        Key = item.Key,
-                //        Jumlah = item.Count()
-                //    }).ToArray();
-
-                //var dataPelanggan = _pelangganBulanIni
-                //    .GroupBy(item => item.TanggalDaftar.Value.Date)
-                //    .Select(item => new
-                //    {
-                //        Key = item.Key,
-                //        Jumlah = item.Count()
-                //    }).ToArray();
-
-                //for (DateTime date = BulanIni[0]; date <= BulanIni[1]; date = date.AddDays(1))
-                //{
-                //    var _transaksi = dataTransaksi.FirstOrDefault(item => item.Key.Date == date.Date);
-                //    int _jumlahTransaksi = 0;
-
-                //    if (_transaksi != null)
-                //        _jumlahTransaksi = _transaksi.Jumlah;
-
-                //    var _pelanggan = dataPelanggan.FirstOrDefault(item => item.Key.Date == date.Date);
-                //    int _jumlahPelanggan = 0;
-
-                //    if (_pelanggan != null)
-                //        _jumlahPelanggan = _pelanggan.Jumlah;
-
-                //    LiteralChart.Text += "{ 'y': '" + date.Day + "', 'Transaksi': " + _jumlahTransaksi + ", 'Pelanggan': " + _jumlahPelanggan + " },";
-                //}
-
-                //LiteralChart.Text += "]; Morris.Line({ element: 'graph', data: dataChart, xkey: 'y',";
-
-                //LiteralChart.Text += "ykeys: ['Transaksi', 'Pelanggan'],";
-                //LiteralChart.Text += "labels: ['Transaksi', 'Pelanggan'],";
-                //LiteralChart.Text += "lineColors:['#0aa699','#d1dade'],";
-
-                //LiteralChart.Text += " parseTime: false}); eval(dataChart); });";
-                //LiteralChart.Text += "</script>";
+                #region GRAFIK JUMLAH PRODUK
+                ReportChartLine_Class LineSingleJumlahProduk = new ReportChartLine_Class();
+                LineSingleJumlahProduk.Color = Manage.GetHexadecimalSAP(EnumColorSAP.Hue1);
+                LineSingleJumlahProduk.Data = new List<string>();
+                foreach (var item in labelsXTanggal)
+                {
+                    if (SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item) != null)
+                    {
+                        LineSingleJumlahProduk.Data.Add(SourceGrafik.FirstOrDefault(item2 => item2.Key.ToString() == item).JumlahProduk.ToString());
+                    }
+                    else
+                    {
+                        LineSingleJumlahProduk.Data.Add("0");
+                    }
+                }
+                LiteralChartJumlahProduk.Text = ClassReport.GetChartTrendAnalysis("CanvasChartJumlahProduk", string.Empty, "Tanggal", "Jumlah", labelsXTanggal, LineSingleJumlahProduk);
                 #endregion
 
                 LabelPenjualanBulanIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanIni[0] && item.TanggalOperasional.Value.Date <= BulanIni[1]).Sum(item => item.GrandTotal).ToFormatHarga();
                 LabelQuantityBulanIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanIni[0] && item.TanggalOperasional.Value.Date <= BulanIni[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
-                LabelPelangganBulanIni.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= BulanIni[0] && item.TanggalDaftar.Value.Date <= BulanIni[1]).Count().ToFormatHargaBulat();
+                //LabelPelangganBulanIni.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= BulanIni[0] && item.TanggalDaftar.Value.Date <= BulanIni[1]).Count().ToFormatHargaBulat();
                 LabelTransaksiBulanIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanIni[0] && item.TanggalOperasional.Value.Date <= BulanIni[1]).Count().ToFormatHargaBulat();
 
-                LabelPenjualanBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Sum(item => item.GrandTotal).ToFormatHarga();
-                LabelQuantityBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
-                LabelPelangganBulanLalu.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= BulanLalu[0] && item.TanggalDaftar.Value.Date <= BulanLalu[1]).ToFormatHargaBulat();
-                LabelTransaksiBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Count().ToFormatHargaBulat();
+                //LabelPenjualanBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Sum(item => item.GrandTotal).ToFormatHarga();
+                //LabelQuantityBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
+                //LabelPelangganBulanLalu.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= BulanLalu[0] && item.TanggalDaftar.Value.Date <= BulanLalu[1]).ToFormatHargaBulat();
+                //LabelTransaksiBulanLalu.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= BulanLalu[0] && item.TanggalOperasional.Value.Date <= BulanLalu[1]).Count().ToFormatHargaBulat();
 
-                LabelPenjualanHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Sum(item => item.GrandTotal).ToFormatHarga();
-                LabelQuantityHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
-                LabelPelangganHariIni.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= HariIni[0] && item.TanggalDaftar.Value.Date <= HariIni[1]).Count().ToFormatHargaBulat();
-                LabelTransaksiHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Count().ToFormatHargaBulat();
+                //LabelPenjualanHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Sum(item => item.GrandTotal).ToFormatHarga();
+                //LabelQuantityHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
+                //LabelPelangganHariIni.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= HariIni[0] && item.TanggalDaftar.Value.Date <= HariIni[1]).Count().ToFormatHargaBulat();
+                //LabelTransaksiHariIni.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= HariIni[0] && item.TanggalOperasional.Value.Date <= HariIni[1]).Count().ToFormatHargaBulat();
 
-                LabelPenjualanKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Sum(item => item.GrandTotal).ToFormatHarga();
-                LabelQuantityKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
-                LabelPelangganKemarin.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= Kemarin[0] && item.TanggalDaftar.Value.Date <= Kemarin[1]).Count().ToFormatHargaBulat();
-                LabelTransaksiKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Count().ToFormatHargaBulat();
+                //LabelPenjualanKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Sum(item => item.GrandTotal).ToFormatHarga();
+                //LabelQuantityKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Sum(item => item.JumlahProduk).ToFormatHargaBulat();
+                //LabelPelangganKemarin.Text = _pelanggan.Where(item => item.TanggalDaftar.Value.Date >= Kemarin[0] && item.TanggalDaftar.Value.Date <= Kemarin[1]).Count().ToFormatHargaBulat();
+                //LabelTransaksiKemarin.Text = _transaksi.Where(item => item.TanggalOperasional.Value.Date >= Kemarin[0] && item.TanggalOperasional.Value.Date <= Kemarin[1]).Count().ToFormatHargaBulat();
             }
-        }
-        else
-        {
-            PanelAktifitasTransaksi1.Visible = false;
-            //////PanelAktifitasTransaksi2.Visible = false;
-            PanelAktifitasTransaksi3.Visible = false;
-        }
-        #endregion
-
-        #region Transaksi Terakhir
-        if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.TransaksiTerakhir))
-        {
-            panelTransaksiTerakhir.Visible = true;
-
-            using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+            else
             {
-                var TransaksiTerakhir = db.TBTransaksis
-                    .Where(item => item.IDStatusTransaksi.HasValue && item.IDTempat == Pengguna.IDTempat)
-                    .Select(item => new
-                    {
-                        item.IDTransaksi,
-                        item.IDTempat,
-                        item.Nomor,
-                        item.TanggalTransaksi,
-                        Persentase = Persentase(item.IDStatusTransaksi.Value, item.TBStatusTransaksi.Nama),
-                        item.JumlahProduk,
-                        item.GrandTotal
-                    }).OrderByDescending(item => item.Nomor).Take(10).ToArray();
-
-                RepeaterOrder.DataSource = TransaksiTerakhir;
-                RepeaterOrder.DataBind();
+                //////PanelAktifitasTransaksi1.Visible = false;
+                //////PanelAktifitasTransaksi2.Visible = false;
+                PanelAktifitasTransaksi3.Visible = false;
             }
-        }
-        else
-            panelTransaksiTerakhir.Visible = false;
-        #endregion
+            #endregion
 
-        LoadStokHabis(Konfigurasi_Class);
-
-        #region PO Bahan BakuJatuh Tempo
-
-        if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.POBahanBakuJatuhTempo))
-        {
-            PanelPOBahanBakuJatuhTempo.Visible = true;
-
-            using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+            #region Transaksi Terakhir
+            if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.TransaksiTerakhir))
             {
+                panelTransaksiTerakhir.Visible = true;
+
+                RepeaterTopTransaksi.DataSource = _transaksi.OrderByDescending(item => item.GrandTotal).Take(5);
+                RepeaterTopTransaksi.DataBind();
+
+                RepeaterTopProduk.DataSource = _prooduk.OrderByDescending(item => item.JumlahProduk).Take(5);
+                RepeaterTopProduk.DataBind();
+            }
+            else
+                panelTransaksiTerakhir.Visible = false;
+            #endregion
+
+            LoadStokHabis(Konfigurasi_Class);
+
+            #region PO Bahan BakuJatuh Tempo
+
+            if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.POBahanBakuJatuhTempo))
+            {
+                PanelPOBahanBakuJatuhTempo.Visible = true;
+
                 decimal batas = db.TBStoreKonfigurasis.FirstOrDefault(item => item.IDStoreKonfigurasi == (int)EnumStoreKonfigurasi.JumlahHariSebelumJatuhTempo).Pengaturan.ToDecimal();
                 RepeaterPOBahanBakuJatuhTempo.DataSource = db.TBPOProduksiBahanBakus
                                 .Where(item => item.IDTempat == Pengguna.IDTempat && item.EnumJenisProduksi != (int)PilihanEnumJenisProduksi.ProduksiSendiri && ((int)((item.TanggalJatuhTempo.Value.Date - DateTime.Now.Date).TotalDays) < batas))
@@ -296,19 +263,16 @@ public partial class WITAdministrator_Default : System.Web.UI.Page
                                 .ToArray();
                 RepeaterPOBahanBakuJatuhTempo.DataBind();
             }
-        }
-        else
-            PanelPOBahanBakuJatuhTempo.Visible = false;
-        #endregion
+            else
+                PanelPOBahanBakuJatuhTempo.Visible = false;
+            #endregion
 
-        #region PO Bahan BakuJatuh Tempo
+            #region PO Bahan BakuJatuh Tempo
 
-        if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.POProdukJatuhTempo))
-        {
-            PanelPOBahanBakuJatuhTempo.Visible = true;
-
-            using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+            if (Konfigurasi_Class.ValidasiKonfigurasi(EnumKonfigurasi.POProdukJatuhTempo))
             {
+                PanelPOBahanBakuJatuhTempo.Visible = true;
+
                 decimal batas = db.TBStoreKonfigurasis.FirstOrDefault(item => item.IDStoreKonfigurasi == (int)EnumStoreKonfigurasi.JumlahHariSebelumJatuhTempo).Pengaturan.ToDecimal();
                 RepeaterPOProdukJatuhTempo.DataSource = db.TBPOProduksiProduks
                                 .Where(item => item.IDTempat == Pengguna.IDTempat && item.EnumJenisProduksi != (int)PilihanEnumJenisProduksi.ProduksiSendiri && ((int)((item.TanggalJatuhTempo.Value.Date - DateTime.Now.Date).TotalDays) < batas))
@@ -324,9 +288,10 @@ public partial class WITAdministrator_Default : System.Web.UI.Page
                                 .ToArray();
                 RepeaterPOProdukJatuhTempo.DataBind();
             }
+            else
+                PanelPOProdukJatuhTempo.Visible = false;
+
         }
-        else
-            PanelPOProdukJatuhTempo.Visible = false;
         #endregion
     }
 

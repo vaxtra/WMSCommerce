@@ -27,9 +27,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card">
-                            <div class="card-header bg-gradient-black">
-                                <h5 class="font-weight-light">SUPPLIER</h5>
-                            </div>
+                            <h4 class="card-header bg-smoke">Supplier</h4>
                             <div class="card-body">
                                 <div class="form-group">
                                     <div class="row">
@@ -57,9 +55,7 @@
 
             <div class="form-group">
                 <div class="card">
-                    <div class="card-header bg-gradient-black">
-                        <h5 class="font-weight-light">DETAIL</h5>
-                    </div>
+                    <h5 class="card-header bg-smoke">Detail</h5>
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-weight-bold text-muted">Bahan Baku</label>
@@ -134,8 +130,7 @@
                         <asp:Button ID="ButtonKembali" runat="server" Text="Kembali" CssClass="btn btn-danger btn-const" OnClick="ButtonKembali_Click" />
                     </div>
                 </div>
-
-                <asp:UpdateProgress ID="updateProgressData" runat="server" AssociatedUpdatePanelID="UpdatePanelData">
+            <asp:UpdateProgress ID="updateProgressData" runat="server" AssociatedUpdatePanelID="UpdatePanelData">
                     <ProgressTemplate>
                         <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: Black; filter: alpha(opacity=90); opacity: 0.5;">
                             <asp:Image ID="imgUpdateProgressData" runat="server" ImageUrl="/assets/images/ajax-loader.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="margin-top: 17%;" />

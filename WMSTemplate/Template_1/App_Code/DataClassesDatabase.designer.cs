@@ -308,6 +308,9 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
   partial void InsertTBPengirimanPOProduksiProdukDetail(TBPengirimanPOProduksiProdukDetail instance);
   partial void UpdateTBPengirimanPOProduksiProdukDetail(TBPengirimanPOProduksiProdukDetail instance);
   partial void DeleteTBPengirimanPOProduksiProdukDetail(TBPengirimanPOProduksiProdukDetail instance);
+  partial void InsertTBPengirimanTemplate(TBPengirimanTemplate instance);
+  partial void UpdateTBPengirimanTemplate(TBPengirimanTemplate instance);
+  partial void DeleteTBPengirimanTemplate(TBPengirimanTemplate instance);
   partial void InsertTBPerpindahanStokBahanBaku(TBPerpindahanStokBahanBaku instance);
   partial void UpdateTBPerpindahanStokBahanBaku(TBPerpindahanStokBahanBaku instance);
   partial void DeleteTBPerpindahanStokBahanBaku(TBPerpindahanStokBahanBaku instance);
@@ -1333,6 +1336,14 @@ public partial class DataClassesDatabaseDataContext : System.Data.Linq.DataConte
 		get
 		{
 			return this.GetTable<TBPengirimanPOProduksiProdukDetail>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TBPengirimanTemplate> TBPengirimanTemplates
+	{
+		get
+		{
+			return this.GetTable<TBPengirimanTemplate>();
 		}
 	}
 	
@@ -28658,7 +28669,7 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi", Storage="_TBTransaksis", ThisKey="IDPengguna", OtherKey="IDPenggunaBatal")]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi", Storage="_TBTransaksis", ThisKey="IDPengguna", OtherKey="IDPenggunaTransaksi")]
 	public EntitySet<TBTransaksi> TBTransaksis
 	{
 		get
@@ -28671,7 +28682,7 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi1", Storage="_TBTransaksis1", ThisKey="IDPengguna", OtherKey="IDPenggunaMarketing")]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi1", Storage="_TBTransaksis1", ThisKey="IDPengguna", OtherKey="IDPenggunaPembayaran")]
 	public EntitySet<TBTransaksi> TBTransaksis1
 	{
 		get
@@ -28684,7 +28695,7 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi2", Storage="_TBTransaksis2", ThisKey="IDPengguna", OtherKey="IDPenggunaPembayaran")]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi2", Storage="_TBTransaksis2", ThisKey="IDPengguna", OtherKey="IDPenggunaUpdate")]
 	public EntitySet<TBTransaksi> TBTransaksis2
 	{
 		get
@@ -28697,7 +28708,7 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi3", Storage="_TBTransaksis3", ThisKey="IDPengguna", OtherKey="IDPenggunaTransaksi")]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi3", Storage="_TBTransaksis3", ThisKey="IDPengguna", OtherKey="IDPenggunaMarketing")]
 	public EntitySet<TBTransaksi> TBTransaksis3
 	{
 		get
@@ -28710,7 +28721,7 @@ public partial class TBPengguna : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi4", Storage="_TBTransaksis4", ThisKey="IDPengguna", OtherKey="IDPenggunaUpdate")]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi4", Storage="_TBTransaksis4", ThisKey="IDPengguna", OtherKey="IDPenggunaBatal")]
 	public EntitySet<TBTransaksi> TBTransaksis4
 	{
 		get
@@ -31832,6 +31843,116 @@ public partial class TBPengirimanPOProduksiProdukDetail : INotifyPropertyChangin
 					this._IDSatuan = default(int);
 				}
 				this.SendPropertyChanged("TBSatuan");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBPengirimanTemplate")]
+public partial class TBPengirimanTemplate : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private long _IDPengirimanTemplate;
+	
+	private string _Nama;
+	
+	private string _Template;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPengirimanTemplateChanging(long value);
+    partial void OnIDPengirimanTemplateChanged();
+    partial void OnNamaChanging(string value);
+    partial void OnNamaChanged();
+    partial void OnTemplateChanging(string value);
+    partial void OnTemplateChanged();
+    #endregion
+	
+	public TBPengirimanTemplate()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPengirimanTemplate", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public long IDPengirimanTemplate
+	{
+		get
+		{
+			return this._IDPengirimanTemplate;
+		}
+		set
+		{
+			if ((this._IDPengirimanTemplate != value))
+			{
+				this.OnIDPengirimanTemplateChanging(value);
+				this.SendPropertyChanging();
+				this._IDPengirimanTemplate = value;
+				this.SendPropertyChanged("IDPengirimanTemplate");
+				this.OnIDPengirimanTemplateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nama", DbType="VarChar(250)")]
+	public string Nama
+	{
+		get
+		{
+			return this._Nama;
+		}
+		set
+		{
+			if ((this._Nama != value))
+			{
+				this.OnNamaChanging(value);
+				this.SendPropertyChanging();
+				this._Nama = value;
+				this.SendPropertyChanged("Nama");
+				this.OnNamaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Template", DbType="VarChar(MAX)")]
+	public string Template
+	{
+		get
+		{
+			return this._Template;
+		}
+		set
+		{
+			if ((this._Template != value))
+			{
+				this.OnTemplateChanging(value);
+				this.SendPropertyChanging();
+				this._Template = value;
+				this.SendPropertyChanged("Template");
+				this.OnTemplateChanged();
 			}
 		}
 	}
@@ -56075,7 +56196,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._IDPenggunaTransaksi != value))
 			{
-				if (this._TBPengguna3.HasLoadedOrAssignedValue)
+				if (this._TBPengguna.HasLoadedOrAssignedValue)
 				{
 					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 				}
@@ -56099,7 +56220,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._IDPenggunaUpdate != value))
 			{
-				if (this._TBPengguna4.HasLoadedOrAssignedValue)
+				if (this._TBPengguna2.HasLoadedOrAssignedValue)
 				{
 					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 				}
@@ -56123,7 +56244,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._IDPenggunaPembayaran != value))
 			{
-				if (this._TBPengguna2.HasLoadedOrAssignedValue)
+				if (this._TBPengguna1.HasLoadedOrAssignedValue)
 				{
 					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 				}
@@ -56147,7 +56268,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._IDPenggunaMarketing != value))
 			{
-				if (this._TBPengguna1.HasLoadedOrAssignedValue)
+				if (this._TBPengguna3.HasLoadedOrAssignedValue)
 				{
 					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 				}
@@ -56171,7 +56292,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._IDPenggunaBatal != value))
 			{
-				if (this._TBPengguna.HasLoadedOrAssignedValue)
+				if (this._TBPengguna4.HasLoadedOrAssignedValue)
 				{
 					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 				}
@@ -57553,7 +57674,7 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi", Storage="_TBPengguna", ThisKey="IDPenggunaBatal", OtherKey="IDPengguna", IsForeignKey=true)]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi", Storage="_TBPengguna", ThisKey="IDPenggunaTransaksi", OtherKey="IDPengguna", IsForeignKey=true)]
 	public TBPengguna TBPengguna
 	{
 		get
@@ -57576,18 +57697,18 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 				if ((value != null))
 				{
 					value.TBTransaksis.Add(this);
-					this._IDPenggunaBatal = value.IDPengguna;
+					this._IDPenggunaTransaksi = value.IDPengguna;
 				}
 				else
 				{
-					this._IDPenggunaBatal = default(Nullable<int>);
+					this._IDPenggunaTransaksi = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("TBPengguna");
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi1", Storage="_TBPengguna1", ThisKey="IDPenggunaMarketing", OtherKey="IDPengguna", IsForeignKey=true)]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi1", Storage="_TBPengguna1", ThisKey="IDPenggunaPembayaran", OtherKey="IDPengguna", IsForeignKey=true)]
 	public TBPengguna TBPengguna1
 	{
 		get
@@ -57610,18 +57731,18 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 				if ((value != null))
 				{
 					value.TBTransaksis1.Add(this);
-					this._IDPenggunaMarketing = value.IDPengguna;
+					this._IDPenggunaPembayaran = value.IDPengguna;
 				}
 				else
 				{
-					this._IDPenggunaMarketing = default(Nullable<int>);
+					this._IDPenggunaPembayaran = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("TBPengguna1");
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi2", Storage="_TBPengguna2", ThisKey="IDPenggunaPembayaran", OtherKey="IDPengguna", IsForeignKey=true)]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi2", Storage="_TBPengguna2", ThisKey="IDPenggunaUpdate", OtherKey="IDPengguna", IsForeignKey=true)]
 	public TBPengguna TBPengguna2
 	{
 		get
@@ -57644,18 +57765,18 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 				if ((value != null))
 				{
 					value.TBTransaksis2.Add(this);
-					this._IDPenggunaPembayaran = value.IDPengguna;
+					this._IDPenggunaUpdate = value.IDPengguna;
 				}
 				else
 				{
-					this._IDPenggunaPembayaran = default(Nullable<int>);
+					this._IDPenggunaUpdate = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("TBPengguna2");
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi3", Storage="_TBPengguna3", ThisKey="IDPenggunaTransaksi", OtherKey="IDPengguna", IsForeignKey=true)]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi3", Storage="_TBPengguna3", ThisKey="IDPenggunaMarketing", OtherKey="IDPengguna", IsForeignKey=true)]
 	public TBPengguna TBPengguna3
 	{
 		get
@@ -57678,18 +57799,18 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 				if ((value != null))
 				{
 					value.TBTransaksis3.Add(this);
-					this._IDPenggunaTransaksi = value.IDPengguna;
+					this._IDPenggunaMarketing = value.IDPengguna;
 				}
 				else
 				{
-					this._IDPenggunaTransaksi = default(Nullable<int>);
+					this._IDPenggunaMarketing = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("TBPengguna3");
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi4", Storage="_TBPengguna4", ThisKey="IDPenggunaUpdate", OtherKey="IDPengguna", IsForeignKey=true)]
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TBPengguna_TBTransaksi4", Storage="_TBPengguna4", ThisKey="IDPenggunaBatal", OtherKey="IDPengguna", IsForeignKey=true)]
 	public TBPengguna TBPengguna4
 	{
 		get
@@ -57712,11 +57833,11 @@ public partial class TBTransaksi : INotifyPropertyChanging, INotifyPropertyChang
 				if ((value != null))
 				{
 					value.TBTransaksis4.Add(this);
-					this._IDPenggunaUpdate = value.IDPengguna;
+					this._IDPenggunaBatal = value.IDPengguna;
 				}
 				else
 				{
-					this._IDPenggunaUpdate = default(Nullable<int>);
+					this._IDPenggunaBatal = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("TBPengguna4");
 			}

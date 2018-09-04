@@ -7,7 +7,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderTitleRight" runat="Server">
-    <input id="ButtonPrint" type="button" value="Print" class="btn btn-default btn-sm" onclick="window.print();" />
+    <input id="ButtonPrint" type="button" value="Print" class="btn btn-secondary btn-const" onclick="window.print();" />
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderSubTitleLeft" runat="Server">
@@ -23,67 +23,67 @@
         <ContentTemplate>
             <div class="form-group hidden-print">
                 <div class="form-inline">
-                    <div class="btn-group" style="margin: 5px 5px 0 0">
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHari" runat="server" Text="Hari Ini" OnClick="ButtonHari_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMinggu" runat="server" Text="Minggu Ini" OnClick="ButtonMinggu_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulan" runat="server" Text="Bulan Ini" OnClick="ButtonBulan_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahun" runat="server" Text="Tahun Ini" OnClick="ButtonTahun_Click" />
+                    <div class="form-group mr-1 mb-1">
+                        <a id="ButtonPeriodeTanggal" runat="server" class="btn btn-light btn-const dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Periode</a>
+                        <div class="dropdown-menu p-1">
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonHari" runat="server" Text="Hari Ini" Width="115px" OnClick="ButtonHari_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonMinggu" runat="server" Text="Minggu Ini" Width="115px" OnClick="ButtonMinggu_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonBulan" runat="server" Text="Bulan Ini" Width="115px" OnClick="ButtonBulan_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonTahun" runat="server" Text="Tahun Ini" Width="115px" OnClick="ButtonTahun_Click" />
+                            <hr class="my-1" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" Width="115px" OnClick="ButtonHariSebelumnya_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" Width="115px" OnClick="ButtonMingguSebelumnya_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" Width="115px" OnClick="ButtonBulanSebelumnya_Click" />
+                            <asp:Button CssClass="btn btn-light border" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" Width="115px" OnClick="ButtonTahunSebelumnya_Click" />
+                        </div>
                     </div>
-                    <div class="btn-group" style="margin: 5px 5px 0 0">
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonHariSebelumnya" runat="server" Text="Kemarin" OnClick="ButtonHariSebelumnya_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonMingguSebelumnya" runat="server" Text="Minggu Lalu" OnClick="ButtonMingguSebelumnya_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonBulanSebelumnya" runat="server" Text="Bulan Lalu" OnClick="ButtonBulanSebelumnya_Click" />
-                        <asp:Button CssClass="btn btn-sm btn-outline btn-default" ID="ButtonTahunSebelumnya" runat="server" Text="Tahun Lalu" OnClick="ButtonTahunSebelumnya_Click" />
+                    <div class="form-group mr-1 mb-1">
+                        <asp:TextBox ID="TextBoxTanggalAwal" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
                     </div>
-                    <div style="margin: 5px 5px 0 0" class="form-group">
-                        <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAwal" runat="server"></asp:TextBox>
-                        <asp:TextBox CssClass="form-control input-sm Tanggal" ID="TextBoxTanggalAkhir" runat="server"></asp:TextBox>
-                        <asp:Button CssClass="btn btn-primary btn-sm" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
+                    <div class="form-group mr-1 mb-1">
+                        <asp:TextBox ID="TextBoxTanggalAkhir" CssClass="form-control input-sm Tanggal" Width="160px" runat="server"></asp:TextBox>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row hidden-print" style="font-weight: bold;">
-                    <div class="col-sm-6 col-md-6">
-                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2" Style="width: 100%;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListTempat_SelectedIndexChanged"></asp:DropDownList>
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <asp:DropDownList ID="DropDownListStatusTransaksi" CssClass="select2" Style="width: 100%;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListStatusTransaksi_SelectedIndexChanged"></asp:DropDownList>
+                    <div class="form-group mb-1">
+                        <asp:Button CssClass="btn btn-light btn-const" ID="ButtonCariTanggal" runat="server" Text="Cari" OnClick="ButtonCariTanggal_Click" />
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>
-                            <asp:Label ID="LabelFilter" runat="server"></asp:Label>
-                            [
+                <div class="row hidden-print">
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListTempat_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListStatusTransaksi" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListStatusTransaksi_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
+                </div>
+            </div>
+            <h4 class="text-uppercase mb-3">
+                <asp:Label ID="LabelFilter" runat="server"></asp:Label>
+                [
                         <asp:Label ID="LabelPeriode" runat="server"></asp:Label>
-                            ]</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3 text-center" id="DivTotalTamu" runat="server">
+                ]</h4>
+            <div class="form-group mb-0">
+                <div class="row mb-0">
+                    <div class="col-md-3 text-center mb-0" id="DivTotalTamu" runat="server">
                         <p class="bg-info" style="font-size: 18px;">
                             Total Tamu :
                 <asp:Label ID="LabelTotalTamu" runat="server"></asp:Label>
                         </p>
                     </div>
-                    <div class="col-md-3 text-center">
+                    <div class="col-md-3 text-center mb-0">
                         <p class="bg-info" style="font-size: 18px;">
                             Total Quantity :
                 <asp:Label ID="LabelTotalQuantity" runat="server"></asp:Label>
                         </p>
                     </div>
-                    <div class="col-md-3 text-center">
+                    <div class="col-md-3 text-center mb-0">
                         <p class="bg-info" style="font-size: 18px;">
                             Total Transaksi :
                 <asp:Label ID="LabelTotalTransaksi" runat="server"></asp:Label>
                         </p>
                     </div>
-                    <div class="col-md-3 text-center">
+                    <div class="col-md-3 text-center mb-0">
                         <p class="bg-info" style="font-size: 18px;">
                             Total Penjualan :
                 <asp:Label ID="LabelTotalPenjualan" runat="server"></asp:Label>
@@ -94,12 +94,12 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading text-center"><strong>00:00 - 12:00</strong></div>
+                        <div class="card">
+                            <h5 class="card-header bg-gradient-blue">00:00 - 12:00</h5>
                             <div class="table-responsive">
-                                <table class="table table-condensed table-hover table-bordered" style="font-size: 12px; width: 100%">
+                                <table class="table table-sm table-bordered table-hover">
                                     <thead>
-                                        <tr class="active">
+                                        <tr class="thead-light">
                                             <th>Jam</th>
                                             <th>Quantity</th>
                                             <th>%</th>
@@ -114,18 +114,18 @@
                                         <asp:Repeater ID="RepeaterSebelumTengahHari" runat="server" OnItemCreated="Repeater_ItemCreated">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td class="text-center active"><strong><%# Eval("Jam") + ":00" %></strong></td>
+                                                    <td class="text-center table-secondary"><strong><%# Eval("Jam") + ":00" %></strong></td>
                                                     <td class="text-right"><%# Eval("Quantity").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info"><%# Eval("PersentaseQuantity").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-info"><%# Eval("PersentaseQuantity").ToFormatHarga() %> %</td>
                                                     <td class="text-right"><%# Eval("Transaksi").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info"><%# Eval("PersentaseTransaksi").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-info"><%# Eval("PersentaseTransaksi").ToFormatHarga() %> %</td>
                                                     <td class="text-right" id="BodyTamu" runat="server"><%# Eval("JumlahTamu").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info" id="BodyPersentase" runat="server"><%# Eval("PersentaseJumlahTamu").ToFormatHarga() %> %</td>
-                                                    <td class="text-right warning"><strong><%# Eval("Penjualan").ToFormatHarga() %></strong></td>
+                                                    <td class="text-right table-info" id="BodyPersentase" runat="server"><%# Eval("PersentaseJumlahTamu").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-warning"><strong><%# Eval("Penjualan").ToFormatHarga() %></strong></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr class="success" style="font-weight: bold;">
+                                        <tr class="font-weight-bold table-success">
                                             <td></td>
                                             <td style="text-align: right;">
                                                 <asp:Label ID="LabelSebelumTengahHariQuantity" runat="server"></asp:Label></td>
@@ -145,12 +145,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading text-center"><strong>12:00 - 24:00</strong></div>
+                        <div class="card">
+                            <h5 class="card-header bg-gradient-blue">12:00 - 24:00</h5>
                             <div class="table-responsive">
-                                <table class="table table-condensed table-hover table-bordered" style="font-size: 12px; width: 100%">
+                                <table class="table table-sm table-bordered table-hover">
                                     <thead>
-                                        <tr class="active">
+                                        <tr class="thead-light">
                                             <th>Jam</th>
                                             <th>Quantity</th>
                                             <th>%</th>
@@ -165,18 +165,18 @@
                                         <asp:Repeater ID="RepeaterSetelahTengahHari" runat="server" OnItemCreated="Repeater_ItemCreated">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td class="text-center active"><strong><%# Eval("Jam") + ":00" %></strong></td>
+                                                    <td class="text-center table-secondary"><strong><%# Eval("Jam") + ":00" %></strong></td>
                                                     <td class="text-right"><%# Eval("Quantity").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info"><%# Eval("PersentaseQuantity").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-info"><%# Eval("PersentaseQuantity").ToFormatHarga() %> %</td>
                                                     <td class="text-right"><%# Eval("Transaksi").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info"><%# Eval("PersentaseTransaksi").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-info"><%# Eval("PersentaseTransaksi").ToFormatHarga() %> %</td>
                                                     <td class="text-right" id="BodyTamu" runat="server"><%# Eval("JumlahTamu").ToFormatHargaBulat() %></td>
-                                                    <td class="text-right info" id="BodyPersentase" runat="server"><%# Eval("PersentaseJumlahTamu").ToFormatHarga() %> %</td>
-                                                    <td class="text-right warning"><strong><%# Eval("Penjualan").ToFormatHarga() %></strong></td>
+                                                    <td class="text-right table-info" id="BodyPersentase" runat="server"><%# Eval("PersentaseJumlahTamu").ToFormatHarga() %> %</td>
+                                                    <td class="text-right table-warning"><strong><%# Eval("Penjualan").ToFormatHarga() %></strong></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr class="success" style="font-weight: bold;">
+                                        <tr class="font-weight-bold table-success">
                                             <td></td>
                                             <td style="text-align: right;">
                                                 <asp:Label ID="LabelSetelahTengahHariQuantity" runat="server"></asp:Label></td>
@@ -189,7 +189,6 @@
                                             <td id="FooterPersentaseMalam" runat="server"></td>
                                             <td style="text-align: right;">
                                                 <asp:Label ID="LabelSetelahTengahHariPenjualan" runat="server"></asp:Label></td>
-
                                         </tr>
                                     </tbody>
                                 </table>

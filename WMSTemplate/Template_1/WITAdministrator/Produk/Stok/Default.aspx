@@ -33,9 +33,9 @@
         <ContentTemplate>
             <div class="form-inline">
                 <div class="form-group">
-                    <asp:Button ID="ButtonExcel" runat="server" Text="Export" CssClass="btn btn-dark btn-const mr-1" OnClick="ButtonExcel_Click" />
+                    <asp:Button ID="ButtonExcel" runat="server" Text="Export" CssClass="btn btn-secondary btn-const mr-1" OnClick="ButtonExcel_Click" />
                     <h5><a id="LinkDownload" runat="server" class="mr-1" visible="false">Download File</a></h5>
-                    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-dark btn-const" />
+                    <asp:Button ID="ButtonPrint" runat="server" Text="Cetak" CssClass="btn btn-secondary btn-const" />
                 </div>
             </div>
 
@@ -64,25 +64,21 @@
         <ContentTemplate>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <asp:DropDownList ID="DropDownListTempat" CssClass="select2 mr-1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                                <asp:DropDownList ID="DropDownListJenisStok" CssClass="select2 mr-1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                                <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-primary d-none" ClientIDMode="Static" OnClick="LoadData_Event" />
-                            </div>
-                        </div>
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListTempat" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-inline float-right">
-                            <div class="form-group">
-                                <h4 class="mr-5 text-primary">QUANTITY :
+                    <div class="col-6">
+                        <asp:DropDownList ID="DropDownListJenisStok" CssClass="select2 w-100" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+                    </div>
+                </div>
+                <asp:Button ID="ButtonCari" runat="server" Text="Cari" CssClass="btn btn-primary d-none" ClientIDMode="Static" OnClick="LoadData_Event" />
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <h4 class="mr-5 text-primary">QUANTITY :
                 <asp:Label ID="LabelTotalJumlah" Text="0" runat="server"></asp:Label></h4>
-                                <h4 class="text-success">SUBTOTAL : 
+                    <h4 class="text-success">SUBTOTAL : 
                         <asp:Label ID="LabelTotalNominal" Text="0" runat="server"></asp:Label></h4>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -95,16 +91,10 @@
                                 <th>Warna</th>
                                 <th>Brand</th>
                                 <th>Kategori</th>
-                                <th>
-                                    <table class="table table-sm table-borderless" style="margin-top: -7px; margin-bottom: -5px;">
-                                        <tr class="thead-light">
-                                            <th style="width: 150px;">Kode</th>
-                                            <th style="width: 100px;">Varian</th>
-                                            <th style="width: 100px;" class="text-right">Harga Jual</th>
-                                            <th style="width: 100px;" class="text-right">Stok</th>
-                                        </tr>
-                                    </table>
-                                </th>
+                                <th>Kode</th>
+                                <th>Varian</th>
+                                <th>Harga Jual</th>
+                                <th>Stok</th>
                             </tr>
                             <tr class="thead-light">
                                 <th></th>
@@ -117,22 +107,14 @@
                                 <th>
                                     <asp:DropDownList ID="DropDownListKategori" CssClass="select2" Style="width: 100%;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList></th>
                                 <th>
-                                    <table class="table table-condensed" style="margin-top: -7px; margin-bottom: -5px; padding: 0px;">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width: 80px;">
-                                                    <asp:TextBox ID="TextBoxKode" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
-                                                <th style="width: 100px;">
-                                                    <asp:DropDownList ID="DropDownListVarian" CssClass="select2" Style="width: 100%;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
-                                                </tdh>
-                                                    <th style="width: 80px;">
-                                                        <asp:TextBox ID="TextBoxHargaJual" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
-                                                <th style="width: 50px;">
-                                                    <asp:TextBox ID="TextBoxStok" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <asp:TextBox ID="TextBoxKode" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
+                                <th>
+                                    <asp:DropDownList ID="DropDownListVarian" CssClass="select2" Style="width: 100%;" runat="server" AutoPostBack="true" OnSelectedIndexChanged="LoadData_Event"></asp:DropDownList>
+                                </th>
+                                <th>
+                                    <asp:TextBox ID="TextBoxHargaJual" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox></th>
+                                <th>
+                                    <asp:TextBox ID="TextBoxStok" CssClass="form-control input-sm" Style="width: 100%;" runat="server" onkeypress="return Func_ButtonCari(event)"></asp:TextBox>
                                 </th>
                             </tr>
                         </thead>
@@ -140,28 +122,22 @@
                             <asp:Repeater ID="RepeaterProduk" runat="server">
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="text-center"><%# Container.ItemIndex + 1 %></td>
-                                        <td><%# Eval("Produk") %></td>
-                                        <td><%# Eval("Warna") %></td>
-                                        <td><%# Eval("PemilikProduk") %></td>
-                                        <td><%# Eval("Kategori") %></td>
-                                        <td>
-                                            <table class="table table-hover table-condensed table-bordered" style="margin: 0px;">
-                                                <tbody>
-                                                    <asp:Repeater ID="RepeaterProduk" runat="server" DataSource='<%# Eval("Stok") %>'>
-                                                        <ItemTemplate>
-                                                            <tr>
-                                                                <td style="width: 80px;"><a href='/WITAdministrator/Produk/Barcode.aspx?id=<%# Eval("IDKombinasiProduk") %>&jumlah=<%# Eval("Jumlah") %>' target="_blank"><%# Eval("Kode") %></a></td>
-                                                                <td style="width: 110px;"><%# Eval("Atribut") %></td>
-                                                                <td style="width: 80px;" class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
-                                                                <td style="width: 50px;" class="text-right"><strong><%# Eval("Jumlah").ToFormatHargaBulat() %></strong></td>
-                                                            </tr>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </tbody>
-                                            </table>
-                                        </td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="text-center fitSize"><%# Container.ItemIndex + 1 %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("Produk") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("Warna") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>' class="fitSize"><%# Eval("PemilikProduk") %></td>
+                                        <td rowspan='<%# Eval("Count").ToInt() + 1 %>'><%# Eval("Kategori") %></td>
                                     </tr>
+                                    <asp:Repeater ID="RepeaterProduk" runat="server" DataSource='<%# Eval("Body") %>'>
+                                        <ItemTemplate>
+                                            <td><a href='/WITAdministrator/Produk/Barcode.aspx?id=<%# Eval("IDKombinasiProduk") %>&jumlah=<%# Eval("Jumlah") %>' target="_blank"><%# Eval("Kode") %></a></td>
+                                            <td class="text-center"><%# Eval("AtributProduk") %></td>
+                                            <td class="text-right"><%# Eval("HargaJual").ToFormatHarga() %></td>
+                                            <td class="text-right"><strong><%# Eval("Jumlah").ToFormatHargaBulat() %></strong></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
                                 </ItemTemplate>
                             </asp:Repeater>
                         </tbody>

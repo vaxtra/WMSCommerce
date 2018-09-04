@@ -10,9 +10,7 @@ public partial class _Cart : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {
             LoadData();
-        }
     }
 
     protected void RepeaterCart_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -48,11 +46,24 @@ public partial class _Cart : System.Web.UI.Page
             PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
 
             //MENCARI TRANSAKSI SESSION
-            var TransaksiECommerceDetail = db.TBTransaksiECommerceDetails
-                .Where(item => item.TBTransaksiECommerce.IDPelanggan == Pelanggan.IDPelanggan);
+            var TransaksiECommerce = db.TBTransaksiECommerces
+                .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
 
-            if (TransaksiECommerceDetail.Count() > 0)
+            if (TransaksiECommerce.TBTransaksiECommerceDetails.Count() > 0)
             {
+                var TransaksiECommerceDetail = TransaksiECommerce.TBTransaksiECommerceDetails;
+
+                StokProduk_Class ClassStokProduk = new StokProduk_Class(db);
+
+                var Result = ClassStokProduk.ValidasiStokProdukTransaksi(TransaksiECommerceDetail.ToArray());
+
+                LiteralWarning.Text = "";
+
+                foreach (var item in Result)
+                {
+                    LiteralWarning.Text += item + ", ";
+                }
+
                 MultiView1.ActiveViewIndex = 1;
 
                 RepeaterCart.DataSource = TransaksiECommerceDetail

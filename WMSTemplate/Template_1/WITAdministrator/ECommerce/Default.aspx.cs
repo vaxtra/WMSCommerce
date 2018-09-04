@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
+public partial class WITAdministrator_ECommerce_Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -16,6 +16,13 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
             {
                 TextBoxTanggalAwal.Text = Pengaturan.HariIni()[0].ToFormatDateMedium();
                 TextBoxTanggalAkhir.Text = Pengaturan.HariIni()[1].ToFormatDateMedium();
+
+
+                JenisPembayaran_Class JenisPembayaran_Class = new JenisPembayaran_Class(db);
+                DropDownListJenisPembayaran.DataSource = JenisPembayaran_Class.Data();
+                DropDownListJenisPembayaran.DataTextField = "Nama";
+                DropDownListJenisPembayaran.DataValueField = "IDJenisPembayaran";
+                DropDownListJenisPembayaran.DataBind();
             }
 
             LoadData();
@@ -77,9 +84,21 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
     }
     #endregion
 
+    #region TRANSAKSI
     protected void LoadData_Event(object sender, EventArgs e)
     {
         LoadData();
+    }
+
+
+    protected void CheckBoxPilihSemua_CheckedChanged(object sender, EventArgs e)
+    {
+        foreach (RepeaterItem item in RepeaterTransaksi.Items)
+        {
+            CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+
+            CheckBoxPilih.Checked = CheckBoxPilihSemua.Checked;
+        }
     }
 
     private void LoadData()
@@ -100,24 +119,25 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
             (ListIDStatusTransaksi.Any(item2 => item2 == item.IDStatusTransaksi)) &&
             item.TanggalOperasional >= TextBoxTanggalAwal.Text.ToDateTime() && item.TanggalOperasional <= TextBoxTanggalAkhir.Text.ToDateTime()).Select(item => new
             {
+                ClassGrandtotal = item.IDStatusTransaksi == (int)EnumStatusTransaksi.Canceled ? "text-right text-danger fitSize font-weight-bold text-line-through" : "text-right fitSize font-weight-bold",
                 item.IDTransaksi,
                 TanggalOperasional = item.TanggalOperasional.ToFormatDateMedium(),
-                JenisTransaksi = item.TBJenisTransaksi.Nama,
-                StatusTransaksi = Manage.HTMLStatusTransaksi(item.IDStatusTransaksi.Value),
                 Pelanggan = item.TBPelanggan.NamaLengkap,
-                JumlahProduk = item.JumlahProduk.ToFormatHargaBulat(),
-                SubtotalSebelumDiscount = (item.Subtotal + item.TotalPotonganHargaJualDetail).ToFormatHarga(),
-                TotalPotonganHargaJualDetail = item.TotalPotonganHargaJualDetail.ToFormatHarga(),
+                StatusTransaksi = Manage.HTMLStatusTransaksi(item.IDStatusTransaksi.Value),
+                StatusPengiriman = string.IsNullOrEmpty(item.KodePengiriman) ? Manage.HTMLBagde(EnumColor.Danger, "Belum") : Manage.HTMLBagde(EnumColor.Success, "Sudah"),
                 GrandTotal = item.GrandTotal.ToFormatHarga(),
-                item.Keterangan
             });
             RepeaterTransaksi.DataBind();
+
+            LabelIDTransaksi.Text = string.Empty;
         }
     }
 
     protected void RepeaterTransaksi_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         MultiViewTransaksi.SetActiveView(ViewDetail);
+        ButtonCetakInvoice.Visible = true;
+        ButtonCetakPackingSlip.Visible = true;
 
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
@@ -125,45 +145,26 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
 
             if (Transaksi != null)
             {
-                ButtonPrint2.OnClientClick = "return popitup('/WITPointOfSales/Invoice.aspx?id=" + Transaksi.IDTransaksi + "')";
-                ButtonPrint3.OnClientClick = "return popitup('/WITPointOfSales/PackingSlip.aspx?id=" + Transaksi.IDTransaksi + "')";
+                ButtonCetakInvoice.OnClientClick = "return popitup('/WITPointOfSales/Invoice.aspx?id=" + Transaksi.IDTransaksi + "')";
+                ButtonCetakPackingSlip.OnClientClick = "return popitup('/WITPointOfSales/PackingSlip.aspx?id=" + Transaksi.IDTransaksi + "')";
 
                 LabelIDTransaksi.Text = Transaksi.IDTransaksi;
-
-                LabelMeja.Text = Transaksi.TBMeja.Nama;
-                LabelPAX.Text = Pengaturan.FormatHarga(Transaksi.JumlahTamu);
+                LabelTempat.Text = Transaksi.TBTempat.Nama;
 
                 //PENGGUNA
                 LabelPenggunaTransaksi.Text = Transaksi.TBPengguna.NamaLengkap;
-
-                if (Transaksi.IDPenggunaUpdate.HasValue)
-                {
-                    LabelPenggunaUpdate.Text = Transaksi.TBPengguna2.NamaLengkap;
-                    PanelPerubahanTerakhir1.Visible = true;
-                }
-                else
-                {
-                    LabelPenggunaUpdate.Text = "";
-                    PanelPerubahanTerakhir1.Visible = false;
-                }
-
-                LabelTempat.Text = Transaksi.TBTempat.Nama;
+                LabelPenggunaUpdate.Text = Transaksi.IDPenggunaUpdate != null ? Transaksi.TBPengguna2.NamaLengkap : " ";
+                LabelPenggunaBatal.Text = Transaksi.IDPenggunaBatal != null ? Transaksi.TBPengguna4.NamaLengkap : " ";
 
                 //PELANGGAN
                 LabelPelangganNama.Text = Transaksi.TBPelanggan.NamaLengkap;
-                PanelPelanggan2.Visible = Transaksi.IDPelanggan > 1;
+                var Alamat = Transaksi.TBPelanggan.TBAlamats.FirstOrDefault();
 
-                if (PanelPelanggan2.Visible)
-                {
-                    var Alamat = Transaksi.TBPelanggan.TBAlamats.FirstOrDefault();
-
-                    LabelPelangganTelepon.Text = Alamat != null ? Alamat.Handphone : "";
-                    LabelPelangganAlamat.Text = Alamat != null ? Alamat.AlamatLengkap : "";
-                }
+                LabelPelangganTelepon.Text = Alamat != null ? Alamat.Handphone : "";
+                LabelPelangganAlamat.Text = Alamat != null ? Alamat.AlamatLengkap : "";
 
                 //STATUS TRANSAKSI
                 LabelStatusTransaksi.Text = Manage.HTMLStatusTransaksi(Transaksi.IDStatusTransaksi.Value);
-                LabelJenisTransaksi.Text = Transaksi.TBJenisTransaksi.Nama;
 
                 //KALKULASI TRANSAKSI
                 var SebelumDiscount = Transaksi.Subtotal + Transaksi.TotalPotonganHargaJualDetail;
@@ -174,40 +175,17 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
                 LabelTanggalTransaksi.Text = Pengaturan.FormatTanggalJam(Transaksi.TanggalTransaksi);
                 LabelTanggalUpdate.Text = Pengaturan.FormatTanggalJam(Transaksi.TanggalUpdate);
 
-                //BIAYA TAMBAHAN 1
-                LabelKeteranganBiayaTambahan1.Text = Transaksi.TBTempat.KeteranganBiayaTambahan1;
-                PanelBiayaTambahan11.Visible = Pengaturan.FormatHarga(LabelBiayaTambahan1, Transaksi.BiayaTambahan1);
-
-                //BIAYA TAMBAHAN 2
-                LabelKeteranganBiayaTambahan2.Text = Transaksi.TBTempat.KeteranganBiayaTambahan2;
-                PanelBiayaTambahan12.Visible = Pengaturan.FormatHarga(LabelBiayaTambahan2, Transaksi.BiayaTambahan2);
-
-                //BIAYA TAMBAHAN 3
-                LabelKeteranganBiayaTambahan3.Text = Transaksi.TBTempat.KeteranganBiayaTambahan3;
-                PanelBiayaTambahan13.Visible = Pengaturan.FormatHarga(LabelBiayaTambahan3, Transaksi.BiayaTambahan3);
-
-                //BIAYA TAMBAHAN 4
-                LabelKeteranganBiayaTambahan4.Text = Transaksi.TBTempat.KeteranganBiayaTambahan4;
-                PanelBiayaTambahan14.Visible = Pengaturan.FormatHarga(LabelBiayaTambahan4, Transaksi.BiayaTambahan4);
-
-                //DISCOUNT
-                var Discount = (Transaksi.TotalPotonganHargaJualDetail + Transaksi.PotonganTransaksi + Transaksi.TotalDiscountVoucher) * -1;
-                PanelDiscount.Visible = Pengaturan.FormatHarga(LabelDiscount, Discount);
-
                 //BIAYA PENGIRIMAN
-                PanelBiayaPengiriman1.Visible = Pengaturan.FormatHarga(LabelBiayaPengiriman, Transaksi.BiayaPengiriman);
+                Pengaturan.FormatHarga(LabelBiayaPengiriman, Transaksi.BiayaPengiriman);
 
                 //PEMBULATAN
-                PanelPembulatan1.Visible = Pengaturan.FormatHarga(LabelPembulatan, Transaksi.Pembulatan);
+                Pengaturan.FormatHarga(LabelPembulatan, Transaksi.Pembulatan);
 
                 Pengaturan.FormatHarga(LabelSubtotal, SebelumDiscount);
                 Pengaturan.FormatHarga(LabelGrandTotal, Transaksi.GrandTotal);
 
                 //KETERANGAN
-                PanelKeterangan2.Visible = !string.IsNullOrWhiteSpace(Transaksi.Keterangan);
-
-                if (PanelKeterangan2.Visible)
-                    LabelKeterangan.Text = Transaksi.Keterangan;
+                LabelKeterangan.Text = Transaksi.Keterangan;
 
                 var TransaksiDetail = Transaksi.TBTransaksiDetails
                     .Select(item => new
@@ -227,113 +205,114 @@ public partial class WITAdministrator_Transaksi_Default : System.Web.UI.Page
                 //PEMBAYARAN
                 var Pembayaran = Transaksi.TBTransaksiJenisPembayarans.ToArray();
 
-                TabelPembayaran.Visible = Pembayaran.Count() > 0;
+                RepeaterPembayaran.DataSource = Pembayaran;
+                RepeaterPembayaran.DataBind();
 
-                if (TabelPembayaran.Visible)
-                {
-                    RepeaterPembayaran.DataSource = Pembayaran;
-                    RepeaterPembayaran.DataBind();
-
-                    Pengaturan.FormatHarga(LabelTotalPembayaran, Pembayaran.Sum(item => item.Total));
-                }
-
+                Pengaturan.FormatHarga(LabelTotalPembayaran, Pembayaran.Sum(item => item.Total));
                 Pengaturan.FormatHarga(LabelTotalQuantity1, Transaksi.JumlahProduk);
 
-                Pengaturan.FormatHarga(LabelDiscountSebelum, SebelumDiscount);
-
-                PanelDiscountDetailProduk.Visible = Pengaturan.FormatHarga(LabelDiscountProduk, Transaksi.TotalPotonganHargaJualDetail * -1);
-                PanelDiscountDetailTransaksi.Visible = Pengaturan.FormatHarga(LabelDiscountTransaksi, Transaksi.PotonganTransaksi * -1);
-                PanelDiscountDetailVoucher.Visible = Pengaturan.FormatHarga(LabelDiscountVoucher, Transaksi.TotalDiscountVoucher * -1);
-
-                PanelTotalDiscount.Visible = false; //Pengaturan.FormatHarga(LabelTotalDiscount, Discount);
-
-                PanelSetelahDiscount.Visible = !(SetelahDiscount == SebelumDiscount);
-                Pengaturan.FormatHarga(LabelDiscountSetelah, SetelahDiscount);
+                Pengaturan.FormatHarga(LabelDiscount, Transaksi.TotalPotonganHargaJualDetail * -1);
             }
             else
                 Response.Redirect("Transaksi.aspx");
         }
     }
+    protected void ButtonSemuaCanceled_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin PenggunaLogin = (PenggunaLogin)Session["PenggunaLogin"];
+
+            foreach (RepeaterItem item in RepeaterTransaksi.Items)
+            {
+                CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+                Label LabelID = (Label)item.FindControl("LabelID");
+
+                if (CheckBoxPilih.Checked == true)
+                {
+                    Transaksi_Class Transaksi = new Transaksi_Class(LabelID.Text, PenggunaLogin.IDPengguna);
+                    Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
+                    Transaksi.ConfirmTransaksi(db, " ", true);
+                }
+            }
+            db.SubmitChanges();
+        }
+
+        MultiViewTransaksi.SetActiveView(ViewTransaksi);
+        ButtonCetakInvoice.Visible = false;
+        ButtonCetakPackingSlip.Visible = false;
+
+        LoadData();
+    }
+    #endregion
+
+    #region DETAIL
+    protected void ButtonCanceled_Click(object sender, EventArgs e)
+    {
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PenggunaLogin PenggunaLogin = (PenggunaLogin)Session["PenggunaLogin"];
+
+            Transaksi_Class Transaksi = new Transaksi_Class(LabelIDTransaksi.Text, PenggunaLogin.IDPengguna);
+            Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
+            Transaksi.ConfirmTransaksi(db, " ", true);
+            db.SubmitChanges();
+        }
+
+        MultiViewTransaksi.SetActiveView(ViewTransaksi);
+        ButtonCetakInvoice.Visible = false;
+        ButtonCetakPackingSlip.Visible = false;
+
+        LoadData();
+    }
 
     protected void ButtonKembali_Click(object sender, EventArgs e)
     {
         MultiViewTransaksi.SetActiveView(ViewTransaksi);
+
+        ButtonCetakInvoice.Visible = false;
+        ButtonCetakPackingSlip.Visible = false;
+
+        LabelIDTransaksi.Text = string.Empty;
     }
-
-    protected void ButtonStatusPendingShippingCost_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.PendingShippingCost;
-            db.SubmitChanges();
-        }
-
-        MultiViewTransaksi.SetActiveView(ViewTransaksi);
-
-        LoadData();
-    }
-
-    protected void ButtonAwaitingPayment_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.AwaitingPayment;
-            db.SubmitChanges();
-        }
-
-        MultiViewTransaksi.SetActiveView(ViewTransaksi);
-
-        LoadData();
-    }
-
-    protected void ButtonAwaitingPaymentVerification_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.AwaitingPaymentVerification;
-            db.SubmitChanges();
-        }
-
-        MultiViewTransaksi.SetActiveView(ViewTransaksi);
-
-        LoadData();
-    }
-
-    protected void ButtonPaymentVerified_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.PaymentVerified;
-            db.SubmitChanges();
-        }
-
-        MultiViewTransaksi.SetActiveView(ViewTransaksi);
-
-        LoadData();
-    }
+    #endregion
 
     protected void ButtonComplete_Click(object sender, EventArgs e)
     {
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.Complete;
+            PenggunaLogin PenggunaLogin = (PenggunaLogin)Session["PenggunaLogin"];
+
+            if (!string.IsNullOrEmpty(LabelIDTransaksi.Text))
+            {
+                Transaksi_Class Transaksi = new Transaksi_Class(LabelIDTransaksi.Text, PenggunaLogin.IDPengguna);
+                Transaksi.TambahPembayaran(DateTime.Now, PenggunaLogin.IDPengguna, DropDownListJenisPembayaran.SelectedValue.ToInt(), Transaksi.GrandTotal, string.Empty);
+                Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Complete;
+                Transaksi.ConfirmTransaksi(db, " ", false);
+            }
+            else
+            {
+                foreach (RepeaterItem item in RepeaterTransaksi.Items)
+                {
+                    CheckBox CheckBoxPilih = (CheckBox)item.FindControl("CheckBoxPilih");
+                    Label LabelID = (Label)item.FindControl("LabelID");
+
+                    if (CheckBoxPilih.Checked == true)
+                    {
+                        Transaksi_Class Transaksi = new Transaksi_Class(LabelID.Text, PenggunaLogin.IDPengguna);
+                        Transaksi.TambahPembayaran(DateTime.Now, PenggunaLogin.IDPengguna, DropDownListJenisPembayaran.SelectedValue.ToInt(), Transaksi.GrandTotal, string.Empty);
+                        Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Complete;
+                        Transaksi.ConfirmTransaksi(db, " ", false);
+                    }
+                }
+            }
+
             db.SubmitChanges();
         }
 
         MultiViewTransaksi.SetActiveView(ViewTransaksi);
-
-        LoadData();
-    }
-
-    protected void ButtonCanceled_Click(object sender, EventArgs e)
-    {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
-        {
-            db.TBTransaksis.FirstOrDefault(item2 => item2.IDTransaksi == LabelIDTransaksi.Text).IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
-            db.SubmitChanges();
-        }
-
-        MultiViewTransaksi.SetActiveView(ViewTransaksi);
+        ButtonCetakInvoice.Visible = false;
+        ButtonCetakPackingSlip.Visible = false;
 
         LoadData();
     }

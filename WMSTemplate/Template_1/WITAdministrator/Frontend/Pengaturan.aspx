@@ -1,4 +1,4 @@
-﻿<%@ Page ValidateRequest="false" Title="" Language="C#" MasterPageFile="~/assets/MasterPageSidebar.master" AutoEventWireup="true" CodeFile="Pengaturan.aspx.cs" Inherits="WITAdministrator_Page_Pengaturan" %>
+﻿<%@ Page ValidateRequest="false" Title="" Language="C#" MasterPageFile="~/assets/MasterPageSidebar.master" AutoEventWireup="true" CodeFile="Pengaturan.aspx.cs" Inherits="WITAdministrator_Frontend_Pengaturan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <h3 class="border-bottom text-info">POST</h3>
+                                <h3 class="border-bottom">POST</h3>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div id="DivDetail" runat="server" class="form-group" visible="false">
-                        <h3 class="border-bottom text-info">DETAIL</h3>
+                        <h3 class="border-bottom">DETAIL</h3>
                         <div class="table-responsive">
                             <table class="table table-sm table-hover table-bordered">
                                 <thead>
@@ -127,7 +127,7 @@
                     <div id="DivKonten" runat="server" class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h3 class="border-bottom text-info">KONTEN</h3>
+                                <h3 class="border-bottom">KONTEN</h3>
                                 <asp:TextBox ID="TextBoxDetailKonten" CssClass="form-control" Rows="5" runat="server" TextMode="MultiLine"></asp:TextBox>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                     <div id="DivSingleImage" runat="server" class="form-group" visible="false">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                <h3 class="border-bottom text-info">UPLOAD IMAGE</h3>
+                                <h3 class="border-bottom">UPLOAD IMAGE</h3>
                                 <div class="form-inline">
                                     <div class="form-group">
                                         <asp:FileUpload ID="FileUploadSingleImage" runat="server" CssClass="form-control mr-1" />
@@ -153,7 +153,7 @@
                     </div>
                     <div id="DivMultipleImage" runat="server" class="form-group" visible="false">
                         <asp:HiddenField ID="HiddenFieldPostDetailImage" runat="server" />
-                        <h3 class="border-bottom text-info">UPLOAD IMAGE</h3>
+                        <h3 class="border-bottom">UPLOAD IMAGE</h3>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
