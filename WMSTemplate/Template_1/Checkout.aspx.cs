@@ -13,6 +13,7 @@ using System.Net.Mail;
 
 public partial class CheckOut : System.Web.UI.Page
 {
+    decimal BiayaKirim = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -24,6 +25,7 @@ public partial class CheckOut : System.Web.UI.Page
 
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
+
                 //VALIDASI STOK PRODUK
                 ValidasiStokProdukTransaksi(db);
 
@@ -131,8 +133,8 @@ public partial class CheckOut : System.Web.UI.Page
                         Alamat.KodePos = TextBoxKodePos.Text;
                         Alamat.Handphone = TextBoxNomorTelepon.Text;
 
-                        Alamat.IDProvinsi = DropDownListProvinsi.SelectedValue.ToInt();
-                        Alamat.IDKota = DropDownListProvinsi.SelectedValue.ToInt();
+                        //Alamat.IDProvinsi = DropDownListProvinsi.SelectedValue.ToInt();
+                        //Alamat.IDKota = DropDownListProvinsi.SelectedValue.ToInt();
                         Alamat.Negara = DropDownListNegara.SelectedItem.Text;
                         Alamat.Provinsi = DropDownListProvinsi.SelectedItem.Text;
                         Alamat.Kota = DropDownListKota.SelectedItem.Text;
@@ -222,7 +224,7 @@ public partial class CheckOut : System.Web.UI.Page
                                             //"etd":"6-7",
                                             //"note":""
                                             //ListKurir.Add(item.name + " - " + item2.description + " " + item3.value.ToFormatHarga());
-                                            RadioButtonListKurir.Items.Add(new ListItem("<img width='150' style='margin:0 20px;' src='./frontend/assets/shipping-logo/" + item.code.ToLower().Replace("j&t", "jnt") + ".png' />" + item.name + " - " + item2.description + " " + item3.value.ToFormatHarga(), item.name + " - " + item2.description + " " + item3.value.ToFormatHarga()));
+                                            RadioButtonListKurir.Items.Add(new ListItem("<img width='150' style='margin:0 20px;' src='./frontend/assets/shipping-logo/" + item.code.ToLower().Replace("j&t", "jnt") + ".png' />" + item.name + " - " + item2.description + " " + item3.value.ToFormatHarga(), item3.value.ToString()));
                                         }
                                     }
                                 }
@@ -303,12 +305,20 @@ public partial class CheckOut : System.Web.UI.Page
         var TransaksiECommerce = db.TBTransaksiECommerces
             .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
 
-        StokProduk_Class ClassStokProduk = new StokProduk_Class(db);
+        if (TransaksiECommerce != null)
+        {
+            StokProduk_Class ClassStokProduk = new StokProduk_Class(db);
 
-        var Result = ClassStokProduk.ValidasiStokProdukTransaksi(TransaksiECommerce.TBTransaksiECommerceDetails.ToArray());
+            var Result = ClassStokProduk.ValidasiStokProdukTransaksi(TransaksiECommerce.TBTransaksiECommerceDetails.ToArray());
 
-        if (Result.Count > 0)
-            Response.Redirect("_Cart.aspx");
+            if (Result.Count > 0)
+                Response.Redirect("Cart.aspx");
+        }
+        else
+        {
+            Response.Redirect("Cart.aspx");
+        }
+        
     }
 
     protected void ButtonProsesPemesanan_Click(object sender, EventArgs e)
@@ -351,7 +361,7 @@ public partial class CheckOut : System.Web.UI.Page
             }
 
             Transaksi.PengaturanPelanggan(Pelanggan.IDPelanggan);
-            Transaksi.BiayaPengiriman = 0;
+            Transaksi.BiayaPengiriman = RadioButtonListKurir.SelectedValue.ToDecimal();
 
             Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.AwaitingPayment;
             Transaksi.StatusPrint = true;

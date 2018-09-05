@@ -1,9 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Net.Mail;
 
 public partial class WITAdministrator_ECommerce_Default : System.Web.UI.Page
 {
@@ -257,6 +263,26 @@ public partial class WITAdministrator_ECommerce_Default : System.Web.UI.Page
             Transaksi.IDStatusTransaksi = (int)EnumStatusTransaksi.Canceled;
             Transaksi.ConfirmTransaksi(db, " ", true);
             db.SubmitChanges();
+
+            //KIRIM EMAIL KE CUSTOMER
+            //using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/frontend/assets/email-template/awaiting-payment.html")))
+            //{
+
+            //    string body = "";
+            //    string listProduk = "";
+            //    body = reader.ReadToEnd();
+            //    body = body.Replace("{nama_customer}", Transaksi.Pelanggan.Nama);
+            //    body = body.Replace("{nomor_order}", Transaksi.IDTransaksi);
+            //    body = body.Replace("{list_produk}", listProduk);
+            //    body = body.Replace("{subtotal}", Transaksi.Subtotal.ToFormatHarga());
+            //    body = body.Replace("{biaya_pengiriman}", Transaksi.BiayaPengiriman.ToString().ToFormatHarga());
+            //    body = body.Replace("{grand_total}", Transaksi.GrandTotal.ToFormatHarga());
+            //    body = body.Replace("{nama_toko}", "Trendsetter");
+            //    body = body.Replace("{logo_email}", "http://ecommerce.wit.co.id/assets/images/email_logo/email_logo.png");
+            //    body = body.Replace("{url_konfirmasi}", "http://wit.co.id");
+            //    body = body.Replace("{url_website}", "http://localhost:54517/");
+            //    SendEmail(Transaksi.Pelanggan, "Trendsetter", "Order Notification", body);
+            //}
         }
 
         MultiViewTransaksi.SetActiveView(ViewTransaksi);
@@ -315,5 +341,23 @@ public partial class WITAdministrator_ECommerce_Default : System.Web.UI.Page
         ButtonCetakPackingSlip.Visible = false;
 
         LoadData();
+    }
+
+    protected void SendEmail(string email, string display_name, string subject, string body)
+    {
+        string sender = "ecommerce@wit.co.id";
+        string passEmail = "empatTH3010*#";
+        string smtpHost = "mail.wit.co.id";
+        int smtpPort = 25;
+        MailMessage msg = new MailMessage();
+        msg.From = new MailAddress(sender, display_name);
+        msg.To.Add(new MailAddress(email));
+        msg.Subject = subject;
+        msg.Body = body;
+        msg.IsBodyHtml = true;
+
+        SmtpClient smtp = new SmtpClient(smtpHost, smtpPort);
+        smtp.Credentials = new NetworkCredential(sender, passEmail);
+        smtp.Send(msg);
     }
 }

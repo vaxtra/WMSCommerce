@@ -52,7 +52,7 @@ public partial class Cart : System.Web.UI.Page
             var TransaksiECommerce = db.TBTransaksiECommerces
                 .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
 
-            if (TransaksiECommerce.TBTransaksiECommerceDetails.Count() > 0)
+            if (TransaksiECommerce != null)
             {
 
                 var TransaksiECommerceDetail = TransaksiECommerce.TBTransaksiECommerceDetails;
