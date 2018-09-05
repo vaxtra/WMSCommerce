@@ -96,62 +96,27 @@
                     <div class="tab-group-goods">
                         <div class="js-scroll-content">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <section class="b-goods b-goods_mod-b">
-                                        <div class="b-goods__inner">
-                                            <a href="/frontend/assets/media/content/goods/populars/280x320/1.jpg" class="b-goods__img js-zoom-images">
-                                                <img src="/frontend/assets/media/content/goods/populars/280x320/1.jpg" alt="goods" class="img-responsive" /></a>
-                                            <div class="b-goods__category">category</div>
-                                            <h3 class="b-goods__name">Epimetheus</h3>
-                                            <div class="b-goods__price-old">$480.00</div>
-                                            <div class="b-goods__price">$450</div>
+                                <asp:Repeater ID="RepeaterRelatedProduks" runat="server">
+                                    <ItemTemplate>
+                                        <div class="col-md-3">
+                                            <section class="b-goods b-goods_mod-b">
+                                                <div class="b-goods__inner">
+                                                    <a href="<%# Eval("Foto") %>" class="b-goods__img js-zoom-images">
+                                                        <img src="<%# Eval("Foto") %>" alt="goods" class="img-responsive" /></a>
+                                                    <h3 class="b-goods__name"><%# Eval("Nama") %></h3>
+                                                    <div class="b-goods__description"><%# Eval("Deskripsi") %></div>
+                                                    <div class="b-goods__price-old"><%# Eval("Harga").ToFormatHarga() %></div>
+                                                    <div class="b-goods__price"><%# Eval("Harga").ToFormatHarga() %></div>
+                                                    <div class="b-goods-links"><a href="/Product.aspx?id=<%# Eval("IDProduk") %>" class="b-goods-links__item b-goods-links__item_main">View Detail</a></div>
+                                                </div>
+                                            </section>
+                                            <!-- end b-goods-->
                                         </div>
-                                    </section>
-                                    <!-- end b-goods-->
-                                </div>
-
-                                <div class="col-md-3">
-                                    <section class="b-goods b-goods_mod-b">
-                                        <div class="b-goods__inner">
-                                            <a href="/frontend/assets/media/content/goods/populars/280x320/2.jpg" class="b-goods__img js-zoom-images">
-                                                <img src="/frontend/assets/media/content/goods/populars/280x320/2.jpg" alt="goods" class="img-responsive" /></a>
-                                            <div class="b-goods__category">category</div>
-                                            <h3 class="b-goods__name">Enceladus</h3>
-                                            <div class="b-goods__price-old">$180.00</div>
-                                            <div class="b-goods__price">$160.00</div>
-                                        </div>
-                                    </section>
-                                    <!-- end b-goods-->
-                                </div>
-
-                                <div class="col-md-3">
-                                    <section class="b-goods b-goods_mod-b">
-                                        <div class="b-goods__inner">
-                                            <a href="/frontend/assets/media/content/goods/populars/280x320/3.jpg" class="b-goods__img js-zoom-images">
-                                                <img src="/frontend/assets/media/content/goods/populars/280x320/3.jpg" alt="goods" class="img-responsive" /></a>
-                                            <div class="b-goods__category">category</div>
-                                            <h3 class="b-goods__name">Hyperion</h3>
-                                            <div class="b-goods__price">$120.00</div>
-                                        </div>
-                                    </section>
-                                    <!-- end b-goods-->
-                                </div>
-
-                                <div class="col-md-3">
-                                    <section class="b-goods b-goods_mod-b">
-                                        <div class="b-goods__inner">
-                                            <a href="/frontend/assets/media/content/goods/populars/280x320/4.jpg" class="b-goods__img js-zoom-images">
-                                                <img src="/frontend/assets/media/content/goods/populars/280x320/4.jpg" alt="goods" class="img-responsive" /></a>
-                                            <div class="b-goods__category">category</div>
-                                            <h3 class="b-goods__name">Iapetus</h3>
-                                            <div class="b-goods__price">$250.00</div>
-                                        </div>
-                                    </section>
-                                    <!-- end b-goods-->
-                                </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </div>
                         </div>
-                        <span class="btn-scroll-next btn btn-default btn-effect center-block js-scroll-next"><i class="icon fa fa-arrow-circle-down color-primary"></i>Load more</span>
+                        <%--<span class="btn-scroll-next btn btn-default btn-effect center-block js-scroll-next"><i class="icon fa fa-arrow-circle-down color-primary"></i>Load more</span>
                         <div class="js-scroll-content">
                             <div class="row">
                                 <div class="col-md-3">
@@ -206,7 +171,7 @@
                                     <!-- end b-goods-->
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>

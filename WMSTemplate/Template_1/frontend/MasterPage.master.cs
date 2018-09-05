@@ -46,6 +46,17 @@ public partial class frontend_MasterPage : System.Web.UI.MasterPage
             }
             else
                 MembuatPelanggan(); //JIKA COOKIES TIDAK ADA
+
+        }
+
+        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        {
+            PelangganLogin PelangganLogin = (PelangganLogin)Session["PelangganLogin"];
+            //MENCARI TRANSAKSI SESSION
+            var TransaksiECommerceDetail = db.TBTransaksiECommerceDetails
+                .Where(item => item.TBTransaksiECommerce.IDPelanggan == PelangganLogin.IDPelanggan);
+
+            LiteralTotalQuantity.Text = TransaksiECommerceDetail.Count().ToString();
         }
 
         Session.Timeout = 525000;

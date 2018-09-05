@@ -18,6 +18,7 @@
                             </asp:View>
 
                             <asp:View ID="View2" runat="server">
+                                <span class="warning-message"><asp:Literal ID="LiteralWarning" runat="server"></asp:Literal></span>
                                 <div class="b-table b-cart-table ">
                                     <table class="shop_table shop_table_responsive cart table" cellspacing="0">
                                         <thead>

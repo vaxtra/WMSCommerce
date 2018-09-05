@@ -133,7 +133,7 @@
                             <div class="header-navibox-1">
                                 <button class="js-toggle-screen toggle-menu-button  hidden-xs"><i class="toggle-menu-button-icon"><span></span><span></span><span></span><span></span><span></span><span></span></i></button>
                                 <a href="#" class="btn_header_search"><i class="fa fa-search"></i></a>
-                                <div class="header-cart"><a href="#"><i aria-hidden="true" class="fa fa-shopping-cart"></i></a><span class="header-cart-count bg-primary">3</span></div>
+                                <div class="header-cart"><a href="Cart.aspx"><i aria-hidden="true" class="fa fa-shopping-cart"></i></a><span class="header-cart-count bg-primary"><asp:Literal ID="LiteralTotalQuantity" runat="server"></asp:Literal></span></div>
                             </div>
                         </div>
                     </div>

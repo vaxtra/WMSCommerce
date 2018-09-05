@@ -47,6 +47,8 @@ public partial class CheckOut : System.Web.UI.Page
                     LiteralBiayaPengiriman.Text = Transaksi.BiayaPengiriman.ToFormatHarga();
                     LiteralTotal.Text = Transaksi.Subtotal.ToFormatHarga();
                     LiteralSubotal.Text = Transaksi.GrandTotal.ToFormatHarga();
+
+
                 }
                 else
                     Response.Redirect("Default.aspx");

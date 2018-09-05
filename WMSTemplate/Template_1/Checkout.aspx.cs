@@ -8,6 +8,8 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Net.Mail;
 
 public partial class CheckOut : System.Web.UI.Page
 {
@@ -15,8 +17,15 @@ public partial class CheckOut : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            //HIDE WARNING VALIDASI DI AWAL
+            StatusValidasi.Visible = false;
+            PengirimanValidasi.Visible = false;
+            PembayaranValidasi.Visible = false;
+
             using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
+                //VALIDASI STOK PRODUK
+                ValidasiStokProdukTransaksi(db);
 
                 //CLOSE SEMUA PANEL KECUALI PANEL PELANNGAN
                 FormPengiriman.Attributes.Add("style", "display:none");
@@ -48,6 +57,8 @@ public partial class CheckOut : System.Web.UI.Page
                     {
                         TextBoxAlamat.Text = Alamat.AlamatLengkap;
                         TextBoxKodePos.Text = Alamat.KodePos;
+                        //DropDownListProvinsi.Items.FindByValue(Alamat.IDProvinsi.ToString()).Selected = true;
+                        //DropDownListKota.Items.FindByText(Alamat.IDKota.ToString()).Selected = true;
                     }
 
                     //MENCARI TRANSAKSI SESSION
@@ -85,51 +96,29 @@ public partial class CheckOut : System.Web.UI.Page
 
     protected void ButtonLanjutkanKePengiriman_Click(object sender, EventArgs e)
     {
-        using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
+        if (DropDownListProvinsi.SelectedValue != "0" && DropDownListKota.SelectedValue != "0" && DropDownListKecamatan.SelectedValue != "0")
         {
-            PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
-
-            var Data = db.TBPelanggans
-                .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
-
-            if (Data != null)
+            using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
             {
-                //IDGrupPelanggan
+                PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
 
-                Data.NamaLengkap = TextBoxNamaLengkap.Text;
-                Data.Email = TextBoxAlamatEmail.Text;
-                Data.Handphone = TextBoxNomorTelepon.Text;
-                Data.Username = TextBoxAlamatEmail.Text;
+                var Data = db.TBPelanggans
+                    .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
 
-                var Alamat = Data.TBAlamats
-                    .OrderByDescending(item => item.IDAlamat)
-                    .FirstOrDefault();
-
-                if (string.IsNullOrWhiteSpace(Alamat.AlamatLengkap))
+                if (Data != null)
                 {
-                    //IDAlamat
-                    //IDPelanggan
-                    //IDNegara
-                    //IDProvinsi
-                    //IDKota
+                    //IDGrupPelanggan
 
-                    Alamat.NamaLengkap = TextBoxNamaLengkap.Text;
-                    Alamat.AlamatLengkap = TextBoxAlamat.Text;
-                    Alamat.KodePos = TextBoxKodePos.Text;
-                    Alamat.Handphone = TextBoxNomorTelepon.Text;
+                    Data.NamaLengkap = TextBoxNamaLengkap.Text;
+                    Data.Email = TextBoxAlamatEmail.Text;
+                    Data.Handphone = TextBoxNomorTelepon.Text;
+                    Data.Username = TextBoxAlamatEmail.Text;
 
-                    Alamat.Negara = DropDownListNegara.SelectedItem.Text;
-                    Alamat.Provinsi = DropDownListProvinsi.SelectedItem.Text;
-                    Alamat.Kota = DropDownListKota.SelectedItem.Text;
-                    Alamat.Kecamatan = DropDownListKecamatan.SelectedItem.Text;
+                    var Alamat = Data.TBAlamats
+                        .OrderByDescending(item => item.IDAlamat)
+                        .FirstOrDefault();
 
-                    //Keterangan
-                    //BiayaPengiriman
-                    //TeleponLain
-                }
-                else
-                {
-                    Data.TBAlamats.Add(new TBAlamat
+                    if (string.IsNullOrWhiteSpace(Alamat.AlamatLengkap))
                     {
                         //IDAlamat
                         //IDPelanggan
@@ -137,102 +126,135 @@ public partial class CheckOut : System.Web.UI.Page
                         //IDProvinsi
                         //IDKota
 
-                        NamaLengkap = TextBoxNamaLengkap.Text,
-                        AlamatLengkap = TextBoxAlamat.Text,
-                        KodePos = TextBoxKodePos.Text,
-                        Handphone = TextBoxNomorTelepon.Text,
+                        Alamat.NamaLengkap = TextBoxNamaLengkap.Text;
+                        Alamat.AlamatLengkap = TextBoxAlamat.Text;
+                        Alamat.KodePos = TextBoxKodePos.Text;
+                        Alamat.Handphone = TextBoxNomorTelepon.Text;
 
-                        Negara = DropDownListNegara.SelectedItem.Text,
-                        Provinsi = DropDownListProvinsi.SelectedItem.Text,
-                        Kota = DropDownListKota.SelectedItem.Text,
-                        Kecamatan = DropDownListKecamatan.SelectedItem.Text,
+                        Alamat.IDProvinsi = DropDownListProvinsi.SelectedValue.ToInt();
+                        Alamat.IDKota = DropDownListProvinsi.SelectedValue.ToInt();
+                        Alamat.Negara = DropDownListNegara.SelectedItem.Text;
+                        Alamat.Provinsi = DropDownListProvinsi.SelectedItem.Text;
+                        Alamat.Kota = DropDownListKota.SelectedItem.Text;
+                        Alamat.Kecamatan = DropDownListKecamatan.SelectedItem.Text;
 
                         //Keterangan
                         //BiayaPengiriman
                         //TeleponLain
-                    });
-                }
-
-                db.SubmitChanges();
-
-                //MENCARI TRANSAKSI SESSION
-                var TransaksiECommerce = db.TBTransaksiECommerces
-                    .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
-
-                var TotalBerat = TransaksiECommerce.TBTransaksiECommerceDetails
-                        .Sum(item => item.Quantity * item.TBStokProduk.TBKombinasiProduk.Berat).Value;
-
-                TotalBerat = TotalBerat * 1000; //KONVERSI KE GRAM
-
-                //REQUEST DATA BIAYA
-                using (WebClient webClient = new WebClient())
-                {
-                    var Values = new NameValueCollection();
-                    Values["key"] = "4fd02ed39a703a1d052da67aebdf8d2d";
-
-                    Values["origin"] = "23";
-                    Values["originType"] = "city";
-
-                    Values["destination"] = DropDownListKota.SelectedValue;
-                    Values["destinationType"] = "city";
-
-                    Values["weight"] = TotalBerat.ToString(); //GRAM
-                    Values["courier"] = "jne:jnt:sicepat"; // //jne, pos, tiki, rpx, esl, pcp, pandu, wahana, sicepat, jnt, pahala, cahaya, sap, jet, indah, dse, slis, first, ncs, star, nss
-
-                    var Respose = webClient.UploadValues(new Uri("https://pro.rajaongkir.com/api/cost"), Values);
-
-                    string Result = Encoding.Default.GetString(Respose);
-
-                    var ResultJson = JsonConvert.DeserializeObject<RajaOngkir_Biaya.Rootobject>(Result);
-
-                    List<string> ListKurir = new List<string>();
-
-                    foreach (var item in ResultJson.rajaongkir.results)
+                    }
+                    else
                     {
-                        //"code":"jne",
-                        //"name":"Jalur Nugraha Ekakurir (JNE)",
-
-                        if (item.costs.Count() > 0)
+                        Data.TBAlamats.Add(new TBAlamat
                         {
-                            foreach (var item2 in item.costs)
+                            //IDAlamat
+                            //IDPelanggan
+                            //IDNegara
+                            //IDProvinsi
+                            //IDKota
+
+                            NamaLengkap = TextBoxNamaLengkap.Text,
+                            AlamatLengkap = TextBoxAlamat.Text,
+                            KodePos = TextBoxKodePos.Text,
+                            Handphone = TextBoxNomorTelepon.Text,
+
+                            Negara = DropDownListNegara.SelectedItem.Text,
+                            Provinsi = DropDownListProvinsi.SelectedItem.Text,
+                            Kota = DropDownListKota.SelectedItem.Text,
+                            Kecamatan = DropDownListKecamatan.SelectedItem.Text,
+
+                            //Keterangan
+                            //BiayaPengiriman
+                            //TeleponLain
+                        });
+                    }
+
+                    db.SubmitChanges();
+
+                    //MENCARI TRANSAKSI SESSION
+                    var TransaksiECommerce = db.TBTransaksiECommerces
+                        .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
+
+                    var TotalBerat = TransaksiECommerce.TBTransaksiECommerceDetails
+                            .Sum(item => item.Quantity * item.TBStokProduk.TBKombinasiProduk.Berat).Value;
+
+                    TotalBerat = TotalBerat * 1000; //KONVERSI KE GRAM
+
+                    //REQUEST DATA BIAYA
+                    using (WebClient webClient = new WebClient())
+                    {
+                        var Values = new NameValueCollection();
+                        Values["key"] = "4fd02ed39a703a1d052da67aebdf8d2d";
+
+                        Values["origin"] = "23";
+                        Values["originType"] = "city";
+
+                        Values["destination"] = DropDownListKota.SelectedValue;
+                        Values["destinationType"] = "city";
+
+                        Values["weight"] = TotalBerat.ToString(); //GRAM
+                        Values["courier"] = "jne:jnt:sicepat"; // //jne, pos, tiki, rpx, esl, pcp, pandu, wahana, sicepat, jnt, pahala, cahaya, sap, jet, indah, dse, slis, first, ncs, star, nss
+
+                        var Respose = webClient.UploadValues(new Uri("https://pro.rajaongkir.com/api/cost"), Values);
+
+                        string Result = Encoding.Default.GetString(Respose);
+
+                        var ResultJson = JsonConvert.DeserializeObject<RajaOngkir_Biaya.Rootobject>(Result);
+
+                        List<string> ListKurir = new List<string>();
+
+                        foreach (var item in ResultJson.rajaongkir.results)
+                        {
+                            //"code":"jne",
+                            //"name":"Jalur Nugraha Ekakurir (JNE)",
+
+                            if (item.costs.Count() > 0)
                             {
-                                //"service":"OKE",
-                                //"description":"Ongkos Kirim Ekonomis",
-
-                                if (item2.cost.Count() > 0)
+                                foreach (var item2 in item.costs)
                                 {
-                                    foreach (var item3 in item2.cost)
-                                    {
-                                        //"value":26000,
-                                        //"etd":"6-7",
-                                        //"note":""
+                                    //"service":"OKE",
+                                    //"description":"Ongkos Kirim Ekonomis",
 
-                                        ListKurir.Add(item.name + " - " + item2.description + " " + item3.value.ToFormatHarga());
+                                    if (item2.cost.Count() > 0)
+                                    {
+                                        foreach (var item3 in item2.cost)
+                                        {
+                                            //"value":26000,
+                                            //"etd":"6-7",
+                                            //"note":""
+                                            //ListKurir.Add(item.name + " - " + item2.description + " " + item3.value.ToFormatHarga());
+                                            RadioButtonListKurir.Items.Add(new ListItem("<img width='150' style='margin:0 20px;' src='./frontend/assets/shipping-logo/" + item.code.ToLower().Replace("j&t", "jnt") + ".png' />" + item.name + " - " + item2.description + " " + item3.value.ToFormatHarga(), item.name + " - " + item2.description + " " + item3.value.ToFormatHarga()));
+                                        }
                                     }
                                 }
                             }
                         }
+
+                        //RadioButtonListKurir.DataSource = ListKurir;
+                        RadioButtonListKurir.DataBind();
+
+                        FormPelanggan.Attributes.Add("style", "display:none");
+                        FormPengiriman.Attributes.Remove("style");
                     }
-
-                    RadioButtonListKurir.DataSource = ListKurir;
-                    RadioButtonListKurir.DataBind();
-
-                    FormPelanggan.Attributes.Add("style", "display:none");
-                    FormPengiriman.Attributes.Remove("style");
                 }
-            }
-            else
-                Response.Redirect("_Cart.aspx");
+                else
+                    Response.Redirect("_Cart.aspx");
 
-            //LOAD DATA PELANGGAN
-            LiteralNamaLengkap.Text = TextBoxNamaLengkap.Text;
-            LiteralAlamat.Text = TextBoxAlamat.Text;
-            LiteralKecamatan.Text = DropDownListKecamatan.SelectedItem.Text;
-            LiteralKota.Text = DropDownListKota.SelectedItem.Text;
-            LiteralProvinsi.Text = DropDownListProvinsi.SelectedItem.Text;
-            LiteralKodePos.Text = TextBoxKodePos.Text;
-            LiteralNegara.Text = DropDownListNegara.SelectedItem.Text;
-            LiteralNomorTelepon.Text = TextBoxNomorTelepon.Text;
+                //LOAD DATA PELANGGAN
+                LiteralNamaLengkap.Text = TextBoxNamaLengkap.Text;
+                LiteralAlamat.Text = TextBoxAlamat.Text;
+                LiteralKecamatan.Text = DropDownListKecamatan.SelectedItem.Text;
+                LiteralKota.Text = DropDownListKota.SelectedItem.Text;
+                LiteralProvinsi.Text = DropDownListProvinsi.SelectedItem.Text;
+                LiteralKodePos.Text = TextBoxKodePos.Text;
+                LiteralNegara.Text = DropDownListNegara.SelectedItem.Text;
+                LiteralNomorTelepon.Text = TextBoxNomorTelepon.Text;
+            }
+            StatusValidasi.Visible = false;
+        }
+        else
+        {
+            LiteralStatusValidasi.Text = "Mohon cek kembali Provinsi / Kota / Kecamatan anda";
+            StatusValidasi.Visible = true;
         }
     }
 
@@ -246,10 +268,15 @@ public partial class CheckOut : System.Web.UI.Page
         if (RadioButtonListKurir.SelectedValue == "")
         {
             LiteralWarningPilihJasaPengiriman.Text = "Jasa Pengiriman belum dipilih";
+            PengirimanValidasi.Visible = true;
             return;
         }
         else
+        {
             LiteralWarningPilihJasaPengiriman.Text = "";
+            PengirimanValidasi.Visible = false;
+        }
+           
 
         List<string> ListJenisPembayaran = new List<string>();
 
@@ -268,18 +295,42 @@ public partial class CheckOut : System.Web.UI.Page
         FormPengiriman.Attributes.Remove("style");
     }
 
+    public void ValidasiStokProdukTransaksi(DataClassesDatabaseDataContext db)
+    {
+        PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
+
+        //MENCARI TRANSAKSI SESSION
+        var TransaksiECommerce = db.TBTransaksiECommerces
+            .FirstOrDefault(item => item.IDPelanggan == Pelanggan.IDPelanggan);
+
+        StokProduk_Class ClassStokProduk = new StokProduk_Class(db);
+
+        var Result = ClassStokProduk.ValidasiStokProdukTransaksi(TransaksiECommerce.TBTransaksiECommerceDetails.ToArray());
+
+        if (Result.Count > 0)
+            Response.Redirect("_Cart.aspx");
+    }
+
     protected void ButtonProsesPemesanan_Click(object sender, EventArgs e)
     {
-        //if (RadioButtonListJenisPembayaran.SelectedValue == "")
-        //{
-        //    LiteralWarningPilihMetodePembayaran.Text = "Metode Pembayaran belum dipilih";
-        //    return;
-        //}
-        //else
-        //    LiteralWarningPilihMetodePembayaran.Text = "";
+        if (RadioButtonListJenisPembayaran.SelectedValue == "")
+        {
+            LiteralWarningPilihMetodePembayaran.Text = "Metode Pembayaran belum dipilih";
+            PembayaranValidasi.Visible = true;
+            return;
+        }
+        else
+        {
+            LiteralWarningPilihMetodePembayaran.Text = "";
+            PembayaranValidasi.Visible = false;
+        }
+            
 
         using (DataClassesDatabaseDataContext db = new DataClassesDatabaseDataContext())
         {
+            //VALIDASI STOK PRODUK
+            ValidasiStokProdukTransaksi(db);
+
             PelangganLogin Pelanggan = (PelangganLogin)Session["PelangganLogin"];
 
             //MENCARI TRANSAKSI SESSION
@@ -307,6 +358,30 @@ public partial class CheckOut : System.Web.UI.Page
 
             Transaksi.ConfirmTransaksi(db);
 
+            //KIRIM EMAIL NOTIFIKASI
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("/frontend/assets/email-template/awaiting-payment.html")))
+            {
+
+                string body = "";
+                string listProduk = "";
+                body = reader.ReadToEnd();
+                body = body.Replace("{nama_customer}", TransaksiECommerce.TBPelanggan.NamaLengkap);
+                body = body.Replace("{nomor_order}", Transaksi.IDTransaksi);
+                foreach (var item in TransaksiECommerce.TBTransaksiECommerceDetails)
+                {
+                    listProduk += "<tr><td>" + item.TBStokProduk.TBKombinasiProduk.Nama + "</td><td>" + item.TBStokProduk.HargaJual.ToFormatHarga() + "</td><td>" + item.Quantity + "</td><td style='text-align:right;'>" + (item.Quantity * item.TBStokProduk.HargaJual).ToFormatHarga() + "</td></tr>";
+                }
+                body = body.Replace("{list_produk}", listProduk);
+                body = body.Replace("{subtotal}", Transaksi.Subtotal.ToFormatHarga());
+                body = body.Replace("{biaya_pengiriman}", Transaksi.BiayaPengiriman.ToString().ToFormatHarga());
+                body = body.Replace("{grand_total}", Transaksi.GrandTotal.ToFormatHarga());
+                body = body.Replace("{nama_toko}", "Trendsetter");
+                body = body.Replace("{logo_email}", "http://ecommerce.wit.co.id/assets/images/email_logo/email_logo.png");
+                body = body.Replace("{url_konfirmasi}", "http://wit.co.id");
+                body = body.Replace("{url_website}", "http://localhost:54517/");
+                SendEmail(TransaksiECommerce.TBPelanggan.Email, "Trendsetter", "Order Notification", body);
+            }
+
             //MENGHAPUS DATA TRANSAKSI ECOMMERCE
             db.TBTransaksiECommerceDetails.DeleteAllOnSubmit(TransaksiECommerce.TBTransaksiECommerceDetails);
             db.TBTransaksiECommerces.DeleteOnSubmit(TransaksiECommerce);
@@ -331,6 +406,7 @@ public partial class CheckOut : System.Web.UI.Page
             DropDownListKota.DataTextField = "Nama";
             DropDownListKota.DataBind();
             DropDownListKota.Items.Insert(0, new ListItem { Selected = true, Text = "- Pilih Kota -", Value = "0" });
+            DropDownListKota.Visible = true;
         }
     }
 
@@ -384,11 +460,30 @@ public partial class CheckOut : System.Web.UI.Page
             DropDownListKecamatan.DataTextField = "Nama";
             DropDownListKecamatan.DataBind();
             DropDownListKecamatan.Items.Insert(0, new ListItem { Selected = true, Text = "- Pilih Kecamatan -", Value = "0" });
+            DropDownListKecamatan.Visible = true;
         }
     }
 
     protected void DropDownListKecamatan_SelectedIndexChanged(object sender, EventArgs e)
     {
         DropDownListKecamatan.Items.Remove(DropDownListKecamatan.Items.FindByValue("0"));
+    }
+
+    protected void SendEmail(string email, string display_name, string subject, string body)
+    {
+        string sender = "ecommerce@wit.co.id";
+        string passEmail = "empatTH3010*#";
+        string smtpHost = "mail.wit.co.id";
+        int smtpPort = 25;
+        MailMessage msg = new MailMessage();
+        msg.From = new MailAddress(sender, display_name);
+        msg.To.Add(new MailAddress(email));
+        msg.Subject = subject;
+        msg.Body = body;
+        msg.IsBodyHtml = true;
+
+        SmtpClient smtp = new SmtpClient(smtpHost, smtpPort);
+        smtp.Credentials = new NetworkCredential(sender, passEmail);
+        smtp.Send(msg);
     }
 }

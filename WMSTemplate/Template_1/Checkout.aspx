@@ -19,9 +19,11 @@
                                             <div class="form-row form-row form-row-first col-md-12 nomargin">
                                                 <h3 class="nomargin">Alamat Email Anda</h3>
                                                 <br />
-                                                <p>Sudah mempunyai akun di website kami? <span class="logpop">Log in</span></p>
+                                                <%--<p>Sudah mempunyai akun di website kami? <span class="logpop">Log in</span></p>--%>
 
                                                 <asp:TextBox ID="TextBoxAlamatEmail" CssClass="input-text" runat="server" placeholder="Alamat Email"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAlamatEmail" runat="server" ErrorMessage="Mohon isi Field di atas" Display="Dynamic" ControlToValidate="TextBoxAlamatEmail" ValidationGroup="PersonalData" ForeColor="Red"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorAlamatEmail" runat="server" ErrorMessage="Format email tidak sesuai" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="TextBoxAlamatEmail" ValidationGroup="PersonalData" ForeColor="Red"></asp:RegularExpressionValidator>
                                                 <br />
                                                 <br />
                                             </div>
@@ -30,45 +32,55 @@
                                             </div>
                                             <div class="form-row form-row form-row-first col-md-12">
                                                 <asp:TextBox ID="TextBoxNamaLengkap" CssClass="input-text" runat="server" placeholder="Nama Lengkap"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorNamaLengkap" runat="server" ErrorMessage="Mohon isi Field di atas" Display="Dynamic" ControlToValidate="TextBoxNamaLengkap" ValidationGroup="PersonalData" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="form-row form-row form-row-wide col-md-6">
                                                 <asp:DropDownList ID="DropDownListNegara" CssClass="input-text" runat="server">
-                                                    <asp:ListItem Text="Indonesia"></asp:ListItem>
+                                                    <asp:ListItem>Indonesia</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-first col-md-6">
                                                 <asp:DropDownList ID="DropDownListProvinsi" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListProvinsi_SelectedIndexChanged">
-                                                    <asp:ListItem Text="Irian Jaya"></asp:ListItem>
+                                                    <asp:ListItem Value="0">- Pilih Provinsi -</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-last col-md-6">
-                                                <asp:DropDownList ID="DropDownListKota" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKota_SelectedIndexChanged">
-                                                    <asp:ListItem Text="Port Akaba"></asp:ListItem>
+                                                <asp:DropDownList ID="DropDownListKota" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKota_SelectedIndexChanged" Visible="false">
+                                                    <asp:ListItem value="0">- Pilih Kota -</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="clear"></div>
                                             <div class="form-row form-row form-row-wide col-md-6">
-                                                <asp:DropDownList ID="DropDownListKecamatan" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKecamatan_SelectedIndexChanged">
-                                                    <asp:ListItem Text="Cimahi Selatan"></asp:ListItem>
+                                                <asp:DropDownList ID="DropDownListKecamatan" CssClass="input-text" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownListKecamatan_SelectedIndexChanged" Visible="false">
+                                                    <asp:ListItem Value="0">- Pilih Kecamatan -</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
                                                 <asp:TextBox ID="TextBoxAlamat" CssClass="input-text" runat="server" placeholder="Alamat Pengiriman"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorAlamatPengiriman" runat="server" ErrorMessage="Mohon isi Field di atas" Display="Dynamic" ControlToValidate="TextBoxAlamat" ValidationGroup="PersonalData" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
                                                 <asp:TextBox ID="TextBoxKodePos" CssClass="input-text" runat="server" placeholder="Kode Pos"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorKodePos" runat="server" ErrorMessage="Mohon isi Field di atas" Display="Dynamic" ControlToValidate="TextBoxKodePos" ValidationGroup="PersonalData" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="form-row form-row form-row-wide col-md-12">
                                                 <asp:TextBox ID="TextBoxNomorTelepon" CssClass="input-text" runat="server" placeholder="Nomor Telepon"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorNomorTelepon" runat="server" ErrorMessage="Mohon isi Field di atas" Display="Dynamic" ControlToValidate="TextBoxNomorTelepon" ValidationGroup="PersonalData" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clearfix"></div>
+
                                         </div>
+                                        <br />
+                                        <span id="StatusValidasi" class="alert alert-warning" runat="server">
+                                            <i class="icon icon_error-circle_alt"></i>
+                                            <asp:Literal ID="LiteralStatusValidasi" runat="server"></asp:Literal>
+                                        </span>
 
                                     </div>
                                     <nav class="form-section-nav col-md-12">
                                         
-                                            <span class="btn-std form-nav-next"><asp:Button ID="ButtonLanjutPengiriman" runat="server" Text="Lanjut ke pengiriman" OnClick="ButtonLanjutkanKePengiriman_Click" /></span>
+                                            <span class="btn-std form-nav-next"><asp:Button ID="ButtonLanjutPengiriman" runat="server" Text="Lanjut ke pengiriman" OnClick="ButtonLanjutkanKePengiriman_Click" ValidationGroup="PersonalData" /></span>
                                     </nav>
                                 </div>
 
@@ -90,13 +102,18 @@
                                     </div>
                                     <div id="payment" class="woocommerce-checkout-payment">
                                         <h3>Pilih Jasa Pengiriman </h3>
-                                        <span class="warning-message"><asp:Literal ID="LiteralWarningPilihJasaPengiriman" runat="server"></asp:Literal></span>
+                                        
                                         <ul class="wc_payment_methods payment_methods methods">
-                                            <asp:RadioButtonList ID="RadioButtonListKurir" CssClass="wc_payment_methods payment_methods methods" runat="server" datas>
+                                            <asp:RadioButtonList ID="RadioButtonListKurir" CssClass="wc_payment_methods payment_methods methods" runat="server">
                                             </asp:RadioButtonList>
                                         </ul>
 
                                     </div>
+                                    <br />
+                                    <span id="PengirimanValidasi" class="alert alert-warning" runat="server">
+                                            <i class="icon icon_error-circle_alt"></i>
+                                            <asp:Literal ID="LiteralWarningPilihJasaPengiriman" runat="server"></asp:Literal>
+                                    </span>
                                     <nav class="form-section-nav">
                                         <span class="btn-secondary form-nav-prev"><asp:Button ID="ButtonKembaliKeInformasiPelanggan" runat="server" Text="Kembali ke Alamat" OnClick="ButtonKembaliKeInformasiPelanggan_Click" /></span>
                                         <span class="btn-std form-nav-next"><asp:Button ID="ButtonLanjutPembayaran" runat="server" Text="Lanjut ke Pembayaran" OnClick="ButtonLanjutkanKePembayaran_Click" /></span>
@@ -106,6 +123,7 @@
                             </fieldset>
                             <fieldset id="PanelPembayaran" runat="server">
                                 <legend>3. METODDE PEMBAYARAN</legend>
+
                                 <div class="form-section" id="FormPembayaran" runat="server">
                                     <div class="col-2">
                                         <div class="woocommerce-checkout-payment">
@@ -129,6 +147,11 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <br />
+                                    <span id="PembayaranValidasi" class="alert alert-warning" runat="server">
+                                        <i class="icon icon_error-circle_alt"></i>
+                                        <asp:Literal ID="LiteralWarningPilihMetodePembayaran" runat="server"></asp:Literal>
+                                    </span>
                                     <nav class="form-section-nav">
                                         <span class="btn-secondary form-nav-prev"><asp:Button ID="ButtonKembaliKeDetailPengiriman" runat="server" Text="Kembali ke Pengiriman" OnClick="ButtonKembaliKeDetailPengiriman_Click" /></span>
                                         <span class="btn-std form-nav-next"><asp:Button ID="ButtonProsesPemesanan" runat="server" Text="Konfirmasi Pemesanan" OnClick="ButtonProsesPemesanan_Click" /></span>
@@ -174,7 +197,7 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
-                    <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <%--<div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="coupon">
 
                             <label for="coupon_code">Coupon:</label>
@@ -182,7 +205,7 @@
                             <input type="submit" class="button" name="apply_coupon" value="Apply Coupon" />
 
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="kelasGarisCheckout col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding'>
                             <div class=' col-lg-6 col-md-6 col-sm-6 nopadding'>
